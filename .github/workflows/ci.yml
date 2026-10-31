@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Testes (sem arquivos do jogo)
+        run: cargo test --workspace
+      - name: Manifesto da API em dia com o inventario
+        shell: bash
+        run: |
+          python3 re/tools/gen_api_manifest.py || python re/tools/gen_api_manifest.py
+          git diff --exit-code crates/itb-lua/src/api_manifest.rs

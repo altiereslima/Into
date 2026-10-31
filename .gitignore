@@ -1,0 +1,11 @@
+/target
+**/__pycache__/
+*.pyc
+# NUNCA versionar arquivos do jogo original
+Breach.exe
+*.dll
+/scripts/
+/maps/
+/resources/
+/shadersOGL/
+*.zip

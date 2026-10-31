@@ -1,0 +1,40 @@
+# Into — motor do Into the Breach em Rust
+
+Reimplementação do motor do **Into the Breach** (Subset Games) em Rust, que executa os **scripts Lua
+originais** da sua própria cópia do jogo. Projeto de fã, sem afiliação com a Subset Games.
+
+> Este repositório **não contém nenhum arquivo do jogo** (EXE, DLLs, scripts, mapas, imagens, sons).
+> Você precisa de uma cópia legítima do Into the Breach (testado com a v1.2.88).
+
+## Estado (Etapa 06)
+- Os scripts originais **carregam sem erro** no host Rust: 137/137 arquivos presentes (`itb-boot`).
+- API nativa mapeada por completo a partir do EXE: 32 classes, 343 métodos, 39 funções globais,
+  111 propriedades, 58 construtores, 190 constantes. 475 nomes expostos à Lua: 34 reconstruídos,
+  11 respostas de plataforma, 430 ainda stubs.
+- Núcleo com regras reconstruídas e testadas: ocupação do tabuleiro, bloqueio de caminho, terreno,
+  `Point`/`Rect2D`/`GL_Color`/`Button`, `rand()` idêntico ao do jogo, escalas de tela.
+
+Detalhes em [`CHECKPOINT.md`](CHECKPOINT.md), estratégia em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md),
+próximos passos em [`docs/ROADMAP.md`](docs/ROADMAP.md).
+
+## Estrutura
+| Pasta | Conteúdo |
+|---|---|
+| `crates/itb-core` | regras do jogo em Rust puro (sem IO) |
+| `crates/itb-lua` | host Lua 5.1 + `itb-boot` |
+| `re/tools` | ferramentas de engenharia reversa (Python, só leitura do EXE) |
+| `re/evidencias` | inventário da API, constantes, desmontagens de prova |
+| `docs` | arquitetura, roadmap, divergências, relatórios, histórico das etapas |
+
+## Usar
+```bash
+cargo test --workspace                                   # não precisa do jogo
+cargo run -p itb-lua --bin itb-boot -- "/caminho/Into the Breach"
+ITB_GAME_DIR="/caminho/Into the Breach" cargo test -p itb-lua -- --ignored   # boot real como teste
+```
+No Windows: `TESTAR_WINDOWS.bat` e `RODAR_BOOT_WINDOWS.bat`.
+
+Ferramentas de análise: `pip install -r re/tools/requirements.txt`, depois
+`python re/tools/map_lua_api_v2.py Breach.exe re/evidencias/`,
+`python re/tools/check_inventory_v2.py Breach.exe Into.the.Breach.zip` e
+`python re/tools/gen_api_manifest.py`.
