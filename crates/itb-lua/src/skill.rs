@@ -40,6 +40,35 @@ impl UserData for LDamageRef {
     }
 }
 
+/// Converte um `SpaceDamage` (registro) nos campos lidos pela aplicação (`itb_core::apply::Hit`).
+pub fn hit_from_record(d: &Record) -> itb_core::apply::Hit {
+    use itb_core::board_occupancy::Point;
+    let pt = |k: &str| match d.get(k).or_else(|| d.hidden(k)) { Some(Field::Point(p)) => Point::new(p.x, p.y), _ => Point::INVALID };
+    let st = |k: &str| match d.get(k) { Some(Field::Str(s)) => s.clone(), _ => String::new() };
+    let bl = |k: &str| matches!(d.get(k), Some(Field::Bool(true)));
+    let mut h = itb_core::apply::Hit::new(pt("loc"), d.int("iDamage"));
+    h.push = d.int("iPush");
+    h.shield = d.int("iShield");
+    h.fire = d.int("iFire");
+    h.frozen = d.int("iFrozen");
+    h.injure = d.int("iInjure");
+    h.smoke = d.int("iSmoke");
+    h.acid = d.int("iAcid");
+    h.crack = d.int("iCrack");
+    h.pawn = st("sPawn");
+    h.pawn_team = d.int("iPawnTeam");
+    h.evacuate = bl("bEvacuate");
+    h.terrain = d.int("iTerrain");
+    h.script = st("sScript");
+    h.web_from = pt("p_0x110");
+    h.item = st("sItem");
+    h.i_0x130 = d.int("i_0x130");
+    h.kind = d.int("kind_0x98");
+    h.move_type = d.int("move_type_0xd8");
+    h.path = d.points("path_0xcc").iter().map(|p| Point::new(p.x, p.y)).collect();
+    h
+}
+
 /// Aceita `SpaceDamage` por valor ou referência e devolve uma cópia (passagem por valor do C++).
 pub fn damage_arg(v: &Value) -> Option<Record> {
     let Value::UserData(u) = v else { return None };

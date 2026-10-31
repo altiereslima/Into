@@ -11,7 +11,7 @@ Stub	Board:Bounce
 Stub	Board:ClearBlockSpawns
 Stub	Board:ClearSpace
 Stub	Board:Crack
-Stub	Board:DamageSpace
+Reconstructed	Board:DamageSpace
 Stub	Board:Fade
 Stub	Board:GetAnotherPlayerPawn
 Stub	Board:GetBuildingCount

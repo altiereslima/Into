@@ -50,8 +50,13 @@ fn main() {
     host.boot().expect("boot");
 
     let mut b = OccupancyBoard::new(8, 8).unwrap();
-    b.tile_mut(Point::new(5, 5)).unwrap().terrain = TERRAIN_BUILDING;
-    let powered = PawnStatusBytes { powered: true, ..Default::default() };
+    {
+        let t = b.tile_mut(Point::new(5, 5)).unwrap();
+        t.terrain = TERRAIN_BUILDING;
+        t.health = 1;
+        t.max_health = 1;
+    }
+    let powered = PawnStatusBytes { powered: true, byte_0x91e: 1, ..Default::default() };
     let mech = b.add_pawn(PawnState { id: 0, team: TEAM_PLAYER, health: 3, max_health: 3, space: p1, mech: true,
         status: powered, base_move_0x63a8f0: 3, type_name: "PunchMech".into(), ..Default::default() }).unwrap();
     if p2 != p1 {
@@ -94,6 +99,11 @@ fn main() {
                     println!("  [{}] {}", i + 1, fmt_damage(d));
                 }
             }
+            // Etapa 11: aplica `effect` ao tabuleiro e mostra o resultado
+            let hits: Vec<_> = s.effect.borrow().iter().map(itb_lua::skill::hit_from_record).collect();
+            let before = board.borrow().clone();
+            board.borrow_mut().apply_effects(&hits);
+            print_board_diff(&before, &board.borrow());
         }
         Ok(other) => println!("GetSkillEffect devolveu {}", other.type_name()),
         Err(e) => {
@@ -109,6 +119,38 @@ fn main() {
     }
 }
 
+/// Mostra o que mudou no tabuleiro depois de aplicar os efeitos.
+fn print_board_diff(before: &OccupancyBoard, after: &OccupancyBoard) {
+    println!("## Tabuleiro depois de aplicar `effect`");
+    for (i, (a, b)) in before.pawns.iter().zip(after.pawns.iter()).enumerate() {
+        let mut ch = Vec::new();
+        if a.space != b.space { ch.push(format!("({},{})→({},{})", a.space.x, a.space.y, b.space.x, b.space.y)); }
+        if a.health != b.health { ch.push(format!("vida {}→{}", a.health, b.health)); }
+        if a.status.fire != b.status.fire { ch.push(format!("fogo {}", b.status.fire)); }
+        if a.status.frozen != b.status.frozen { ch.push(format!("gelo {}", b.status.frozen)); }
+        if a.status.acid != b.status.acid { ch.push(format!("ácido {}", b.status.acid)); }
+        if a.damage.shield_0x8d4 != b.damage.shield_0x8d4 { ch.push(format!("escudo {}", b.damage.shield_0x8d4)); }
+        if !ch.is_empty() { println!("  unidade {} (id {}): {}", i, b.id, ch.join(", ")); }
+    }
+    let s = after.get_size();
+    for y in 0..s.y {
+        for x in 0..s.x {
+            let p = Point::new(x, y);
+            let (a, b) = (before.tile(p), after.tile(p));
+            let mut ch = Vec::new();
+            if a.terrain != b.terrain { ch.push(format!("terreno {}→{}", a.terrain, b.terrain)); }
+            if a.health != b.health { ch.push(format!("vida {}→{}", a.health, b.health)); }
+            if a.fire != b.fire { ch.push(format!("fogo {}", b.fire)); }
+            if a.smoke != b.smoke { ch.push(format!("fumaça {}", b.smoke)); }
+            if a.acid != b.acid { ch.push(format!("ácido {}", b.acid)); }
+            if a.cracked != b.cracked { ch.push(format!("rachado {}", b.cracked)); }
+            if a.frozen_0x2aa1 != b.frozen_0x2aa1 { ch.push(format!("gelo {}", b.frozen_0x2aa1)); }
+            if !ch.is_empty() { println!("  casa ({x},{y}): {}", ch.join(", ")); }
+        }
+    }
+    for e in &after.events[before.events.len()..] { println!("  evento: {e:?}"); }
+}
+
 /// Executa GetTargetArea + GetSkillEffect de TODAS as armas definidas nos scripts e resume.
 fn sweep(host: &Host, board: &Rc<RefCell<OccupancyBoard>>, mech: usize, p1: Point, p2: Point) {
     let names: Vec<String> = host.lua.load(r#"
@@ -120,6 +162,7 @@ fn sweep(host: &Host, board: &Rc<RefCell<OccupancyBoard>>, mech: usize, p1: Poin
         table.sort(t) return t"#).eval().unwrap();
     let lp = |p: Point| itb_lua::values::LPoint(itb_core::geometry::IPoint::new(p.x, p.y));
     let (mut clean, mut with_stubs, mut failed) = (0, 0, Vec::new());
+    let (mut applied, mut changed, mut apply_panics) = (0, 0, Vec::<String>::new());
     let mut stub_freq: std::collections::BTreeMap<String, usize> = Default::default();
     for name in &names {
         let before: std::collections::BTreeMap<String, u64> = host.report.borrow().stub_calls.clone();
@@ -128,6 +171,16 @@ fn sweep(host: &Host, board: &Rc<RefCell<OccupancyBoard>>, mech: usize, p1: Poin
         let w: Table = host.lua.globals().get(name.as_str()).unwrap();
         let r1 = w.get::<Function>("GetTargetArea").and_then(|f| f.call::<Value>((w.clone(), lp(p1))));
         let r2 = w.get::<Function>("GetSkillEffect").and_then(|f| f.call::<Value>((w.clone(), lp(p1), lp(p2))));
+        // Etapa 11: aplica `effect` numa cópia do tabuleiro (não pode entrar em pânico)
+        if let Ok(Value::UserData(u)) = &r2 {
+            if let Ok(fx) = u.borrow::<LSkillEffect>() {
+                let hits: Vec<_> = fx.effect.borrow().iter().map(itb_lua::skill::hit_from_record).collect();
+                let mut copy = board.borrow().clone();
+                let ok = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| copy.apply_effects(&hits))).is_ok();
+                if ok { applied += 1; if copy.pawns != board.borrow().pawns || copy.events.len() > board.borrow().events.len() { changed += 1; } }
+                else { apply_panics.push(name.clone()); }
+            }
+        }
         let after = host.report.borrow().stub_calls.clone();
         let new_stubs: Vec<String> = after.iter().filter(|(k, n)| before.get(*k) != Some(n)).map(|(k, _)| k.clone()).collect();
         match (r1, r2) {
@@ -139,6 +192,8 @@ fn sweep(host: &Host, board: &Rc<RefCell<OccupancyBoard>>, mech: usize, p1: Poin
     }
     println!("# Varredura de armas ({} encontradas nos scripts)", names.len());
     println!("sem stubs e sem erro: {clean} | rodaram tocando stubs: {with_stubs} | com erro: {}", failed.len());
+    println!("efeitos aplicados ao tabuleiro: {applied} (mudaram unidades ou geraram eventos: {changed}) | pânico na aplicação: {}{}",
+             apply_panics.len(), if apply_panics.is_empty() { String::new() } else { format!(" ({})", apply_panics.join(", ")) });
     let mut freq: Vec<_> = stub_freq.into_iter().collect();
     freq.sort_by_key(|e| std::cmp::Reverse(e.1));
     println!("\n## Stubs que mais bloqueiam armas (nº de armas)");

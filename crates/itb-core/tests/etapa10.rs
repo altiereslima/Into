@@ -105,7 +105,7 @@ fn is_terrain_special_values() {
     assert!(!b.is_terrain(pt(1, 1), TERRAIN_WATER) && !b.is_terrain(pt(1, 1), TERRAIN_LAVA));
     let t = b.tile_mut(pt(2, 2)).unwrap();
     t.terrain = TERRAIN_ICE;
-    t.health_0x7c = 1;
+    t.health = 1;
     t.cracked = 1;
     assert!(b.is_terrain(pt(2, 2), 18) && b.is_terrain(pt(2, 2), 16) && b.is_terrain(pt(2, 2), TERRAIN_ICE));
     assert!(b.is_terrain(pt(-3, 0), TERRAIN_ROAD)); // sentinela
@@ -173,7 +173,7 @@ fn would_die_cracked_ground_and_damaged_ice() {
     let t = b.tile_mut(pt(2, 2)).unwrap();
     t.cracked = 0;
     t.terrain = TERRAIN_ICE;
-    t.health_0x7c = 1;
+    t.health = 1;
     b.pawns[i].movement.flying = false;
     assert!(deadly(&b, 1));
     b.pawns[i].damage.byte_0x99d = 1;

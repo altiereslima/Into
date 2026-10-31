@@ -159,6 +159,29 @@ impl UserData for LBoard {
             let loc = match d.get("loc") { Some(crate::records::Field::Point(p)) => *p, _ => return Err(sig()) };
             Ok(s.0.borrow().is_deadly(to_b(loc), d.int("iDamage"), attacker))
         });
+        // 0x0055F200 DamageSpace(SpaceDamage) / 0x0055F5B0 DamageSpace(Point, int). Os empurrões
+        // gerados são resolvidos logo em seguida (o original espera a animação).
+        m.add_method("DamageSpace", |_, s, a: MultiValue| {
+            let a: Vec<Value> = a.into_iter().collect();
+            let sig = || no_overload("DamageSpace(SpaceDamage), DamageSpace(Point,int)");
+            let mut b = s.0.borrow_mut();
+            match a.as_slice() {
+                [d] => {
+                    let rec = crate::skill::damage_arg(d).ok_or_else(sig)?;
+                    b.damage_space(&crate::skill::hit_from_record(&rec));
+                }
+                [p, n] => {
+                    let p = pt(p).ok_or_else(sig)?;
+                    let n = arg_int(n).ok_or_else(sig)?;
+                    if b.is_valid(to_b(p)) {
+                        b.tile_apply_damage(to_b(p), &itb_core::apply::Hit::new(BPoint::INVALID, n), 0);
+                    }
+                }
+                _ => return Err(sig()),
+            }
+            b.resolve_pending_pushes();
+            Ok(())
+        });
         m.add_method("IsPawnAlive", |_, s, id: Value| {
             Ok(s.0.borrow().is_pawn_alive(arg_int(&id).ok_or_else(|| no_overload("IsPawnAlive(int)"))?))
         });
@@ -235,7 +258,7 @@ impl mlua::FromLua for LPawnRef {
 pub const BOARD_DONE: &[&str] = &[
     "IsValid", "GetTerrain", "IsBuilding", "IsFire", "IsSmoke", "IsVines", "IsAcid", "IsCracked", "IsEdge",
     "GetPawnTeam", "GetSize", "GetSimpleReachable", "GetSimplePath", "GetReachable", "GetPath", "IsDeadly", "IsTerrain", "IsPod", "IsItem",
-    "IsDangerous", "IsSpawning", "IsCrackable", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
+    "IsDangerous", "IsSpawning", "IsCrackable", "DamageSpace", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
 ];
 /// Respondidos com dados do estado do jogo (rotina original ainda não reconstruída).
 pub const PAWN_HOST: &[&str] = &["GetBaseMove", "IsAbility"];

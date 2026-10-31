@@ -224,6 +224,22 @@ fn etapa10_board_queries_from_lua() {
 }
 
 #[test]
+fn etapa11_damage_space_applies_to_the_board() {
+    use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, PawnStatusBytes, Point};
+    let h = host();
+    h.lua.load("function SetBoard(b) Board = b end").exec().unwrap();
+    let mut b = OccupancyBoard::new(8, 8).unwrap();
+    let st = PawnStatusBytes { byte_0x91e: 1, ..Default::default() };
+    let e = b.add_pawn(PawnState { id: 7, team: TEAM_ENEMY, health: 3, max_health: 3, space: Point::new(4, 4), status: st, ..Default::default() }).unwrap();
+    let shared = std::rc::Rc::new(std::cell::RefCell::new(b));
+    h.set_board(shared.clone()).unwrap();
+    h.lua.load("local d = SpaceDamage(Point(4,4), 1, DIR_RIGHT) d.iFire = EFFECT_CREATE Board:DamageSpace(d) Board:DamageSpace(Point(5,4), 1)").exec().unwrap();
+    let b = shared.borrow();
+    assert_eq!((b.pawns[e].space, b.pawns[e].health, b.pawns[e].status.fire), (Point::new(5, 4), 1, true));
+    assert_eq!(b.tile(Point::new(4, 4)).fire, 1);
+}
+
+#[test]
 fn board_and_pawn_bindings_reach_the_core() {
     use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, Point};
     let h = host();

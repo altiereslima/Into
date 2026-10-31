@@ -1,32 +1,35 @@
-# CHECKPOINT — Etapa 10: alcance e caminho do EXE, dano letal; 559/559 armas rodando
+# CHECKPOINT — Etapa 11: aplicar armas ao tabuleiro (versão 1)
 
 **Data:** 2026-10-31. Etapas anteriores em `docs/historico/`.
 
 ## Feito
-- **Alcance e caminho** (`itb-core/src/pathfinding.rs`): `Board:GetReachable` (Dijkstra com `std::set`
-  ordenado por custo, x, y) e `Board:GetPath` (A* com heap binário do MSVC, heurística ×1.01 em float).
-  Desempates reproduzidos instrução a instrução, inclusive o custo 1000 de prédio para projéteis e as
-  paredes por direção (+0x2AC4).
-- **Terreno** (`board_terrain.rs`): `IsTerrain` (com os valores especiais 14, 16, 18), `IsCrackable`,
-  `IsPod`, `IsItem`, `IsDangerous`, `IsSpawning`.
-- **Dano letal** (`damage.rs`): `Board:IsDeadly` e `Pawn::WouldDie` — impulso do atacante, escudo, gelo,
-  `DAMAGE_ZERO`/`DAMAGE_DEATH`, blindagem, ácido, chão rachado e gelo danificado.
-- **Pawn**: `IsShield`, `IsBoosted`, `IsFlying`, `IsJumper`, `IsTeleporter`, `IsBurrower`, `IsGrappled`,
-  `GetMoveSpeed`, `GetType`, `IsCorpse` na Lua; `GetBaseMove`/`IsAbility` como dados do host.
-  Correção: `GetPathProf` usa `IsJumper()`/`IsFlying()`, que exigem unidade viva.
-- **SkillEffect**: + AddAirstrike, AddReverseAirstrike, AddDropper, AddEmitter, AddVoice, AddQueuedVoice.
-  Global `IsPassiveSkill`.
-- Provas: `re/evidencias/rotinas_alcance.md`.
+- **Aplicação de dano** (`itb-core/src/apply.rs`), lida no assembly: `Board:DamageSpace`,
+  `Tile::ApplyDamage` (a rotina de ~1500 instruções que o motor usa para cada `SpaceDamage`),
+  `Pawn::ApplyDamage`, `Health::Add`. Escudo e gelo absorvem, `DAMAGE_ZERO`/`DAMAGE_DEATH`, blindagem e ácido,
+  cura que limpa estados, prédios perdendo vida e virando entulho, montanha e gelo com 2 de vida, floresta
+  que pega fogo, areia que vira fumaça, chão rachado que vira buraco.
+- **Empurrão**: agendamento (`Pawn::Push`), colisão (prédio, montanha, unidade, parede) com 1 de dano para
+  os dois lados, unidades "estáveis", e chegada na casa nova (afogar na água, cair no buraco).
+- **Fogo, fumaça, ácido, gelo, rachadura e terreno** nas casas e nas unidades, com as interações do EXE
+  (fumaça e ácido apagam fogo, gelo derrete com fogo, água vira gelo...).
+- `Board:DamageSpace` na Lua; `itb-weapon` agora **aplica** os efeitos e mostra o que mudou.
+- O que ainda não é simulado vira `BoardEvent` (rede elétrica, itens, cápsulas, criação de unidades, teias,
+  retirada, scripts visuais). Provas: `re/evidencias/rotinas_dano.md`.
+- Correção: o campo de vida da casa é +0x78 (atual) / +0x7C (máximo); `IsTerrain(p, 18)` usa o atual.
+
+## Exemplo (`itb-weapon <jogo> Prime_Punchmech 5 3 5 4`)
+O soco empurra o inimigo contra o prédio em (5,5): o inimigo toma 2 + 1 da colisão e morre, o prédio
+toma 1 e vira entulho, e a rede elétrica registra 1 de dano.
 
 ## Números
-| Métrica | Etapa 09 | Etapa 10 |
+| Métrica | Etapa 10 | Etapa 11 |
 |---|---|---|
-| Armas que rodam sem erro e sem tocar stub (559) | 514 (92%) | **559 (100%)** |
-| Nomes da API reconstruídos / plataforma / stubs (475) | 184 / 11 / 280 | **210 / 13 / 252** |
-| Entrypoints nativos com Rust testado (368) | 115 (31,25%) | **131 (35,60%)** — 91 com lógica, 40 acessores; +10 parciais |
-| Testes | 69 | **83** + 2 de integração |
+| Armas cujo efeito é aplicado ao tabuleiro sem falhar (559) | 0 | **559** (415 mudam o tabuleiro no cenário de teste) |
+| Nomes da API reconstruídos / plataforma / stubs (475) | 210 / 13 / 252 | **211 / 13 / 251** |
+| Entrypoints com Rust testado (368) | 131 (35,60%) | 131 + **12 parciais** (DamageSpace entrou como parcial) |
+| Testes | 83 | **94** + 2 de integração |
 
 ## Próximo
-**Aplicar** um `SkillEffect` ao tabuleiro (M5): dano, empurrão, fogo, fumaça, ácido, gelo, rachaduras,
-prédios — começando pela rotina que consome a `DamageList` em ordem com os atrasos. Depois, os scripts de IA
-inimiga (M6) já têm `GetReachable`/`GetPath`.
+Fechar as partes "versão 1": ler o executor do `SkillEffect` (ordem real, atrasos e quando os empurrões
+resolvem), o efeito de chegada completo (0x0059C5C0), rede elétrica/prédios de energia e a chance de resistir,
+itens e criação de unidades. Depois, o turno inimigo (M6).

@@ -107,6 +107,8 @@ pub struct PawnState {
     pub base_move_0x63a8f0: i32,
     /// Habilidades consultadas por `Pawn:IsAbility(nome)` (0x0063AB20 → 0x0061D180; dado de entrada).
     pub abilities: Vec<String>,
+    /// +0x978: direção de empurrão pendente (`None` = 4, valor inicial gravado em 0x006275A3).
+    pub pending_push_0x978: Option<i32>,
     /// +0x94 `std::string` com o tipo da unidade (ex.: "SatelliteRocket"), lido por `IsCrackable`.
     pub type_name: String,
     /// Entradas de `Pawn::WouldDie` (0x006362A0) e `IsBoosted` (0x006313E0); ver `damage.rs`.
@@ -131,6 +133,14 @@ pub struct DamageTraits {
     pub query_0x62f2f0: bool,
     /// `Pawn::0x0063C100()` — blindagem (reduz 1 de dano).
     pub query_0x63c100: bool,
+    /// `Pawn::0x0062C5F0()`: passiva "Passive_PlayerTurnShield" ativa nesta unidade (anula dano).
+    pub query_0x62c5f0: bool,
+    /// `Pawn::0x00638BD0()`: imune a fogo (só pega fogo com "Passive_FireBoost" sendo mech).
+    pub query_0x638bd0: bool,
+    /// Tipo (+0x874) byte +0x374: ignora fogo por completo.
+    pub type_ignores_fire_0x374: bool,
+    /// Nomes aceitos por `vftable[1](nome)` (ex.: "Thick", "Retaliation").
+    pub vslot1_names: &'static [&'static str],
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
@@ -141,6 +151,10 @@ pub struct PawnStatusBytes {
     pub infected: bool,
     pub powered: bool,
     pub byte_0x91e: u8,
+    /// +0x8D6: ferido (`iInjure`).
+    pub injured_0x8d6: bool,
+    /// +0x921: morreu nesta ação (gravado por `Kill` e `ApplyDamage`).
+    pub died_0x921: bool,
 }
 
 /// Entradas de `Pawn:GetPathProf()`. Cada uma vem de uma consulta ainda não reconstruída em detalhe.
@@ -162,6 +176,8 @@ impl PawnState {
     pub fn is_dead(&self) -> bool { self.health <= 0 }
     /// 0x00638D50 `IsDamaged`: `[+0x8A8] != [+0x8AC]` (inclusive se vida > máximo).
     pub fn is_damaged(&self) -> bool { self.health != self.max_health }
+    /// `vftable[1](nome)`.
+    pub fn vslot1(&self, name: &str) -> bool { self.damage.vslot1_names.contains(&name) }
     /// 0x00639FC0 `GetTeam`.
     pub fn get_team(&self) -> i32 { self.team }
     /// 0x0062F2D0 `SetTeam(int)`: grava sem validar.
@@ -281,8 +297,22 @@ pub struct Tile {
     pub edge_block_0x2ac4: [bool; 4],
     /// +0x2AC8 (BYTE): água marcada como lava (`IsTerrain(p, TERRAIN_LAVA)`).
     pub lava_0x2ac8: bool,
-    /// +0x7C: campo do objeto de vida da casa (+0x78); `IsTerrain(p, 18)` = gelo com valor 1.
-    pub health_0x7c: i32,
+    /// Objeto de vida da casa (+0x74; vida atual +0x78, máximo +0x7C): prédios, montanhas, gelo.
+    /// `IsTerrain(p, 18)` = gelo com vida atual 1. (Etapa 10 chamava este campo de `health_0x7c`.)
+    pub health: i32,
+    pub max_health: i32,
+    /// +0x2AA4: contagem do escudo da casa (prédio/montanha; 2 ao ativar, 0 ao remover).
+    pub shield_0x2aa4: i32,
+    /// +0x2AA1 (BYTE): prédio/montanha congelado.
+    pub frozen_0x2aa1: bool,
+    /// +0x2630 (BYTE): casa atingida.
+    pub hit_0x2630: bool,
+    /// +0x27AC (DWORD): prédio "único" (objetivo) — não vira entulho.
+    pub unique_0x27ac: i32,
+    /// +0x2710 (BYTE): prédio criado por `AddBuilding`.
+    pub byte_0x2710: bool,
+    /// +0x2640 (BYTE): com ele, a unidade da casa não barra empurrões.
+    pub byte_0x2640: bool,
     /// +0x2AE4: 1 na casa da cápsula (`IsPod`).
     pub pod_0x2ae4: i32,
     /// +0x2B04 (DWORD): `IsItem` (!= 0).
@@ -320,6 +350,11 @@ pub struct OccupancyBoard {
     /// Board+0x7460.. e Board+0x7470..: listas de casas perigosas (`IsDangerous`).
     pub danger_list_a: Vec<Point>,
     pub danger_list_b: Vec<Point>,
+    /// Passivas do esquadrão para `IsPassiveSkill` lido pelas regras de dano (ex.: "Passive_ForceAmp").
+    pub passive_skills: Vec<String>,
+    /// Efeitos que o motor original delega a sistemas ainda não reconstruídos (rede elétrica, itens,
+    /// cápsulas, criação de unidades...) ou que só têm efeito visual. Ver `apply.rs`.
+    pub events: Vec<crate::apply::BoardEvent>,
 }
 
 impl OccupancyBoard {
@@ -330,7 +365,8 @@ impl OccupancyBoard {
         let len = (width as usize) * (height as usize);
         Ok(Self { bounds: BoardBounds { width, height }, tiles: vec![Tile::default(); len],
                   sentinel: Tile::default(), pawns: Vec::new(), global_list_has_12: false,
-                  pod_space: Point::INVALID, spawn_list: Vec::new(), danger_list_a: Vec::new(), danger_list_b: Vec::new() })
+                  pod_space: Point::INVALID, spawn_list: Vec::new(), danger_list_a: Vec::new(), danger_list_b: Vec::new(),
+                  passive_skills: Vec::new(), events: Vec::new() })
     }
 
     /// Board vftable slot 0x08 → 0x00561370 (`IsValid`).

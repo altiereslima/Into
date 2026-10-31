@@ -13,7 +13,7 @@ impl OccupancyBoard {
     ///
     /// * 3 (água): falso se o byte +0x23AC estiver ligado com contador +0x23CC < 15; senão terreno == 3.
     /// * 14 (lava): `IsTerrain(3)` e byte +0x2AC8.
-    /// * 18: `IsTerrain(5)` (gelo) e campo de vida +0x7C == 1.
+    /// * 18: `IsTerrain(5)` (gelo) e vida atual (+0x78) == 1.
     /// * 16: byte `IsCracked` (+0x2B26).
     /// * demais: terreno == valor.
     pub fn tile_is_terrain(tile: &Tile, t: i32) -> bool {
@@ -23,7 +23,7 @@ impl OccupancyBoard {
                 tile.terrain == TERRAIN_WATER
             }
             TERRAIN_LAVA => Self::tile_is_terrain(tile, TERRAIN_WATER) && tile.lava_0x2ac8,
-            TERRAIN_QUERY_DAMAGED_ICE => Self::tile_is_terrain(tile, TERRAIN_ICE) && tile.health_0x7c == 1,
+            TERRAIN_QUERY_DAMAGED_ICE => Self::tile_is_terrain(tile, TERRAIN_ICE) && tile.health == 1,
             TERRAIN_QUERY_CRACKED => tile.cracked != 0,
             _ => tile.terrain == t,
         }

@@ -742,6 +742,16 @@
       "",
       "IsPassiveSkill",
       "0x0065AEB0"
+    ],
+    [
+      "Board",
+      "DamageSpace",
+      "0x0055F200"
+    ],
+    [
+      "Board",
+      "DamageSpace",
+      "0x0055F5B0"
     ]
   ],
   "trivial_accessors": [

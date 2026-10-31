@@ -30,3 +30,5 @@ pub mod board_terrain;
 pub mod damage;
 /// Alcance (Dijkstra) e caminho (A*) (Etapa 10).
 pub mod pathfinding;
+/// Aplicação de SkillEffect ao tabuleiro: dano, empurrão, fogo, fumaça, ácido, gelo (Etapa 11).
+pub mod apply;
