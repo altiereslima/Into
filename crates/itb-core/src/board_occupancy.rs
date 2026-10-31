@@ -1,0 +1,297 @@
+//! Ocupação do tabuleiro por unidades (Pawn) — Etapa 05.
+//!
+//! Reconstrução semântica, a partir de `Breach.exe` v1.2.88, das rotinas nativas
+//! expostas à Lua que respondem "quem está em (x,y)?", "a unidade N está viva?",
+//! "esta casa bloqueia o caminho?". Endereços e desmontagens em
+//! `evidencias/etapa05_disasm/` e `evidencias/rotinas_ocupacao.md`.
+//!
+//! O modelo NÃO replica o layout C++. Ponteiros `Pawn*` do EXE viram índices
+//! (`PawnIdx`) numa arena; a ordem da arena é a ordem da lista do `PawnHolder`
+//! (Board+0x3C..0x40), usada por `GetPawn(id)`. Cada casa guarda a sua própria
+//! lista de unidades (tile+0xA0..0xA4), que pode divergir da arena, como no EXE.
+//!
+//! Dependência parcial declarada: `Pawn::IsCorpse` (0x00629540) chama
+//! `Pawn::0x00639E10(12)`, ainda não reconstruída. O resultado dessa chamada é um
+//! dado de entrada (`PawnState::query_0x639e10_12`).
+
+use crate::board::BoardBounds;
+
+/// Constantes registradas pelo próprio EXE em `_G` (ver `evidencias/lua_constants.csv`).
+pub mod consts {
+    pub const TEAM_PLAYER: i32 = 1;
+    pub const TEAM_NONE: i32 = 2;
+    pub const TEAM_MECH: i32 = 4;
+    pub const TEAM_ENEMY: i32 = 6;
+    pub const PATH_GROUND: i32 = 0;
+    pub const PATH_FLYER: i32 = 1;
+    pub const PATH_MASSIVE: i32 = 2;
+    pub const PATH_PROJECTILE: i32 = 3;
+    pub const PATH_ROADRUNNER: i32 = 4;
+    pub const PATH_BURROWER: i32 = 7;
+    pub const PATH_PHASING: i32 = 9;
+    pub const TERRAIN_ROAD: i32 = 0;
+    pub const TERRAIN_BUILDING: i32 = 1;
+    pub const TERRAIN_RUBBLE: i32 = 2;
+    pub const TERRAIN_WATER: i32 = 3;
+    pub const TERRAIN_MOUNTAIN: i32 = 4;
+    pub const TERRAIN_ICE: i32 = 5;
+    pub const TERRAIN_FOREST: i32 = 6;
+    pub const TERRAIN_SAND: i32 = 7;
+    pub const TERRAIN_HOLE: i32 = 9;
+    pub const TERRAIN_FIRE: i32 = 11;
+    pub const TERRAIN_ACID: i32 = 12;
+    pub const TERRAIN_LAVA: i32 = 14;
+}
+
+/// `Point` do motor: dois `int` passados por valor (mesma ABI de `(int x, int y)`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct Point {
+    pub x: i32,
+    pub y: i32,
+}
+
+impl Point {
+    pub const fn new(x: i32, y: i32) -> Self { Self { x, y } }
+    /// Valor devolvido por `GetPawnSpace` quando não há unidade (0x00567993).
+    pub const INVALID: Point = Point { x: -1, y: -1 };
+}
+
+/// Índice de uma unidade na arena (substitui `Pawn*`).
+pub type PawnIdx = usize;
+
+/// Campos de `Pawn` lidos pelas rotinas desta etapa (offsets do objeto original).
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
+pub struct PawnState {
+    /// +0x9A4 — `GetId` (0x006370D0).
+    pub id: i32,
+    /// +0x0B0 — `GetTeam` (0x00639FC0), `SetTeam` (0x0062F2D0).
+    pub team: i32,
+    /// +0x8A8 — `GetHealth` (0x004F6410).
+    pub health: i32,
+    /// +0x8AC — comparado em `IsDamaged` (0x00638D50).
+    pub max_health: i32,
+    /// +0x8EC/+0x8F0 — `GetSpace` (0x00635FA0, slot 0x28 da vftable de Pawn).
+    pub space: Point,
+    /// +0x9E4 — `IsMech` (0x00639040), `SetMech` (0x00639050).
+    pub mech: bool,
+    /// +0xF80 — byte testado por `IsCorpse`; significado ainda não nomeado.
+    pub flag_0xf80: bool,
+    /// +0x9E0 — inteiro testado por `IsCorpse` contra 2, 3 e 4; não nomeado.
+    pub state_0x9e0: i32,
+    /// +0x10E8 — inteiro comparado com 12 em `IsCorpse`; não nomeado.
+    pub value_0x10e8: i32,
+    /// Resultado de `Pawn::0x00639E10(12)` (não reconstruída; dado de entrada).
+    pub query_0x639e10_12: bool,
+}
+
+impl PawnState {
+    /// 0x004F6410 `GetHealth`: `return [this+0x8A8]`.
+    pub fn get_health(&self) -> i32 { self.health }
+    /// 0x00629530 `IsDead` (vftable slot 0x10): `[this+0x8A8] <= 0`.
+    pub fn is_dead(&self) -> bool { self.health <= 0 }
+    /// 0x00638D50 `IsDamaged`: `[+0x8A8] != [+0x8AC]` (inclusive se vida > máximo).
+    pub fn is_damaged(&self) -> bool { self.health != self.max_health }
+    /// 0x00639FC0 `GetTeam`.
+    pub fn get_team(&self) -> i32 { self.team }
+    /// 0x0062F2D0 `SetTeam(int)`: grava sem validar.
+    pub fn set_team(&mut self, team: i32) { self.team = team; }
+    /// 0x0062F840 `IsPlayer`: `team == 1`.
+    pub fn is_player(&self) -> bool { self.team == consts::TEAM_PLAYER }
+    /// 0x0062F870 `IsEnemy`: `team == 6`.
+    pub fn is_enemy(&self) -> bool { self.team == consts::TEAM_ENEMY }
+    /// 0x006370D0 `GetId`.
+    pub fn get_id(&self) -> i32 { self.id }
+    /// 0x00639040 `IsMech`.
+    pub fn is_mech(&self) -> bool { self.mech }
+    /// 0x00639050 `SetMech()`: grava 1, sem parâmetro (não existe "desmarcar").
+    pub fn set_mech(&mut self) { self.mech = true; }
+    /// 0x00635FA0 `GetSpace` (slot 0x28): copia +0x8EC/+0x8F0.
+    pub fn get_space(&self) -> Point { self.space }
+
+    /// 0x00629540 `IsCorpse` — fluxo completo; a chamada 0x00639E10(12) é dado de entrada.
+    /// `global_list_has_12`: a lista global de inteiros em 0x008CF84C..0x008CF850 contém 12.
+    pub fn is_corpse(&self, global_list_has_12: bool) -> bool {
+        if (self.mech || self.flag_0xf80) && !matches!(self.state_0x9e0, 2..=4) {
+            return true;
+        }
+        if self.value_0x10e8 == 12 || global_list_has_12 {
+            return self.query_0x639e10_12;
+        }
+        false
+    }
+}
+
+/// Casa do tabuleiro: só os campos que as rotinas de ocupação leem.
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
+pub struct Tile {
+    /// +0x2AE0 (mesmo campo de `GetTerrain`).
+    pub terrain: i32,
+    /// +0x27B4 `std::string`; 0x005AE510 procura "conveyor" nela.
+    pub custom_tile: String,
+    /// +0xA0..+0xA4 `std::vector<Pawn*>` na ordem original.
+    pub pawns: Vec<PawnIdx>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum OccupancyError { InvalidDimensions, OutOfBounds, UnknownPawn }
+
+/// Tabuleiro com unidades. `sentinel` corresponde à casa em Board+0x5C,
+/// usada pelo EXE quando a coordenada é inválida.
+#[derive(Clone, Debug)]
+pub struct OccupancyBoard {
+    bounds: BoardBounds,
+    tiles: Vec<Tile>,
+    pub sentinel: Tile,
+    /// Arena = lista do PawnHolder (Board+0x3C), na ordem de busca de `GetPawn(id)`.
+    pub pawns: Vec<PawnState>,
+    /// Estado global lido por `IsCorpse` (lista em 0x008CF84C contém 12).
+    pub global_list_has_12: bool,
+}
+
+impl OccupancyBoard {
+    pub fn new(width: i32, height: i32) -> Result<Self, OccupancyError> {
+        if width <= 0 || height <= 0 || (width as i64) * (height as i64) > 1_048_576 {
+            return Err(OccupancyError::InvalidDimensions);
+        }
+        let len = (width as usize) * (height as usize);
+        Ok(Self { bounds: BoardBounds { width, height }, tiles: vec![Tile::default(); len],
+                  sentinel: Tile::default(), pawns: Vec::new(), global_list_has_12: false })
+    }
+
+    /// Board vftable slot 0x08 → 0x00561370 (`IsValid`).
+    pub fn is_valid(&self, p: Point) -> bool { self.bounds.is_valid(p.x, p.y) }
+
+    fn index(&self, p: Point) -> Option<usize> {
+        self.is_valid(p).then(|| (p.y as usize) * (self.bounds.width as usize) + p.x as usize)
+    }
+
+    /// Acesso `[Board+0x50][x].begin + y*0x2BBC`, ou a sentinela Board+0x5C.
+    pub fn tile(&self, p: Point) -> &Tile {
+        match self.index(p) { Some(i) => &self.tiles[i], None => &self.sentinel }
+    }
+
+    pub fn tile_mut(&mut self, p: Point) -> Result<&mut Tile, OccupancyError> {
+        let i = self.index(p).ok_or(OccupancyError::OutOfBounds)?;
+        Ok(&mut self.tiles[i])
+    }
+
+    /// Ajuda de montagem (não é rotina do EXE): cria unidade na arena e a põe na casa.
+    pub fn add_pawn(&mut self, pawn: PawnState) -> Result<PawnIdx, OccupancyError> {
+        let space = pawn.space;
+        let idx = self.pawns.len();
+        if self.index(space).is_none() { return Err(OccupancyError::OutOfBounds); }
+        self.pawns.push(pawn);
+        self.tile_mut(space)?.pawns.push(idx);
+        Ok(idx)
+    }
+
+    pub fn pawn(&self, idx: PawnIdx) -> &PawnState { &self.pawns[idx] }
+
+    // ----------------------------------------------------------- rotinas da casa
+
+    /// 0x0059F050 `Tile::HasPawn(bool)` (interna, não exposta à Lua).
+    /// `false`: lista não vazia. `true`: existe unidade não morta OU cadáver que ocupa.
+    pub fn tile_has_pawn(&self, tile: &Tile, check_alive: bool) -> bool {
+        if !check_alive { return !tile.pawns.is_empty(); }
+        tile.pawns.iter().any(|&i| {
+            let p = &self.pawns[i];
+            !p.is_dead() || p.is_corpse(self.global_list_has_12)
+        })
+    }
+
+    /// 0x005AE490 `Tile::GetPawn(bool)`: primeira unidade não morta; se todas
+    /// estiverem mortas, devolve a ÚLTIMA da lista (variável sobrescrita no laço).
+    pub fn tile_get_pawn(&self, tile: &Tile, check_alive: bool) -> Option<PawnIdx> {
+        if !self.tile_has_pawn(tile, check_alive) { return None; }
+        let mut last = None;
+        for &i in &tile.pawns {
+            if !self.pawns[i].is_dead() { return Some(i); }
+            last = Some(i);
+        }
+        last
+    }
+
+    /// 0x005AE510 `Tile::IsTerrainBlocked(int pathProf)` (interna).
+    pub fn tile_terrain_blocks(tile: &Tile, path_prof: i32) -> bool {
+        use consts::*;
+        let prof = path_prof & 0xF;
+        if prof == PATH_BURROWER && tile.custom_tile.contains("conveyor") { return true; }
+        match tile.terrain {
+            TERRAIN_BUILDING => prof != PATH_PHASING,
+            TERRAIN_WATER => prof == PATH_GROUND || prof == PATH_BURROWER,
+            TERRAIN_MOUNTAIN => true,
+            TERRAIN_ICE => prof == PATH_BURROWER,
+            TERRAIN_HOLE => !matches!(prof, PATH_PHASING | PATH_PROJECTILE | PATH_FLYER | 8 | 5),
+            // 2, 6, 7, 8 (tabela) e qualquer valor fora de 1..=9 (ex.: 0, 11, 12, 14).
+            _ => false,
+        }
+    }
+
+    // ----------------------------------------------------------- API Lua: Board
+
+    /// 0x0056EE70 `Board:IsPawnSpace(Point, bool)` (WeaponTarget slot 0x4C).
+    pub fn is_pawn_space_ex(&self, p: Point, check_alive: bool) -> bool {
+        if !self.is_valid(p) { return false; }
+        self.tile_has_pawn(self.tile(p), check_alive)
+    }
+
+    /// 0x0056EE50 `Board:IsPawnSpace(Point)`: chama o slot 0x4C com `true`.
+    pub fn is_pawn_space(&self, p: Point) -> bool { self.is_pawn_space_ex(p, true) }
+
+    /// 0x00570E00 `Board:GetPawn(Point)`: se `IsPawnSpace(p)`, devolve o PRIMEIRO
+    /// item da lista da casa (mesmo morto, se outro item satisfez o filtro).
+    pub fn get_pawn_at(&self, p: Point) -> Option<PawnIdx> {
+        if !self.is_pawn_space(p) { return None; }
+        let tile = self.tile(p);
+        if !self.tile_has_pawn(tile, true) { return None; }
+        tile.pawns.first().copied()
+    }
+
+    /// 0x00567750 `Board:GetPawn(Point, bool)`.
+    pub fn get_pawn_at_ex(&self, p: Point, check_alive: bool) -> Option<PawnIdx> {
+        if !self.is_pawn_space_ex(p, check_alive) { return None; }
+        self.tile_get_pawn(self.tile(p), check_alive)
+    }
+
+    /// 0x00567700 `Board:GetPawn(int id)` (PawnHolder slot 0): primeira da arena com o id.
+    pub fn get_pawn_by_id(&self, id: i32) -> Option<PawnIdx> {
+        self.pawns.iter().position(|p| p.id == id)
+    }
+
+    /// 0x00567840 `Board:IsPawnAlive(int id)`: existe e `!IsDead()`.
+    /// Cadáveres (IsCorpse) contam como NÃO vivos aqui.
+    pub fn is_pawn_alive(&self, id: i32) -> bool {
+        self.get_pawn_by_id(id).is_some_and(|i| !self.pawns[i].is_dead())
+    }
+
+    /// 0x00567970 `Board:GetPawnSpace(int id)`: `GetSpace()` ou (-1,-1).
+    /// Usa a posição gravada na unidade, não a casa onde ela está listada.
+    pub fn get_pawn_space(&self, id: i32) -> Point {
+        self.get_pawn_by_id(id).map_or(Point::INVALID, |i| self.pawns[i].get_space())
+    }
+
+    /// 0x00568950 `Board:GetPawnTeam(Point)`: time do PRIMEIRO item da casa
+    /// se `HasPawn(true)`; senão 2 (`TEAM_NONE`). `IsValid` só escolhe entre a casa
+    /// real e a sentinela (Board+0x5C); não há retorno antecipado.
+    pub fn get_pawn_team(&self, p: Point) -> i32 {
+        let tile = self.tile(p);
+        if self.tile_has_pawn(tile, true) {
+            if let Some(&first) = tile.pawns.first() { return self.pawns[first].team; }
+        }
+        consts::TEAM_NONE
+    }
+
+    /// 0x0055F030 `Board:IsBlocked(Point, int pathProf)`.
+    /// Fora do tabuleiro: bloqueado. Terreno: tabela 0x005AE510. Unidade: bloqueia,
+    /// exceto para `PATH_PHASING` (9), que só é barrado por `TEAM_ENEMY` (6).
+    /// Nota: compara `pathProf` inteiro com 9 (sem a máscara 0xF do terreno).
+    pub fn is_blocked(&self, p: Point, path_prof: i32) -> bool {
+        if !self.is_valid(p) { return true; }
+        if Self::tile_terrain_blocks(self.tile(p), path_prof) { return true; }
+        if self.is_pawn_space(p) {
+            if path_prof != consts::PATH_PHASING { return true; }
+            return self.get_pawn_team(p) == consts::TEAM_ENEMY;
+        }
+        false
+    }
+}
