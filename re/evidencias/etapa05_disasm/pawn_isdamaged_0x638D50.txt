@@ -1,0 +1,49 @@
+; pawn_isdamaged_0x638D50  VA 0x00638D50  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00638D50: 8b81a8080000     mov eax, dword ptr [ecx + 0x8a8]
+00638D56: 3b81ac080000     cmp eax, dword ptr [ecx + 0x8ac]
+00638D5C: 0f95c0           setne al
+00638D5F: c3               ret 
+00638D60: 55               push ebp
+00638D61: 8bec             mov ebp, esp
+00638D63: 6aff             push -1
+00638D65: 6868037a00       push 0x7a0368
+00638D6A: 64a100000000     mov eax, dword ptr fs:[0]
+00638D70: 50               push eax
+00638D71: 83ec08           sub esp, 8
+00638D74: 56               push esi
+00638D75: a128df8800       mov eax, dword ptr [0x88df28]
+00638D7A: 33c5             xor eax, ebp
+00638D7C: 50               push eax
+00638D7D: 8d45f4           lea eax, [ebp - 0xc]
+00638D80: 64a300000000     mov dword ptr fs:[0], eax
+00638D86: 8bf1             mov esi, ecx
+00638D88: ff750c           push dword ptr [ebp + 0xc]
+00638D8B: ff7508           push dword ptr [ebp + 8]
+00638D8E: 83ec18           sub esp, 0x18
+00638D91: 8bcc             mov ecx, esp
+00638D93: 8965f0           mov dword ptr [ebp - 0x10], esp
+00638D96: c741140f000000   mov dword ptr [ecx + 0x14], 0xf
+00638D9D: c7411000000000   mov dword ptr [ecx + 0x10], 0
+00638DA4: 83791410         cmp dword ptr [ecx + 0x14], 0x10
+00638DA8: 7204             jb 0x638dae
+00638DAA: 8b01             mov eax, dword ptr [ecx]
+00638DAC: eb02             jmp 0x638db0
+00638DAE: 8bc1             mov eax, ecx
+00638DB0: 6a10             push 0x10
+00638DB2: 68981d8300       push 0x831d98
+00638DB7: c60000           mov byte ptr [eax], 0
+00638DBA: e871f2dcff       call 0x408030
+00638DBF: 83ec18           sub esp, 0x18
+00638DC2: c745fc00000000   mov dword ptr [ebp - 4], 0
+00638DC9: 8d8e94000000     lea ecx, [esi + 0x94]
+00638DCF: 54               push esp
+00638DD0: e89b05e1ff       call 0x449370
+00638DD5: c745fcffffffff   mov dword ptr [ebp - 4], 0xffffffff
+00638DDC: e8ff7c0000       call 0x640ae0
+00638DE1: 8b4df4           mov ecx, dword ptr [ebp - 0xc]
+00638DE4: 64890d00000000   mov dword ptr fs:[0], ecx
+00638DEB: 59               pop ecx
+00638DEC: 5e               pop esi
+00638DED: 8be5             mov esp, ebp
+00638DEF: 5d               pop ebp
+00638DF0: c20800           ret 8

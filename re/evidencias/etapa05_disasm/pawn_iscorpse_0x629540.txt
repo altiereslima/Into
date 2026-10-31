@@ -1,0 +1,39 @@
+; pawn_iscorpse_0x629540  VA 0x00629540  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00629540: 51               push ecx
+00629541: 80b9e409000000   cmp byte ptr [ecx + 0x9e4], 0
+00629548: 7509             jne 0x629553
+0062954A: 80b9800f000000   cmp byte ptr [ecx + 0xf80], 0
+00629551: 7415             je 0x629568
+00629553: 8b81e0090000     mov eax, dword ptr [ecx + 0x9e0]
+00629559: 83f803           cmp eax, 3
+0062955C: 740a             je 0x629568
+0062955E: 83f802           cmp eax, 2
+00629561: 7405             je 0x629568
+00629563: 83f804           cmp eax, 4
+00629566: 753b             jne 0x6295a3
+00629568: 83b9e81000000c   cmp dword ptr [ecx + 0x10e8], 0xc
+0062956F: 7423             je 0x629594
+00629571: a14cf88c00       mov eax, dword ptr [0x8cf84c]
+00629576: 8b1550f88c00     mov edx, dword ptr [0x8cf850]
+0062957C: 3bc2             cmp eax, edx
+0062957E: 741f             je 0x62959f
+00629580: 83380c           cmp dword ptr [eax], 0xc
+00629583: 740b             je 0x629590
+00629585: 83c004           add eax, 4
+00629588: 3bc2             cmp eax, edx
+0062958A: 75f4             jne 0x629580
+0062958C: 32c0             xor al, al
+0062958E: 59               pop ecx
+0062958F: c3               ret 
+00629590: 3bc2             cmp eax, edx
+00629592: 740b             je 0x62959f
+00629594: 6a0c             push 0xc
+00629596: e875080100       call 0x639e10
+0062959B: 84c0             test al, al
+0062959D: 7504             jne 0x6295a3
+0062959F: 32c0             xor al, al
+006295A1: 59               pop ecx
+006295A2: c3               ret 
+006295A3: b001             mov al, 1
+006295A5: 59               pop ecx
+006295A6: c3               ret 

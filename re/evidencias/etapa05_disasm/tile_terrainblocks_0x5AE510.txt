@@ -1,0 +1,71 @@
+; tile_terrainblocks_0x5AE510  VA 0x005AE510  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+005AE510: 55               push ebp
+005AE511: 8bec             mov ebp, esp
+005AE513: 56               push esi
+005AE514: 8b7508           mov esi, dword ptr [ebp + 8]
+005AE517: 83e60f           and esi, 0xf
+005AE51A: 57               push edi
+005AE51B: 8bf9             mov edi, ecx
+005AE51D: 83fe07           cmp esi, 7
+005AE520: 7521             jne 0x5ae543
+005AE522: 6a08             push 8
+005AE524: 6a00             push 0
+005AE526: 681cd68200       push 0x82d61c
+005AE52B: 8d8fb4270000     lea ecx, [edi + 0x27b4]
+005AE531: e8da14eaff       call 0x44fa10
+005AE536: 83f8ff           cmp eax, -1
+005AE539: 7408             je 0x5ae543
+005AE53B: 5f               pop edi
+005AE53C: b001             mov al, 1
+005AE53E: 5e               pop esi
+005AE53F: 5d               pop ebp
+005AE540: c20400           ret 4
+005AE543: 8b87e02a0000     mov eax, dword ptr [edi + 0x2ae0]
+005AE549: 48               dec eax
+005AE54A: 83f808           cmp eax, 8
+005AE54D: 7754             ja 0x5ae5a3
+005AE54F: ff2485ace55a00   jmp dword ptr [eax*4 + 0x5ae5ac]
+005AE556: 83fe09           cmp esi, 9
+005AE559: 7414             je 0x5ae56f
+005AE55B: 83fe03           cmp esi, 3
+005AE55E: 740f             je 0x5ae56f
+005AE560: 83fe01           cmp esi, 1
+005AE563: 740a             je 0x5ae56f
+005AE565: 83fe08           cmp esi, 8
+005AE568: 7405             je 0x5ae56f
+005AE56A: 83fe05           cmp esi, 5
+005AE56D: 751d             jne 0x5ae58c
+005AE56F: 5f               pop edi
+005AE570: 33c0             xor eax, eax
+005AE572: 5e               pop esi
+005AE573: 5d               pop ebp
+005AE574: c20400           ret 4
+005AE577: 83fe09           cmp esi, 9
+005AE57A: 5f               pop edi
+005AE57B: 0f95c0           setne al
+005AE57E: 5e               pop esi
+005AE57F: 5d               pop ebp
+005AE580: c20400           ret 4
+005AE583: 85f6             test esi, esi
+005AE585: 7405             je 0x5ae58c
+005AE587: 83fe07           cmp esi, 7
+005AE58A: 75e3             jne 0x5ae56f
+005AE58C: 5f               pop edi
+005AE58D: b801000000       mov eax, 1
+005AE592: 5e               pop esi
+005AE593: 5d               pop ebp
+005AE594: c20400           ret 4
+005AE597: 83fe07           cmp esi, 7
+005AE59A: 5f               pop edi
+005AE59B: 0f94c0           sete al
+005AE59E: 5e               pop esi
+005AE59F: 5d               pop ebp
+005AE5A0: c20400           ret 4
+005AE5A3: 5f               pop edi
+005AE5A4: 32c0             xor al, al
+005AE5A6: 5e               pop esi
+005AE5A7: 5d               pop ebp
+005AE5A8: c20400           ret 4
+005AE5AB: 90               nop 
+; jump table 0x005AE5AC (terreno-1 = 0..8): 1->0x005AE577, 2->0x005AE5A3, 3->0x005AE583, 4->0x005AE53B, 5->0x005AE597, 6->0x005AE5A3, 7->0x005AE5A3, 8->0x005AE5A3, 9->0x005AE556
+; string 0x0082D61C = "conveyor"

@@ -1,0 +1,55 @@
+; tile_haspawn_0x59F050  VA 0x0059F050  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+0059F050: 55               push ebp
+0059F051: 8bec             mov ebp, esp
+0059F053: 807d0800         cmp byte ptr [ebp + 8], 0
+0059F057: 53               push ebx
+0059F058: 56               push esi
+0059F059: 57               push edi
+0059F05A: 8bf1             mov esi, ecx
+0059F05C: 7516             jne 0x59f074
+0059F05E: 8b86a0000000     mov eax, dword ptr [esi + 0xa0]
+0059F064: 3b86a4000000     cmp eax, dword ptr [esi + 0xa4]
+0059F06A: 0f95c0           setne al
+0059F06D: 5f               pop edi
+0059F06E: 5e               pop esi
+0059F06F: 5b               pop ebx
+0059F070: 5d               pop ebp
+0059F071: c20400           ret 4
+0059F074: 8b86a4000000     mov eax, dword ptr [esi + 0xa4]
+0059F07A: 33ff             xor edi, edi
+0059F07C: 2b86a0000000     sub eax, dword ptr [esi + 0xa0]
+0059F082: c1f802           sar eax, 2
+0059F085: 85c0             test eax, eax
+0059F087: 7448             je 0x59f0d1
+0059F089: 0f1f8000000000   nop dword ptr [eax]
+0059F090: 8b86a0000000     mov eax, dword ptr [esi + 0xa0]
+0059F096: 8d1cbd00000000   lea ebx, [edi*4]
+0059F09D: 8b0c03           mov ecx, dword ptr [ebx + eax]
+0059F0A0: 8b01             mov eax, dword ptr [ecx]
+0059F0A2: 8b4010           mov eax, dword ptr [eax + 0x10]
+0059F0A5: ffd0             call eax
+0059F0A7: 84c0             test al, al
+0059F0A9: 742f             je 0x59f0da
+0059F0AB: 8b8ea0000000     mov ecx, dword ptr [esi + 0xa0]
+0059F0B1: 8b0c19           mov ecx, dword ptr [ecx + ebx]
+0059F0B4: e887a40800       call 0x629540
+0059F0B9: 84c0             test al, al
+0059F0BB: 751d             jne 0x59f0da
+0059F0BD: 8b86a4000000     mov eax, dword ptr [esi + 0xa4]
+0059F0C3: 47               inc edi
+0059F0C4: 2b86a0000000     sub eax, dword ptr [esi + 0xa0]
+0059F0CA: c1f802           sar eax, 2
+0059F0CD: 3bf8             cmp edi, eax
+0059F0CF: 72bf             jb 0x59f090
+0059F0D1: 32c0             xor al, al
+0059F0D3: 5f               pop edi
+0059F0D4: 5e               pop esi
+0059F0D5: 5b               pop ebx
+0059F0D6: 5d               pop ebp
+0059F0D7: c20400           ret 4
+0059F0DA: 5f               pop edi
+0059F0DB: 5e               pop esi
+0059F0DC: b001             mov al, 1
+0059F0DE: 5b               pop ebx
+0059F0DF: 5d               pop ebp
+0059F0E0: c20400           ret 4

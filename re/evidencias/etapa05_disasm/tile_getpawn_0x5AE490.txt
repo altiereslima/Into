@@ -1,0 +1,52 @@
+; tile_getpawn_0x5AE490  VA 0x005AE490  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+005AE490: 55               push ebp
+005AE491: 8bec             mov ebp, esp
+005AE493: 51               push ecx
+005AE494: 56               push esi
+005AE495: 57               push edi
+005AE496: ff7508           push dword ptr [ebp + 8]
+005AE499: 8bf1             mov esi, ecx
+005AE49B: e8b00bffff       call 0x59f050
+005AE4A0: 84c0             test al, al
+005AE4A2: 7460             je 0x5ae504
+005AE4A4: 8b86a4000000     mov eax, dword ptr [esi + 0xa4]
+005AE4AA: 33c9             xor ecx, ecx
+005AE4AC: 2b86a0000000     sub eax, dword ptr [esi + 0xa0]
+005AE4B2: 33ff             xor edi, edi
+005AE4B4: c1f802           sar eax, 2
+005AE4B7: 85c0             test eax, eax
+005AE4B9: 7436             je 0x5ae4f1
+005AE4BB: 0f1f440000       nop dword ptr [eax + eax]
+005AE4C0: 8b86a0000000     mov eax, dword ptr [esi + 0xa0]
+005AE4C6: 8b0cb8           mov ecx, dword ptr [eax + edi*4]
+005AE4C9: 8b01             mov eax, dword ptr [ecx]
+005AE4CB: 8b4010           mov eax, dword ptr [eax + 0x10]
+005AE4CE: ffd0             call eax
+005AE4D0: 84c0             test al, al
+005AE4D2: 8b86a0000000     mov eax, dword ptr [esi + 0xa0]
+005AE4D8: 7420             je 0x5ae4fa
+005AE4DA: 8b0cb8           mov ecx, dword ptr [eax + edi*4]
+005AE4DD: 47               inc edi
+005AE4DE: 8b86a4000000     mov eax, dword ptr [esi + 0xa4]
+005AE4E4: 2b86a0000000     sub eax, dword ptr [esi + 0xa0]
+005AE4EA: c1f802           sar eax, 2
+005AE4ED: 3bf8             cmp edi, eax
+005AE4EF: 72cf             jb 0x5ae4c0
+005AE4F1: 8bc1             mov eax, ecx
+005AE4F3: 5f               pop edi
+005AE4F4: 5e               pop esi
+005AE4F5: 59               pop ecx
+005AE4F6: 5d               pop ebp
+005AE4F7: c20400           ret 4
+005AE4FA: 8b04b8           mov eax, dword ptr [eax + edi*4]
+005AE4FD: 5f               pop edi
+005AE4FE: 5e               pop esi
+005AE4FF: 59               pop ecx
+005AE500: 5d               pop ebp
+005AE501: c20400           ret 4
+005AE504: 5f               pop edi
+005AE505: 33c0             xor eax, eax
+005AE507: 5e               pop esi
+005AE508: 59               pop ecx
+005AE509: 5d               pop ebp
+005AE50A: c20400           ret 4

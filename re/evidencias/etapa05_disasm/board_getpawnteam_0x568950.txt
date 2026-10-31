@@ -1,0 +1,38 @@
+; board_getpawnteam_0x568950  VA 0x00568950  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00568950: 55               push ebp
+00568951: 8bec             mov ebp, esp
+00568953: 83e4f8           and esp, 0xfffffff8
+00568956: 51               push ecx
+00568957: 56               push esi
+00568958: ff750c           push dword ptr [ebp + 0xc]
+0056895B: 8bf1             mov esi, ecx
+0056895D: ff7508           push dword ptr [ebp + 8]
+00568960: 8b06             mov eax, dword ptr [esi]
+00568962: 8b4008           mov eax, dword ptr [eax + 8]
+00568965: ffd0             call eax
+00568967: 84c0             test al, al
+00568969: 7415             je 0x568980
+0056896B: 8b4508           mov eax, dword ptr [ebp + 8]
+0056896E: 8d0c40           lea ecx, [eax + eax*2]
+00568971: 8b4650           mov eax, dword ptr [esi + 0x50]
+00568974: 69750cbc2b0000   imul esi, dword ptr [ebp + 0xc], 0x2bbc
+0056897B: 033488           add esi, dword ptr [eax + ecx*4]
+0056897E: eb03             jmp 0x568983
+00568980: 83c65c           add esi, 0x5c
+00568983: 6a01             push 1
+00568985: 8bce             mov ecx, esi
+00568987: e8c4660300       call 0x59f050
+0056898C: 84c0             test al, al
+0056898E: 7415             je 0x5689a5
+00568990: 8b86a0000000     mov eax, dword ptr [esi + 0xa0]
+00568996: 8b00             mov eax, dword ptr [eax]
+00568998: 8b80b0000000     mov eax, dword ptr [eax + 0xb0]
+0056899E: 5e               pop esi
+0056899F: 8be5             mov esp, ebp
+005689A1: 5d               pop ebp
+005689A2: c20800           ret 8
+005689A5: b802000000       mov eax, 2
+005689AA: 5e               pop esi
+005689AB: 8be5             mov esp, ebp
+005689AD: 5d               pop ebp
+005689AE: c20800           ret 8

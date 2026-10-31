@@ -1,0 +1,57 @@
+; pawn_setteam_0x62F2D0  VA 0x0062F2D0  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+0062F2D0: 55               push ebp
+0062F2D1: 8bec             mov ebp, esp
+0062F2D3: 8b4508           mov eax, dword ptr [ebp + 8]
+0062F2D6: 8981b0000000     mov dword ptr [ecx + 0xb0], eax
+0062F2DC: 5d               pop ebp
+0062F2DD: c20400           ret 4
+0062F2E0: 55               push ebp
+0062F2E1: 8bec             mov ebp, esp
+0062F2E3: 8a4508           mov al, byte ptr [ebp + 8]
+0062F2E6: 8881000a0000     mov byte ptr [ecx + 0xa00], al
+0062F2EC: 5d               pop ebp
+0062F2ED: c20400           ret 4
+0062F2F0: 55               push ebp
+0062F2F1: 8bec             mov ebp, esp
+0062F2F3: 51               push ecx
+0062F2F4: 56               push esi
+0062F2F5: 83ec18           sub esp, 0x18
+0062F2F8: 8bf1             mov esi, ecx
+0062F2FA: 8bcc             mov ecx, esp
+0062F2FC: 6a18             push 0x18
+0062F2FE: c741140f000000   mov dword ptr [ecx + 0x14], 0xf
+0062F305: c7411000000000   mov dword ptr [ecx + 0x10], 0
+0062F30C: 6860178300       push 0x831760
+0062F311: c60100           mov byte ptr [ecx], 0
+0062F314: e8178dddff       call 0x408030
+0062F319: e892bb0200       call 0x65aeb0
+0062F31E: 83c418           add esp, 0x18
+0062F321: 84c0             test al, al
+0062F323: 744b             je 0x62f370
+0062F325: 80bee409000000   cmp byte ptr [esi + 0x9e4], 0
+0062F32C: 7442             je 0x62f370
+0062F32E: 80be1d09000000   cmp byte ptr [esi + 0x91d], 0
+0062F335: 7439             je 0x62f370
+0062F337: a104748b00       mov eax, dword ptr [0x8b7404]
+0062F33C: 8b0d00748b00     mov ecx, dword ptr [0x8b7400]
+0062F342: 2bc1             sub eax, ecx
+0062F344: 83e0fc           and eax, 0xfffffffc
+0062F347: 3d38010000       cmp eax, 0x138
+0062F34C: 7e15             jle 0x62f363
+0062F34E: 83b93801000000   cmp dword ptr [ecx + 0x138], 0
+0062F355: 0f95c0           setne al
+0062F358: 84c0             test al, al
+0062F35A: 7414             je 0x62f370
+0062F35C: b001             mov al, 1
+0062F35E: 5e               pop esi
+0062F35F: 8be5             mov esp, ebp
+0062F361: 5d               pop ebp
+0062F362: c3               ret 
+0062F363: 6870f38100       push 0x81f370
+0062F368: e8e3fce0ff       call 0x43f050
+0062F36D: 83c404           add esp, 4
+0062F370: 32c0             xor al, al
+0062F372: 5e               pop esi
+0062F373: 8be5             mov esp, ebp
+0062F375: 5d               pop ebp
+0062F376: c3               ret 

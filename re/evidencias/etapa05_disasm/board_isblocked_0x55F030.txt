@@ -1,0 +1,60 @@
+; board_isblocked_0x55F030  VA 0x0055F030  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+0055F030: 55               push ebp
+0055F031: 8bec             mov ebp, esp
+0055F033: 83e4f8           and esp, 0xfffffff8
+0055F036: 51               push ecx
+0055F037: 56               push esi
+0055F038: ff750c           push dword ptr [ebp + 0xc]
+0055F03B: 8bf1             mov esi, ecx
+0055F03D: ff7508           push dword ptr [ebp + 8]
+0055F040: 8b06             mov eax, dword ptr [esi]
+0055F042: 8b4008           mov eax, dword ptr [eax + 8]
+0055F045: ffd0             call eax
+0055F047: 84c0             test al, al
+0055F049: 746f             je 0x55f0ba
+0055F04B: 8b06             mov eax, dword ptr [esi]
+0055F04D: 8bce             mov ecx, esi
+0055F04F: ff750c           push dword ptr [ebp + 0xc]
+0055F052: ff7508           push dword ptr [ebp + 8]
+0055F055: 8b4008           mov eax, dword ptr [eax + 8]
+0055F058: ffd0             call eax
+0055F05A: 84c0             test al, al
+0055F05C: 7415             je 0x55f073
+0055F05E: 8b4508           mov eax, dword ptr [ebp + 8]
+0055F061: 69550cbc2b0000   imul edx, dword ptr [ebp + 0xc], 0x2bbc
+0055F068: 8d0c40           lea ecx, [eax + eax*2]
+0055F06B: 8b4650           mov eax, dword ptr [esi + 0x50]
+0055F06E: 031488           add edx, dword ptr [eax + ecx*4]
+0055F071: eb03             jmp 0x55f076
+0055F073: 8d565c           lea edx, [esi + 0x5c]
+0055F076: ff7510           push dword ptr [ebp + 0x10]
+0055F079: 8bca             mov ecx, edx
+0055F07B: e890f40400       call 0x5ae510
+0055F080: 84c0             test al, al
+0055F082: 7536             jne 0x55f0ba
+0055F084: 8b460c           mov eax, dword ptr [esi + 0xc]
+0055F087: 8d4e0c           lea ecx, [esi + 0xc]
+0055F08A: ff750c           push dword ptr [ebp + 0xc]
+0055F08D: ff7508           push dword ptr [ebp + 8]
+0055F090: 8b4050           mov eax, dword ptr [eax + 0x50]
+0055F093: ffd0             call eax
+0055F095: 84c0             test al, al
+0055F097: 7418             je 0x55f0b1
+0055F099: 837d1009         cmp dword ptr [ebp + 0x10], 9
+0055F09D: 751b             jne 0x55f0ba
+0055F09F: ff750c           push dword ptr [ebp + 0xc]
+0055F0A2: 8bce             mov ecx, esi
+0055F0A4: ff7508           push dword ptr [ebp + 8]
+0055F0A7: e8a4980000       call 0x568950
+0055F0AC: 83f806           cmp eax, 6
+0055F0AF: 7409             je 0x55f0ba
+0055F0B1: 32c0             xor al, al
+0055F0B3: 5e               pop esi
+0055F0B4: 8be5             mov esp, ebp
+0055F0B6: 5d               pop ebp
+0055F0B7: c20c00           ret 0xc
+0055F0BA: b001             mov al, 1
+0055F0BC: 5e               pop esi
+0055F0BD: 8be5             mov esp, ebp
+0055F0BF: 5d               pop ebp
+0055F0C0: c20c00           ret 0xc

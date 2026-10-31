@@ -1,0 +1,10 @@
+; pawn_getspace_0x635FA0  VA 0x00635FA0  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00635FA0: 55               push ebp
+00635FA1: 8bec             mov ebp, esp
+00635FA3: 8b4508           mov eax, dword ptr [ebp + 8]
+00635FA6: 8b91ec080000     mov edx, dword ptr [ecx + 0x8ec]
+00635FAC: 8b89f0080000     mov ecx, dword ptr [ecx + 0x8f0]
+00635FB2: 8910             mov dword ptr [eax], edx
+00635FB4: 894804           mov dword ptr [eax + 4], ecx
+00635FB7: 5d               pop ebp
+00635FB8: c20400           ret 4

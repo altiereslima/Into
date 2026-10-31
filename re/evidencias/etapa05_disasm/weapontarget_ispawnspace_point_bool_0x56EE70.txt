@@ -1,0 +1,47 @@
+; weapontarget_ispawnspace_point_bool_0x56EE70  VA 0x0056EE70  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+0056EE70: 55               push ebp
+0056EE71: 8bec             mov ebp, esp
+0056EE73: 83e4f8           and esp, 0xfffffff8
+0056EE76: 51               push ecx
+0056EE77: 8b41f4           mov eax, dword ptr [ecx - 0xc]
+0056EE7A: 56               push esi
+0056EE7B: ff750c           push dword ptr [ebp + 0xc]
+0056EE7E: 8d71f4           lea esi, [ecx - 0xc]
+0056EE81: ff7508           push dword ptr [ebp + 8]
+0056EE84: 8b4008           mov eax, dword ptr [eax + 8]
+0056EE87: 8bce             mov ecx, esi
+0056EE89: ffd0             call eax
+0056EE8B: 84c0             test al, al
+0056EE8D: 7507             jne 0x56ee96
+0056EE8F: 5e               pop esi
+0056EE90: 8be5             mov esp, ebp
+0056EE92: 5d               pop ebp
+0056EE93: c20c00           ret 0xc
+0056EE96: 8b06             mov eax, dword ptr [esi]
+0056EE98: 8bce             mov ecx, esi
+0056EE9A: ff750c           push dword ptr [ebp + 0xc]
+0056EE9D: ff7508           push dword ptr [ebp + 8]
+0056EEA0: 8b4008           mov eax, dword ptr [eax + 8]
+0056EEA3: ffd0             call eax
+0056EEA5: 84c0             test al, al
+0056EEA7: 7424             je 0x56eecd
+0056EEA9: 8b4508           mov eax, dword ptr [ebp + 8]
+0056EEAC: ff7510           push dword ptr [ebp + 0x10]
+0056EEAF: 8d0c40           lea ecx, [eax + eax*2]
+0056EEB2: 8b4650           mov eax, dword ptr [esi + 0x50]
+0056EEB5: 69750cbc2b0000   imul esi, dword ptr [ebp + 0xc], 0x2bbc
+0056EEBC: 033488           add esi, dword ptr [eax + ecx*4]
+0056EEBF: 8bce             mov ecx, esi
+0056EEC1: e88a010300       call 0x59f050
+0056EEC6: 5e               pop esi
+0056EEC7: 8be5             mov esp, ebp
+0056EEC9: 5d               pop ebp
+0056EECA: c20c00           ret 0xc
+0056EECD: ff7510           push dword ptr [ebp + 0x10]
+0056EED0: 83c65c           add esi, 0x5c
+0056EED3: 8bce             mov ecx, esi
+0056EED5: e876010300       call 0x59f050
+0056EEDA: 5e               pop esi
+0056EEDB: 8be5             mov esp, ebp
+0056EEDD: 5d               pop ebp
+0056EEDE: c20c00           ret 0xc

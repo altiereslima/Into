@@ -1,0 +1,21 @@
+; board_getpawnspace_0x567970  VA 0x00567970  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00567970: 55               push ebp
+00567971: 8bec             mov ebp, esp
+00567973: 8b4110           mov eax, dword ptr [ecx + 0x10]
+00567976: 83c110           add ecx, 0x10
+00567979: ff750c           push dword ptr [ebp + 0xc]
+0056797C: ff10             call dword ptr [eax]
+0056797E: 85c0             test eax, eax
+00567980: 7411             je 0x567993
+00567982: 8b10             mov edx, dword ptr [eax]
+00567984: 8bc8             mov ecx, eax
+00567986: ff7508           push dword ptr [ebp + 8]
+00567989: ff5228           call dword ptr [edx + 0x28]
+0056798C: 8b4508           mov eax, dword ptr [ebp + 8]
+0056798F: 5d               pop ebp
+00567990: c20800           ret 8
+00567993: 8b4508           mov eax, dword ptr [ebp + 8]
+00567996: c700ffffffff     mov dword ptr [eax], 0xffffffff
+0056799C: c74004ffffffff   mov dword ptr [eax + 4], 0xffffffff
+005679A3: 5d               pop ebp
+005679A4: c20800           ret 8

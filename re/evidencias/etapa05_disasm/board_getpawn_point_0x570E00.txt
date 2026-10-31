@@ -1,0 +1,46 @@
+; board_getpawn_point_0x570E00  VA 0x00570E00  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00570E00: 55               push ebp
+00570E01: 8bec             mov ebp, esp
+00570E03: 83e4f8           and esp, 0xfffffff8
+00570E06: 51               push ecx
+00570E07: 56               push esi
+00570E08: ff750c           push dword ptr [ebp + 0xc]
+00570E0B: 8bf1             mov esi, ecx
+00570E0D: 8b460c           mov eax, dword ptr [esi + 0xc]
+00570E10: 8d4e0c           lea ecx, [esi + 0xc]
+00570E13: ff7508           push dword ptr [ebp + 8]
+00570E16: 8b4050           mov eax, dword ptr [eax + 0x50]
+00570E19: ffd0             call eax
+00570E1B: 84c0             test al, al
+00570E1D: 7447             je 0x570e66
+00570E1F: 8b06             mov eax, dword ptr [esi]
+00570E21: 8bce             mov ecx, esi
+00570E23: ff750c           push dword ptr [ebp + 0xc]
+00570E26: ff7508           push dword ptr [ebp + 8]
+00570E29: 8b4008           mov eax, dword ptr [eax + 8]
+00570E2C: ffd0             call eax
+00570E2E: 84c0             test al, al
+00570E30: 7415             je 0x570e47
+00570E32: 8b4508           mov eax, dword ptr [ebp + 8]
+00570E35: 8d0c40           lea ecx, [eax + eax*2]
+00570E38: 8b4650           mov eax, dword ptr [esi + 0x50]
+00570E3B: 69750cbc2b0000   imul esi, dword ptr [ebp + 0xc], 0x2bbc
+00570E42: 033488           add esi, dword ptr [eax + ecx*4]
+00570E45: eb03             jmp 0x570e4a
+00570E47: 83c65c           add esi, 0x5c
+00570E4A: 6a01             push 1
+00570E4C: 8bce             mov ecx, esi
+00570E4E: e8fde10200       call 0x59f050
+00570E53: 84c0             test al, al
+00570E55: 740f             je 0x570e66
+00570E57: 8b86a0000000     mov eax, dword ptr [esi + 0xa0]
+00570E5D: 8b00             mov eax, dword ptr [eax]
+00570E5F: 5e               pop esi
+00570E60: 8be5             mov esp, ebp
+00570E62: 5d               pop ebp
+00570E63: c20800           ret 8
+00570E66: 33c0             xor eax, eax
+00570E68: 5e               pop esi
+00570E69: 8be5             mov esp, ebp
+00570E6B: 5d               pop ebp
+00570E6C: c20800           ret 8

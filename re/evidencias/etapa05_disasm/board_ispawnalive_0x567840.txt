@@ -1,0 +1,22 @@
+; board_ispawnalive_0x567840  VA 0x00567840  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00567840: 55               push ebp
+00567841: 8bec             mov ebp, esp
+00567843: 8b4110           mov eax, dword ptr [ecx + 0x10]
+00567846: 83c110           add ecx, 0x10
+00567849: ff7508           push dword ptr [ebp + 8]
+0056784C: ff10             call dword ptr [eax]
+0056784E: 8bc8             mov ecx, eax
+00567850: 85c9             test ecx, ecx
+00567852: 7414             je 0x567868
+00567854: 8b01             mov eax, dword ptr [ecx]
+00567856: 8b4010           mov eax, dword ptr [eax + 0x10]
+00567859: ffd0             call eax
+0056785B: 33c9             xor ecx, ecx
+0056785D: 84c0             test al, al
+0056785F: 0f94c1           sete cl
+00567862: 8ac1             mov al, cl
+00567864: 5d               pop ebp
+00567865: c20400           ret 4
+00567868: 32c0             xor al, al
+0056786A: 5d               pop ebp
+0056786B: c20400           ret 4

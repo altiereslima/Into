@@ -1,0 +1,49 @@
+; board_getpawn_point_bool_0x567750  VA 0x00567750  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00567750: 55               push ebp
+00567751: 8bec             mov ebp, esp
+00567753: 83e4f8           and esp, 0xfffffff8
+00567756: 51               push ecx
+00567757: 56               push esi
+00567758: ff7510           push dword ptr [ebp + 0x10]
+0056775B: 8bf1             mov esi, ecx
+0056775D: 8b460c           mov eax, dword ptr [esi + 0xc]
+00567760: 8d4e0c           lea ecx, [esi + 0xc]
+00567763: ff750c           push dword ptr [ebp + 0xc]
+00567766: ff7508           push dword ptr [ebp + 8]
+00567769: 8b404c           mov eax, dword ptr [eax + 0x4c]
+0056776C: ffd0             call eax
+0056776E: 84c0             test al, al
+00567770: 744b             je 0x5677bd
+00567772: 8b06             mov eax, dword ptr [esi]
+00567774: 8bce             mov ecx, esi
+00567776: ff750c           push dword ptr [ebp + 0xc]
+00567779: ff7508           push dword ptr [ebp + 8]
+0056777C: 8b4008           mov eax, dword ptr [eax + 8]
+0056777F: ffd0             call eax
+00567781: 84c0             test al, al
+00567783: 7424             je 0x5677a9
+00567785: 8b4508           mov eax, dword ptr [ebp + 8]
+00567788: 69550cbc2b0000   imul edx, dword ptr [ebp + 0xc], 0x2bbc
+0056778F: ff7510           push dword ptr [ebp + 0x10]
+00567792: 8d0c40           lea ecx, [eax + eax*2]
+00567795: 8b4650           mov eax, dword ptr [esi + 0x50]
+00567798: 031488           add edx, dword ptr [eax + ecx*4]
+0056779B: 8bca             mov ecx, edx
+0056779D: e8ee6c0400       call 0x5ae490
+005677A2: 5e               pop esi
+005677A3: 8be5             mov esp, ebp
+005677A5: 5d               pop ebp
+005677A6: c20c00           ret 0xc
+005677A9: ff7510           push dword ptr [ebp + 0x10]
+005677AC: 8d565c           lea edx, [esi + 0x5c]
+005677AF: 8bca             mov ecx, edx
+005677B1: e8da6c0400       call 0x5ae490
+005677B6: 5e               pop esi
+005677B7: 8be5             mov esp, ebp
+005677B9: 5d               pop ebp
+005677BA: c20c00           ret 0xc
+005677BD: 33c0             xor eax, eax
+005677BF: 5e               pop esi
+005677C0: 8be5             mov esp, ebp
+005677C2: 5d               pop ebp
+005677C3: c20c00           ret 0xc

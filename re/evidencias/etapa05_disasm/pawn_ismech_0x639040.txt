@@ -1,0 +1,3 @@
+; pawn_ismech_0x639040  VA 0x00639040  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00639040: 8a81e4090000     mov al, byte ptr [ecx + 0x9e4]
+00639046: c3               ret 

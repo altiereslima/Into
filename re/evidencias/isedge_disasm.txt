@@ -1,0 +1,28 @@
+
+/mnt/data/itb_stage01_work/Breach.exe:     file format pei-i386
+
+
+Disassembly of section .text:
+
+0056fb20 <.text+0x16eb20>:
+  56fb20:	55                   	push   ebp
+  56fb21:	8b ec                	mov    ebp,esp
+  56fb23:	83 7d 08 00          	cmp    DWORD PTR [ebp+0x8],0x0
+  56fb27:	74 1e                	je     0x56fb47
+  56fb29:	8b 55 0c             	mov    edx,DWORD PTR [ebp+0xc]
+  56fb2c:	85 d2                	test   edx,edx
+  56fb2e:	74 17                	je     0x56fb47
+  56fb30:	8b 41 48             	mov    eax,DWORD PTR [ecx+0x48]
+  56fb33:	48                   	dec    eax
+  56fb34:	39 45 08             	cmp    DWORD PTR [ebp+0x8],eax
+  56fb37:	74 0e                	je     0x56fb47
+  56fb39:	8b 41 4c             	mov    eax,DWORD PTR [ecx+0x4c]
+  56fb3c:	48                   	dec    eax
+  56fb3d:	3b d0                	cmp    edx,eax
+  56fb3f:	74 06                	je     0x56fb47
+  56fb41:	32 c0                	xor    al,al
+  56fb43:	5d                   	pop    ebp
+  56fb44:	c2 08 00             	ret    0x8
+  56fb47:	b0 01                	mov    al,0x1
+  56fb49:	5d                   	pop    ebp
+  56fb4a:	c2 08 00             	ret    0x8

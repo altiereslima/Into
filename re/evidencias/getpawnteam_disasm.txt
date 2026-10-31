@@ -1,0 +1,44 @@
+
+/mnt/data/itb_stage01_work/Breach.exe:     file format pei-i386
+
+
+Disassembly of section .text:
+
+00568950 <.text+0x167950>:
+  568950:	55                   	push   ebp
+  568951:	8b ec                	mov    ebp,esp
+  568953:	83 e4 f8             	and    esp,0xfffffff8
+  568956:	51                   	push   ecx
+  568957:	56                   	push   esi
+  568958:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+  56895b:	8b f1                	mov    esi,ecx
+  56895d:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+  568960:	8b 06                	mov    eax,DWORD PTR [esi]
+  568962:	8b 40 08             	mov    eax,DWORD PTR [eax+0x8]
+  568965:	ff d0                	call   eax
+  568967:	84 c0                	test   al,al
+  568969:	74 15                	je     0x568980
+  56896b:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  56896e:	8d 0c 40             	lea    ecx,[eax+eax*2]
+  568971:	8b 46 50             	mov    eax,DWORD PTR [esi+0x50]
+  568974:	69 75 0c bc 2b 00 00 	imul   esi,DWORD PTR [ebp+0xc],0x2bbc
+  56897b:	03 34 88             	add    esi,DWORD PTR [eax+ecx*4]
+  56897e:	eb 03                	jmp    0x568983
+  568980:	83 c6 5c             	add    esi,0x5c
+  568983:	6a 01                	push   0x1
+  568985:	8b ce                	mov    ecx,esi
+  568987:	e8 c4 66 03 00       	call   0x59f050
+  56898c:	84 c0                	test   al,al
+  56898e:	74 15                	je     0x5689a5
+  568990:	8b 86 a0 00 00 00    	mov    eax,DWORD PTR [esi+0xa0]
+  568996:	8b 00                	mov    eax,DWORD PTR [eax]
+  568998:	8b 80 b0 00 00 00    	mov    eax,DWORD PTR [eax+0xb0]
+  56899e:	5e                   	pop    esi
+  56899f:	8b e5                	mov    esp,ebp
+  5689a1:	5d                   	pop    ebp
+  5689a2:	c2 08 00             	ret    0x8
+  5689a5:	b8 02 00 00 00       	mov    eax,0x2
+  5689aa:	5e                   	pop    esi
+  5689ab:	8b e5                	mov    esp,ebp
+  5689ad:	5d                   	pop    ebp
+  5689ae:	c2 08 00             	ret    0x8

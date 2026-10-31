@@ -1,0 +1,35 @@
+
+/mnt/data/itb_stage01_work/Breach.exe:     file format pei-i386
+
+
+Disassembly of section .text:
+
+005653e0 <.text+0x1643e0>:
+  5653e0:	55                   	push   ebp
+  5653e1:	8b ec                	mov    ebp,esp
+  5653e3:	83 e4 f8             	and    esp,0xfffffff8
+  5653e6:	51                   	push   ecx
+  5653e7:	56                   	push   esi
+  5653e8:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+  5653eb:	8b f1                	mov    esi,ecx
+  5653ed:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+  5653f0:	8b 06                	mov    eax,DWORD PTR [esi]
+  5653f2:	8b 40 08             	mov    eax,DWORD PTR [eax+0x8]
+  5653f5:	ff d0                	call   eax
+  5653f7:	84 c0                	test   al,al
+  5653f9:	74 20                	je     0x56541b
+  5653fb:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  5653fe:	8b 4e 50             	mov    ecx,DWORD PTR [esi+0x50]
+  565401:	8d 14 40             	lea    edx,[eax+eax*2]
+  565404:	69 45 0c bc 2b 00 00 	imul   eax,DWORD PTR [ebp+0xc],0x2bbc
+  56540b:	03 04 91             	add    eax,DWORD PTR [ecx+edx*4]
+  56540e:	8a 80 25 2b 00 00    	mov    al,BYTE PTR [eax+0x2b25]
+  565414:	5e                   	pop    esi
+  565415:	8b e5                	mov    esp,ebp
+  565417:	5d                   	pop    ebp
+  565418:	c2 08 00             	ret    0x8
+  56541b:	8a 86 81 2b 00 00    	mov    al,BYTE PTR [esi+0x2b81]
+  565421:	5e                   	pop    esi
+  565422:	8b e5                	mov    esp,ebp
+  565424:	5d                   	pop    ebp
+  565425:	c2 08 00             	ret    0x8

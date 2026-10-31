@@ -1,0 +1,11 @@
+; weapontarget_ispawnspace_point_0x56EE50  VA 0x0056EE50  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+0056EE50: 55               push ebp
+0056EE51: 8bec             mov ebp, esp
+0056EE53: 8b01             mov eax, dword ptr [ecx]
+0056EE55: 6a01             push 1
+0056EE57: ff750c           push dword ptr [ebp + 0xc]
+0056EE5A: ff7508           push dword ptr [ebp + 8]
+0056EE5D: 8b404c           mov eax, dword ptr [eax + 0x4c]
+0056EE60: ffd0             call eax
+0056EE62: 5d               pop ebp
+0056EE63: c20800           ret 8

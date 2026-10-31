@@ -1,0 +1,3 @@
+; pawn_getid_0x6370D0  VA 0x006370D0  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+006370D0: 8b81a4090000     mov eax, dword ptr [ecx + 0x9a4]
+006370D6: c3               ret 

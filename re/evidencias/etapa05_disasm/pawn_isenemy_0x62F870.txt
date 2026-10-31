@@ -1,0 +1,4 @@
+; pawn_isenemy_0x62F870  VA 0x0062F870  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+0062F870: 83b9b000000006   cmp dword ptr [ecx + 0xb0], 6
+0062F877: 0f94c0           sete al
+0062F87A: c3               ret 

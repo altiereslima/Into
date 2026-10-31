@@ -1,0 +1,39 @@
+; pawnholder_getpawn_id_0x567700  VA 0x00567700  (Breach.exe v1.2.88, SHA256 4bd9e4cc43140244...)
+00567700: 55               push ebp
+00567701: 8bec             mov ebp, esp
+00567703: 53               push ebx
+00567704: 56               push esi
+00567705: 8bf1             mov esi, ecx
+00567707: 33d2             xor edx, edx
+00567709: 57               push edi
+0056770A: 8b4630           mov eax, dword ptr [esi + 0x30]
+0056770D: 2b462c           sub eax, dword ptr [esi + 0x2c]
+00567710: c1f802           sar eax, 2
+00567713: 85c0             test eax, eax
+00567715: 7423             je 0x56773a
+00567717: 8b5e2c           mov ebx, dword ptr [esi + 0x2c]
+0056771A: 8bcb             mov ecx, ebx
+0056771C: 8b7d08           mov edi, dword ptr [ebp + 8]
+0056771F: 90               nop 
+00567720: 8b01             mov eax, dword ptr [ecx]
+00567722: 3bb8a4090000     cmp edi, dword ptr [eax + 0x9a4]
+00567728: 7419             je 0x567743
+0056772A: 8b4630           mov eax, dword ptr [esi + 0x30]
+0056772D: 42               inc edx
+0056772E: 2bc3             sub eax, ebx
+00567730: 83c104           add ecx, 4
+00567733: c1f802           sar eax, 2
+00567736: 3bd0             cmp edx, eax
+00567738: 72e6             jb 0x567720
+0056773A: 5f               pop edi
+0056773B: 5e               pop esi
+0056773C: 33c0             xor eax, eax
+0056773E: 5b               pop ebx
+0056773F: 5d               pop ebp
+00567740: c20400           ret 4
+00567743: 8b0493           mov eax, dword ptr [ebx + edx*4]
+00567746: 5f               pop edi
+00567747: 5e               pop esi
+00567748: 5b               pop ebx
+00567749: 5d               pop ebp
+0056774A: c20400           ret 4
