@@ -59,6 +59,9 @@ fn main() {
     host.set_board(board.clone()).unwrap();
     host.set_pawn(&board, mech).unwrap();
 
+    if args[2] == "--todas" {
+        return sweep(&host, &board, mech, p1, p2);
+    }
     let weapon: Table = match host.lua.globals().get::<Value>(args[2].as_str()) {
         Ok(Value::Table(t)) => t,
         _ => { eprintln!("arma {:?} não existe nos scripts", args[2]); std::process::exit(1); }
@@ -101,4 +104,44 @@ fn main() {
     if !stubs.is_empty() {
         println!("stubs chamados: {}", stubs.iter().map(|(k, n)| format!("{k}×{n}")).collect::<Vec<_>>().join(", "));
     }
+}
+
+/// Executa GetTargetArea + GetSkillEffect de TODAS as armas definidas nos scripts e resume.
+fn sweep(host: &Host, board: &Rc<RefCell<OccupancyBoard>>, mech: usize, p1: Point, p2: Point) {
+    let names: Vec<String> = host.lua.load(r#"
+        local t = {}
+        for k, v in pairs(_G) do
+            if type(k) == "string" and type(v) == "table" and type(v.GetSkillEffect) == "function"
+               and type(v.GetTargetArea) == "function" and k ~= "Skill" then t[#t + 1] = k end
+        end
+        table.sort(t) return t"#).eval().unwrap();
+    let lp = |p: Point| itb_lua::values::LPoint(itb_core::geometry::IPoint::new(p.x, p.y));
+    let (mut clean, mut with_stubs, mut failed) = (0, 0, Vec::new());
+    let mut stub_freq: std::collections::BTreeMap<String, usize> = Default::default();
+    for name in &names {
+        let before: std::collections::BTreeMap<String, u64> = host.report.borrow().stub_calls.clone();
+        host.set_board(board.clone()).unwrap();
+        host.set_pawn(board, mech).unwrap();
+        let w: Table = host.lua.globals().get(name.as_str()).unwrap();
+        let r1 = w.get::<Function>("GetTargetArea").and_then(|f| f.call::<Value>((w.clone(), lp(p1))));
+        let r2 = w.get::<Function>("GetSkillEffect").and_then(|f| f.call::<Value>((w.clone(), lp(p1), lp(p2))));
+        let after = host.report.borrow().stub_calls.clone();
+        let new_stubs: Vec<String> = after.iter().filter(|(k, n)| before.get(*k) != Some(n)).map(|(k, _)| k.clone()).collect();
+        match (r1, r2) {
+            (Ok(_), Ok(_)) if new_stubs.is_empty() => clean += 1,
+            (Ok(_), Ok(_)) => with_stubs += 1,
+            (a, b) => failed.push((name.clone(), a.err().or(b.err()).map(|e| e.to_string().lines().next().unwrap_or("").to_string()).unwrap_or_default())),
+        }
+        for k in new_stubs { *stub_freq.entry(k).or_default() += 1; }
+    }
+    println!("# Varredura de armas ({} encontradas nos scripts)", names.len());
+    println!("sem stubs e sem erro: {clean} | rodaram tocando stubs: {with_stubs} | com erro: {}", failed.len());
+    let mut freq: Vec<_> = stub_freq.into_iter().collect();
+    freq.sort_by(|a, b| b.1.cmp(&a.1));
+    println!("\n## Stubs que mais bloqueiam armas (nº de armas)");
+    for (k, n) in freq.iter().take(25) { println!("{n:>4}  {k}"); }
+    let mut errs: std::collections::BTreeMap<String, Vec<String>> = Default::default();
+    for (n, e) in &failed { errs.entry(e.chars().take(110).collect()).or_default().push(n.clone()); }
+    println!("\n## Erros (agrupados)");
+    for (e, ns) in errs { println!("{:>4}  {e}   ex.: {}", ns.len(), ns.iter().take(3).cloned().collect::<Vec<_>>().join(", ")); }
 }

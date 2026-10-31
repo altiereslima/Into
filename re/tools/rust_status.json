@@ -515,6 +515,101 @@
       "UIntList",
       "back",
       "0x00675730"
+    ],
+    [
+      "Board",
+      "GetSimpleReachable",
+      "0x00573160"
+    ],
+    [
+      "Board",
+      "GetSimplePath",
+      "0x005731F0"
+    ],
+    [
+      "SkillEffect",
+      "AddCharge",
+      "0x00653E90"
+    ],
+    [
+      "SkillEffect",
+      "AddBurst",
+      "0x00652E50"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedCharge",
+      "0x00654960"
+    ],
+    [
+      "SkillEffect",
+      "AddLeap",
+      "0x00653BD0"
+    ],
+    [
+      "SkillEffect",
+      "AddBurrow",
+      "0x00653E00"
+    ],
+    [
+      "SkillEffect",
+      "AddGrapple",
+      "0x00652D30"
+    ],
+    [
+      "SkillEffect",
+      "AddBounce",
+      "0x00654EC0"
+    ],
+    [
+      "SkillEffect",
+      "AddTeleport",
+      "0x00654760"
+    ],
+    [
+      "SkillEffect",
+      "AddBoardShake",
+      "0x00654D20"
+    ],
+    [
+      "BoardPawn",
+      "IsPowered",
+      "0x00637370"
+    ],
+    [
+      "BoardPawn",
+      "IsInfected",
+      "0x006372F0"
+    ],
+    [
+      "BoardPawn",
+      "GetPathProf",
+      "0x0062F700"
+    ],
+    [
+      "BoardPawn",
+      "IsGuarding",
+      "0x0063A250"
+    ],
+    [
+      "BoardPawn",
+      "IsAcid",
+      "0x006398D0"
+    ],
+    [
+      "BoardPawn",
+      "IsFire",
+      "0x006398E0"
+    ],
+    [
+      "BoardPawn",
+      "IsFrozen",
+      "0x00636B70"
+    ],
+    [
+      "",
+      "SoundEffect",
+      "0x00656480"
     ]
   ],
   "partial": [
@@ -534,11 +629,17 @@
     "0x0062F840",
     "0x0062F870",
     "0x00635FA0",
+    "0x00636B70",
     "0x006370D0",
+    "0x006372F0",
+    "0x00637370",
     "0x00638D50",
     "0x00639040",
     "0x00639050",
+    "0x006398D0",
+    "0x006398E0",
     "0x00639FC0",
+    "0x0063A250",
     "0x006528D0",
     "0x006528E0",
     "0x00652900",

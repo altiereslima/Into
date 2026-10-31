@@ -305,6 +305,13 @@ impl Host {
         let mut wd = self.game_dir.to_string_lossy().replace('\\', "/");
         if !wd.ends_with('/') { wd.push('/'); }
         self.set_fn("GetWorkingDir", Host, move |_, ()| Ok(wd.clone()))?;
+        // 0x00656480 SoundEffect(Point, string): SpaceDamage(p) com sSound
+        self.set_fn("SoundEffect", Reconstructed, |_, (p, snd): (LPoint, String)| {
+            let mut d = crate::records::space_damage(&[]).expect("SpaceDamage()");
+            d.set("loc", crate::records::Field::Point(p.0));
+            d.set("sSound", crate::records::Field::Str(snd));
+            Ok(d)
+        })?;
         let rep = self.report.clone();
         self.set_fn("ConsolePrint", Host, move |_, s: String| { rep.borrow_mut().console.push(s); Ok(()) })?;
         Ok(())

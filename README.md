@@ -6,12 +6,12 @@ originais** da sua própria cópia do jogo. Projeto de fã, sem afiliação com 
 > Este repositório **não contém nenhum arquivo do jogo** (EXE, DLLs, scripts, mapas, imagens, sons).
 > Você precisa de uma cópia legítima do Into the Breach (testado com a v1.2.88).
 
-## Estado (Etapa 08)
+## Estado (Etapa 09)
 - Os scripts originais **carregam sem erro** no host Rust: 137/137 arquivos presentes (`itb-boot`).
 - API nativa mapeada por completo a partir do EXE: 32 classes, 343 métodos, 39 funções globais,
-  111 propriedades, 58 construtores, 190 constantes. 475 nomes expostos à Lua: 165 reconstruídos,
-  11 respostas de plataforma, 299 ainda stubs. O boot só toca 1 stub.
-- **Armas originais rodam no motor Rust**: `cargo run -p itb-lua --bin itb-weapon -- "/caminho/do/jogo" Prime_Lasermech 3 4 3 1`.
+  111 propriedades, 58 construtores, 190 constantes. 475 nomes expostos à Lua: 184 reconstruídos,
+  11 respostas de plataforma, 280 ainda stubs. O boot só toca 1 stub.
+- **514 das 559 armas originais rodam sem erro nem stub** (`itb-weapon <jogo> --todas`). Uma arma: `cargo run -p itb-lua --bin itb-weapon -- "/caminho/do/jogo" Prime_Lasermech 3 4 3 1`.
 - Inicialização do Lua igual à do motor original, e 118 funções Lua que o motor chama já inventariadas.
 - Núcleo com regras reconstruídas e testadas: ocupação do tabuleiro, bloqueio de caminho, terreno,
   `Point`/`Rect2D`/`GL_Color`/`Button`/`Text`/`SpaceDamage`/`Objective`…, `rand()` idêntico ao do jogo, escalas de tela.

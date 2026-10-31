@@ -28,6 +28,9 @@ pub mod consts {
     pub const PATH_PROJECTILE: i32 = 3;
     pub const PATH_ROADRUNNER: i32 = 4;
     pub const PATH_BURROWER: i32 = 7;
+    /// Sem nome Lua; valores que `GetPathProf` usa para teleporte e salto.
+    pub const PATH_TELEPORT: i32 = 5;
+    pub const PATH_JUMPER: i32 = 6;
     pub const PATH_PHASING: i32 = 9;
     pub const TERRAIN_ROAD: i32 = 0;
     pub const TERRAIN_BUILDING: i32 = 1;
@@ -88,6 +91,35 @@ pub struct PawnState {
     pub neutral: bool,
     /// Resultado de `Pawn::0x0063A410()` usado por `IsTeam(-1)` (não reconstruída; dado de entrada).
     pub query_0x63a410: bool,
+    /// Resultado de `Pawn::IsNonGridStructure()` (0x0063A8B0, ainda não reconstruída) — barra a passagem.
+    pub non_grid_structure: bool,
+    /// Características de movimento lidas da definição do tipo de unidade (tabelas Lua de pawns.lua)
+    /// por `GetPathProf` (0x0062F700): "Teleporter", `IsJumper`, "Burrows", `IsFlying`, "Road_Runner", `IsMassive`.
+    pub movement: MovementTraits,
+    /// Bytes de estado lidos por acessores Lua: +0x8D0 `IsFire`, +0x8D1 `IsFrozen`, +0x8D3 `IsAcid`,
+    /// +0x8DC `IsInfected`, +0x10C0 `IsPowered`, +0x91E (`IsGuarding` devolve `byte == 0`).
+    pub status: PawnStatusBytes,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct PawnStatusBytes {
+    pub fire: bool,
+    pub frozen: bool,
+    pub acid: bool,
+    pub infected: bool,
+    pub powered: bool,
+    pub byte_0x91e: u8,
+}
+
+/// Entradas de `Pawn:GetPathProf()`. Cada uma vem de uma consulta ainda não reconstruída em detalhe.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct MovementTraits {
+    pub teleporter: bool,
+    pub jumper: bool,
+    pub burrows: bool,
+    pub flying: bool,
+    pub road_runner: bool,
+    pub massive: bool,
 }
 
 impl PawnState {
@@ -113,6 +145,33 @@ impl PawnState {
     pub fn set_mech(&mut self) { self.mech = true; }
     /// 0x00635FA0 `GetSpace` (slot 0x28): copia +0x8EC/+0x8F0.
     pub fn get_space(&self) -> Point { self.space }
+
+    /// 0x006398E0 `IsFire`.
+    pub fn is_fire(&self) -> bool { self.status.fire }
+    /// 0x00636B70 `IsFrozen`.
+    pub fn is_frozen(&self) -> bool { self.status.frozen }
+    /// 0x006398D0 `IsAcid`.
+    pub fn is_acid(&self) -> bool { self.status.acid }
+    /// 0x006372F0 `IsInfected`.
+    pub fn is_infected(&self) -> bool { self.status.infected }
+    /// 0x00637370 `IsPowered`.
+    pub fn is_powered(&self) -> bool { self.status.powered }
+    /// 0x0063A250 `IsGuarding`: `[+0x91E] == 0` (byte zerado = protegido contra empurrão).
+    pub fn is_guarding(&self) -> bool { self.status.byte_0x91e == 0 }
+
+    /// 0x0062F700 `GetPathProf()`: `(time << 4) | perfil`, com perfil por prioridade:
+    /// teleporte (5, só se não morto) > saltador (6) > escavador (7) > voador (1) > Road_Runner (4) > massivo (2) > chão (0).
+    pub fn get_path_prof(&self) -> i32 {
+        let m = &self.movement;
+        let base = if m.teleporter && !self.is_dead() { consts::PATH_TELEPORT }
+            else if m.jumper { consts::PATH_JUMPER }
+            else if m.burrows { consts::PATH_BURROWER }
+            else if m.flying { consts::PATH_FLYER }
+            else if m.road_runner { consts::PATH_ROADRUNNER }
+            else if m.massive { consts::PATH_MASSIVE }
+            else { consts::PATH_GROUND };
+        self.team.wrapping_shl(4) | base
+    }
 
     /// 0x00639FD0 `Pawn::IsTeam(int)` (usada por `Board:IsPawnTeam`).
     pub fn is_team(&self, t: i32) -> bool {
@@ -156,6 +215,10 @@ pub struct Tile {
     pub acid: u8,
     /// +0x2B26 `IsCracked` (BYTE).
     pub cracked: u8,
+    /// +0x23AC (BYTE) e +0x23CC (int): exceção da água em `IsPassable` — com o byte ligado e o
+    /// contador < 15 a água não barra o movimento. Significado ainda não nomeado.
+    pub flag_0x23ac: bool,
+    pub counter_0x23cc: i32,
     /// +0x27B4 `std::string`; 0x005AE510 procura "conveyor" nela.
     pub custom_tile: String,
     /// +0xA0..+0xA4 `std::vector<Pawn*>` na ordem original.

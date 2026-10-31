@@ -22,3 +22,5 @@ pub mod rng;
 pub mod display;
 /// Estruturas de UI (ButtonDesc...) (Etapa 06).
 pub mod ui;
+/// Passagem e alcance em linha reta (Etapa 09).
+pub mod pathing;

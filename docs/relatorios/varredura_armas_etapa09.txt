@@ -1,0 +1,23 @@
+# Varredura de armas (559 encontradas nos scripts)
+sem stubs e sem erro: 514 | rodaram tocando stubs: 31 | com erro: 14
+
+## Stubs que mais bloqueiam armas (nº de armas)
+  21  Board:IsDeadly
+   6  Board:IsPod
+   6  Board:IsTerrain
+   5  Board:GetPath
+   3  Board:GetReachable
+   3  IsPassiveSkill()
+   3  SkillEffect:AddAirstrike
+   2  Board:IsCrackable
+   2  SkillEffect:AddEmitter
+   1  BoardPawn:GetMoveSpeed
+   1  BoardPawn:IsCorpse
+   1  BoardPawn:IsGrappled
+   1  BoardPawn:IsJumper
+   1  BoardPawn:IsTeleporter
+   1  SkillEffect:AddVoice
+
+## Erros (agrupados)
+   5  bad argument #2 to `LSkillEffect.AddMove`: error converting Lua nil to PointList   ex.: Move, Passive_FireBoost, Passive_HealingSmoke
+   9  runtime error: No matching overload found, candidates: SpaceDamage.bKO_Effect = <tipo do campo>   ex.: Brute_KO_Combo, Brute_KO_Combo_A, Brute_KO_Combo_AB

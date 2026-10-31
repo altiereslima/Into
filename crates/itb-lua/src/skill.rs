@@ -365,6 +365,89 @@ impl UserData for LSkillEffect {
                 Ok(true)
             });
         }
+        // 0x00654EC0: SpaceDamage() com sScript "Board:Bounce(Point( x, y ),n)"
+        m.add_method("AddBounce", |_, s, (p, n): (Value, Value)| {
+            let err = || no_overload("AddBounce(Point,int)");
+            let (p, n) = (arg_point(&p).ok_or_else(err)?, arg_int(&n).ok_or_else(err)?);
+            let mut d = sd_zero();
+            d.set("sScript", Field::Str(format!("Board:Bounce({},{})", p.lua_string(), n)));
+            s.effect.borrow_mut().push(d);
+            Ok(())
+        });
+        // 0x00654D20: "Board:StartShake(%f)"
+        m.add_method("AddBoardShake", |_, s, f: Value| {
+            let f = arg_f32(&f).ok_or_else(|| no_overload("AddBoardShake(float)"))?;
+            let mut d = sd_zero();
+            d.set("sScript", Field::Str(format!("Board:StartShake({:.6})", f as f64)));
+            s.effect.borrow_mut().push(d);
+            Ok(())
+        });
+        // 0x00652E50: AddScript("Board:AddBurst(Point( x, y ),\"anim\",n)")
+        m.add_method("AddBurst", |_, s, (p, a, n): (Value, Value, Value)| {
+            let err = || no_overload("AddBurst(Point,string,int)");
+            let (p, a, n) = (arg_point(&p).ok_or_else(err)?, str_arg(&a).ok_or_else(err)?, arg_int(&n).ok_or_else(err)?);
+            let mut d = sd_zero();
+            d.set("sScript", Field::Str(format!("Board:AddBurst({},\"{}\",{})", p.lua_string(), a, n)));
+            s.effect.borrow_mut().push(d);
+            Ok(())
+        });
+        // 0x00653E90 / 0x00653E00 / 0x00654960: AddMove e, se aceito, tipo de movimento 2 (charge) / 5 (burrow)
+        for (name, queued, kind) in [("AddCharge", false, 2), ("AddBurrow", false, 5), ("AddQueuedCharge", true, 2)] {
+            m.add_method(name, move |_, s, (path, f): (LPointList, Value)| {
+                let f = arg_f32(&f).ok_or_else(|| no_overload("AddCharge(PointList,float)"))?;
+                if path.0.len() <= 1 { return Ok(()); }
+                let mut d = sd_zero();
+                d.set("path_0xcc", Field::Points(path.0));
+                d.set("fDelay", Field::Float(f));
+                d.set("move_type_0xd8", Field::Int(kind));
+                if queued { s.q_effect.borrow_mut().push(d) } else { s.effect.borrow_mut().push(d) }
+                Ok(())
+            });
+        }
+        // 0x00653BD0: marca "advanced/combat/throw_<dir>.png" em SpaceDamage(path[0], 0); depois AddMove com tipo 1
+        m.add_method("AddLeap", |_, s, (path, f): (LPointList, Value)| {
+            let f = arg_f32(&f).ok_or_else(|| no_overload("AddLeap(PointList,float)"))?;
+            let (first, last) = match (path.0.first(), path.0.last()) { (Some(a), Some(b)) => (*a, *b), _ => return Err(bad_index()) };
+            let mut mark = sd_at(first);
+            mark.set("sImageMark", Field::Str(format!("advanced/combat/throw_{}.png", itb_core::geometry::get_direction(last - first))));
+            s.effect.borrow_mut().push(mark);
+            if path.0.len() > 1 {
+                let mut d = sd_zero();
+                d.set("path_0xcc", Field::Points(path.0));
+                d.set("fDelay", Field::Float(f));
+                d.set("move_type_0xd8", Field::Int(1));
+                s.effect.borrow_mut().push(d);
+            }
+            Ok(())
+        });
+        // 0x00654760: AddMove([p1,p2]) tipo 4 + marca de brilho em p1 e em p2
+        m.add_method("AddTeleport", |_, s, (p1, p2, f): (Value, Value, Value)| {
+            let err = || no_overload("AddTeleport(Point,Point,float)");
+            let (a, b, f) = (arg_point(&p1).ok_or_else(err)?, arg_point(&p2).ok_or_else(err)?, arg_f32(&f).ok_or_else(err)?);
+            let mut mv = sd_zero();
+            mv.set("path_0xcc", Field::Points(vec![a, b]));
+            mv.set("fDelay", Field::Float(f));
+            mv.set("move_type_0xd8", Field::Int(4));
+            let mut glow = sd_at(a);
+            glow.set("sImageMark", Field::Str("advanced/combat/icons/icon_teleport_glow.png".into()));
+            let mut glow2 = glow.clone();
+            glow2.set("loc", Field::Point(b));
+            let mut e = s.effect.borrow_mut();
+            e.push(mv);
+            e.push(glow);
+            e.push(glow2);
+            Ok(())
+        });
+        // 0x00652D30: SpaceDamage() com loc=p1, +0x110=p2, +0xF8=anim, sAnimation="dummy"
+        m.add_method("AddGrapple", |_, s, (a, b, anim): (Value, Value, Value)| {
+            let err = || no_overload("AddGrapple(Point,Point,string)");
+            let mut d = sd_at(arg_point(&a).ok_or_else(err)?);
+            d.set("p_0x110", Field::Point(arg_point(&b).ok_or_else(err)?));
+            d.set("str_0xf8", Field::Str(str_arg(&anim).ok_or_else(err)?));
+            d.set("sAnimation", Field::Str("dummy".into()));
+            s.effect.borrow_mut().push(d);
+            Ok(())
+        });
         m.add_method("GetDamageCount", |_, s, ()| Ok(s.effect.borrow().len() as i32));
         m.add_method("GetQueuedCount", |_, s, ()| Ok(s.q_effect.borrow().len() as i32));
         m.add_method("GetDamage", |_, s, i: Value| {
@@ -384,5 +467,6 @@ impl UserData for LSkillEffect {
 pub const SKILL_EFFECT_DONE: &[&str] = &[
     "AddDamage", "AddQueuedDamage", "AddDelay", "AddScript", "AddQueuedScript", "AddSound", "AddAnimation",
     "AddProjectile", "AddQueuedProjectile", "AddArtillery", "AddQueuedArtillery", "AddMelee", "AddQueuedMelee",
-    "AddMove", "AddQueuedMove", "GetDamageCount", "GetQueuedCount", "GetDamage", "GetQueuedDamage",
+    "AddMove", "AddQueuedMove", "AddBounce", "AddBoardShake", "AddBurst", "AddCharge", "AddBurrow", "AddQueuedCharge",
+    "AddLeap", "AddTeleport", "AddGrapple", "GetDamageCount", "GetQueuedCount", "GetDamage", "GetQueuedDamage",
 ];

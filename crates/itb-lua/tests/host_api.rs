@@ -62,12 +62,12 @@ fn display_and_rng_globals() {
 #[test]
 fn stubs_record_calls_and_coverage_is_reported() {
     let h = host();
-    h.lua.load("local s = SkillEffect() s:AddBounce(nil) s:AddBounce(nil) PAWN_FACTORY:CreatePawn('x')").exec().unwrap();
+    h.lua.load("local s = SkillEffect() s:AddAirstrike(nil) s:AddAirstrike(nil) PAWN_FACTORY:CreatePawn('x')").exec().unwrap();
     let rep = h.report.borrow();
-    assert_eq!(rep.stub_calls.get("SkillEffect:AddBounce"), Some(&2));
+    assert_eq!(rep.stub_calls.get("SkillEffect:AddAirstrike"), Some(&2));
     assert_eq!(rep.stub_calls.get("PawnFactory:CreatePawn"), Some(&1));
     assert_eq!(rep.coverage.get("Point:Manhattan"), Some(&Status::Reconstructed));
-    assert_eq!(rep.coverage.get("SkillEffect:AddBounce"), Some(&Status::Stub));
+    assert_eq!(rep.coverage.get("SkillEffect:AddAirstrike"), Some(&Status::Stub));
     assert_eq!(rep.coverage.get("SkillEffect:AddDamage"), Some(&Status::Reconstructed));
     assert_eq!(rep.coverage.len(), 475);
 }
@@ -212,9 +212,10 @@ fn board_and_pawn_bindings_reach_the_core() {
     // escrita pelo script muda o núcleo compartilhado
     h.lua.load("Board:GetPawn(7):SetTeam(TEAM_PLAYER)").exec().unwrap();
     assert_eq!(shared.borrow().pawns[1].team, TEAM_PLAYER);
+    assert_eq!(eval::<i32>(&h, "return Board:GetSimpleReachable(Point(1,1), 1, false):size()"), 4);
     // método ainda não reconstruído continua stub
-    h.lua.load("Board:GetSimpleReachable(Point(1,1), 3, false)").exec().unwrap();
-    assert_eq!(h.report.borrow().stub_calls.get("Board:GetSimpleReachable"), Some(&1));
+    h.lua.load("Board:GetReachable(Point(1,1), 3, PATH_GROUND)").exec().unwrap();
+    assert_eq!(h.report.borrow().stub_calls.get("Board:GetReachable"), Some(&1));
 }
 
 /// Integração: armas originais executam no motor Rust (`ITB_GAME_DIR=... cargo test -- --ignored`).

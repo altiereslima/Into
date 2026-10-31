@@ -107,6 +107,18 @@ impl UserData for LBoard {
             };
             match s.pawn(idx) { Some(p) => p.into_lua(lua), None => Ok(Value::Nil) }
         });
+        // 0x00573160 → 0x004CEC60
+        m.add_method("GetSimpleReachable", |_, s, (p, range, corners): (LPoint, Value, Value)| {
+            let range = arg_int(&range).ok_or_else(|| no_overload("GetSimpleReachable(Point,int,bool)"))?;
+            let corners = match corners { Value::Boolean(b) => b, Value::Nil => false, _ => return Err(no_overload("GetSimpleReachable(Point,int,bool)")) };
+            let v = s.0.borrow().get_simple_reachable(to_b(p.0), range, corners);
+            Ok(crate::skill::LPointList(v.into_iter().map(from_b).collect()))
+        });
+        // WeaponTarget slot 0x80 → 0x005731F0 → 0x004CD680
+        m.add_method("GetSimplePath", |_, s, (a, b): (LPoint, LPoint)| {
+            let v = s.0.borrow().get_simple_path(to_b(a.0), to_b(b.0));
+            Ok(crate::skill::LPointList(v.into_iter().map(from_b).collect()))
+        });
         m.add_method("IsPawnAlive", |_, s, id: Value| {
             Ok(s.0.borrow().is_pawn_alive(arg_int(&id).ok_or_else(|| no_overload("IsPawnAlive(int)"))?))
         });
@@ -136,6 +148,13 @@ impl UserData for LPawn {
             p.board.borrow_mut().pawns[p.idx].set_team(t);
             Ok(())
         });
+        m.add_method("IsFire", |_, p, ()| Ok(with(p, |s| s.is_fire())));
+        m.add_method("IsFrozen", |_, p, ()| Ok(with(p, |s| s.is_frozen())));
+        m.add_method("IsAcid", |_, p, ()| Ok(with(p, |s| s.is_acid())));
+        m.add_method("IsInfected", |_, p, ()| Ok(with(p, |s| s.is_infected())));
+        m.add_method("IsPowered", |_, p, ()| Ok(with(p, |s| s.is_powered())));
+        m.add_method("IsGuarding", |_, p, ()| Ok(with(p, |s| s.is_guarding())));
+        m.add_method("GetPathProf", |_, p, ()| Ok(with(p, |s| s.get_path_prof())));
         m.add_method("SetMech", |_, p, ()| { p.board.borrow_mut().pawns[p.idx].set_mech(); Ok(()) });
         m.add_meta_method(MetaMethod::Eq, |_, a, b: LPawnRef| Ok(Rc::ptr_eq(&a.board, &b.0.board) && a.idx == b.0.idx));
         m.add_meta_method(MetaMethod::Index, |lua, _, k: String| stub_lookup(lua, "BoardPawn", &k));
@@ -157,8 +176,8 @@ impl mlua::FromLua for LPawnRef {
 /// Nomes ligados nesta etapa (para o relatório de cobertura).
 pub const BOARD_DONE: &[&str] = &[
     "IsValid", "GetTerrain", "IsBuilding", "IsFire", "IsSmoke", "IsVines", "IsAcid", "IsCracked", "IsEdge",
-    "GetPawnTeam", "GetSize", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
+    "GetPawnTeam", "GetSize", "GetSimpleReachable", "GetSimplePath", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
 ];
 pub const PAWN_DONE: &[&str] = &[
-    "GetHealth", "IsDead", "IsDamaged", "GetTeam", "IsPlayer", "IsEnemy", "GetId", "IsMech", "GetSpace", "SetTeam", "SetMech",
+    "GetHealth", "IsDead", "IsDamaged", "GetTeam", "IsPlayer", "IsEnemy", "GetId", "IsMech", "GetSpace", "SetTeam", "SetMech", "GetPathProf", "IsFire", "IsFrozen", "IsAcid", "IsInfected", "IsPowered", "IsGuarding",
 ];
