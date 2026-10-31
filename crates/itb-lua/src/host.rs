@@ -49,11 +49,16 @@ pub struct HostConfig {
     pub difficulty: i32,
     pub advanced_content: bool,
     pub rand_seed: u32,
+    /// Estado global lido por `IsPassiveSkill` (0x0065AEB0): string em 0x008D0E94 (prefixo forçado)
+    /// e nomes para os quais algum objeto da lista 0x008D0E48 responde `0x00625320(nome)`.
+    pub forced_passive: String,
+    pub passive_skills: Vec<String>,
 }
 
 impl Default for HostConfig {
     fn default() -> Self {
-        Self { window_w: 1280, window_h: 720, difficulty: 1, advanced_content: true, rand_seed: 1 }
+        Self { window_w: 1280, window_h: 720, difficulty: 1, advanced_content: true, rand_seed: 1,
+               forced_passive: String::new(), passive_skills: Vec::new() }
     }
 }
 
@@ -222,6 +227,7 @@ impl Host {
         }
         for k in crate::world::BOARD_DONE { self.mark(format!("Board:{k}"), Status::Reconstructed); }
         for k in crate::world::PAWN_DONE { self.mark(format!("BoardPawn:{k}"), Status::Reconstructed); }
+        for k in crate::world::PAWN_HOST { self.mark(format!("BoardPawn:{k}"), Status::Host); }
         let color = self.lua.create_table()?;
         let mt = self.lua.create_table()?;
         mt.set("__call", self.lua.create_function(|_, args: MultiValue| {
@@ -311,6 +317,13 @@ impl Host {
             d.set("loc", crate::records::Field::Point(p.0));
             d.set("sSound", crate::records::Field::Str(snd));
             Ok(d)
+        })?;
+        // 0x0065AEB0 IsPassiveSkill(string): a string global começa com o nome, ou algum objeto
+        // da lista global aceita o nome. O estado vem da configuração do host.
+        let (forced, passives) = (cfg.forced_passive.clone(), cfg.passive_skills.clone());
+        self.set_fn("IsPassiveSkill", Reconstructed, move |_, name: Value| {
+            let n = crate::records::arg_str(&name).ok_or_else(|| no_overload("IsPassiveSkill(string)"))?;
+            Ok((forced.len() >= n.len() && forced.as_bytes()[..n.len()] == *n.as_bytes()) || passives.contains(&n))
         })?;
         let rep = self.report.clone();
         self.set_fn("ConsolePrint", Host, move |_, s: String| { rep.borrow_mut().console.push(s); Ok(()) })?;

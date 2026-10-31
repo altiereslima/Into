@@ -90,8 +90,10 @@ fn path_prof_priority_and_team_bits() {
     assert_eq!(p.get_path_prof() & 0xF, 6);
     p.movement.teleporter = true;
     assert_eq!(p.get_path_prof() & 0xF, 5);
-    p.health = 0; // teleporte só vale se não estiver morto
-    assert_eq!(p.get_path_prof() & 0xF, 6);
+    p.health = 0; // teleporte e IsJumper (0x0063AFC0) só valem vivos; "Burrows" é lido cru
+    assert_eq!(p.get_path_prof() & 0xF, PATH_BURROWER);
+    p.movement.burrows = false;
+    assert_eq!(p.get_path_prof() & 0xF, PATH_MASSIVE); // IsFlying também exige vivo
     p.team = TEAM_ENEMY;
     assert_eq!(p.get_path_prof() >> 4, TEAM_ENEMY);
 }

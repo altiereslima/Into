@@ -610,6 +610,86 @@
       "",
       "SoundEffect",
       "0x00656480"
+    ],
+    [
+      "Board",
+      "GetReachable",
+      "0x00573280"
+    ],
+    [
+      "Board",
+      "GetPath",
+      "0x005733D0"
+    ],
+    [
+      "Board",
+      "IsTerrain",
+      "0x0055F0D0"
+    ],
+    [
+      "Board",
+      "IsPod",
+      "0x00571680"
+    ],
+    [
+      "Board",
+      "IsItem",
+      "0x005716F0"
+    ],
+    [
+      "Board",
+      "IsDangerous",
+      "0x005717A0"
+    ],
+    [
+      "Board",
+      "IsSpawning",
+      "0x0056D5B0"
+    ],
+    [
+      "Board",
+      "IsCrackable",
+      "0x00568860"
+    ],
+    [
+      "BoardPawn",
+      "IsGrappled",
+      "0x00631490"
+    ],
+    [
+      "SkillEffect",
+      "AddAirstrike",
+      "0x00653F20"
+    ],
+    [
+      "SkillEffect",
+      "AddReverseAirstrike",
+      "0x00654030"
+    ],
+    [
+      "SkillEffect",
+      "AddDropper",
+      "0x00654140"
+    ],
+    [
+      "SkillEffect",
+      "AddEmitter",
+      "0x00654500"
+    ],
+    [
+      "SkillEffect",
+      "AddVoice",
+      "0x00652AD0"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedVoice",
+      "0x00652BC0"
+    ],
+    [
+      "BoardPawn",
+      "GetType",
+      "0x0063F3B0"
     ]
   ],
   "partial": [
@@ -617,6 +697,51 @@
       "BoardPawn",
       "IsCorpse",
       "0x00629540"
+    ],
+    [
+      "Board",
+      "IsDeadly",
+      "0x005739E0"
+    ],
+    [
+      "BoardPawn",
+      "IsShield",
+      "0x00633AD0"
+    ],
+    [
+      "BoardPawn",
+      "IsBoosted",
+      "0x006313E0"
+    ],
+    [
+      "BoardPawn",
+      "IsFlying",
+      "0x0063AC00"
+    ],
+    [
+      "BoardPawn",
+      "GetMoveSpeed",
+      "0x0063A860"
+    ],
+    [
+      "BoardPawn",
+      "IsTeleporter",
+      "0x0063AF60"
+    ],
+    [
+      "BoardPawn",
+      "IsJumper",
+      "0x0063AFC0"
+    ],
+    [
+      "BoardPawn",
+      "IsBurrower",
+      "0x006365D0"
+    ],
+    [
+      "",
+      "IsPassiveSkill",
+      "0x0065AEB0"
     ]
   ],
   "trivial_accessors": [
@@ -658,6 +783,7 @@
     "0x00675740",
     "0x00675750",
     "0x00675770",
-    "0x00675790"
+    "0x00675790",
+    "0x0063F3B0"
   ]
 }

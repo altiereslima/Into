@@ -283,6 +283,56 @@ impl UserData for LSkillEffect {
             s.effect.borrow_mut().push(d); Ok(())
         });
         // 0x00654310 / 0x00654400: SpaceDamage(p, 0) com sAnimation (+ parâmetro em +0x34)
+        // 0x00654500: AddAnimation(p, "add_emitter_" + s)
+        m.add_method("AddEmitter", |_, s, (p, e): (Value, Value)| {
+            let err = || no_overload("AddEmitter(Point,string)");
+            let mut d = sd_at(arg_point(&p).ok_or_else(err)?);
+            d.set("sAnimation", Field::Str(format!("add_emitter_{}", str_arg(&e).ok_or_else(err)?)));
+            s.effect.borrow_mut().push(d);
+            Ok(())
+        });
+        // 0x00652AD0 / 0x00652BC0 (fila) → 0x00655FA0: SpaceDamage() com sScript = PrepareVoiceEvent("evento",id)
+        for (name, queued) in [("AddVoice", false), ("AddQueuedVoice", true)] {
+            m.add_method(name, move |_, s, (e, id): (Value, Value)| {
+                let err = || no_overload(if queued { "AddQueuedVoice(string,int)" } else { "AddVoice(string,int)" });
+                let (e, id) = (str_arg(&e).ok_or_else(err)?, arg_int(&id).ok_or_else(err)?);
+                let mut d = crate::records::space_damage(&[]).expect("SpaceDamage()");
+                d.set("sScript", Field::Str(format!("PrepareVoiceEvent(\"{e}\",{id})")));
+                if queued { s.q_effect.borrow_mut().push(d) } else { s.effect.borrow_mut().push(d) }
+                Ok(())
+            });
+        }
+        // 0x00653F20 AddAirstrike: casa (0, p.y), tipo 3, atraso seguinte p.x × 0.125 + 0.375.
+        // 0x00654030 AddReverseAirstrike: casa (p.x, 0), tipo 6, atraso seguinte p.y × 0.125 + 0.375.
+        // Construtor 0x00652610: imagem em +0x68, tipo em +0x98, fDelay −2.
+        for (name, reverse) in [("AddAirstrike", false), ("AddReverseAirstrike", true)] {
+            m.add_method(name, move |_, s, (p, img): (Value, Value)| {
+                let err = || no_overload(if reverse { "AddReverseAirstrike(Point,string)" } else { "AddAirstrike(Point,string)" });
+                let (p, img) = (arg_point(&p).ok_or_else(err)?, str_arg(&img).ok_or_else(err)?);
+                let (loc, kind, along) = if reverse { (IPoint::new(p.x, 0), 6, p.y) } else { (IPoint::new(0, p.y), 3, p.x) };
+                let mut d = sd_at(loc);
+                d.set("image_0x68", Field::Str(img));
+                d.set("kind_0x98", Field::Int(kind));
+                d.set("fDelay", Field::Float(-2.0));
+                let mut delay = sd_zero();
+                delay.set("fDelay", Field::Float((along as f32) * 0.125f32 + 0.375f32));
+                delay.set("bHide", Field::Bool(true));
+                let mut e = s.effect.borrow_mut();
+                e.push(d);
+                e.push(delay);
+                Ok(())
+            });
+        }
+        // 0x00654140 AddDropper(SpaceDamage, string): cópia com imagem (+0x68), tipo 4 e fDelay 0.
+        m.add_method("AddDropper", |_, s, (d, img): (Value, Value)| {
+            let err = || no_overload("AddDropper(SpaceDamage,string)");
+            let mut d = damage_arg(&d).ok_or_else(err)?;
+            d.set("image_0x68", Field::Str(str_arg(&img).ok_or_else(err)?));
+            d.set("kind_0x98", Field::Int(4));
+            d.set("fDelay", Field::Float(0.0));
+            s.effect.borrow_mut().push(d);
+            Ok(())
+        });
         m.add_method("AddAnimation", |_, s, a: MultiValue| {
             let a: Vec<Value> = a.into_iter().collect();
             let err = || no_overload("AddAnimation(Point,string), AddAnimation(Point,string,int)");
@@ -468,5 +518,5 @@ pub const SKILL_EFFECT_DONE: &[&str] = &[
     "AddDamage", "AddQueuedDamage", "AddDelay", "AddScript", "AddQueuedScript", "AddSound", "AddAnimation",
     "AddProjectile", "AddQueuedProjectile", "AddArtillery", "AddQueuedArtillery", "AddMelee", "AddQueuedMelee",
     "AddMove", "AddQueuedMove", "AddBounce", "AddBoardShake", "AddBurst", "AddCharge", "AddBurrow", "AddQueuedCharge",
-    "AddLeap", "AddTeleport", "AddGrapple", "GetDamageCount", "GetQueuedCount", "GetDamage", "GetQueuedDamage",
+    "AddLeap", "AddTeleport", "AddGrapple", "AddEmitter", "AddVoice", "AddAirstrike", "AddQueuedVoice", "AddReverseAirstrike", "AddDropper", "GetDamageCount", "GetQueuedCount", "GetDamage", "GetQueuedDamage",
 ];

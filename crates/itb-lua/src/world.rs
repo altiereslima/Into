@@ -119,6 +119,46 @@ impl UserData for LBoard {
             let v = s.0.borrow().get_simple_path(to_b(a.0), to_b(b.0));
             Ok(crate::skill::LPointList(v.into_iter().map(from_b).collect()))
         });
+        q!(m, "IsPod", "IsPod(Point)", |b, p| b.is_pod(p));
+        q!(m, "IsItem", "IsItem(Point)", |b, p| b.is_item(p));
+        q!(m, "IsDangerous", "IsDangerous(Point)", |b, p| b.is_dangerous(p));
+        q!(m, "IsSpawning", "IsSpawning(Point)", |b, p| b.is_spawning(p));
+        q!(m, "IsCrackable", "IsCrackable(Point)", |b, p| b.is_crackable(p));
+        // WeaponTarget slot 0x7C → 0x0055F0D0 → 0x005AE5D0
+        m.add_method("IsTerrain", |_, s, (p, t): (LPoint, Value)| {
+            let t = arg_int(&t).ok_or_else(|| no_overload("IsTerrain(Point,int)"))?;
+            Ok(s.0.borrow().is_terrain(to_b(p.0), t))
+        });
+        // 0x00573280 → 0x004CDA00 → Dijkstra 0x004CDE60
+        m.add_method("GetReachable", |_, s, (p, range, prof): (LPoint, Value, Value)| {
+            let sig = || no_overload("GetReachable(Point,int,int)");
+            let range = arg_int(&range).ok_or_else(sig)?;
+            let prof = arg_int(&prof).ok_or_else(sig)?;
+            let v = s.0.borrow().get_reachable(to_b(p.0), range, prof);
+            Ok(crate::skill::LPointList(v.into_iter().map(from_b).collect()))
+        });
+        // 0x005733D0 → A* 0x004CE630
+        m.add_method("GetPath", |_, s, (a, b, prof): (LPoint, LPoint, Value)| {
+            let prof = arg_int(&prof).ok_or_else(|| no_overload("GetPath(Point,Point,int)"))?;
+            let v = s.0.borrow().get_path(to_b(a.0), to_b(b.0), prof);
+            Ok(crate::skill::LPointList(v.into_iter().map(from_b).collect()))
+        });
+        // 0x005739E0 `IsDeadly(SpaceDamage, Pawn*)` — Pawn pode ser nil (ponteiro nulo).
+        m.add_method("IsDeadly", |_, s, (d, pawn): (Value, Value)| {
+            let sig = || no_overload("IsDeadly(SpaceDamage,Pawn)");
+            let d = crate::skill::damage_arg(&d).ok_or_else(sig)?;
+            let attacker = match &pawn {
+                Value::Nil => None,
+                Value::UserData(u) => {
+                    let lp = u.borrow::<LPawn>().map_err(|_| sig())?;
+                    if !Rc::ptr_eq(&lp.board, &s.0) { return Err(sig()); }
+                    Some(lp.idx)
+                }
+                _ => return Err(sig()),
+            };
+            let loc = match d.get("loc") { Some(crate::records::Field::Point(p)) => *p, _ => return Err(sig()) };
+            Ok(s.0.borrow().is_deadly(to_b(loc), d.int("iDamage"), attacker))
+        });
         m.add_method("IsPawnAlive", |_, s, id: Value| {
             Ok(s.0.borrow().is_pawn_alive(arg_int(&id).ok_or_else(|| no_overload("IsPawnAlive(int)"))?))
         });
@@ -155,6 +195,24 @@ impl UserData for LPawn {
         m.add_method("IsPowered", |_, p, ()| Ok(with(p, |s| s.is_powered())));
         m.add_method("IsGuarding", |_, p, ()| Ok(with(p, |s| s.is_guarding())));
         m.add_method("GetPathProf", |_, p, ()| Ok(with(p, |s| s.get_path_prof())));
+        m.add_method("IsShield", |_, p, ()| Ok(with(p, |s| s.is_shield())));
+        m.add_method("IsBoosted", |_, p, ()| Ok(with(p, |s| s.is_boosted())));
+        m.add_method("IsFlying", |_, p, ()| Ok(with(p, |s| s.is_flying())));
+        m.add_method("IsTeleporter", |_, p, ()| Ok(with(p, |s| s.is_teleporter())));
+        m.add_method("IsJumper", |_, p, ()| Ok(with(p, |s| s.is_jumper())));
+        m.add_method("IsBurrower", |_, p, ()| Ok(with(p, |s| s.is_burrower())));
+        m.add_method("GetBaseMove", |_, p, ()| Ok(with(p, |s| s.base_move_0x63a8f0)));
+        m.add_method("IsGrappled", |_, p, ()| Ok(with(p, |s| s.is_grappled())));
+        m.add_method("IsAbility", |_, p, name: Value| {
+            let n = crate::records::arg_str(&name).ok_or_else(|| no_overload("IsAbility(string)"))?;
+            Ok(with(p, |s| s.is_ability(&n)))
+        });
+        m.add_method("GetMoveSpeed", |_, p, ()| Ok(with(p, |s| s.get_move_speed())));
+        m.add_method("IsCorpse", |_, p, ()| {
+            let b = p.board.borrow();
+            Ok(b.pawns[p.idx].is_corpse(b.global_list_has_12))
+        });
+        m.add_method("GetType", |_, p, ()| Ok(with(p, |s| s.type_name.clone())));
         m.add_method("SetMech", |_, p, ()| { p.board.borrow_mut().pawns[p.idx].set_mech(); Ok(()) });
         m.add_meta_method(MetaMethod::Eq, |_, a, b: LPawnRef| Ok(Rc::ptr_eq(&a.board, &b.0.board) && a.idx == b.0.idx));
         m.add_meta_method(MetaMethod::Index, |lua, _, k: String| stub_lookup(lua, "BoardPawn", &k));
@@ -176,8 +234,12 @@ impl mlua::FromLua for LPawnRef {
 /// Nomes ligados nesta etapa (para o relatório de cobertura).
 pub const BOARD_DONE: &[&str] = &[
     "IsValid", "GetTerrain", "IsBuilding", "IsFire", "IsSmoke", "IsVines", "IsAcid", "IsCracked", "IsEdge",
-    "GetPawnTeam", "GetSize", "GetSimpleReachable", "GetSimplePath", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
+    "GetPawnTeam", "GetSize", "GetSimpleReachable", "GetSimplePath", "GetReachable", "GetPath", "IsDeadly", "IsTerrain", "IsPod", "IsItem",
+    "IsDangerous", "IsSpawning", "IsCrackable", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
 ];
+/// Respondidos com dados do estado do jogo (rotina original ainda não reconstruída).
+pub const PAWN_HOST: &[&str] = &["GetBaseMove", "IsAbility"];
 pub const PAWN_DONE: &[&str] = &[
     "GetHealth", "IsDead", "IsDamaged", "GetTeam", "IsPlayer", "IsEnemy", "GetId", "IsMech", "GetSpace", "SetTeam", "SetMech", "GetPathProf", "IsFire", "IsFrozen", "IsAcid", "IsInfected", "IsPowered", "IsGuarding",
+    "IsShield", "IsBoosted", "IsFlying", "GetType", "IsTeleporter", "IsJumper", "IsBurrower", "GetMoveSpeed", "IsCorpse", "IsGrappled",
 ];

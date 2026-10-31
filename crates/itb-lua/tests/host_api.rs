@@ -62,12 +62,11 @@ fn display_and_rng_globals() {
 #[test]
 fn stubs_record_calls_and_coverage_is_reported() {
     let h = host();
-    h.lua.load("local s = SkillEffect() s:AddAirstrike(nil) s:AddAirstrike(nil) PAWN_FACTORY:CreatePawn('x')").exec().unwrap();
+    h.lua.load("PAWN_FACTORY:CreatePawn('x') PAWN_FACTORY:CreatePawn('y')").exec().unwrap();
     let rep = h.report.borrow();
-    assert_eq!(rep.stub_calls.get("SkillEffect:AddAirstrike"), Some(&2));
-    assert_eq!(rep.stub_calls.get("PawnFactory:CreatePawn"), Some(&1));
+    assert_eq!(rep.stub_calls.get("PawnFactory:CreatePawn"), Some(&2));
     assert_eq!(rep.coverage.get("Point:Manhattan"), Some(&Status::Reconstructed));
-    assert_eq!(rep.coverage.get("SkillEffect:AddAirstrike"), Some(&Status::Stub));
+    assert_eq!(rep.coverage.get("PawnFactory:CreatePawn"), Some(&Status::Stub));
     assert_eq!(rep.coverage.get("SkillEffect:AddDamage"), Some(&Status::Reconstructed));
     assert_eq!(rep.coverage.len(), 475);
 }
@@ -190,6 +189,41 @@ fn skill_effect_builders_match_exe() {
 }
 
 #[test]
+fn etapa10_skill_effects_airstrike_voice_dropper_emitter() {
+    let h = host();
+    // AddAirstrike: casa (0, y), depois atraso x*0.125+0.375
+    assert_eq!(eval::<(i32, i32, f32, i32, f32, bool)>(&h, "local r = SkillEffect() r:AddAirstrike(Point(4,3), 'units/player/mech_jet_1.png') \
+        local a, b = r:GetDamage(1), r:GetDamage(2) return a.loc.x, a.loc.y, a.fDelay, r:GetDamageCount(), b.fDelay, b.bHide"), (0, 3, -2.0, 2, 0.875, true));
+    assert_eq!(eval::<(i32, i32, f32)>(&h, "local r = SkillEffect() r:AddReverseAirstrike(Point(4,3), 'x.png') \
+        return r:GetDamage(1).loc.x, r:GetDamage(1).loc.y, r:GetDamage(2).fDelay"), (4, 0, 0.75));
+    assert_eq!(eval::<(String, i32, i32)>(&h, "local r = SkillEffect() r:AddVoice('Mech_Repaired', 3) r:AddQueuedVoice('X', 1) \
+        return r:GetDamage(1).sScript, r:GetDamageCount(), r:GetQueuedCount()"), ("PrepareVoiceEvent(\"Mech_Repaired\",3)".into(), 1, 1));
+    assert_eq!(eval::<String>(&h, "local r = SkillEffect() r:AddEmitter(Point(1,1), 'Emitter_Burst') return r:GetDamage(1).sAnimation"), "add_emitter_Emitter_Burst");
+    assert_eq!(eval::<(i32, f32)>(&h, "local r = SkillEffect() local d = SpaceDamage(Point(2,2), 1) d.fDelay = 0.5 r:AddDropper(d, 'pod.png') \
+        return r:GetDamage(1).iDamage, r:GetDamage(1).fDelay"), (1, 0.0));
+}
+
+#[test]
+fn etapa10_board_queries_from_lua() {
+    use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, Point};
+    let h = host();
+    h.lua.load("function SetBoard(b) Board = b end function SetPawn(p) Pawn = p end").exec().unwrap();
+    let mut b = OccupancyBoard::new(8, 8).unwrap();
+    b.tile_mut(Point::new(3, 3)).unwrap().cracked = 1;
+    let m = b.add_pawn(PawnState { id: 0, team: TEAM_PLAYER, health: 3, max_health: 3, space: Point::new(0, 0), mech: true, ..Default::default() }).unwrap();
+    b.add_pawn(PawnState { id: 1, team: TEAM_ENEMY, health: 2, max_health: 2, space: Point::new(2, 2), ..Default::default() }).unwrap();
+    b.add_pawn(PawnState { id: 2, team: TEAM_ENEMY, health: 5, max_health: 5, space: Point::new(3, 3), ..Default::default() }).unwrap();
+    let shared = std::rc::Rc::new(std::cell::RefCell::new(b));
+    h.set_board(shared.clone()).unwrap();
+    h.set_pawn(&shared, m).unwrap();
+    assert!(eval::<bool>(&h, "return Board:IsDeadly(SpaceDamage(Point(2,2), 2), Pawn) and not Board:IsDeadly(SpaceDamage(Point(2,2), 1), nil)"));
+    assert!(eval::<bool>(&h, "return Board:IsDeadly(SpaceDamage(Point(3,3), 1), Pawn)")); // chão rachado
+    assert!(eval::<bool>(&h, "return Board:IsTerrain(Point(3,3), 16) and Board:IsTerrain(Point(1,1), TERRAIN_ROAD)"));
+    assert_eq!(eval::<i32>(&h, "return Board:GetPath(Point(0,0), Point(2,2), Pawn:GetPathProf()):size()"), 5);
+    assert!(eval::<bool>(&h, "return not Board:IsPod(Point(0,0)) and Board:IsCrackable(Point(1,1)) and Pawn:GetMoveSpeed() == 0"));
+}
+
+#[test]
 fn board_and_pawn_bindings_reach_the_core() {
     use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, Point};
     let h = host();
@@ -214,8 +248,13 @@ fn board_and_pawn_bindings_reach_the_core() {
     assert_eq!(shared.borrow().pawns[1].team, TEAM_PLAYER);
     assert_eq!(eval::<i32>(&h, "return Board:GetSimpleReachable(Point(1,1), 1, false):size()"), 4);
     // método ainda não reconstruído continua stub
-    h.lua.load("Board:GetReachable(Point(1,1), 3, PATH_GROUND)").exec().unwrap();
-    assert_eq!(h.report.borrow().stub_calls.get("Board:GetReachable"), Some(&1));
+    h.lua.load("Board:GetDistance(Point(1,1), Point(3,3))").exec().unwrap();
+    assert_eq!(h.report.borrow().stub_calls.get("Board:GetDistance"), Some(&1));
+    // Dijkstra do EXE: montanha em (2,2), mech em (1,1), inimigo em (4,4); ordem (x, y)
+    let reach: Vec<(i32, i32)> = h.lua.load("local l = Board:GetReachable(Point(1,1), 2, PATH_GROUND) local r = {} \
+        for i = 1, l:size() do r[#r+1] = {l:index(i).x, l:index(i).y} end return r").eval::<Vec<Vec<i32>>>().unwrap()
+        .into_iter().map(|v| (v[0], v[1])).collect();
+    assert_eq!(reach, vec![(0, 0), (0, 1), (0, 2), (1, 0), (1, 2), (1, 3), (2, 0), (2, 1), (3, 1)]);
 }
 
 /// Integração: armas originais executam no motor Rust (`ITB_GAME_DIR=... cargo test -- --ignored`).

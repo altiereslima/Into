@@ -1,0 +1,6 @@
+# Varredura de armas (559 encontradas nos scripts)
+sem stubs e sem erro: 559 | rodaram tocando stubs: 0 | com erro: 0
+
+## Stubs que mais bloqueiam armas (nº de armas)
+
+## Erros (agrupados)

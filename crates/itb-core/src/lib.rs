@@ -24,3 +24,9 @@ pub mod display;
 pub mod ui;
 /// Passagem e alcance em linha reta (Etapa 09).
 pub mod pathing;
+/// Consultas de terreno: IsTerrain, IsCrackable, IsPod, IsItem, IsDangerous, IsSpawning (Etapa 10).
+pub mod board_terrain;
+/// Dano letal: IsDeadly / WouldDie (Etapa 10).
+pub mod damage;
+/// Alcance (Dijkstra) e caminho (A*) (Etapa 10).
+pub mod pathfinding;

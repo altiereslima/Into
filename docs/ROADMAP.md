@@ -9,15 +9,15 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 | M2 | Tipos de valor completos | `Point`, `Rect2D`, `GL_Color`, `Button`, `Text`, `StyleInfo`, `Objective`, `SpaceDamage`, `SkillEffect`, listas | ▶ 17 classes prontas, incl. SkillEffect e listas (faltam Effect, Choice, Squad…) |
 | M3 | Ciclo de vida do motor | Descobrir no EXE o que roda depois do boot (funções Lua chamadas pelo C++, ordem, argumentos) e reproduzir | ▶ inicialização reproduzida; 118 callbacks inventariados |
 | M4 | Missão em memória | Carregar um `.map` original, criar `Board`/`Game`, posicionar unidades via `PAWN_FACTORY` | |
-| M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | ▶ 514/559 armas geram seus efeitos sem stub; falta aplicar ao tabuleiro |
-| M6 | Turno inimigo | IA (scripts) + pathfinding nativo (`GetPath`, `GetReachable`...) idênticos | ▶ GetSimpleReachable/GetSimplePath prontos |
+| M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | ▶ 559/559 armas geram seus efeitos sem stub; `IsDeadly` pronto; falta aplicar ao tabuleiro |
+| M6 | Turno inimigo | IA (scripts) + pathfinding nativo (`GetPath`, `GetReachable`...) idênticos | ▶ GetReachable/GetPath/GetSimpleReachable/GetSimplePath prontos |
 | M7 | Simulador sem gráficos | Uma missão completa jogada por script de teste, resultado comparável ao original | |
 | M8 | Assets + render | Ler `resource.dat`, desenhar tabuleiro/unidades/UI (SDL2) | |
 | M9 | Jogável | Menu, hangar, ilhas, missões, salvar/carregar | |
 
 ## Fila imediata
 
-Etapa 10: `GetReachable`/`GetPath` (Dijkstra), `IsDeadly`/`IsTerrain`/`IsPod` e aplicação do `SkillEffect`.
+Etapa 11: aplicação do `SkillEffect` ao tabuleiro (M5).
 Antes disso, a fila vinha do M3:
 ler, para cada callback de `re/evidencias/engine_callbacks.csv`, como o motor o chama, começando por
 `startNewGame` → criação de ilhas/missões → `CallMethod("MissionN", "BaseStart")` e as armas

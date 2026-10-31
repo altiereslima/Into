@@ -3,7 +3,7 @@
 //! Executa o código ORIGINAL de uma arma (`GetTargetArea` e `GetSkillEffect` dos scripts) sobre um
 //! tabuleiro 8x8 do motor Rust: mech do jogador em (x1,y1), inimigo em (x2,y2), um prédio em (5,5).
 //! Mostra a área de alvo e a lista de efeitos gerada — o que o motor original aplicaria.
-use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, Point};
+use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, PawnStatusBytes, Point};
 use itb_lua::records::{Field, Record};
 use itb_lua::skill::{LPointList, LSkillEffect};
 use itb_lua::{Host, HostConfig};
@@ -51,9 +51,12 @@ fn main() {
 
     let mut b = OccupancyBoard::new(8, 8).unwrap();
     b.tile_mut(Point::new(5, 5)).unwrap().terrain = TERRAIN_BUILDING;
-    let mech = b.add_pawn(PawnState { id: 0, team: TEAM_PLAYER, health: 3, max_health: 3, space: p1, mech: true, ..Default::default() }).unwrap();
+    let powered = PawnStatusBytes { powered: true, ..Default::default() };
+    let mech = b.add_pawn(PawnState { id: 0, team: TEAM_PLAYER, health: 3, max_health: 3, space: p1, mech: true,
+        status: powered, base_move_0x63a8f0: 3, type_name: "PunchMech".into(), ..Default::default() }).unwrap();
     if p2 != p1 {
-        b.add_pawn(PawnState { id: 1, team: TEAM_ENEMY, health: 3, max_health: 3, space: p2, ..Default::default() }).unwrap();
+        b.add_pawn(PawnState { id: 1, team: TEAM_ENEMY, health: 3, max_health: 3, space: p2,
+            status: powered, base_move_0x63a8f0: 3, type_name: "Firefly1".into(), ..Default::default() }).unwrap();
     }
     let board = Rc::new(RefCell::new(b));
     host.set_board(board.clone()).unwrap();

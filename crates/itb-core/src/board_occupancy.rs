@@ -47,7 +47,7 @@ pub mod consts {
 }
 
 /// `Point` do motor: dois `int` passados por valor (mesma ABI de `(int x, int y)`).
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default, Hash, PartialOrd, Ord)]
 pub struct Point {
     pub x: i32,
     pub y: i32,
@@ -99,6 +99,38 @@ pub struct PawnState {
     /// Bytes de estado lidos por acessores Lua: +0x8D0 `IsFire`, +0x8D1 `IsFrozen`, +0x8D3 `IsAcid`,
     /// +0x8DC `IsInfected`, +0x10C0 `IsPowered`, +0x91E (`IsGuarding` devolve `byte == 0`).
     pub status: PawnStatusBytes,
+    /// +0xF81 (BYTE): agarrado (`IsGrappled` = byte e não morto); zera `GetMoveSpeed`.
+    pub grappled_0xf81: bool,
+    /// +0xA64: velocidade fixa (usada por `GetMoveSpeed` se > 0).
+    pub move_speed_override_0xa64: i32,
+    /// `Pawn:GetBaseMove()` (0x0063A8F0: tipo + bônus de piloto/itens; ainda não reconstruída).
+    pub base_move_0x63a8f0: i32,
+    /// Habilidades consultadas por `Pawn:IsAbility(nome)` (0x0063AB20 → 0x0061D180; dado de entrada).
+    pub abilities: Vec<String>,
+    /// +0x94 `std::string` com o tipo da unidade (ex.: "SatelliteRocket"), lido por `IsCrackable`.
+    pub type_name: String,
+    /// Entradas de `Pawn::WouldDie` (0x006362A0) e `IsBoosted` (0x006313E0); ver `damage.rs`.
+    pub damage: DamageTraits,
+}
+
+/// Campos e consultas de `Pawn` lidos pelo cálculo de dano letal (Etapa 10).
+/// Os `query_*` são resultados de rotinas ainda não reconstruídas (dados de entrada).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct DamageTraits {
+    /// +0x8D5 (BYTE): impulso ("boost") ativo.
+    pub boosted_0x8d5: bool,
+    /// +0x8D4 (BYTE): escudo.
+    pub shield_0x8d4: bool,
+    /// +0x99D (BYTE): com 0, gelo rachado sob a unidade a mata (cai na água).
+    pub byte_0x99d: u8,
+    /// `Pawn::0x00638C70(11)` (habilidade de piloto 11) — usada por `IsBoosted`.
+    pub query_0x638c70_11: bool,
+    /// `vftable[1]("Arrogant_Boost")` — usada por `IsBoosted` (só vale com vida cheia).
+    pub query_arrogant_boost: bool,
+    /// `Pawn::0x0062F2F0()` — escudo implícito (mech + byte +0x91D + estado global).
+    pub query_0x62f2f0: bool,
+    /// `Pawn::0x0063C100()` — blindagem (reduz 1 de dano).
+    pub query_0x63c100: bool,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
@@ -114,6 +146,7 @@ pub struct PawnStatusBytes {
 /// Entradas de `Pawn:GetPathProf()`. Cada uma vem de uma consulta ainda não reconstruída em detalhe.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
 pub struct MovementTraits {
+    // Valores CRUS das propriedades do tipo; `flying` também vale com o byte +0x1314.
     pub teleporter: bool,
     pub jumper: bool,
     pub burrows: bool,
@@ -164,13 +197,35 @@ impl PawnState {
     pub fn get_path_prof(&self) -> i32 {
         let m = &self.movement;
         let base = if m.teleporter && !self.is_dead() { consts::PATH_TELEPORT }
-            else if m.jumper { consts::PATH_JUMPER }
+            else if self.is_jumper() { consts::PATH_JUMPER }
             else if m.burrows { consts::PATH_BURROWER }
-            else if m.flying { consts::PATH_FLYER }
+            else if self.is_flying() { consts::PATH_FLYER }
             else if m.road_runner { consts::PATH_ROADRUNNER }
             else if m.massive { consts::PATH_MASSIVE }
             else { consts::PATH_GROUND };
         self.team.wrapping_shl(4) | base
+    }
+
+    /// 0x0063AF60 `Pawn:IsTeleporter()`: propriedade "Teleporter" do tipo e não morto.
+    pub fn is_teleporter(&self) -> bool { self.movement.teleporter && !self.is_dead() }
+    /// 0x0063AFC0 `Pawn:IsJumper()`: propriedade "Jumper" do tipo e não morto.
+    pub fn is_jumper(&self) -> bool { self.movement.jumper && !self.is_dead() }
+    /// 0x006365D0 `Pawn:IsBurrower()`: propriedade "Burrows" do tipo (sem checar morte).
+    pub fn is_burrower(&self) -> bool { self.movement.burrows }
+    /// 0x0063AC00 `Pawn:IsFlying()`: (`IsAbility("Flying")` OU byte +0x1314) e não morto.
+    pub fn is_flying(&self) -> bool { self.movement.flying && !self.is_dead() }
+
+    /// 0x00631490 `Pawn:IsGrappled()`: byte +0xF81 e não morto.
+    pub fn is_grappled(&self) -> bool { self.grappled_0xf81 && !self.is_dead() }
+    /// 0x00637650 `Pawn:IsAbility(string)`.
+    pub fn is_ability(&self, name: &str) -> bool { self.abilities.iter().any(|a| a == name) }
+
+    /// 0x0063A860 `Pawn:GetMoveSpeed()`: 0 se morto, agarrado ou sem energia (+0x10C0);
+    /// senão +0xA64 se > 0; senão `GetBaseMove()` (0x0063A8F0).
+    pub fn get_move_speed(&self) -> i32 {
+        if self.is_dead() || self.is_grappled() || !self.status.powered { return 0; }
+        if self.move_speed_override_0xa64 > 0 { return self.move_speed_override_0xa64; }
+        self.base_move_0x63a8f0
     }
 
     /// 0x00639FD0 `Pawn::IsTeam(int)` (usada por `Board:IsPawnTeam`).
@@ -221,6 +276,25 @@ pub struct Tile {
     pub counter_0x23cc: i32,
     /// +0x27B4 `std::string`; 0x005AE510 procura "conveyor" nela.
     pub custom_tile: String,
+    /// +0x2AC4..+0x2AC7 (BYTE ×4): paredes por direção (UP, RIGHT, DOWN, LEFT) que barram a
+    /// SAÍDA da casa para perfis que não sejam voador/projétil/saltador/teleporte (0x00573540).
+    pub edge_block_0x2ac4: [bool; 4],
+    /// +0x2AC8 (BYTE): água marcada como lava (`IsTerrain(p, TERRAIN_LAVA)`).
+    pub lava_0x2ac8: bool,
+    /// +0x7C: campo do objeto de vida da casa (+0x78); `IsTerrain(p, 18)` = gelo com valor 1.
+    pub health_0x7c: i32,
+    /// +0x2AE4: 1 na casa da cápsula (`IsPod`).
+    pub pod_0x2ae4: i32,
+    /// +0x2B04 (DWORD): `IsItem` (!= 0).
+    pub item_0x2b04: i32,
+    /// +0x2AF0 (BYTE): `IsDangerous`.
+    pub danger_0x2af0: bool,
+    /// +0x27E8 (BYTE): `IsSpawning`.
+    pub spawning_0x27e8: bool,
+    /// +0x26F8 `std::string`: `IsCrackable` recusa "supervolcano".
+    pub str_0x26f8: String,
+    /// +0x2BA0 (DWORD): `IsCrackable` recusa != 0.
+    pub int_0x2ba0: i32,
     /// +0xA0..+0xA4 `std::vector<Pawn*>` na ordem original.
     pub pawns: Vec<PawnIdx>,
 }
@@ -239,6 +313,13 @@ pub struct OccupancyBoard {
     pub pawns: Vec<PawnState>,
     /// Estado global lido por `IsCorpse` (lista em 0x008CF84C contém 12).
     pub global_list_has_12: bool,
+    /// Board+0x2D70/0x2D74: casa da cápsula (`IsPod`).
+    pub pod_space: Point,
+    /// Board+0x2D50..: lista de casas com surgimento (`IsSpawning`).
+    pub spawn_list: Vec<Point>,
+    /// Board+0x7460.. e Board+0x7470..: listas de casas perigosas (`IsDangerous`).
+    pub danger_list_a: Vec<Point>,
+    pub danger_list_b: Vec<Point>,
 }
 
 impl OccupancyBoard {
@@ -248,7 +329,8 @@ impl OccupancyBoard {
         }
         let len = (width as usize) * (height as usize);
         Ok(Self { bounds: BoardBounds { width, height }, tiles: vec![Tile::default(); len],
-                  sentinel: Tile::default(), pawns: Vec::new(), global_list_has_12: false })
+                  sentinel: Tile::default(), pawns: Vec::new(), global_list_has_12: false,
+                  pod_space: Point::INVALID, spawn_list: Vec::new(), danger_list_a: Vec::new(), danger_list_b: Vec::new() })
     }
 
     /// Board vftable slot 0x08 → 0x00561370 (`IsValid`).

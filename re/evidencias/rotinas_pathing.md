@@ -21,6 +21,5 @@ AddBurst 0x00652E50 (`"Board:AddBurst(Point( x, y ),\"anim\",n)"`), AddCharge/Ad
 + movimento tipo 1), AddTeleport 0x00654760 (movimento tipo 4 + duas marcas de brilho), AddGrapple 0x00652D30,
 global `SoundEffect` 0x00656480.
 
-## Ainda não reconstruído
-`GetReachable` (0x00573280 → Dijkstra em 0x004CDE60 com `std::map<Point,…>`, ordem x depois y) e `GetPath`
-(0x005733D0 → 0x004CE630). Próxima etapa.
+## Continuação
+`GetReachable` e `GetPath` foram reconstruídos na Etapa 10: ver `rotinas_alcance.md`.
