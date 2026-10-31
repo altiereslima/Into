@@ -1,6 +1,6 @@
 # Decisão 0001 — Gráficos e som: ler da instalação e extrair localmente
 
-**Data:** 2026-10-31 · **Estado:** aceita (implementação planejada para depois do turno inimigo, M6)
+**Data:** 2026-10-31 (revisada no mesmo dia) · **Estado:** aceita — começa quando chegar a versão 1.2.92/93 do PC, igual à da Netflix, com `resources`
 
 ## Contexto
 O motor em Rust já executa os scripts Lua originais lendo-os da instalação do usuário. Faltam gráficos
@@ -18,8 +18,9 @@ também facilitar um port futuro para consoles.
    (PC); (b) da pasta extraída (base para ports; cada plataforma converte para o seu formato).
 4. **Som sem depender do FMOD:** as regras dos eventos (variações, camadas, transições de música) serão
    lidas dos bancos e reimplementadas em Rust, para não exigir licença do FMOD em cada plataforma.
-5. **Trabalho local:** a análise e a extração rodam no PC do usuário (ponte com o app Claude e a pasta do
-   jogo conectada), sem enviar os arquivos grandes. Os originais nunca são alterados.
+5. **Onde roda:** no PC do usuário (ponte com o app Claude) ou, quando o usuário envia os arquivos (ex.: a
+   versão 1.2.92/93 completa, com `resources`), no ambiente de trabalho da sessão. Em qualquer caso os
+   originais nunca são alterados e nada extraído vai para o repositório; o resultado volta só para o usuário.
 
 ## Consequências
 - `recursos_extraidos/` fica no `.gitignore`.
