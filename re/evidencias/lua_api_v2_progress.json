@@ -12,7 +12,7 @@
   "callable_registrations_tested_in_rust": 141,
   "distinct_native_entrypoints_resolved": 368,
   "entrypoints_rust_semantics_tested": 131,
-  "entrypoints_rust_partial": 12,
+  "entrypoints_rust_partial": 14,
   "entrypoints_remaining_including_partial": 237,
   "percent_entrypoints_reconstructed": 35.6,
   "percent_entrypoints_remaining": 64.4,

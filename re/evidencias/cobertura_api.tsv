@@ -1,7 +1,7 @@
 Stub	Board:AddAlert
 Stub	Board:AddAnimation
 Stub	Board:AddBurst
-Stub	Board:AddEffect
+Reconstructed	Board:AddEffect
 Stub	Board:AddPawn
 Stub	Board:AddShield
 Stub	Board:AddTeleport

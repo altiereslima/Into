@@ -32,3 +32,5 @@ pub mod damage;
 pub mod pathfinding;
 /// Aplicação de SkillEffect ao tabuleiro: dano, empurrão, fogo, fumaça, ácido, gelo (Etapa 11).
 pub mod apply;
+/// Executor de SkillEffect com relógio: fila do tabuleiro, atrasos, empurrões e projéteis (Etapa 12).
+pub mod executor;

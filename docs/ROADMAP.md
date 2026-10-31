@@ -9,7 +9,7 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 | M2 | Tipos de valor completos | `Point`, `Rect2D`, `GL_Color`, `Button`, `Text`, `StyleInfo`, `Objective`, `SpaceDamage`, `SkillEffect`, listas | ▶ 17 classes prontas, incl. SkillEffect e listas (faltam Effect, Choice, Squad…) |
 | M3 | Ciclo de vida do motor | Descobrir no EXE o que roda depois do boot (funções Lua chamadas pelo C++, ordem, argumentos) e reproduzir | ▶ inicialização reproduzida; 118 callbacks inventariados |
 | M4 | Missão em memória | Carregar um `.map` original, criar `Board`/`Game`, posicionar unidades via `PAWN_FACTORY` | |
-| M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | ▶ 559/559 armas geram e **aplicam** seus efeitos (versão 1); faltam executor com atrasos, rede elétrica, itens |
+| M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | ▶ 559/559 armas geram e **aplicam** seus efeitos, com fila e atrasos do motor; faltam tempo de voo, rede elétrica, itens |
 | M6 | Turno inimigo | IA (scripts) + pathfinding nativo (`GetPath`, `GetReachable`...) idênticos | ▶ GetReachable/GetPath/GetSimpleReachable/GetSimplePath prontos |
 | M7 | Simulador sem gráficos | Uma missão completa jogada por script de teste, resultado comparável ao original | |
 | M8 | Assets + render | Ler `resource.dat`, desenhar tabuleiro/unidades/UI (SDL2) | |
@@ -17,7 +17,7 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 
 ## Fila imediata
 
-Etapa 12: executor do `SkillEffect` (ordem, atrasos, resolução dos empurrões) e efeito de chegada completo.
+Etapa 13: tempo de voo dos projéteis, efeito de chegada completo e início do turno inimigo (M6).
 Antes disso, a fila vinha do M3:
 ler, para cada callback de `re/evidencias/engine_callbacks.csv`, como o motor o chama, começando por
 `startNewGame` → criação de ilhas/missões → `CallMethod("MissionN", "BaseStart")` e as armas

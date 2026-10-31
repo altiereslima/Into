@@ -237,6 +237,12 @@ fn etapa11_damage_space_applies_to_the_board() {
     let b = shared.borrow();
     assert_eq!((b.pawns[e].space, b.pawns[e].health, b.pawns[e].status.fire), (Point::new(5, 4), 1, true));
     assert_eq!(b.tile(Point::new(4, 4)).fire, 1);
+    drop(b);
+    // AddEffect(SkillEffect): fila do tabuleiro; o empurrão termina antes do golpe com FULL_DELAY
+    h.lua.load("local fx = SkillEffect() local d = SpaceDamage(Point(5,4), 0, DIR_DOWN) fx:AddDamage(d) fx:AddDelay(FULL_DELAY) \
+        fx:AddDamage(SpaceDamage(Point(5,5), 1)) Board:AddEffect(fx)").exec().unwrap();
+    let b = shared.borrow();
+    assert_eq!((b.pawns[e].space, b.pawns[e].health), (Point::new(5, 5), 0));
 }
 
 #[test]

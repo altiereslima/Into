@@ -355,6 +355,9 @@ pub struct OccupancyBoard {
     /// Efeitos que o motor original delega a sistemas ainda não reconstruídos (rede elétrica, itens,
     /// cápsulas, criação de unidades...) ou que só têm efeito visual. Ver `apply.rs`.
     pub events: Vec<crate::apply::BoardEvent>,
+    /// Unidades que receberam `Pawn::Push` desde a última consulta do executor (o relógio de 0,4 s
+    /// do empurrão começa ou recomeça nesse momento).
+    pub pushes_started: Vec<PawnIdx>,
 }
 
 impl OccupancyBoard {
@@ -366,7 +369,7 @@ impl OccupancyBoard {
         Ok(Self { bounds: BoardBounds { width, height }, tiles: vec![Tile::default(); len],
                   sentinel: Tile::default(), pawns: Vec::new(), global_list_has_12: false,
                   pod_space: Point::INVALID, spawn_list: Vec::new(), danger_list_a: Vec::new(), danger_list_b: Vec::new(),
-                  passive_skills: Vec::new(), events: Vec::new() })
+                  passive_skills: Vec::new(), events: Vec::new(), pushes_started: Vec::new() })
     }
 
     /// Board vftable slot 0x08 → 0x00561370 (`IsValid`).

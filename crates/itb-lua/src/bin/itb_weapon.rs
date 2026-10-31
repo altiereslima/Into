@@ -102,7 +102,13 @@ fn main() {
             // Etapa 11: aplica `effect` ao tabuleiro e mostra o resultado
             let hits: Vec<_> = s.effect.borrow().iter().map(itb_lua::skill::hit_from_record).collect();
             let before = board.borrow().clone();
-            board.borrow_mut().apply_effects(&hits);
+            let mut ex = itb_core::executor::Executor::default();
+            ex.add_effect(hits);
+            ex.run_until_idle(&mut board.borrow_mut());
+            if !ex.log.is_empty() {
+                println!("## Linha do tempo");
+                for l in &ex.log { println!("  {l}"); }
+            }
             print_board_diff(&before, &board.borrow());
         }
         Ok(other) => println!("GetSkillEffect devolveu {}", other.type_name()),
@@ -176,7 +182,11 @@ fn sweep(host: &Host, board: &Rc<RefCell<OccupancyBoard>>, mech: usize, p1: Poin
             if let Ok(fx) = u.borrow::<LSkillEffect>() {
                 let hits: Vec<_> = fx.effect.borrow().iter().map(itb_lua::skill::hit_from_record).collect();
                 let mut copy = board.borrow().clone();
-                let ok = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| copy.apply_effects(&hits))).is_ok();
+                let ok = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                    let mut ex = itb_core::executor::Executor::default();
+                    ex.add_effect(hits.clone());
+                    ex.run_until_idle(&mut copy);
+                })).is_ok();
                 if ok { applied += 1; if copy.pawns != board.borrow().pawns || copy.events.len() > board.borrow().events.len() { changed += 1; } }
                 else { apply_panics.push(name.clone()); }
             }

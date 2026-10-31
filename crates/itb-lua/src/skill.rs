@@ -65,6 +65,7 @@ pub fn hit_from_record(d: &Record) -> itb_core::apply::Hit {
     h.i_0x130 = d.int("i_0x130");
     h.kind = d.int("kind_0x98");
     h.move_type = d.int("move_type_0xd8");
+    h.delay = match d.get("fDelay") { Some(Field::Float(f)) => *f, _ => 0.0 };
     h.path = d.points("path_0xcc").iter().map(|p| Point::new(p.x, p.y)).collect();
     h
 }

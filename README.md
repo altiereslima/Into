@@ -6,12 +6,12 @@ originais** da sua própria cópia do jogo. Projeto de fã, sem afiliação com 
 > Este repositório **não contém nenhum arquivo do jogo** (EXE, DLLs, scripts, mapas, imagens, sons).
 > Você precisa de uma cópia legítima do Into the Breach (testado com a v1.2.88).
 
-## Estado (Etapa 11)
+## Estado (Etapa 12)
 - Os scripts originais **carregam sem erro** no host Rust: 137/137 arquivos presentes (`itb-boot`).
 - API nativa mapeada por completo a partir do EXE: 32 classes, 343 métodos, 39 funções globais,
-  111 propriedades, 58 construtores, 190 constantes. 475 nomes expostos à Lua: 211 reconstruídos,
-  13 respostas de plataforma, 251 ainda stubs. O boot só toca 1 stub.
-- **As 559 armas originais rodam sem erro nem stub, e seus efeitos já são aplicados ao tabuleiro** (dano, empurrão, colisão, fogo, fumaça, ácido, gelo, terreno) (`itb-weapon <jogo> --todas`). Uma arma: `cargo run -p itb-lua --bin itb-weapon -- "/caminho/do/jogo" Prime_Lasermech 3 4 3 1`.
+  111 propriedades, 58 construtores, 190 constantes. 475 nomes expostos à Lua: 212 reconstruídos,
+  13 respostas de plataforma, 250 ainda stubs. O boot só toca 1 stub.
+- **As 559 armas originais rodam sem erro nem stub, e seus efeitos já são aplicados ao tabuleiro** (dano, empurrão, colisão, fogo, fumaça, ácido, gelo, terreno), na ordem e com os atrasos do motor original (`itb-weapon <jogo> --todas`). Uma arma: `cargo run -p itb-lua --bin itb-weapon -- "/caminho/do/jogo" Prime_Lasermech 3 4 3 1`.
 - Inicialização do Lua igual à do motor original, e 118 funções Lua que o motor chama já inventariadas.
 - Núcleo com regras reconstruídas e testadas: ocupação do tabuleiro, bloqueio de caminho, alcance (Dijkstra) e caminho (A*) idênticos aos do EXE, terreno, dano letal,
   `Point`/`Rect2D`/`GL_Color`/`Button`/`Text`/`SpaceDamage`/`Objective`…, `rand()` idêntico ao do jogo, escalas de tela.

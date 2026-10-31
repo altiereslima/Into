@@ -752,6 +752,16 @@
       "Board",
       "DamageSpace",
       "0x0055F5B0"
+    ],
+    [
+      "Board",
+      "AddEffect",
+      "0x0055F7B0"
+    ],
+    [
+      "Board",
+      "AddEffect",
+      "0x0055F970"
     ]
   ],
   "trivial_accessors": [

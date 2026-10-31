@@ -182,6 +182,23 @@ impl UserData for LBoard {
             b.resolve_pending_pushes();
             Ok(())
         });
+        // 0x0055F7B0 AddEffect(SkillEffect) / 0x0055F970 AddEffect(SpaceDamage): o motor enfileira e roda
+        // ao longo dos quadros; o host roda a fila até ficar ocioso, na hora.
+        m.add_method("AddEffect", |_, s, v: Value| {
+            let sig = || no_overload("AddEffect(SkillEffect), AddEffect(SpaceDamage)");
+            let hits: Vec<itb_core::apply::Hit> = match &v {
+                Value::UserData(u) if u.is::<crate::skill::LSkillEffect>() => {
+                    let fx = u.borrow::<crate::skill::LSkillEffect>()?;
+                    let list = fx.effect.borrow();
+                    list.iter().map(crate::skill::hit_from_record).collect()
+                }
+                other => vec![crate::skill::hit_from_record(&crate::skill::damage_arg(other).ok_or_else(sig)?)],
+            };
+            let mut ex = itb_core::executor::Executor::default();
+            ex.add_effect(hits);
+            ex.run_until_idle(&mut s.0.borrow_mut());
+            Ok(())
+        });
         m.add_method("IsPawnAlive", |_, s, id: Value| {
             Ok(s.0.borrow().is_pawn_alive(arg_int(&id).ok_or_else(|| no_overload("IsPawnAlive(int)"))?))
         });
@@ -258,7 +275,7 @@ impl mlua::FromLua for LPawnRef {
 pub const BOARD_DONE: &[&str] = &[
     "IsValid", "GetTerrain", "IsBuilding", "IsFire", "IsSmoke", "IsVines", "IsAcid", "IsCracked", "IsEdge",
     "GetPawnTeam", "GetSize", "GetSimpleReachable", "GetSimplePath", "GetReachable", "GetPath", "IsDeadly", "IsTerrain", "IsPod", "IsItem",
-    "IsDangerous", "IsSpawning", "IsCrackable", "DamageSpace", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
+    "IsDangerous", "IsSpawning", "IsCrackable", "DamageSpace", "AddEffect", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
 ];
 /// Respondidos com dados do estado do jogo (rotina original ainda não reconstruída).
 pub const PAWN_HOST: &[&str] = &["GetBaseMove", "IsAbility"];

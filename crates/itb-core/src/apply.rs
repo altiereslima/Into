@@ -43,6 +43,7 @@ pub struct Hit {
     pub kind: i32,           // +0x98 (0 normal, 1 artilharia, 2 projétil, 3 ataque aéreo...)
     pub path: Vec<Point>,    // +0xCC caminho de movimento
     pub move_type: i32,      // +0xD8 (1 salto, 2 investida, 3 corpo a corpo, 4 teleporte, 5 escavar)
+    pub delay: f32,          // +0xC8 fDelay (0 = segue; > 0 segundos; −1 FULL_DELAY; −2 PROJ_DELAY)
 }
 
 impl Hit {
@@ -51,7 +52,7 @@ impl Hit {
         Self { loc, damage, push: DIR_NONE, shield: 0, fire: 0, frozen: 0, injure: 0, smoke: 0, acid: 0, crack: 0,
                pawn: String::new(), pawn_team: TEAM_NONE, evacuate: false, terrain: 10, script: String::new(),
                web_from: Point::INVALID, item: String::new(), i_0x130: 3,
-               kind: 0, path: Vec::new(), move_type: 0 }
+               kind: 0, path: Vec::new(), move_type: 0, delay: 0.0 }
     }
 }
 
@@ -551,6 +552,7 @@ impl OccupancyBoard {
         let target = add(self.pawns[i].space, v);
         if self.pawn_push_blocked(i, dir) || self.is_valid(target) {
             self.pawns[i].pending_push_0x978 = Some(dir);
+            self.pushes_started.push(i);
         }
     }
 
@@ -638,33 +640,35 @@ impl OccupancyBoard {
         }
     }
 
-    /// Resolve os empurrões pendentes na ordem da arena (`PawnHolder`).
+    /// Resolve já todos os empurrões pendentes, na ordem da arena (`PawnHolder`).
     pub fn resolve_pending_pushes(&mut self) {
+        self.pushes_started.clear();
         for i in 0..self.pawns.len() {
             if self.pawns[i].pending_push_0x978.is_some() { self.pawn_resolve_push(i); }
         }
+        self.pushes_started.clear();
     }
 
     /// `SpaceDamage:IsMovement()` (0x00655F10): caminho não vazio, tipo de movimento != 3, tipo 0.
     pub fn hit_is_movement(h: &Hit) -> bool { !h.path.is_empty() && h.move_type != 3 && h.kind == 0 }
 
-    /// Movimento de um `SpaceDamage` (versão 1, rotina do executor ainda não lida): a primeira
-    /// unidade da casa inicial vai para a última casa do caminho e passa pelo efeito de chegada.
+    /// Movimento de um `SpaceDamage` (executor 0x005601C0): a unidade de `GetPawn(caminho[0], false)`
+    /// (0x00567750) termina na última casa do caminho. O original anima o trajeto (0x00632670 andar,
+    /// 0x00632750 salto, 0x006329F0 investida, teleporte em +0x10B4, 0x00636610 escavar); aqui a
+    /// unidade chega na hora e passa pelo efeito de chegada.
     pub fn apply_movement(&mut self, h: &Hit) {
         let (Some(&from), Some(&to)) = (h.path.first(), h.path.last()) else { return };
         if from == to { return; }
-        let Some(i) = self.get_pawn_at(from) else { return };
+        let Some(i) = self.get_pawn_at_ex(from, false) else { return };
         self.move_pawn(i, to);
         self.tile_on_enter(to);
     }
 
-    /// Executa uma `DamageList` em ordem (versão 1): movimento, `DamageSpace` e, em seguida, os
-    /// empurrões pendentes. Atrasos (`fDelay`) não mudam a ordem e são ignorados.
+    /// Executa uma `DamageList` como o motor faz com `Board:AddEffect`, com o relógio de
+    /// `executor::Executor` e os tempos padrão.
     pub fn apply_effects(&mut self, hits: &[Hit]) {
-        for h in hits {
-            if Self::hit_is_movement(h) { self.apply_movement(h); }
-            self.damage_space(h);
-            self.resolve_pending_pushes();
-        }
+        let mut ex = crate::executor::Executor::default();
+        ex.add_effect(hits.to_vec());
+        ex.run_until_idle(self);
     }
 }
