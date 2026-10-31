@@ -16,7 +16,7 @@ originais** da sua própria cópia do jogo. Projeto de fã, sem afiliação com 
 - Núcleo com regras reconstruídas e testadas: ocupação do tabuleiro, bloqueio de caminho, alcance (Dijkstra) e caminho (A*) idênticos aos do EXE, terreno, dano letal,
   `Point`/`Rect2D`/`GL_Color`/`Button`/`Text`/`SpaceDamage`/`Objective`…, `rand()` idêntico ao do jogo, escalas de tela.
 
-Detalhes em [`CHECKPOINT.md`](CHECKPOINT.md), estratégia em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md),
+Decisões registradas em [`docs/decisoes/`](docs/decisoes/). Detalhes em [`CHECKPOINT.md`](CHECKPOINT.md), estratégia em [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md),
 próximos passos em [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## Estrutura

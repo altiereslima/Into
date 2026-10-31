@@ -9,3 +9,8 @@ Breach.exe
 /resources/
 /shadersOGL/
 *.zip
+/data/
+*.bank
+resource.dat
+# recursos extraídos localmente por itb-assets (decisão 0001)
+/recursos_extraidos/
