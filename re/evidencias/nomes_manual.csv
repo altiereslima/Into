@@ -1,0 +1,39 @@
+pc_va,nome,confianca,evidencia
+0x0055DC10,GridSearchable::GetSize() const,alta,slot 0x04 da vftable de Board@0 (GridSearchable); mesma ordem de declaração do Android
+0x00561300,Board::IsEnterable(int; int; int),alta,slot 0x14 (GridSearchable::IsEnterable); nosso IsFree
+0x005612A0,Board::GetEnterCost(int; int; int),alta,slot 0x18 (GridSearchable::GetEnterCost); nosso move_cost
+0x00561280,Board::GetLeaveCost(int; int; int),alta,slot 0x1C (GridSearchable::GetLeaveCost); devolve 0
+0x0059F3A0,BoardSpace::GetEnterPenalty(int),media,chamada por GetEnterCost; 1000 para prédio com projétil
+0x004CDE60,GridSearchable::CalculateDijkstraMap(Point; int; int; bool),alta,4 parâmetros (o 4º era o 'ecx lixo' da Etapa 10); cache Board+4 = ClearDijkstraCache
+0x004CDA00,GridSearchable::GetReachablePoints(Point; int; int),alta,chamada por Board::GetReachablePointList (0x00573280)
+0x004CE630,GridSearchable::GetAstarPath(Point; Point; int),alta,chamada por Board::GetPath (0x005733D0); A*
+0x004CD680,GridSearchable::GetSingleCornerPath(Point; Point; int),media,caminho em L chamado por GetSimplePath
+0x0055F680,Board::PushDamage(Point; int),alta,golpe de colisão (Point; direção) — nosso Board::Bump
+0x00571B20,Board::IsPushBlocked(Point; int),alta,mesma assinatura; chama BoardSpace::IsPushBlocked
+0x005AAA10,BoardSpace::IsPushBlocked(int),alta,prédio/montanha/unidade/parede
+0x0059F7C0,BoardSpace::IsWall(int),alta,bytes +0x2AC4+dir
+0x0059F050,BoardSpace::IsPawnSpace(bool),alta,nosso Tile::HasPawn(bool)
+0x005AE490,BoardSpace::GetPawn(bool),alta,nosso Tile::GetPawn(bool)
+0x005AE510,BoardSpace::IsTerrainBlocking(int),alta,nosso IsTerrainBlocked(pathProf)
+0x0059F260,BoardSpace::IsWalkable(int),media,nosso Tile::IsPassable(pathProf)
+0x005AE5D0,BoardSpace::IsTerrain(int),alta,mesma assinatura e valores especiais
+0x005AE6B0,BoardSpace::IsCrackable(),alta,chamada por Board::IsCrackable
+0x005AABD0,BoardSpace::SetAcid(bool),alta,grava +0x2AF1
+0x005A10B0,BoardSpace::AddBuilding(),alta,iTerrain = 1
+0x005AF5A0,BoardSpace::KillPawns(),alta,mata todas as unidades da casa
+0x0059EE20,BoardSpace::RemoveForceField(),alta,par de SetForceField (0x0059EBE0)
+0x005ADBB0,BoardSpace::PushSpace(int),alta,empurra a última unidade da casa
+0x005739E0,Board::IsSkillDeadly(SpaceDamage; Pawn*),alta,Lua Board:IsDeadly; mesma assinatura
+0x006362A0,Pawn::IsDeadly(std::vector<SpaceDamage>),alta,nosso WouldDie
+0x004DFFC0,ValueBar::AnimatedModify(int),media,objeto de vida (vftable 0x00824EF4); soma com limite e anima
+0x0062CAA0,Pawn::IsPushBlocked(int),alta,mesma assinatura
+0x0062CB10,Pawn::IsPushBlocked(),media,unidade sólida para empurrões
+0x0062C910,Pawn::SetSpace(Point; bool),alta,(x; y; 0)
+0x0062CA80,Pawn::SetSpace(Point),alta,chama SetSpace(Point; false)
+0x00632B40,Pawn::Melee(SpaceDamage),alta,guarda o golpe em +0xC84
+0x006329F0,Pawn::Charge(vector<Point>; bool; string),media,tipo de movimento 2
+0x00636610,Pawn::Burrow(Point; bool),media,tipo de movimento 5
+0x0062C5F0,Pawn::IsTurnShield(),media,"Passive_PlayerTurnShield"; mesma ordem das chamadas em BoardSpace::DamageSpace
+0x0062F2F0,Pawn::IsForceField(),media,idem; usada por IsShield
+0x0063C100,Pawn::IsArmor(),media,blindagem (−1 de dano)
+0x005754D0,Board::StackEffect(SkillEffect; float),media,o executor põe o resto da lista na fila com o cronômetro

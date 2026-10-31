@@ -32,6 +32,13 @@ chega na hora). Estão em `Timing` e em `docs/DIVERGENCIAS.md`.
 | Nomes da API reconstruídos / plataforma / stubs (475) | 211 / 13 / 251 | **212 / 13 / 250** |
 | Testes | 94 | **99** + 2 de integração |
 
+## Extra: nomes das funções (Android)
+Com o `libmain.so` da versão Android (1.2.92, fora do repositório), `re/tools/match_android_symbols.py` deu nome
+a 1192 funções do `Breach.exe` por quatro sinais conferidos entre si (Lua, vftable, strings, vizinhos no grafo),
+mais 38 leituras manuais. 332 dos endereços citados no projeto agora têm nome — ex.: `0x005ABA90` é
+`BoardSpace::DamageSpace`, `0x004CDE60` é `GridSearchable::CalculateDijkstraMap`. Tabela:
+`re/evidencias/nomes_android_resumo.md`.
+
 ## Próximo
 Ler a atualização dos projéteis (tempo de voo) e das animações de movimento; efeito de chegada completo
 (0x0059C5C0); depois o turno inimigo (M6): preparar ataques (`q_effect`), mover e atacar.

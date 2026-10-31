@@ -36,6 +36,8 @@ ITB_GAME_DIR="/caminho/Into the Breach" cargo test -p itb-lua -- --ignored   # b
 ```
 No Windows: `TESTAR_WINDOWS.bat` e `RODAR_BOOT_WINDOWS.bat`.
 
+Nomes das funções vindos da versão Android: `re/evidencias/nomes_android_resumo.md` (gerado com o `libmain.so` do usuário por `re/tools/match_android_symbols.py`).
+
 Ferramentas de análise: `pip install -r re/tools/requirements.txt`, depois
 `python re/tools/map_lua_api_v2.py Breach.exe re/evidencias/`,
 `python re/tools/check_inventory_v2.py Breach.exe Into.the.Breach.zip` e
