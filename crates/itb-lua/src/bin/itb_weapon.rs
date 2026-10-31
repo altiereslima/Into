@@ -137,7 +137,7 @@ fn sweep(host: &Host, board: &Rc<RefCell<OccupancyBoard>>, mech: usize, p1: Poin
     println!("# Varredura de armas ({} encontradas nos scripts)", names.len());
     println!("sem stubs e sem erro: {clean} | rodaram tocando stubs: {with_stubs} | com erro: {}", failed.len());
     let mut freq: Vec<_> = stub_freq.into_iter().collect();
-    freq.sort_by(|a, b| b.1.cmp(&a.1));
+    freq.sort_by_key(|e| std::cmp::Reverse(e.1));
     println!("\n## Stubs que mais bloqueiam armas (nº de armas)");
     for (k, n) in freq.iter().take(25) { println!("{n:>4}  {k}"); }
     let mut errs: std::collections::BTreeMap<String, Vec<String>> = Default::default();

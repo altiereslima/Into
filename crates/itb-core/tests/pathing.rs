@@ -1,6 +1,5 @@
 //! Etapa 09: IsPassable (0x0059F260), IsFree (0x00561300), GetSimpleReachable (0x004CEC60).
 use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, Point, Tile};
-use itb_core::pathing::*;
 
 fn b8() -> OccupancyBoard { OccupancyBoard::new(8, 8).unwrap() }
 fn pawn(id: i32, team: i32, x: i32, y: i32) -> PawnState {
