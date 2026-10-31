@@ -3,17 +3,13 @@ arquivos: 138 | ok: 137 | ausentes: 1 | com erro: 0
 AUSENTE  user/missionData.lua
 
 # Cobertura da API nativa (475 nomes: métodos, propriedades, construtores, funções globais)
-Reconstructed    34  (7.2%)
+Reconstructed    84  (17.7%)
 Host             11  (2.3%)
-Stub            430  (90.5%)
+Stub            380  (80.0%)
 
 # Stubs chamados durante o boot (prioridade de implementação)
-   138  StyleInfo()
-    44  Text()
-    32  Objective()
-    32  RegionInfo()
-    20  JoyRumble()
-    20  PilotSkill()
-     4  SpaceDamage()
      1  GetMechColorsInTexture()
-     1  TipData()
+
+# ConsolePrint (2 linhas; primeiras 10)
+  loading 137 scripts
+  user/missionData.lua doesn't exist!

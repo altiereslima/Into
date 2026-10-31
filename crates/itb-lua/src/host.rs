@@ -135,6 +135,7 @@ impl Host {
                 Ok(t)
             })?)?;
             class_tbl.set_metatable(Some(class_mt))?;
+            self.lua.set_named_registry_value(&format!("itb_methods_{}", c.name), methods.clone())?;
             class_tbl.set("__methods", methods)?;
             class_tbl.set("__instance_mt", inst_mt)?;
             if c.constructors > 0 {
@@ -178,6 +179,20 @@ impl Host {
         self.value_class("Button", construct_button)?;
         for k in ["Button()", "Button.image", "Button.pos", "Button.hitstats", "Button.label"] {
             self.mark(k, Status::Reconstructed);
+        }
+        for rc in crate::records::RECORD_CLASSES {
+            let cls = self.lua.create_table()?;
+            let mt = self.lua.create_table()?;
+            mt.set("__call", self.lua.create_function(move |_, args: MultiValue| {
+                let rest: MultiValue = args.into_iter().skip(1).collect();
+                crate::records::construct(rc, &rest)
+            })?)?;
+            cls.set_metatable(Some(mt))?;
+            self.lua.globals().set(rc.name, cls)?;
+            self.mark(format!("{}()", rc.name), Status::Reconstructed);
+            for p in rc.properties {
+                self.mark(format!("{}.{}", rc.name, p), Status::Reconstructed);
+            }
         }
         let color = self.lua.create_table()?;
         let mt = self.lua.create_table()?;
@@ -304,11 +319,28 @@ impl Host {
         if first != Outcome::Ok {
             return Ok(());
         }
+        // ActiveLua (vftable 0x00836FC8): slot 2 (0x00675D00) lê GetScripts(); 0x0044D1A0 carrega cada um
+        // ("%s doesn't exist!" para ausentes) e depois chama o slot 1 (0x00675C70):
+        // SetPawn(nil), SetBoard(nil), SetGame(nil).
         let get: Function = self.lua.globals().get("GetScripts")?;
         let list: Vec<String> = get.call(())?;
+        self.report.borrow_mut().console.push(format!("loading {} scripts", list.len()));
         for rel in list {
             let out = self.run_file(&rel);
+            if out == Outcome::Missing {
+                self.report.borrow_mut().console.push(format!("{rel} doesn't exist!"));
+            }
             self.report.borrow_mut().scripts.push((rel, out));
+        }
+        self.clear_engine_globals()
+    }
+
+    /// 0x00675C70: avisa os scripts de que não há Pawn/Board/Game ativos.
+    pub fn clear_engine_globals(&self) -> mlua::Result<()> {
+        for f in ["SetPawn", "SetBoard", "SetGame"] {
+            if let Ok(func) = self.lua.globals().get::<Function>(f) {
+                func.call::<()>(Value::Nil)?;
+            }
         }
         Ok(())
     }

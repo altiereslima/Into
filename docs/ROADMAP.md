@@ -6,8 +6,8 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 |---|---|---|---|
 | M0 | Inventário da API nativa | 100% dos registros luabind, fechado por RTTI; constantes com valor | ✅ Etapa 05/06 |
 | M1 | Boot dos scripts originais | Todos os arquivos de `GetScripts()` presentes carregam sem erro no host Rust | ✅ Etapa 06 (137/137) |
-| M2 | Tipos de valor completos | `Point`, `Rect2D`, `GL_Color`, `Button`, `Text`, `StyleInfo`, `Objective`, `SpaceDamage`, `SkillEffect`, listas | ▶ parcial (4/12) |
-| M3 | Ciclo de vida do motor | Descobrir no EXE o que roda depois do boot (funções Lua chamadas pelo C++, ordem, argumentos) e reproduzir | |
+| M2 | Tipos de valor completos | `Point`, `Rect2D`, `GL_Color`, `Button`, `Text`, `StyleInfo`, `Objective`, `SpaceDamage`, `SkillEffect`, listas | ▶ 11 classes prontas (faltam SkillEffect, DamageList, listas, Effect, Choice…) |
+| M3 | Ciclo de vida do motor | Descobrir no EXE o que roda depois do boot (funções Lua chamadas pelo C++, ordem, argumentos) e reproduzir | ▶ inicialização reproduzida; 118 callbacks inventariados |
 | M4 | Missão em memória | Carregar um `.map` original, criar `Board`/`Game`, posicionar unidades via `PAWN_FACTORY` | |
 | M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | |
 | M6 | Turno inimigo | IA (scripts) + pathfinding nativo (`GetPath`, `GetReachable`...) idênticos | |
@@ -15,10 +15,12 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 | M8 | Assets + render | Ler `resource.dat`, desenhar tabuleiro/unidades/UI (SDL2) | |
 | M9 | Jogável | Menu, hangar, ilhas, missões, salvar/carregar | |
 
-## Fila imediata (gerada pelo `itb-boot`)
+## Fila imediata
 
-Stubs mais chamados durante o boot: `StyleInfo()` (138), `Text()` (44), `Objective()`,
-`RegionInfo()`, `JoyRumble()`, `PilotSkill()`. Depois de M2, o relatório de M3 passa a guiar.
+O boot já não depende de stubs (só `GetMechColorsInTexture()` é chamado). A próxima fila vem do M3:
+ler, para cada callback de `re/evidencias/engine_callbacks.csv`, como o motor o chama, começando por
+`startNewGame` → criação de ilhas/missões → `CallMethod("MissionN", "BaseStart")` e as armas
+(`GetTargetArea`/`GetSkillEffect`), que exigem `SkillEffect`, `PointList` e `Board`.
 
 ## Paralelo: diferencial contra o original
 

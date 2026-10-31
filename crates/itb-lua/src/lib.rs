@@ -7,6 +7,7 @@
 
 pub mod api_manifest;
 pub mod host;
+pub mod records;
 pub mod values;
 
 pub use host::{Host, HostConfig, Outcome, Report, Status};
