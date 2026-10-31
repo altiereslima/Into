@@ -4,7 +4,10 @@ use itb_lua::{Host, HostConfig, Outcome, Status};
 use std::io::Write;
 
 fn main() {
-    let dir = std::env::args().nth(1).or_else(|| std::env::var("ITB_GAME_DIR").ok()).unwrap_or_else(|| {
+    // --cobertura <arquivo>: grava "Status<TAB>nome" para cada nome da API (usado por re/tools)
+    let argv: Vec<String> = std::env::args().collect();
+    let cov_out = argv.iter().position(|a| a == "--cobertura").and_then(|i| argv.get(i + 1).cloned());
+    let dir = std::env::args().skip(1).find(|a| !a.starts_with("--") && Some(a) != cov_out.as_ref()).or_else(|| std::env::var("ITB_GAME_DIR").ok()).unwrap_or_else(|| {
         eprintln!("uso: itb-boot <pasta do Into the Breach>  (ou defina ITB_GAME_DIR)");
         std::process::exit(2);
     });
@@ -13,6 +16,10 @@ fn main() {
         eprintln!("boot interrompido: {e}");
     }
     let rep = host.report.borrow();
+    if let Some(path) = &cov_out {
+        let txt: String = rep.coverage.iter().map(|(k, st)| format!("{st:?}\t{k}\n")).collect();
+        std::fs::write(path, txt).expect("gravar cobertura");
+    }
     let ok = rep.scripts.iter().filter(|(_, o)| *o == Outcome::Ok).count();
     let missing: Vec<_> = rep.scripts.iter().filter(|(_, o)| *o == Outcome::Missing).collect();
     let errors: Vec<_> = rep.scripts.iter().filter(|(_, o)| matches!(o, Outcome::Error(_))).collect();

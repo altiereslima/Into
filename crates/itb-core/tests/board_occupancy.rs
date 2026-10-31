@@ -232,3 +232,46 @@ fn rust_constants_match_values_extracted_from_exe() {
     // Constante antiga da Etapa 03 confirmada: retorno 2 de GetPawnTeam == TEAM_NONE.
     assert_eq!(itb_core::board_queries::ORIGINAL_ABSENT_PAWN_TEAM, TEAM_NONE);
 }
+
+#[test]
+fn pawn_is_team_follows_0x639fd0() {
+    let mut p = pawn(1, TEAM_PLAYER, 3, 0, 0);
+    assert!(p.is_team(TEAM_NONE));
+    assert!(p.is_team(TEAM_PLAYER));
+    assert!(!p.is_team(TEAM_ENEMY));
+    assert!(p.is_team(5)); // jogador não neutro conta para 5
+    p.neutral = true;
+    assert!(!p.is_team(5));
+    assert!(!p.is_team(TEAM_MECH));
+    p.mech = true;
+    assert!(p.is_team(TEAM_MECH));
+    p.team = 7; // >= 6 conta como inimigo
+    assert!(p.is_team(TEAM_ENEMY));
+    p.team = TEAM_ENEMY;
+    assert!(p.is_team(7));
+    p.field_0x10bc = 1;
+    assert!(!p.is_team(7));
+    assert!(p.is_team(8));
+    assert!(!p.is_team(-1));
+    p.query_0x63a410 = true;
+    assert!(p.is_team(-1));
+}
+
+#[test]
+fn board_is_pawn_team_and_tile_queries() {
+    let mut b = board();
+    assert!(b.is_pawn_team(Point::new(1, 1), TEAM_NONE));
+    assert!(!b.is_pawn_team(Point::new(1, 1), TEAM_PLAYER));
+    b.add_pawn(pawn(1, TEAM_ENEMY, 2, 1, 1)).unwrap();
+    assert!(b.is_pawn_team(Point::new(1, 1), TEAM_ENEMY));
+    assert!(!b.is_pawn_team(Point::new(1, 1), TEAM_PLAYER));
+    assert_eq!(b.get_size(), Point::new(8, 8));
+    b.tile_mut(Point::new(2, 2)).unwrap().terrain = TERRAIN_BUILDING;
+    b.tile_mut(Point::new(2, 3)).unwrap().fire = 2;
+    assert!(b.is_building(Point::new(2, 2)));
+    assert!(b.is_fire(Point::new(2, 3)));
+    assert!(!b.is_fire(Point::new(9, 9)));
+    b.sentinel.fire = 1;
+    assert!(b.is_fire(Point::new(9, 9))); // casa sentinela, como no original
+    assert!(b.is_edge(Point::new(0, 4)) && b.is_edge(Point::new(7, 2)) && !b.is_edge(Point::new(3, 3)));
+}

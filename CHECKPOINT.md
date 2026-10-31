@@ -1,29 +1,25 @@
-# CHECKPOINT — Etapa 07: tipos de dados do boot + ciclo de vida do Lua
+# CHECKPOINT — Etapa 08: armas originais rodando no motor Rust
 
 **Data:** 2026-10-30. Etapas anteriores em `docs/historico/`.
 
-## Feito nesta etapa
-- **Classes de dados** num tipo genérico (`itb-lua/src/records.rs`), com valores padrão e construtores
-  lidos do EXE: `Text` (TextData), `StyleInfo`, `JoyRumble`, `PilotSkill`, `TipData`, `Objective` (RepObj,
-  6 construtores), `RegionInfo` e **`SpaceDamage`** (25 propriedades, 5 construtores; peça central do dano).
-  Métodos ainda não implementados dessas classes continuam acessíveis como stubs que registram uso.
-- **Inicialização igual à do motor** (`ActiveLua`, vftable 0x00836FC8): depois de carregar os scripts,
-  o host chama `SetPawn(nil)`, `SetBoard(nil)`, `SetGame(nil)` e registra `loading N scripts` /
-  `X doesn't exist!` como o original.
-- **API reversa (M3):** `re/tools/map_engine_callbacks.py` inventariou **118 funções Lua que o motor
-  chama** (78 globais, 40 métodos via `CallMethod`) — `re/evidencias/engine_callbacks.csv` e
-  `re/evidencias/ciclo_de_vida.md`.
+## Feito
+- **`SkillEffect`** com os construtores de efeito mais usados pelas armas (dano, atraso, projétil, laser,
+  artilharia, corpo a corpo, movimento, som, script, animação) e **`DamageList`/`PointList`/`IntList`/`UIntList`**.
+  Semântica de **referência** do luabind preservada (`ret.effect:back().bHide = true` funciona como no jogo).
+- **`SpaceDamage`**: métodos `IsMovement`, `MoveStart` (inclusive o (−1,1) do caminho vazio), `MoveEnd`.
+- **`Board` e `Pawn` na Lua**, ligados ao núcleo (`OccupancyBoard`, agora unificado com terreno/fogo/fumaça/ácido…):
+  17 métodos de Board e 11 de Pawn; novos `IsPawnTeam`/`Pawn::IsTeam` e `GetSize`.
+- **`itb-weapon`**: executa o `GetTargetArea` e o `GetSkillEffect` ORIGINAIS de qualquer arma num tabuleiro Rust.
+  Exemplos em `docs/relatorios/armas_etapa08.txt` (soco, tanque, artilharia, laser, puxão).
 
 ## Números
-| Métrica | Etapa 06 | Etapa 07 |
+| Métrica | Etapa 07 | Etapa 08 |
 |---|---|---|
-| Scripts originais carregando sem erro | 137/137 | 137/137 |
-| Nomes da API: reconstruídos / plataforma / stubs | 34 / 11 / 430 | **84 / 11 / 380** |
-| Stubs chamados durante o boot | 10 tipos (330 chamadas) | **1** (`GetMechColorsInTexture`) |
-| Entrypoints nativos com Rust testado | 47/368 (12,77%) | 47/368 (12,77%) — esta etapa foi de construtores/propriedades |
-| Callbacks motor→Lua inventariados | — | 118 |
-| Testes | 53 | **57** (+1 integração com o jogo) |
+| Nomes da API reconstruídos / plataforma / stubs (475) | 84 / 11 / 380 | **165 / 11 / 299** |
+| Entrypoints nativos com Rust testado (368) | 47 (12,77%) | **96 (26,09%)** — 63 com lógica, 33 acessores triviais |
+| Testes | 57 | **62** + 2 de integração com o jogo |
 
-## Próximo passo
-M3 parte 2: contrato de cada callback (ordem, argumentos, retorno), começando por `startNewGame` e pelo
-ciclo de missão; em paralelo, `SkillEffect`/`PointList`/`DamageList` (M2) para as armas funcionarem.
+## Próximo
+`Board:GetSimpleReachable` / `GetReachable` / `GetPath` (alcance e caminho — usados pela área de alvo padrão
+e pelo movimento), depois os efeitos restantes (`AddBounce`, `AddLeap`, `AddCharge`…) e a **aplicação** de um
+`SkillEffect` ao tabuleiro (dano, empurrão, fogo) — marco M5.

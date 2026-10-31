@@ -62,12 +62,13 @@ fn display_and_rng_globals() {
 #[test]
 fn stubs_record_calls_and_coverage_is_reported() {
     let h = host();
-    h.lua.load("local s = SkillEffect() s:AddDamage(nil) s:AddDamage(nil) PAWN_FACTORY:CreatePawn('x')").exec().unwrap();
+    h.lua.load("local s = SkillEffect() s:AddBounce(nil) s:AddBounce(nil) PAWN_FACTORY:CreatePawn('x')").exec().unwrap();
     let rep = h.report.borrow();
-    assert_eq!(rep.stub_calls.get("SkillEffect:AddDamage"), Some(&2));
+    assert_eq!(rep.stub_calls.get("SkillEffect:AddBounce"), Some(&2));
     assert_eq!(rep.stub_calls.get("PawnFactory:CreatePawn"), Some(&1));
     assert_eq!(rep.coverage.get("Point:Manhattan"), Some(&Status::Reconstructed));
-    assert_eq!(rep.coverage.get("SkillEffect:AddDamage"), Some(&Status::Stub));
+    assert_eq!(rep.coverage.get("SkillEffect:AddBounce"), Some(&Status::Stub));
+    assert_eq!(rep.coverage.get("SkillEffect:AddDamage"), Some(&Status::Reconstructed));
     assert_eq!(rep.coverage.len(), 475);
 }
 
@@ -147,6 +148,89 @@ fn space_damage_defaults_and_stub_methods() {
     assert_eq!(eval::<(i32, i32, i32)>(&h, "local d = SpaceDamage(Point(2,3), 1, DIR_LEFT) return d.loc.x, d.iDamage, d.iPush"), (2, 1, 3));
     assert_eq!(eval::<i32>(&h, "local d = SpaceDamage(5) return d.iDamage"), 5);
     assert_eq!(eval::<String>(&h, "local d = SpaceDamage(Point(1,1)) d.sAnimation = 'explo' return d.sAnimation"), "explo");
-    h.lua.load("local d = SpaceDamage() d:IsMovement()").exec().unwrap();
-    assert_eq!(h.report.borrow().stub_calls.get("SpaceDamage:IsMovement"), Some(&1));
+    assert!(!eval::<bool>(&h, "return SpaceDamage():IsMovement()"));
+}
+
+#[test]
+fn skill_effect_lists_have_reference_semantics() {
+    let h = host();
+    // padrão de ae_weapons.lua: modificar o último dano pela referência
+    assert!(eval::<bool>(&h, "local ret = SkillEffect() ret:AddDamage(SpaceDamage(Point(1,1), 2)) \
+        ret.effect:back().bHide = true return ret.effect:index(1).bHide"));
+    // AddDamage copia: alterar o original depois não muda a lista
+    assert_eq!(eval::<i32>(&h, "local ret = SkillEffect() local d = SpaceDamage(Point(1,1), 2) ret:AddDamage(d) \
+        d.iDamage = 9 return ret:GetDamage(1).iDamage"), 2);
+    assert_eq!(eval::<(i32, i32)>(&h, "local r = SkillEffect() r:AddQueuedDamage(SpaceDamage(3)) return r:GetDamageCount(), r:GetQueuedCount()"), (0, 1));
+    assert_eq!(eval::<(i32, i32, i32)>(&h, "local r = SkillEffect() return r.iOwner, r.piOrigin.x, r.effect:size()"), (-1, -2147483647, 0));
+}
+
+#[test]
+fn skill_effect_builders_match_exe() {
+    let h = host();
+    // AddDelay: SpaceDamage(0) com fDelay e bHide
+    assert_eq!(eval::<(f32, bool, i32, i32)>(&h, "local r = SkillEffect() r:AddDelay(0.25) local d = r:GetDamage(1) \
+        return d.fDelay, d.bHide, d.loc.x, d.iDamage"), (0.25, true, -1, 0));
+    // projétil: atraso padrão -2 (PROJ_DELAY); laser zera o atraso
+    assert_eq!(eval::<f32>(&h, "local r = SkillEffect() r:AddProjectile(SpaceDamage(Point(2,2), 1), 'effects/shot_mechtank') return r:GetDamage(1).fDelay"), -2.0);
+    assert_eq!(eval::<f32>(&h, "local r = SkillEffect() r:AddProjectile(Point(0,0), SpaceDamage(Point(2,2), 1), 'effects/laser1', 0.5) return r:GetDamage(1).fDelay"), 0.0);
+    assert_eq!(eval::<f32>(&h, "local r = SkillEffect() r:AddArtillery(SpaceDamage(Point(2,2), 1), 'effects/shotup', 0.3) return r:GetDamage(1).fDelay"), 0.3);
+    // movimento: caminho com <= 1 ponto é recusado
+    assert!(!eval::<bool>(&h, "local r = SkillEffect() local p = PointList() p:push_back(Point(1,1)) return r:AddMove(p, FULL_DELAY)"));
+    assert_eq!(eval::<(bool, i32, i32, i32)>(&h, "local r = SkillEffect() local p = PointList() p:push_back(Point(1,1)) p:push_back(Point(1,3)) \
+        local ok = r:AddMove(p, FULL_DELAY) local d = r:GetDamage(1) return ok, d:MoveEnd().y, d:MoveStart().y, r:GetDamageCount()"), (true, 3, 1, 1));
+    assert!(eval::<bool>(&h, "local r = SkillEffect() local p = PointList() p:push_back(Point(1,1)) p:push_back(Point(2,1)) r:AddMove(p, 0) return r:GetDamage(1):IsMovement()"));
+    // melee: tipo 3 → não é "movimento"
+    assert!(!eval::<bool>(&h, "local r = SkillEffect() r:AddMelee(Point(1,1), SpaceDamage(Point(1,2), 1)) return r:GetDamage(1):IsMovement()"));
+    // MoveStart com caminho vazio devolve (-1, 1) como o original
+    assert_eq!(eval::<(i32, i32)>(&h, "local s = SpaceDamage():MoveStart() return s.x, s.y"), (-1, 1));
+    // listas
+    assert_eq!(eval::<(i32, i32, bool)>(&h, "local l = PointList() l:push_back(Point(1,2)) l:push_back(Point(3,4)) l:erase(1) \
+        return l:size(), l:index(1).x, l:empty()"), (1, 3, false));
+    assert!(h.lua.load("local l = PointList() return l:index(1)").exec().is_err());
+}
+
+#[test]
+fn board_and_pawn_bindings_reach_the_core() {
+    use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, Point};
+    let h = host();
+    h.lua.load("function SetBoard(b) Board = b end function SetPawn(p) Pawn = p end").exec().unwrap();
+    let mut b = OccupancyBoard::new(8, 8).unwrap();
+    b.tile_mut(Point::new(2, 2)).unwrap().terrain = TERRAIN_MOUNTAIN;
+    let m = b.add_pawn(PawnState { id: 0, team: TEAM_PLAYER, health: 3, max_health: 3, space: Point::new(1, 1), mech: true, ..Default::default() }).unwrap();
+    b.add_pawn(PawnState { id: 7, team: TEAM_ENEMY, health: 2, max_health: 2, space: Point::new(4, 4), ..Default::default() }).unwrap();
+    let shared = std::rc::Rc::new(std::cell::RefCell::new(b));
+    h.set_board(shared.clone()).unwrap();
+    h.set_pawn(&shared, m).unwrap();
+    assert!(eval::<bool>(&h, "return Board:IsValid(Point(7,7)) and not Board:IsValid(8, 0)"));
+    assert!(eval::<bool>(&h, "return Board:IsBlocked(Point(2,2), PATH_FLYER) and Board:IsBlocked(Point(4,4), PATH_PHASING)"));
+    assert_eq!(eval::<(i32, i32)>(&h, "local s = Board:GetSize() return s.x, s.y"), (8, 8));
+    assert_eq!(eval::<(i32, bool)>(&h, "local p = Board:GetPawn(Point(4,4)) return p:GetId(), p:IsEnemy()"), (7, true));
+    assert!(eval::<bool>(&h, "return Board:GetPawn(Point(5,5)) == nil"));
+    assert!(eval::<bool>(&h, "return Board:GetPawn(7) == Board:GetPawn(Point(4,4))"));
+    assert!(eval::<bool>(&h, "return Pawn:IsMech() and Board:IsPawnTeam(Point(1,1), TEAM_PLAYER)"));
+    assert_eq!(eval::<(i32, i32)>(&h, "local s = Board:GetPawnSpace(7) return s.x, s.y"), (4, 4));
+    // escrita pelo script muda o núcleo compartilhado
+    h.lua.load("Board:GetPawn(7):SetTeam(TEAM_PLAYER)").exec().unwrap();
+    assert_eq!(shared.borrow().pawns[1].team, TEAM_PLAYER);
+    // método ainda não reconstruído continua stub
+    h.lua.load("Board:GetSimpleReachable(Point(1,1), 3, false)").exec().unwrap();
+    assert_eq!(h.report.borrow().stub_calls.get("Board:GetSimpleReachable"), Some(&1));
+}
+
+/// Integração: armas originais executam no motor Rust (`ITB_GAME_DIR=... cargo test -- --ignored`).
+#[test]
+#[ignore = "precisa dos arquivos originais do jogo (ITB_GAME_DIR)"]
+fn original_laser_weapon_produces_falloff_damage() {
+    use itb_core::board_occupancy::{consts::*, OccupancyBoard, PawnState, Point};
+    let dir = std::env::var("ITB_GAME_DIR").expect("defina ITB_GAME_DIR");
+    let h = Host::new(&dir, HostConfig::default()).unwrap();
+    h.boot().unwrap();
+    let mut b = OccupancyBoard::new(8, 8).unwrap();
+    let m = b.add_pawn(PawnState { id: 0, team: TEAM_PLAYER, health: 3, space: Point::new(3, 4), mech: true, ..Default::default() }).unwrap();
+    let shared = std::rc::Rc::new(std::cell::RefCell::new(b));
+    h.set_board(shared.clone()).unwrap();
+    h.set_pawn(&shared, m).unwrap();
+    let dmg: Vec<i32> = h.lua.load("local r = Prime_Lasermech:GetSkillEffect(Point(3,4), Point(3,3)) local t = {} \
+        for i = 1, r.effect:size() do t[i] = r.effect:index(i).iDamage end return t").eval().unwrap();
+    assert_eq!(dmg, vec![3, 2, 1, 1]);
 }

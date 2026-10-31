@@ -12,3 +12,7 @@ mlua = { version = "0.12.2", features = ["lua51", "vendored"] }
 [[bin]]
 name = "itb-boot"
 path = "src/bin/itb_boot.rs"
+
+[[bin]]
+name = "itb-weapon"
+path = "src/bin/itb_weapon.rs"

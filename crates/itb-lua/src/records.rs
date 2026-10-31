@@ -15,6 +15,8 @@ pub enum Field {
     Bool(bool),
     Str(String),
     Point(IPoint),
+    /// Vetor de pontos interno (ex.: caminho de movimento de SpaceDamage, +0xCC).
+    Points(Vec<IPoint>),
 }
 
 impl Field {
@@ -25,6 +27,7 @@ impl Field {
             Field::Bool(b) => b.into_lua(lua),
             Field::Str(s) => s.as_str().into_lua(lua),
             Field::Point(p) => LPoint(*p).into_lua(lua),
+            Field::Points(v) => Ok(Value::Integer(v.len() as _)),
         }
     }
     /// Conversão com as regras do luabind para o tipo atual do campo.
@@ -35,6 +38,7 @@ impl Field {
             Field::Bool(_) => match v { Value::Boolean(b) => Field::Bool(*b), _ => return None },
             Field::Str(_) => Field::Str(arg_str(v)?),
             Field::Point(_) => Field::Point(arg_point(v)?),
+            Field::Points(_) => return None,
         })
     }
 }
@@ -63,28 +67,51 @@ pub struct Record {
 
 impl Record {
     pub fn get(&self, k: &str) -> Option<&Field> { self.fields.iter().find(|(n, _)| *n == k).map(|(_, f)| f) }
+    pub fn hidden(&self, k: &str) -> Option<&Field> { self.hidden.iter().find(|(n, _)| *n == k).map(|(_, f)| f) }
+    pub fn set(&mut self, k: &str, f: Field) {
+        if let Some(slot) = self.fields.iter_mut().find(|(n, _)| *n == k) { slot.1 = f; return; }
+        if let Some(slot) = self.hidden.iter_mut().find(|(n, _)| *n == k) { slot.1 = f; return; }
+        panic!("campo inexistente {}.{k}", self.class);
+    }
+    pub fn int(&self, k: &str) -> i32 {
+        match self.get(k).or_else(|| self.hidden(k)) { Some(Field::Int(i)) => *i, _ => panic!("{k} não é int") }
+    }
+    pub fn points(&self, k: &str) -> &[IPoint] {
+        match self.hidden(k) { Some(Field::Points(v)) => v, _ => &[] }
+    }
+}
+
+/// Leitura de propriedade com fallback para métodos (reais ou stubs) da classe.
+pub fn rec_index(lua: &Lua, r: &Record, k: &str) -> mlua::Result<Value> {
+    if let Some(f) = r.get(k) {
+        return f.to_lua(lua);
+    }
+    if let Some(t) = lua.named_registry_value::<Option<mlua::Table>>(&format!("itb_real_methods_{}", r.class))? {
+        let v: Value = t.get(k)?;
+        if !v.is_nil() { return Ok(v); }
+    }
+    match lua.named_registry_value::<Option<mlua::Table>>(&format!("itb_methods_{}", r.class))? {
+        Some(t) => t.get::<Value>(k),
+        None => Ok(Value::Nil),
+    }
+}
+
+/// Escrita de propriedade com as conversões do luabind.
+pub fn rec_newindex(r: &mut Record, k: &str, v: &Value) -> mlua::Result<()> {
+    let class = r.class;
+    match r.fields.iter_mut().find(|(n, _)| *n == k) {
+        Some((_, f)) => {
+            *f = f.assign(v).ok_or_else(|| no_overload(&format!("{class}.{k} = <tipo do campo>")))?;
+            Ok(())
+        }
+        None => Err(mlua::Error::RuntimeError(format!("propriedade inexistente: {class}.{k}"))),
+    }
 }
 
 impl UserData for Record {
     fn add_methods<M: UserDataMethods<Self>>(m: &mut M) {
-        m.add_meta_method(MetaMethod::Index, |lua, r, k: String| match r.get(&k) {
-            Some(f) => f.to_lua(lua),
-            // métodos ainda não implementados continuam acessíveis como stubs (registram o uso)
-            None => match lua.named_registry_value::<Option<mlua::Table>>(&format!("itb_methods_{}", r.class))? {
-                Some(t) => t.get::<Value>(k),
-                None => Ok(Value::Nil),
-            },
-        });
-        m.add_meta_method_mut(MetaMethod::NewIndex, |_, r, (k, v): (String, Value)| {
-            let class = r.class;
-            match r.fields.iter_mut().find(|(n, _)| *n == k) {
-                Some((_, f)) => {
-                    *f = f.assign(&v).ok_or_else(|| no_overload(&format!("{class}.{k} = <tipo do campo>")))?;
-                    Ok(())
-                }
-                None => Err(mlua::Error::RuntimeError(format!("propriedade inexistente: {class}.{k}"))),
-            }
-        });
+        m.add_meta_method(MetaMethod::Index, |lua, r, k: String| rec_index(lua, r, &k));
+        m.add_meta_method_mut(MetaMethod::NewIndex, |_, r, (k, v): (String, Value)| rec_newindex(r, &k, &v));
     }
 }
 
@@ -198,7 +225,7 @@ fn region_info(a: &[Value]) -> Option<Record> {
 /// inicializados de forma idêntica nos cinco — verificado por comparação das instruções).
 /// Padrões: loc (-1,-1), iDamage 0, iPush 4 (DIR_NONE), iPawnTeam 2 (TEAM_NONE), iTerrain 10,
 /// demais 0/false/"". Campos internos relevantes guardados em `hidden`.
-fn space_damage(a: &[Value]) -> Option<Record> {
+pub fn space_damage(a: &[Value]) -> Option<Record> {
     let (loc, dmg, push) = match a {
         [] => (IPoint::new(-1, -1), 0, 4),
         [Value::UserData(_)] => (arg_point(&a[0])?, 0, 4),
@@ -217,8 +244,10 @@ fn space_damage(a: &[Value]) -> Option<Record> {
         ("iPawnTeam", Field::Int(2)), ("bHide", Field::Bool(false)), ("bHidePath", Field::Bool(false)),
         ("bHideIcon", Field::Bool(false)), ("bEvacuate", Field::Bool(false)), ("fDelay", Field::Float(0.0)),
         ("iTerrain", Field::Int(10)), ("sScript", s()), ("sItem", s())],
-        vec![("i_0x34", Field::Int(2)), ("p_0x9c", Field::Point(IPoint::new(-1, -1))), ("i_0xc0", Field::Int(2)),
-             ("move_type_0xd8", Field::Int(0)), ("p_0x110", Field::Point(IPoint::new(-1, -1))), ("i_0x130", Field::Int(3))]))
+        vec![("anim_param_0x34", Field::Int(2)), ("image_0x68", s()), ("kind_0x98", Field::Int(0)),
+             ("source_0x9c", Field::Point(IPoint::new(-1, -1))), ("i_0xc0", Field::Int(2)),
+             ("path_0xcc", Field::Points(vec![])), ("move_type_0xd8", Field::Int(0)), ("str_0xf8", s()),
+             ("p_0x110", Field::Point(IPoint::new(-1, -1))), ("i_0x130", Field::Int(3))]))
 }
 
 pub static RECORD_CLASSES: &[RecordClass] = &[

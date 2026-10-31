@@ -8,6 +8,8 @@
 pub mod api_manifest;
 pub mod host;
 pub mod records;
+pub mod skill;
+pub mod world;
 pub mod values;
 
 pub use host::{Host, HostConfig, Outcome, Report, Status};

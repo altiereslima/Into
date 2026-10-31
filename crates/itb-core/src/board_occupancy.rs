@@ -82,6 +82,12 @@ pub struct PawnState {
     pub value_0x10e8: i32,
     /// Resultado de `Pawn::0x00639E10(12)` (não reconstruída; dado de entrada).
     pub query_0x639e10_12: bool,
+    /// +0x10BC — testado por `IsTeam(8)` (TEAM_BOTS) e `IsTeam(7)`; não nomeado.
+    pub field_0x10bc: i32,
+    /// +0x97C — gravado por `SetNeutral` (0x0063ABF0); testado por `IsTeam(5)`.
+    pub neutral: bool,
+    /// Resultado de `Pawn::0x0063A410()` usado por `IsTeam(-1)` (não reconstruída; dado de entrada).
+    pub query_0x63a410: bool,
 }
 
 impl PawnState {
@@ -108,6 +114,20 @@ impl PawnState {
     /// 0x00635FA0 `GetSpace` (slot 0x28): copia +0x8EC/+0x8F0.
     pub fn get_space(&self) -> Point { self.space }
 
+    /// 0x00639FD0 `Pawn::IsTeam(int)` (usada por `Board:IsPawnTeam`).
+    pub fn is_team(&self, t: i32) -> bool {
+        match t {
+            2 => true,                                            // TEAM_NONE/TEAM_ANY
+            8 => self.field_0x10bc == 1,                          // TEAM_BOTS
+            7 => self.team == consts::TEAM_ENEMY && self.field_0x10bc == 0,
+            6 => self.team >= consts::TEAM_ENEMY,                 // TEAM_ENEMY: time >= 6
+            -1 => self.is_team(6) && self.query_0x63a410,         // TEAM_ENEMY_MAJOR
+            4 => self.mech || self.team == 4,                     // TEAM_MECH
+            5 => (!self.neutral && self.team == consts::TEAM_PLAYER) || self.team == 5,
+            _ => self.team == t,
+        }
+    }
+
     /// 0x00629540 `IsCorpse` — fluxo completo; a chamada 0x00639E10(12) é dado de entrada.
     /// `global_list_has_12`: a lista global de inteiros em 0x008CF84C..0x008CF850 contém 12.
     pub fn is_corpse(&self, global_list_has_12: bool) -> bool {
@@ -121,11 +141,21 @@ impl PawnState {
     }
 }
 
-/// Casa do tabuleiro: só os campos que as rotinas de ocupação leem.
+/// Casa do tabuleiro: só os campos que as rotinas de ocupação/consulta leem.
 #[derive(Clone, Debug, PartialEq, Eq, Default)]
 pub struct Tile {
     /// +0x2AE0 (mesmo campo de `GetTerrain`).
     pub terrain: i32,
+    /// +0x2AEC `IsFire` (DWORD != 0).
+    pub fire: i32,
+    /// +0x2B25 `IsSmoke` (BYTE).
+    pub smoke: u8,
+    /// +0x2AA0 `IsVines` (BYTE).
+    pub vines: u8,
+    /// +0x2AF1 `IsAcid` (BYTE).
+    pub acid: u8,
+    /// +0x2B26 `IsCracked` (BYTE).
+    pub cracked: u8,
     /// +0x27B4 `std::string`; 0x005AE510 procura "conveyor" nela.
     pub custom_tile: String,
     /// +0xA0..+0xA4 `std::vector<Pawn*>` na ordem original.
@@ -227,6 +257,30 @@ impl OccupancyBoard {
         }
     }
 
+    // ----------------------------------------------------------- consultas de casa (Etapas 01–03)
+    // Mesma semântica de `board_queries::BoardSnapshot`, agora sobre o modelo unificado.
+
+    /// 0x0055DC10 `GetSize()`: (largura, altura) = [this+0x48], [this+0x4C].
+    pub fn get_size(&self) -> Point { Point::new(self.bounds.width, self.bounds.height) }
+    /// 0x00503B60 `GetTerrain` (casa sentinela se inválida).
+    pub fn get_terrain(&self, p: Point) -> i32 { self.tile(p).terrain }
+    /// 0x00567D00 `IsBuilding`: terreno == 1.
+    pub fn is_building(&self, p: Point) -> bool { self.get_terrain(p) == consts::TERRAIN_BUILDING }
+    /// 0x00567C50 `IsFire`.
+    pub fn is_fire(&self, p: Point) -> bool { self.tile(p).fire != 0 }
+    /// 0x005653E0 `IsSmoke`.
+    pub fn is_smoke(&self, p: Point) -> bool { self.tile(p).smoke != 0 }
+    /// 0x005653C0 `IsVines`.
+    pub fn is_vines(&self, p: Point) -> bool { self.tile(p).vines != 0 }
+    /// 0x00567CB0 `IsAcid`.
+    pub fn is_acid(&self, p: Point) -> bool { self.tile(p).acid != 0 }
+    /// 0x00569920 `IsCracked`.
+    pub fn is_cracked(&self, p: Point) -> bool { self.tile(p).cracked != 0 }
+    /// 0x0056FB20 `IsEdge`: sem `IsValid`, compara com 0 e largura/altura − 1.
+    pub fn is_edge(&self, p: Point) -> bool {
+        p.x == 0 || p.y == 0 || p.x == self.bounds.width.wrapping_sub(1) || p.y == self.bounds.height.wrapping_sub(1)
+    }
+
     // ----------------------------------------------------------- API Lua: Board
 
     /// 0x0056EE70 `Board:IsPawnSpace(Point, bool)` (WeaponTarget slot 0x4C).
@@ -279,6 +333,13 @@ impl OccupancyBoard {
             if let Some(&first) = tile.pawns.first() { return self.pawns[first].team; }
         }
         consts::TEAM_NONE
+    }
+
+    /// 0x0056ED50 / 0x0056EDA0 `Board:IsPawnTeam(Point, int)`: sem unidade em `IsPawnSpace(p)`
+    /// → `team == 2`; senão `GetPawn(p)->IsTeam(team)` (primeiro item da casa).
+    pub fn is_pawn_team(&self, p: Point, team: i32) -> bool {
+        if !self.is_pawn_space(p) { return team == consts::TEAM_NONE; }
+        match self.get_pawn_at(p) { Some(i) => self.pawns[i].is_team(team), None => false }
     }
 
     /// 0x0055F030 `Board:IsBlocked(Point, int pathProf)`.

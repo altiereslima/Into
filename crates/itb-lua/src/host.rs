@@ -194,6 +194,34 @@ impl Host {
                 self.mark(format!("{}.{}", rc.name, p), Status::Reconstructed);
             }
         }
+        // SkillEffect, listas e métodos reais de SpaceDamage (Etapa 08)
+        use crate::skill::*;
+        install_space_damage_methods(&self.lua)?;
+        for k in ["SpaceDamage:IsMovement", "SpaceDamage:MoveStart", "SpaceDamage:MoveEnd"] {
+            self.mark(k, Status::Reconstructed);
+        }
+        self.value_class("SkillEffect", |a: &MultiValue| if a.is_empty() { Ok(LSkillEffect::default()) } else { Err(no_overload("SkillEffect()")) })?;
+        self.value_class("DamageList", |a: &MultiValue| if a.is_empty() { Ok(LDamageList::new()) } else { Err(no_overload("DamageList()")) })?;
+        self.value_class("PointList", |a: &MultiValue| if a.is_empty() { Ok(LPointList::default()) } else { Err(no_overload("PointList()")) })?;
+        self.value_class("IntList", |a: &MultiValue| if a.is_empty() { Ok(LIntList::default()) } else { Err(no_overload("IntList()")) })?;
+        self.value_class("UIntList", |a: &MultiValue| if a.is_empty() { Ok(LUIntList::default()) } else { Err(no_overload("UIntList()")) })?;
+        for k in SKILL_EFFECT_DONE {
+            self.mark(format!("SkillEffect:{k}"), Status::Reconstructed);
+        }
+        for k in ["SkillEffect()", "SkillEffect.effect", "SkillEffect.q_effect", "SkillEffect.impact_sound", "SkillEffect.piOrigin",
+                  "SkillEffect.iOwner", "DamageList()", "PointList()", "IntList()", "UIntList()"] {
+            self.mark(k, Status::Reconstructed);
+        }
+        for (cls, ms) in [("DamageList", &["size", "index", "push_back", "back", "empty"][..]),
+                          ("PointList", &["size", "index", "push_back", "back", "erase", "empty"][..]),
+                          ("IntList", &["size", "index", "push_back", "back", "erase", "empty"][..]),
+                          ("UIntList", &["size", "index", "push_back", "back"][..])] {
+            for m in ms {
+                self.mark(format!("{cls}:{m}"), Status::Reconstructed);
+            }
+        }
+        for k in crate::world::BOARD_DONE { self.mark(format!("Board:{k}"), Status::Reconstructed); }
+        for k in crate::world::PAWN_DONE { self.mark(format!("BoardPawn:{k}"), Status::Reconstructed); }
         let color = self.lua.create_table()?;
         let mt = self.lua.create_table()?;
         mt.set("__call", self.lua.create_function(|_, args: MultiValue| {
@@ -343,6 +371,20 @@ impl Host {
             }
         }
         Ok(())
+    }
+
+    /// Entrega um tabuleiro aos scripts como o motor faz: chama a função Lua `SetBoard(board)`.
+    pub fn set_board(&self, board: crate::world::SharedBoard) -> mlua::Result<crate::world::LBoard> {
+        let lb = crate::world::LBoard(board);
+        let f: Function = self.lua.globals().get("SetBoard")?;
+        f.call::<()>(lb.clone())?;
+        Ok(lb)
+    }
+
+    /// Define a unidade ativa: chama `SetPawn(pawn)`.
+    pub fn set_pawn(&self, board: &crate::world::SharedBoard, idx: usize) -> mlua::Result<()> {
+        let f: Function = self.lua.globals().get("SetPawn")?;
+        f.call::<()>(crate::world::LPawn { board: board.clone(), idx })
     }
 
     /// Resumo da cobertura da API por estado.

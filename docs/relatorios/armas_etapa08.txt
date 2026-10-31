@@ -1,0 +1,44 @@
+# Prime_Punchmech  — mech em (3,4), inimigo em (3,1)
+GetTargetArea devolveu nil
+effect: 1 itens
+  [1] loc=(3,1)  iDamage=2  sAnimation="explopunch1_0"  fDelay=-1  path_0xcc=(3,2)  move_type_0xd8=3
+q_effect: 0 itens
+stubs chamados: Board:GetSimpleReachable×1
+
+# Brute_Tankmech  — mech em (3,4), inimigo em (3,1)
+GetTargetArea devolveu nil
+effect: 1 itens
+  [1] loc=(3,1)  iDamage=1  sAnimation="explopush1_0"  image_0x68="effects/shot_mechtank"  kind_0x98=2
+q_effect: 0 itens
+stubs chamados: Board:GetSimpleReachable×1
+
+# Ranged_Artillerymech  — mech em (3,4), inimigo em (3,1)
+GetTargetArea: 10 casas: (3,2) (3,1) (3,0) (5,4) (6,4) (7,4) (3,6) (3,7) (1,4) (0,4)
+effect: 5 itens
+  [1] loc=(3,1)  iDamage=1  sAnimation="ExploArt1"  fDelay=-2  image_0x68="effects/shotup_tribomb_missile.png"  kind_0x98=1
+  [2] loc=(3,0)  sAnimation="airpush_0"
+  [3] loc=(4,1)  iPush=1  sAnimation="airpush_1"
+  [4] loc=(3,2)  iPush=2  sAnimation="airpush_2"
+  [5] loc=(2,1)  iPush=3  sAnimation="airpush_3"
+q_effect: 0 itens
+stubs chamados: SkillEffect:AddBounce×2
+
+# Prime_Lasermech  — mech em (3,4), inimigo em (3,1)
+GetTargetArea: 14 casas: (3,3) (3,2) (3,1) (3,0) (4,4) (5,4) (6,4) (7,4) (3,5) (3,6) (3,7) (2,4) (1,4) (0,4)
+effect: 4 itens
+  [1] loc=(3,3)  iDamage=3
+  [2] loc=(3,2)  iDamage=2
+  [3] loc=(3,1)  iDamage=1
+  [4] loc=(3,0)  iDamage=1  image_0x68="effects/laser1"  kind_0x98=5  source_0x9c=(3,4)
+q_effect: 0 itens
+
+# Science_Pullmech  — mech em (3,4), inimigo em (3,1)
+GetTargetArea devolveu nil
+effect: 4 itens
+  [1] loc=(3,1)  iPush=2  image_0x68="effects/shot_pull"  kind_0x98=2
+  [2] loc=(-1,-1)  bHide=true  fDelay=0.05
+  [3] loc=(-1,-1)  bHide=true  fDelay=0.05
+  [4] loc=(-1,-1)  bHide=true  fDelay=0.05
+q_effect: 0 itens
+stubs chamados: Board:GetSimpleReachable×1, SkillEffect:AddBounce×3
+

@@ -6,10 +6,10 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 |---|---|---|---|
 | M0 | Inventário da API nativa | 100% dos registros luabind, fechado por RTTI; constantes com valor | ✅ Etapa 05/06 |
 | M1 | Boot dos scripts originais | Todos os arquivos de `GetScripts()` presentes carregam sem erro no host Rust | ✅ Etapa 06 (137/137) |
-| M2 | Tipos de valor completos | `Point`, `Rect2D`, `GL_Color`, `Button`, `Text`, `StyleInfo`, `Objective`, `SpaceDamage`, `SkillEffect`, listas | ▶ 11 classes prontas (faltam SkillEffect, DamageList, listas, Effect, Choice…) |
+| M2 | Tipos de valor completos | `Point`, `Rect2D`, `GL_Color`, `Button`, `Text`, `StyleInfo`, `Objective`, `SpaceDamage`, `SkillEffect`, listas | ▶ 17 classes prontas, incl. SkillEffect e listas (faltam Effect, Choice, Squad…) |
 | M3 | Ciclo de vida do motor | Descobrir no EXE o que roda depois do boot (funções Lua chamadas pelo C++, ordem, argumentos) e reproduzir | ▶ inicialização reproduzida; 118 callbacks inventariados |
 | M4 | Missão em memória | Carregar um `.map` original, criar `Board`/`Game`, posicionar unidades via `PAWN_FACTORY` | |
-| M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | |
+| M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | ▶ armas originais já GERAM os efeitos (`itb-weapon`); falta aplicar |
 | M6 | Turno inimigo | IA (scripts) + pathfinding nativo (`GetPath`, `GetReachable`...) idênticos | |
 | M7 | Simulador sem gráficos | Uma missão completa jogada por script de teste, resultado comparável ao original | |
 | M8 | Assets + render | Ler `resource.dat`, desenhar tabuleiro/unidades/UI (SDL2) | |
@@ -17,7 +17,8 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 
 ## Fila imediata
 
-O boot já não depende de stubs (só `GetMechColorsInTexture()` é chamado). A próxima fila vem do M3:
+Etapa 09: `GetSimpleReachable`/`GetReachable`/`GetPath`, efeitos restantes e aplicação do `SkillEffect`.
+Antes disso, a fila vinha do M3:
 ler, para cada callback de `re/evidencias/engine_callbacks.csv`, como o motor o chama, começando por
 `startNewGame` → criação de ilhas/missões → `CallMethod("MissionN", "BaseStart")` e as armas
 (`GetTargetArea`/`GetSkillEffect`), que exigem `SkillEffect`, `PointList` e `Board`.
