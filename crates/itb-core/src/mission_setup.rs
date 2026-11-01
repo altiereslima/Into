@@ -25,8 +25,8 @@ pub struct Weather {
 }
 
 /// Quantos prédios recebem a vida `i + 1` (0x56D2C0..0x56D303). A conta é em `float`:
-/// `v / 100.0f * n`, com `n` convertido como inteiro sem sinal; depois `ceil` em `double` (0x476150 → 0x799B30,
-/// o `ceil` da CRT) e truncamento (`cvttss2si`).
+/// `v / 100.0f * n`, com `n` convertido como inteiro sem sinal; depois `ceilf` (0x476150, que passa por `ceil` em
+/// `double`, 0x799B30) e truncamento (`cvttss2si`).
 pub fn building_count(percent: i32, n: usize) -> i32 {
     let n = n as u32 as f64 as f32;
     let v = percent as f32 / 100.0f32 * n;
@@ -34,7 +34,8 @@ pub fn building_count(percent: i32, n: usize) -> i32 {
 }
 
 impl OccupancyBoard {
-    /// 0x573260: lista de prédios, em x e depois y, das casas com terreno 1 (campo +0x2AE0, sem `IsTerrain`).
+    /// `Board::UpdateBuildings` (0x573260): lista de prédios, em x e depois y, das casas com terreno 1 (campo +0x2AE0,
+    /// sem `IsTerrain`).
     pub fn update_building_list(&mut self) {
         let size = self.get_size();
         self.buildings = (0..size.x).flat_map(|x| (0..size.y).map(move |y| Point::new(x, y)))
@@ -63,7 +64,8 @@ impl OccupancyBoard {
     ///
     /// 1. Conta de cada fatia, por `building_count`, sobre o tamanho da lista de prédios.
     /// 2. Para cada prédio da lista, a primeira fatia com conta não nula (o índice só avança, até 4):
-    ///    `SetTerrain(1)`, vida `(i + 1)/(i + 1)` por 0x5AF190 e, com vida atual 0, `SetTerrain(2)`.
+    ///    `SetTerrain(1)`, vida `(i + 1)/(i + 1)` por `BoardSpace::SetHealth` e, com vida atual 0, `SetTerrain(2)`
+    ///    (no Android, `BoardSpace::SetBuilding(int)`; no PC, embutida).
     ///    Sem fatia restante, para.
     /// 3. Em x e depois y, cada casa de entulho gasta um `rand() % 100` e recebe vida `0/m`, com `m` = 1 + o
     ///    primeiro índice em que o valor fica abaixo da soma acumulada, ou 1.
@@ -100,12 +102,13 @@ impl OccupancyBoard {
         }
     }
 
-    /// 0x56D580 `Board::SetWeather`: repassa os argumentos ao objeto de clima (0x504840, não reconstruído).
+    /// 0x56D580 `Board::SetWeather`: repassa os argumentos a `RainCloud::SetWeather` (0x504840, não reconstruída).
     pub fn set_weather(&mut self, kind: i32, subtype: i32, from: Point, to: Point, time: f32) {
         self.weather = Some(Weather { kind, subtype, from, to, time });
     }
 
-    /// 0x55FFB0 `Board:GetHealth(Point)`: vida atual da casa (+0x78, copiada por 0x5AF100), ou da sentinela.
+    /// 0x55FFB0 `Board:GetHealth(Point)`: vida atual da casa (+0x78, copiada por `BoardSpace::GetHealth`), ou da
+    /// sentinela.
     pub fn get_health(&self, p: Point) -> i32 { self.tile(p).health }
 }
 

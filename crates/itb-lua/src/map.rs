@@ -176,8 +176,8 @@ impl Host {
         Ok((shared, loaded))
     }
 
-    /// Chama uma função Lua global como os ajudantes 0x597060 (`(string, int)`) e 0x597190 (`(string)`):
-    /// um erro dentro da chamada vira 0, depois da mensagem "Something went wrong".
+    /// Chama uma função Lua global como `LuaEnv::CallFunction<int, ...>` (0x597060 com `(string, int)`, 0x597190 com
+    /// `(string)`): um erro dentro da chamada vira 0, depois da mensagem "Something went wrong".
     fn call_int(&self, func: &str, args: impl mlua::IntoLuaMulti) -> mlua::Result<i32> {
         let f: Function = self.lua.globals().get(func)?;
         match f.call::<Value>(args) {
@@ -189,7 +189,7 @@ impl Host {
         }
     }
 
-    /// 0x449640: `CallMethod(obj, func)` pela pilha Lua (`lua_pcall`). Só um booleano conta; erro ou outro
+    /// `LuaEnv::CallMethod<bool>` (0x449640): `CallMethod(obj, func)` pela pilha Lua (`lua_pcall`). Só um booleano conta; erro ou outro
     /// tipo dá falso, depois da mensagem "Something went wrong in <obj>::<func>".
     pub fn call_method_bool(&self, obj: &str, func: &str) -> mlua::Result<bool> {
         let f: Function = self.lua.globals().get("CallMethod")?;
@@ -202,8 +202,8 @@ impl Host {
         }
     }
 
-    /// `BoardPlayer::SetupBuildingHealth(int setor)` (0x591540): `getBuildingHealth(setor)` vira o vetor
-    /// de `Board::SetBuildingHP`.
+    /// `BoardPlayer::SetupBuildingHealth(int setor)` (0x591540): `getBuildingHealth(setor)`, por
+    /// `LuaEnv::CallListFunction<int, int>`, vira o vetor de `Board::SetBuildingHP`.
     pub fn setup_building_health(&self, board: &SharedBoard, sector: i32) -> mlua::Result<()> {
         let f: Function = self.lua.globals().get("getBuildingHealth")?;
         let percent: Vec<i32> = match f.call::<Value>(sector) {

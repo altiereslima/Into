@@ -9,6 +9,7 @@ A versão vem da string `1.2.93` dentro do EXE. Os arquivos de `re/evidencias/` 
 | `lua_api_v2_all.csv`, `lua_api_v2_classes.csv`, `lua_global_values.csv`, `lua_api_v2_progress.json` | inventário da API | `map_lua_api_v2.py` |
 | `nomes_android.csv` | nomes do `libmain.so` casados com a 1.2.93 | `match_android_symbols.py` |
 | `pares_manuais.csv` | pares lidos no assembly, com a prova | à mão |
+| `nomes_manual.csv` | nomes achados direto na 1.2.93, pelos chamados das mesmas funções no `libmain.so`, com a prova | à mão |
 | `migracao_enderecos.csv` | tabela antigo → novo, com método e confiança | `migrar_enderecos.py` |
 | `regioes_alteradas.csv` | pontos em que o deslocamento muda | `migrar_enderecos.py` |
 | `migracao_resumo.txt` | números da última execução | `migrar_enderecos.py` |

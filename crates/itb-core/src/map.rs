@@ -94,8 +94,8 @@ impl OccupancyBoard {
         for tile in &map.tiles {
             b.load_map_tile(tile);
         }
-        // `Board::Load` (0x565860): depois de `LoadScript`, 0x573A20 guarda o terreno das vizinhas (só gráficos)
-        // e 0x573260 refaz a lista de prédios.
+        // `Board::Load` (0x565860): depois de `LoadScript`, `UpdateTerrainNeighbors` guarda o terreno das vizinhas
+        // (só gráficos) e `UpdateBuildings` refaz a lista de prédios.
         b.update_building_list();
         Ok(b)
     }
@@ -131,7 +131,7 @@ impl OccupancyBoard {
         }
     }
 
-    /// 0x5AF190 (1.2.93): grava a vida e ajusta por terreno. Entulho fica com no máximo 0; montanha tem
+    /// `BoardSpace::SetHealth(ValueBar)` (1.2.93: 0x5AF190): grava a vida e ajusta por terreno. Entulho fica com no máximo 0; montanha tem
     /// máximo 2; prédio único, máximo 1.
     pub(crate) fn tile_set_health(&mut self, p: Point, current: i32, max: i32) {
         let t = self.tile_mut_or_sentinel(p);

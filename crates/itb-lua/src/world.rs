@@ -286,7 +286,8 @@ impl UserData for LBoard {
             let b = s.0.borrow();
             Ok(crate::skill::LIntList(b.get_pawns(team).into_iter().map(|i| b.pawns[i].id).collect()))
         });
-        // 0x565EE0 → 0x565E90 → `BoardSpace::SetTerrain`, depois 0x573260 refaz a lista de prédios.
+        // 0x565EE0 → `Board::SetTerrain(int, int, int)` 0x565E90 → `BoardSpace::SetTerrain`, depois
+        // `Board::UpdateBuildings` refaz a lista de prédios.
         m.add_method("SetTerrain", |_, s, (p, t): (LPoint, Value)| {
             let t = arg_int(&t).ok_or_else(|| no_overload("SetTerrain(Point,int)"))?;
             let mut b = s.0.borrow_mut();

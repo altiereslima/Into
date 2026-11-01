@@ -56,6 +56,8 @@ versão junto do endereço e prefira o nome real. Em `CHECKPOINT.md`, `docs/*.md
 - Assembly: `re/tools/asm/` (ann.py, xdisp.py, decomp.py; variável `ITB_EXE`).
 - Nomes: `python re/tools/match_android_symbols.py <Breach.exe> <libmain.so> re/evidencias/v1.2.93/` e
   `python re/tools/gen_nomes_resumo.py`. Prefira o **nome real** (`Pawn::Damage`) ao endereço nos textos novos.
+  Função sem nome casado: ver os chamados da mesma função nomeada no `libmain.so`
+  (`python -I re/tools/chamados_android.py <libmain.so> <padrão>`) e registrar em `re/evidencias/v1.2.93/nomes_manual.csv`, com a prova.
 
 ## Fila de trabalho (ver CHECKPOINT.md)
 Ordem escolhida pelo usuário em 2026-11-01: regras antes de gráficos, para chegar ao teste diferencial.
