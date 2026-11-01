@@ -324,10 +324,13 @@ pub struct Tile {
     pub byte_0x2640: bool,
     /// +0x2AE4: 1 na casa da cápsula (`IsPod`).
     pub pod_0x2ae4: i32,
-    /// +0x2B04 (DWORD): `IsItem` (!= 0).
-    pub item_0x2b04: i32,
-    /// +0x288C..+0x2938: dano guardado com o item, lido por `BoardSpace::IsDangerousItem`.
+    /// +0x2AF4 `std::string` (tamanho em +0x2B04): nome do item, gravado por `BoardSpace::SetItem` (0x5A0C50).
+    /// `IsItem` = não vazio.
+    pub item: String,
+    /// +0x2884 `SpaceDamage` do item (chave `Damage` da tabela Lua do item), lido por `IsDangerousItem`.
     pub item_damage: crate::board_mission::ItemDamage,
+    /// +0x2684 `std::string`: ícone de terreno (`Board::SetTerrainIcon`), só para os gráficos.
+    pub terrain_icon: String,
     /// +0x2AF0 (BYTE): `IsDangerous`; chave `spikes` nos jogos salvos.
     pub danger_0x2af0: bool,
     /// +0x27E8 (BYTE): `IsSpawning`.

@@ -23,14 +23,14 @@ Leia antes `CLAUDE.md` e `CHECKPOINT.md`. Endereços abaixo são da 1.2.93.
 - Documentar ao fechar o bloco, não a cada rotina.
 
 ## Próximo passo
-0. Bloco 4 da fila de uso (1 a 3 feitos, ver `rotinas_fila_uso.md`; 19 stubs restantes): `Board::RemovePawn` (0x561D20),
-   `ClearSpace`, `GetDeployLocScore` (já lida: unidade "Wall" temporária; medir o consumo de `rand()` no teste com
-   `recupera_estado`/`conta_rand` de `coleta.lua`), `AddPawn`/`SpawnPawn` com nome de zona (`so_analise/stubs_pawn.md` já
-   tem a leitura do PC), `SetItem` (com o dano do item), `SetTerrainIcon`, `Pawn:SetShield`/`SetPowered`/`SetAcid`.
-   Antes do turno inimigo, ler `so_analise/ia_inimiga_pc.md`, `fila_ataque_pc.md` e `turno_pc.md`: a IA começa cada
-   turno com `srand(aiSeed)` (AiController+0x80), então o turno inimigo pode ser testado contra o jogo.
-   `so_analise/nomes_pc_novos.csv` tem evidência fraca (ex.: 0x4F5D50 como `Board::GetPawns`, que é 0x566310): conferir
-   cada nome antes de usar.
+0. Bloco 5 da fila de uso (1 a 4 feitos, ver `rotinas_fila_uso.md`; 14 stubs restantes, poucos usos cada):
+   `BoardPawn:IsAvoidingMines`, `SetShield`, `SetPowered`, `SetAcid`, `SetActive`, `SetMissionCritical`;
+   `Board:IsEnvironmentDanger`, `IsWall`, `SetWall` (o núcleo já tem `set_wall`), `AddShield`, `MarkSpaceImage`,
+   `AddTeleport`; `GameMap:TriggerSound`. Depois, o turno inimigo: ler `so_analise/ia_inimiga_pc.md`,
+   `ia_inimiga_formulas.md`, `fila_ataque_pc.md` e `turno_pc.md`. A IA começa cada turno com `srand(aiSeed)`
+   (AiController+0x80, sorteado no construtor). Para o teste, o Lua do jogo tem `io` (a coleta já escreve arquivo),
+   então pode ler `aiSeed` de `saveData.lua` depois que o motor salvar; falta saber quando o motor salva.
+   `SelectMap` está lido em `so_analise/inicio_missao_pc.md`.
 1. `BoardPlayer::SelectMap` 0x582A60: hoje o mapa é argumento, e o teste o acha pelo terreno. Ela chama Lua
    (`GetMapTag`, `GetMapVetoes`, `GetMap`, `RandomMap`) e gasta `rand()` antes do primeiro ponto de sincronia da
    preparação. Reconstruir e conferir: o ponto `01` do cabeçalho do `itb-diff` deve passar a ficar em sincronia.

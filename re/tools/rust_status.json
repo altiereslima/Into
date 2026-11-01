@@ -930,6 +930,56 @@
       "BoardPawn",
       "SetFrozen",
       "0x00637810"
+    ],
+    [
+      "Board",
+      "RemovePawn",
+      "0x00561D20"
+    ],
+    [
+      "Board",
+      "RemovePawn",
+      "0x00561F00"
+    ],
+    [
+      "Board",
+      "ClearSpace",
+      "0x00565D40"
+    ],
+    [
+      "Board",
+      "SetItem",
+      "0x005727C0"
+    ],
+    [
+      "Board",
+      "SetTerrainIcon",
+      "0x00568880"
+    ],
+    [
+      "Board",
+      "GetDeployLocScore",
+      "0x0056CD40"
+    ],
+    [
+      "Board",
+      "AddPawn",
+      "0x0056EE40"
+    ],
+    [
+      "Board",
+      "AddPawn",
+      "0x0056ECE0"
+    ],
+    [
+      "Board",
+      "SpawnPawn",
+      "0x005690E0"
+    ],
+    [
+      "Board",
+      "SpawnPawn",
+      "0x00569250"
     ]
   ],
   "partial": [

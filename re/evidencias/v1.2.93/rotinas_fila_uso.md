@@ -66,12 +66,34 @@ Conferido contra o jogo: `Mission_Train` no mapa `trainAE4`, 0 divergências em 
 | `Board::SetAcid` 0x566150, `SetSmoke` 0x566060, `SetCracked` 0x56A7E0, `SetFrozen` 0x56D5F0, `RemoveShield` 0x569770 | só repassam para `BoardSpace::SetAcid` (embutida), `SetSmoke(bool, bool)` 0x5AC5A0, `SetCracked` 0x5ABAA0, `SetFrozen` 0x59F700 e `RemoveForceField` 0x59FC80, que o Rust já tinha da 1.2.88 |
 | `Pawn::SetFrozen(bool)` 0x637810 | grava +0x8D1; ao congelar, `SetOnFire(false)` (0x639F00) e `SetInfected(false)` (0x6380B0); o resto é animação e som |
 
-Lidos para o bloco 4, ainda não implementados:
-* `Board::GetDeployLocScore(Point)` 0x56CD40: com unidade na casa (slot 0x50 do `WeaponTarget`), −10. Senão cria na pilha
-  `Pawn("Wall", 6)` (0x627F30, que gasta `rand()` em 0x628D9A), `AddPawn(pawn, p)` (0x56E830), chama o Lua
-  `ScorePositioning(p, pawn)` (0x4F8650), `RemovePawn` (0x561D20) e destrói a unidade. Falta `RemovePawn` e medir o
-  consumo de `rand()`.
-* `Board::SetItem` 0x5727C0 → `BoardSpace::SetItem(string)` 0x5A0C50: lê `Image` e `Damage` da tabela Lua do item.
-
 Efeito na fila de uso: de 26 para 19 stubs.
+
+## Bloco 4
+Conferido contra o jogo em duas partidas: `Mission_Dam`/`opendam7` (tudo igual, menos ids absolutos de unidade, que o
+contador do original acumula desde o menu) e `Mission_Mines`/`any25`, já com ids relativos: 0 divergências em 66.525
+linhas. A seção `bloco4` põe itens, limpa casas, usa zonas, mede `GetDeployLocScore` (nota, 3 `rand()` e 1 id) e tira um
+mech do tabuleiro. A análise do `.so` (`so_analise/bloco4_pc.md`, `rand_unidade.md`, `stubs_pawn.md`) foi o guia, com
+duas correções: em `ClearSpace`, Board+0x2D50/+0x2D44 são a lista e a fila de surgimento (não paredes), e
+`AddPawn(nome, zona)` não tem ambiguidade de string (é o padrão do MSVC de montar antes o argumento da chamada de fora).
+
+| Rotina | Regra |
+|---|---|
+| `Board::RemovePawn(Pawn*)` 0x561D20 | casa da unidade (slot 0x28): +0x2630 = 1 e sai da lista da casa (`BoardSpace::FindPawn` 0x5A0060); o mesmo nas casas extras (slot 0x14, ainda não no Rust); limpa o cache do Dijkstra (Board+4); +0x944 = 0 com `SetWeaponTarget(0)`; sai da lista Board+0x3C |
+| `Board::RemovePawn(Point)` 0x561F00 | enquanto `HasPawn(true)` na casa, tira a primeira da lista da casa |
+| `BoardSpace::Clear()` 0x5A0330 | `Pawn::Kill(false)` embutida em cada unidade da casa, `OnInit(0, 0)` (0x5A0270) e `custom` (+0x27B4) vazio |
+| `Board::SetWall(bool, Point, int)` 0x574450 | parede `d` da casa e a oposta `(d+2)%4` na vizinha |
+| `Board::ClearSpace(Point)` 0x565D40 | `RemovePawn(p)`, `Clear`, 4 paredes desligadas e, se a casa está na lista de surgimento, sai dela e da fila paralela, com +0x27E8 = 0 |
+| `Board::AddPawn(Pawn*, string)` 0x56EE40 | zona por `std::map::operator[]` (ausente entra vazia); casas com `!IsBlocked(p, 0)`; `rand() % n`; `AddPawn(pawn, casa)`; sem casa, log e (-1, -1) |
+| `Board::AddPawn(string, string)` 0x56ECE0 | `AddPawn(CreatePawn(nome, 2), zona)` |
+| `Board::SpawnPawn(Pawn*, string)` 0x5690E0 | casas com `!IsBlocked(p, GetPathProf)`; `rand() % n`; `SpawnPawn(pawn, casa)`; sem casa, `SpawnPawn(pawn, (-1,-1))` |
+| `Board::SpawnPawn(string, string)` 0x569250 | `SpawnPawn(CreatePawn(nome, 2), zona)` e devolve o id (+0x9A4) |
+| `Board::SetItem(Point, string)` 0x5727C0 → `BoardSpace::SetItem` 0x5A0C50 | nome vazio: nada. Nome em +0x2AF4 (tamanho +0x2B04, o antigo `item_0x2b04`), imagem `Image` em +0x2880 e `SpaceDamage` da chave `Damage` em +0x2884 |
+| `BoardSpace::IsDangerousItem` 0x5A11E0 | com os nomes do registro luabind: `iDamage` (+0x08), `iPush != 4` (+0x0C), `iShield` (+0x10), `iFire` (+0x18), `iSmoke` (+0x24), `sPawn` não vazio (+0xA4, tamanho em +0xB4), `iAcid` (+0x28), `iFrozen` (+0x1C) |
+| `Board::SetTerrainIcon(Point, string)` 0x568880 | ícone em +0x2684 |
+| `Board::GetDeployLocScore(Point)` 0x56CD40 | com unidade na casa, −10; senão `Pawn("Wall", 6)` na pilha (3 `rand()`: duas habilidades do piloto padrão em 0x623BB5 e a semente em 0x628D9A; e um id), `AddPawn`, `ScorePositioning(p, pawn)` em Lua, `RemovePawn` |
+
+Os 3 `rand()` de toda criação de unidade, que o projeto não tinha localizado, são do piloto padrão `Pilot_Artificial`:
+duas habilidades sorteadas em `Pilot::OnInit` (0x623BB5, duas vezes) e a semente da unidade (0x628D9A, +0x924).
+
+Efeito na fila de uso: de 19 para 14 stubs; nas 85 missões sobram 5 erros de script.
 

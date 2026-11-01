@@ -15,6 +15,7 @@ Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao test
 - **`Board:SpawnPawn` e a fila de surgimento:** casa disponível, sorteio com `rand()` e entrada na fila, como em `Board::GetAvailableSpace` e `Board::SpawnQueued`; bloqueio de surgimento causa dano.
 - **`Game` real:** `GetSector`, `GetTeamTurn`, `GetTurnCount`, `IsIslandUnlocked` e `GetPower`; os outros métodos seguem como stub. Também `Board:GetPawns`, `SetTerrain`, `BlockSpawn` e `ClearBlockSpawns`.
 - **`startNewGame` e `Mission:BaseStart` originais terminam sem tocar nenhum stub:** `itb-map <jogo> any3 --missao Mission_Acid` mostra os inimigos na fila.
+- **Fila por uso, bloco 4:** `RemovePawn` (2 formas), `ClearSpace`, `SetItem` (com o dano do item por nome), `SetTerrainIcon`, `GetDeployLocScore` e as formas com zona de `AddPawn`/`SpawnPawn`. `item_0x2b04` virou `item` (nome). Os 3 `rand()` de criar unidade foram localizados (piloto padrão). Conferido contra o jogo: `Mission_Mines`/`any25`, 0 divergências em 66.525 linhas. Fila de uso: 14 stubs.
 - **Fila por uso, bloco 3:** `IsSafe` (verdadeiro = segura), `StopWeather`, `GetBuildings`, `SetCustomTile`, `SetAcid`, `SetSmoke`, `SetCracked`, `Board:SetFrozen`, `RemoveShield` e `Pawn:SetFrozen`. Conferido contra o jogo: `Mission_Train`/`trainAE4`, 0 divergências em 67.433 linhas, com mudanças de casa. Fila de uso: 19 stubs.
 - **Fila por uso, bloco 2:** `GetDistanceToBuilding`, `GetDistanceToPawn`, `IsDamaged`, `GetMechDamage`, `AddUniqueBuilding`, `MarkSpaceDesc`, `IsRanged`, `IsTempUnit`; `IsBusy` e `GetEventCount` parciais. `unique_0x27ac` virou `unique_building` (nome do prédio único). Conferido contra o jogo: `Mission_Tanks`/`any1`, 0 divergências em 66.666 linhas. Fila de uso: 26 stubs.
 - **Fila por uso, bloco 1:** `IsPowered`, `IsFrozen`, `IsDangerousItem`, `GetEnemyCount`, `GetPawnCount` (time e tipo), `IsNonGridStructure`, `GetCustomPositionScore`, `Objective:Failed` e `GameMap:AddObjective`; `IsTargeted` parcial (sem fila de ataques). Conferido contra o jogo: `Mission_Volatile`/`mix6`, 0 divergências em 66.302 linhas. Provas em `re/evidencias/v1.2.93/rotinas_fila_uso.md`.
@@ -26,8 +27,8 @@ Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao test
 |---|---|---|
 | Mapas originais carregados | 0 | **376 de 376**, sem chave ignorada |
 | Unidades criadas pelos mapas | 0 | **6 de 6** |
-| Nomes reconstruídos / plataforma / stubs (475) | 212 / 13 / 250 | **261 / 13 / 201** |
-| Testes | 100 + 2 | **145 + 6** |
+| Nomes reconstruídos / plataforma / stubs (475) | 212 / 13 / 250 | **266 / 13 / 196** |
+| Testes | 100 + 2 | **146 + 6** |
 | Fatos conferidos na 1.2.93 | 36 | **56** |
 
 ## Teste diferencial contra o jogo original

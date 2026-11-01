@@ -347,7 +347,7 @@ impl OccupancyBoard {
     pub fn tile_set_cracked(&mut self, p: Point, v: bool) {
         if !v { self.tile_mut_or_sentinel(p).cracked = 0; return; }
         if !self.is_crackable(p) { return; }
-        if self.tile(p).item_0x2b04 != 0 { self.events.push(BoardEvent::ItemTriggered(p)); }
+        if !self.tile(p).item.is_empty() { self.events.push(BoardEvent::ItemTriggered(p)); }
         self.tile_mut_or_sentinel(p).int_0x2ba0 = 0;
         if self.tile(p).pod_0x2ae4 == 1 { self.events.push(BoardEvent::PodDestroyed(p)); }
         let terr = self.tile(p).terrain;
@@ -459,7 +459,7 @@ impl OccupancyBoard {
         let terr = self.tile(p).terrain;
         if d > 0 {
             if mode != 1 {
-                if self.tile(p).item_0x2b04 != 0 { self.events.push(BoardEvent::ItemTriggered(p)); }
+                if !self.tile(p).item.is_empty() { self.events.push(BoardEvent::ItemTriggered(p)); }
                 if self.tile(p).pod_0x2ae4 == 1 { self.events.push(BoardEvent::PodDestroyed(p)); }
             }
             if self.tile(p).vines != 0 && mode != 1 { self.tile_set_vines(p, false); }
@@ -490,7 +490,7 @@ impl OccupancyBoard {
         if hit.crack == 1 { self.tile_set_cracked(p, true); }
         match hit.fire {
             1 => {
-                if self.tile(p).item_0x2b04 != 0 { self.events.push(BoardEvent::ItemTriggered(p)); }
+                if !self.tile(p).item.is_empty() { self.events.push(BoardEvent::ItemTriggered(p)); }
                 self.tile_set_fire(p, true);
                 for i in self.tile_pawns(p) { self.pawn_set_fire(i, true); }
             }
@@ -638,7 +638,7 @@ impl OccupancyBoard {
                 self.pawn_kill(i);
             } else if terr == TERRAIN_HOLE {
                 if !pawn.is_flying() { self.pawn_kill(i); }
-            } else if self.tile(p).item_0x2b04 != 0 {
+            } else if !self.tile(p).item.is_empty() {
                 self.events.push(BoardEvent::ItemTriggered(p));
             }
         }

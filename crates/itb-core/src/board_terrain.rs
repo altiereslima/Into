@@ -55,8 +55,8 @@ impl OccupancyBoard {
         p == self.pod_space && self.tile(self.pod_space).pod_0x2ae4 == 1
     }
 
-    /// 0x005716F0 `Board:IsItem(Point)`: DWORD +0x2B04 != 0 (sentinela se inválida).
-    pub fn is_item(&self, p: Point) -> bool { self.tile(p).item_0x2b04 != 0 }
+    /// 0x005716F0 `Board:IsItem(Point)`: tamanho do nome do item (+0x2B04) != 0 (sentinela se inválida).
+    pub fn is_item(&self, p: Point) -> bool { !self.tile(p).item.is_empty() }
 
     /// 0x005717A0 `Board:IsDangerous(Point)`: byte +0x2AF0, ou `p` em uma das listas Board+0x7460/0x7470.
     pub fn is_dangerous(&self, p: Point) -> bool {

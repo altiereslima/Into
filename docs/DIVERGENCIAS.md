@@ -28,7 +28,6 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | Regras lidas na 1.2.88 | versão atual é a 1.2.93 | código não relido rotina a rotina. O teste diferencial cobre valores, unidades, consultas de casa, alcance, caminho e efeitos gerados pelas armas, mas não a aplicação de dano, empurrão e o executor | Mudança do mesmo tamanho em rotina fora do teste passaria despercebida | Estender o teste diferencial à aplicação de efeitos |
 | `IgnoreFlip`, `Pushable` | `Pawn::OnInit` lê da definição do tipo | dados de entrada em `PawnStatusBytes` | Unidades reais ainda não vêm de `pawns.lua` | M4 |
 | Ordem de `MAP_LIST` | ordem da listagem da pasta feita pelo motor | alfabética (SUPOSIÇÃO: é o que o NTFS costuma devolver) | Escolha de mapa por sorteio, se a ordem diferir | Ler a rotina de listagem; comparar `MAP_LIST` no teste diferencial |
-| `AddPawn`/`SpawnPawn` com nome de zona | escolhem a casa pela zona | stub que devolve nil | Scripts que usam essas formas (ex.: `"disposal"`) | Ler 0x56EE40, 0x56ECE0, 0x5690E0, 0x569250 |
 | `SpawnPawn` em água, unidade que não voa | caminho com `general_DiamondTarget` | entra na casa com estado 1 | Inimigo em água | Ler 0x568D5A em diante |
 | `GetDropZone` com menos de 3 casas | caminho em 0x560E3A | devolve o que houver | Mechs em mapas apertados | Ler o resto da rotina |
 | Teste de casa para os times 3 e -3 | caminho próprio com `GetDropZone` | recusa | Quem chamar com esses times | Ler 0x57309B em diante |
@@ -60,4 +59,6 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | `GameMap:GetEventCount` (1.2.93: 0x60BD70) | lista global de eventos (0x8B8400) | sempre 0: eventos não existem no Rust | Objetivos que contam eventos (reparos, mortes por ácido, surgimentos bloqueados, inimigos mortos) | Achar quem grava a lista (o laço do jogo e `CApp::OnLoop`) |
 | Vida máxima dos mechs em `GetMechDamage` | 0x6350A0 recalcula o máximo pelos pilotos (`Zoltan_Skill`) | usa o máximo guardado | Mechs com piloto que muda a vida | Pilotos |
 | Projéteis e alertas da casa em `IsSafe` (1.2.93: vetores +0x2644 e +0x7E0) | animações pendentes contam como perigo | sempre vazios: o executor termina tudo na hora | Só durante animações | Laço de quadro (M7) |
+| Casas extras de unidades grandes (slot 0x14 de `Pawn`, `GetExtraSpaces`) | `RemovePawn` e a ocupação usam todas as casas da unidade | só a casa principal | Unidades de várias casas (trem, etc.) | Ler `GetExtraSpaces` e quem preenche |
+| Cache do Dijkstra limpo por `RemovePawn` | Board+4 | o Rust não tem cache | Nenhum (o Rust recalcula sempre) | — |
 

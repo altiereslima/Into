@@ -116,19 +116,8 @@ impl OccupancyBoard {
 
     fn load_map_tile(&mut self, m: &MapTile) {
         let p = m.loc;
-        // 0x5A0270: chama SetTerrain e depois limpa o estado da casa
-        self.tile_mut_or_sentinel(p).pawns.clear();
-        self.set_terrain(p, m.terrain);
+        self.tile_on_init(p, m.terrain);
         let t = self.tile_mut_or_sentinel(p);
-        t.shield_0x2aa4 = 0;
-        t.vines = 0;
-        t.frozen_0x2aa1 = false;
-        t.fire = 0;
-        t.pod_0x2ae4 = 0;
-        t.acid = 0;
-        t.smoke = 0;
-        t.cracked = 0;
-        t.item_0x2b04 = 0;
         t.byte_0x2710 = m.populated == 1;
         t.fire = m.fire;
         self.tile_set_acid(p, m.poison == 1);
@@ -143,6 +132,23 @@ impl OccupancyBoard {
         if !m.pawn.is_empty() {
             self.mission.pending_pawns.push((p, m.pawn.clone()));
         }
+    }
+
+    /// `BoardSpace::OnInit(int terreno, int)` (1.2.93: 0x5A0270): esvazia a lista de unidades da casa, chama
+    /// `SetTerrain` e limpa escudo, +0x2AA0/+0x2AA1, fogo, cápsula, ácido, fumaça, rachadura e item (`ClearItem`).
+    pub fn tile_on_init(&mut self, p: Point, terrain: i32) {
+        self.tile_mut_or_sentinel(p).pawns.clear();
+        self.set_terrain(p, terrain);
+        let t = self.tile_mut_or_sentinel(p);
+        t.shield_0x2aa4 = 0;
+        t.vines = 0;
+        t.frozen_0x2aa1 = false;
+        t.fire = 0;
+        t.pod_0x2ae4 = 0;
+        t.acid = 0;
+        t.smoke = 0;
+        t.cracked = 0;
+        t.item.clear();
     }
 
     /// `BoardSpace::SetHealth(ValueBar)` (1.2.93: 0x5AF190): grava a vida e ajusta por terreno. Entulho fica com no máximo 0; montanha tem

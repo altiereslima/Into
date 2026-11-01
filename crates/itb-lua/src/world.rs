@@ -37,12 +37,17 @@ fn stub_lookup(lua: &Lua, class: &str, k: &str) -> mlua::Result<Value> {
     }
 }
 
-/// Casa pedida por `AddPawn`/`SpawnPawn`: `(x)` usa (-1,-1), `(x, Point)` usa o ponto. `None` para as
-/// variantes com nome de zona, ainda não reconstruídas.
-fn spawn_target(a: &[Value]) -> Option<IPoint> {
+/// Casa pedida por `AddPawn`/`SpawnPawn`: `(x)` usa (-1,-1), `(x, Point)` usa o ponto e `(x, string)`, uma zona.
+enum Target {
+    At(IPoint),
+    Zone(String),
+}
+
+fn spawn_target(a: &[Value]) -> Option<Target> {
     match a {
-        [_] => Some(IPoint::new(-1, -1)),
-        [_, p] => pt(p),
+        [_] => Some(Target::At(IPoint::new(-1, -1))),
+        [_, Value::String(z)] => Some(Target::Zone(z.to_string_lossy().to_string())),
+        [_, p] => pt(p).map(Target::At),
         _ => None,
     }
 }
@@ -232,41 +237,53 @@ impl UserData for LBoard {
             Ok(())
         });
         // 1.2.93: (Pawn*, Point) 0x56E830, (Pawn*) 0x56ECC0, (string, Point) 0x56EC00 e (string) 0x56EFE0
-        // devolvem a casa final. As variantes com nome de zona continuam stub.
+        // devolvem a casa final; com zona, (Pawn*, string) 0x56EE40 e (string, string) 0x56ECE0, que cria a unidade
+        // com `CreatePawn(nome, 2)` e passa a zona adiante. Zona sem casa: (-1, -1), e a unidade não entra.
         m.add_method("AddPawn", |lua, s, a: MultiValue| {
             let a: Vec<Value> = a.into_iter().collect();
             let Some(target) = spawn_target(&a) else { return board_stub(lua, "AddPawn") };
             let rng = rng_of(lua)?;
             let fail = |e: OccupancyError| mlua::Error::RuntimeError(format!("AddPawn: {e:?}"));
+            let add = |state| -> mlua::Result<Option<usize>> {
+                let mut b = s.0.borrow_mut();
+                match &target {
+                    Target::At(p) => b.board_add_pawn_at(state, to_b(*p), &mut rng.borrow_mut()).map(Some).map_err(fail),
+                    Target::Zone(z) => b.add_pawn_zone(state, z, &mut rng.borrow_mut()).map_err(fail),
+                }
+            };
             let idx = match &a[0] {
                 Value::UserData(u) if u.is::<LPawn>() => {
                     let mut pawn = u.borrow_mut::<LPawn>()?;
-                    let state = detach(&pawn, s)?;
-                    let idx = s.0.borrow_mut().board_add_pawn_at(state, to_b(target), &mut rng.borrow_mut()).map_err(fail)?;
-                    pawn.board = s.0.clone();
-                    pawn.idx = idx;
+                    let idx = add(detach(&pawn, s)?)?;
+                    if let Some(idx) = idx {
+                        pawn.board = s.0.clone();
+                        pawn.idx = idx;
+                    }
                     idx
                 }
-                name => {
-                    let state = crate::pawns::create_pawn(lua, &crate::records::arg_str(name).ok_or_else(|| no_overload("AddPawn"))?, TEAM_NONE)?;
-                    s.0.borrow_mut().board_add_pawn_at(state, to_b(target), &mut rng.borrow_mut()).map_err(fail)?
-                }
+                name => add(crate::pawns::create_pawn(lua, &crate::records::arg_str(name).ok_or_else(|| no_overload("AddPawn"))?, TEAM_NONE)?)?,
             };
-            let space = s.0.borrow().pawns[idx].space;
+            let space = idx.map_or(BPoint::INVALID, |i| s.0.borrow().pawns[i].space);
             LPoint(from_b(space)).into_lua(lua)
         });
         // 1.2.93: (Pawn*, Point) 0x568CA0, (Pawn*) 0x5690C0 e, com o id de volta, (string, Point) 0x568F30 e
-        // (string) 0x569030. As variantes com nome de zona continuam stub.
+        // (string) 0x569030; com zona, (Pawn*, string) 0x5690E0 e (string, string) 0x569250.
         m.add_method("SpawnPawn", |lua, s, a: MultiValue| {
             let a: Vec<Value> = a.into_iter().collect();
             let Some(target) = spawn_target(&a) else { return board_stub(lua, "SpawnPawn") };
             let rng = rng_of(lua)?;
             let fail = |e: OccupancyError| mlua::Error::RuntimeError(format!("SpawnPawn: {e:?}"));
+            let spawn = |state| -> mlua::Result<usize> {
+                let mut b = s.0.borrow_mut();
+                match &target {
+                    Target::At(p) => b.spawn_pawn(state, to_b(*p), &mut rng.borrow_mut()).map_err(fail),
+                    Target::Zone(z) => b.spawn_pawn_zone(state, z, &mut rng.borrow_mut()).map_err(fail),
+                }
+            };
             match &a[0] {
                 Value::UserData(u) if u.is::<LPawn>() => {
                     let mut pawn = u.borrow_mut::<LPawn>()?;
-                    let state = detach(&pawn, s)?;
-                    let idx = s.0.borrow_mut().spawn_pawn(state, to_b(target), &mut rng.borrow_mut()).map_err(fail)?;
+                    let idx = spawn(detach(&pawn, s)?)?;
                     pawn.board = s.0.clone();
                     pawn.idx = idx;
                     Ok(Value::Nil)
@@ -274,10 +291,60 @@ impl UserData for LBoard {
                 name => {
                     let state = crate::pawns::create_pawn(lua, &crate::records::arg_str(name).ok_or_else(|| no_overload("SpawnPawn"))?, TEAM_NONE)?;
                     let id = state.id;
-                    s.0.borrow_mut().spawn_pawn(state, to_b(target), &mut rng.borrow_mut()).map_err(fail)?;
+                    spawn(state)?;
                     id.into_lua(lua)
                 }
             }
+        });
+        // bloco 4
+        m.add_method("RemovePawn", |_, s, v: Value| {
+            match &v {
+                Value::UserData(u) if u.is::<LPawn>() => {
+                    let pawn = u.borrow::<LPawn>()?;
+                    if Rc::ptr_eq(&pawn.board, &s.0) { s.0.borrow_mut().remove_pawn(pawn.idx); }
+                }
+                _ => {
+                    let p = pt(&v).ok_or_else(|| no_overload("RemovePawn(Pawn), RemovePawn(Point)"))?;
+                    s.0.borrow_mut().remove_pawns_at(to_b(p));
+                }
+            }
+            Ok(())
+        });
+        m.add_method("ClearSpace", |_, s, p: LPoint| { s.0.borrow_mut().clear_space(to_b(p.0)); Ok(()) });
+        m.add_method("SetTerrainIcon", |_, s, (p, icon): (LPoint, Value)| {
+            let icon = crate::records::arg_str(&icon).ok_or_else(|| no_overload("SetTerrainIcon(Point,string)"))?;
+            s.0.borrow_mut().set_terrain_icon(to_b(p.0), &icon);
+            Ok(())
+        });
+        // `BoardSpace::SetItem` lê `_G[nome].Damage` como `SpaceDamage` (padrão `SpaceDamage()` sem ela).
+        m.add_method("SetItem", |lua, s, (p, name): (LPoint, Value)| {
+            let name = crate::records::arg_str(&name).ok_or_else(|| no_overload("SetItem(Point,string)"))?;
+            let mut damage = itb_core::board_mission::ItemDamage::default();
+            if let Some(t) = lua.globals().get::<Option<mlua::Table>>(name.as_str()).ok().flatten() {
+                if let Some(d) = crate::skill::damage_arg(&t.get::<Value>("Damage")?) {
+                    let int = |k: &str| d.int(k);
+                    damage = itb_core::board_mission::ItemDamage {
+                        damage: int("iDamage"), push: int("iPush"), shield: int("iShield"), fire: int("iFire"),
+                        frozen: int("iFrozen"), smoke: int("iSmoke"), acid: int("iAcid"),
+                        pawn: match d.get("sPawn") { Some(crate::records::Field::Str(s)) => s.clone(), _ => String::new() },
+                    };
+                }
+            }
+            s.0.borrow_mut().set_item(to_b(p.0), &name, damage);
+            Ok(())
+        });
+        // 0x56CD40 `Board::GetDeployLocScore(Point)`: casa com unidade, −10. Senão `Pawn("Wall", 6)` na pilha (3 `rand()`
+        // e um id, como `CreatePawn`), `AddPawn(pawn, p)`, `ScorePositioning(p, pawn)` em Lua, `RemovePawn`.
+        m.add_method("GetDeployLocScore", |lua, s, p: LPoint| {
+            let bp = to_b(p.0);
+            if s.0.borrow().is_pawn_space(bp) { return Ok(-10); }
+            let state = crate::pawns::create_pawn(lua, "Wall", 6)?;
+            let rng = rng_of(lua)?;
+            let idx = s.0.borrow_mut().board_add_pawn_at(state, bp, &mut rng.borrow_mut()).map_err(|e| mlua::Error::RuntimeError(format!("GetDeployLocScore: {e:?}")))?;
+            let f: mlua::Function = lua.globals().get("ScorePositioning")?;
+            let score = f.call::<Value>((p, LPawn { board: s.0.clone(), idx }));
+            s.0.borrow_mut().remove_pawn(idx);
+            Ok(score.ok().and_then(|v| arg_int(&v)).unwrap_or(0))
         });
         m.add_method("SpawnQueued", |_, s, ()| { s.0.borrow_mut().spawn_queued(); Ok(()) });
         // 0x566310: ids, na ordem da lista do tabuleiro.
@@ -477,6 +544,7 @@ pub const BOARD_DONE: &[&str] = &[
     "GetHealth", "RandomizeTerrain", "SetWeather", "IsPowered", "IsFrozen", "IsDangerousItem", "GetEnemyCount", "GetPawnCount",
     "GetDistanceToBuilding", "GetDistanceToPawn", "IsDamaged", "GetMechDamage", "AddUniqueBuilding", "MarkSpaceDesc",
     "IsSafe", "StopWeather", "GetBuildings", "SetCustomTile", "SetAcid", "SetSmoke", "SetCracked", "SetFrozen", "RemoveShield",
+    "RemovePawn", "ClearSpace", "SetTerrainIcon", "SetItem", "GetDeployLocScore",
 ];
 /// Ligados, mas com parte do estado ainda ausente no Rust (ver `docs/DIVERGENCIAS.md`).
 pub const BOARD_PARTIAL: &[&str] = &["IsTargeted", "IsBusy"];

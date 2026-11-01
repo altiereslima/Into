@@ -49,7 +49,7 @@ fn blocks_items_pods_and_queued_spaces_are_not_available() {
     b.clear_block_spawns();
     assert!(!b.is_available(TEAM_ENEMY, PATH_GROUND, p), "o tipo 2 sobrevive a ClearBlockSpawns");
     let q = pt(5, 4);
-    b.tile_mut(q).unwrap().item_0x2b04 = 1;
+    b.tile_mut(q).unwrap().item = "Item_Mine".into();
     assert!(!b.is_available(TEAM_ENEMY, PATH_GROUND, q));
     let r = pt(5, 5);
     b.tile_mut(r).unwrap().pod_0x2ae4 = 1;

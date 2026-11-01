@@ -100,7 +100,7 @@ impl OccupancyBoard {
     /// Os times 3 e -3 têm outro caminho, que não foi lido.
     pub fn is_available(&self, team: i32, prof: i32, p: Point) -> bool {
         let t = self.tile(p);
-        if t.item_0x2b04 != 0 || t.pod_0x2ae4 == 1 { return false; }
+        if !t.item.is_empty() || t.pod_0x2ae4 == 1 { return false; }
         if matches!(self.mission.block_spawn.get(&p), Some(1 | 2)) { return false; }
         if self.is_dangerous(p) { return false; }
         let side = if team == 9 { TEAM_ENEMY } else { team };

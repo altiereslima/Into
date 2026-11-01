@@ -441,6 +441,35 @@ local function coleta_missao(mapa)
 	emit("mutacao", "mech_casa_congelada", tostring(Board:IsFrozen(mech:GetSpace())))
 	mech:SetFrozen(false)
 	emit("mutacao", "mech_descongelado", tostring(mech:IsFrozen()))
+
+	-- bloco 4: itens, limpeza de casa, zonas e a unidade temporária de GetDeployLocScore
+	for k, it in ipairs({ "Item_Mine", "Item_Repair_Mine", "Supply_Drop" }) do
+		local p = Point(k, 2)
+		Board:SetItem(p, it)
+		emit("bloco4", it, tostring(Board:IsItem(p)) .. "," .. tostring(Board:IsDangerousItem(p)))
+	end
+	local antes = Board:GetPawns(TEAM_ENEMY):size()
+	Board:ClearSpace(Point(3, 6))
+	emit("bloco4", "clear", antes .. ">" .. Board:GetPawns(TEAM_ENEMY):size() .. "," .. Board:GetPawnTeam(Point(3, 6))
+		.. "," .. tostring(Board:IsItem(Point(3, 2))))
+	Board:ClearSpace(Point(3, 2))
+	emit("bloco4", "clear_item", tostring(Board:IsItem(Point(3, 2))))
+	-- ids relativos: o contador absoluto depende de tudo o que o jogo criou desde o menu
+	local base = PAWN_FACTORY:CreatePawn("Firefly1"):GetId()
+	local s = recupera_estado()
+	local nota = Board:GetDeployLocScore(Point(2, 4))
+	local gasto
+	gasto, s = conta_rand(s)
+	emit("bloco4", "deploy", nota .. "," .. gasto .. "," .. Board:GetDeployLocScore(mech:GetSpace()))
+	emit("bloco4", "id_depois", PAWN_FACTORY:CreatePawn("Firefly1"):GetId() - base)
+	for _, z in ipairs({ "enemy", "deployment", "nao_existe" }) do
+		local u = PAWN_FACTORY:CreatePawn("Firefly1")
+		emit("bloco4", "add_" .. z, ponto(Board:AddPawn(u, z)))
+		emit("bloco4", "spawn_" .. z, Board:SpawnPawn("Hornet1", z) - base)
+		emit("bloco4", "zona_" .. z, lista_pontos(Board:GetZone(z)))
+	end
+	Board:RemovePawn(mech)
+	emit("bloco4", "remove", Board:GetPawns(TEAM_PLAYER):size() .. "," .. tostring(Board:IsPawnSpace(mech:GetSpace())))
 	emit("fim", "missao", "ok")
 end
 

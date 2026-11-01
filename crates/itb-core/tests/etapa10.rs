@@ -127,7 +127,7 @@ fn crackable_pod_item_danger_spawn() {
     assert!(!b.is_pod(pt(3, 3)));
     b.tile_mut(pt(3, 3)).unwrap().pod_0x2ae4 = 1;
     assert!(b.is_pod(pt(3, 3)) && !b.is_pod(pt(3, 4)));
-    b.tile_mut(pt(6, 6)).unwrap().item_0x2b04 = 4;
+    b.tile_mut(pt(6, 6)).unwrap().item = "Item_Mine".into();
     assert!(b.is_item(pt(6, 6)) && !b.is_item(pt(6, 5)));
     b.danger_list_b.push(pt(7, 7));
     b.tile_mut(pt(0, 7)).unwrap().danger_0x2af0 = true;
