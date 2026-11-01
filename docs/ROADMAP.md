@@ -8,7 +8,7 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 | M1 | Boot dos scripts originais | Todos os arquivos de `GetScripts()` presentes carregam sem erro no host Rust | ✅ Etapa 06 (137/137) |
 | M2 | Tipos de valor completos | `Point`, `Rect2D`, `GL_Color`, `Button`, `Text`, `StyleInfo`, `Objective`, `SpaceDamage`, `SkillEffect`, listas | ▶ 17 classes prontas, incl. SkillEffect e listas (faltam Effect, Choice, Squad…) |
 | M3 | Ciclo de vida do motor | Descobrir no EXE o que roda depois do boot (funções Lua chamadas pelo C++, ordem, argumentos) e reproduzir | ▶ inicialização reproduzida; 118 callbacks inventariados |
-| M4 | Missão em memória | Carregar um `.map` original, criar `Board`/`Game`, posicionar unidades via `PAWN_FACTORY` | ▶ 376/376 mapas carregam, `PAWN_FACTORY` cria unidades e `startNewGame` + `BaseStart` terminam sem stub; falta o fluxo de `BoardPlayer` (mapa da missão, posicionamento, surgimento) |
+| M4 | Missão em memória | Carregar um `.map` original, criar `Board`/`Game`, posicionar unidades via `PAWN_FACTORY` | ▶ 376/376 mapas carregam, `PAWN_FACTORY` cria unidades e `startNewGame` + `BaseStart` terminam sem stub; preparação da missão (terreno aleatório, vida dos prédios, chuva) igual ao jogo; falta o resto de `BoardPlayer` (`SelectMap`, `InitializeMission`, posicionamento) |
 | M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | ▶ 559/559 armas geram e **aplicam** seus efeitos, com fila e atrasos do motor; faltam tempo de voo, rede elétrica, itens |
 | M6 | Turno inimigo | IA (scripts) + pathfinding nativo (`GetPath`, `GetReachable`...) idênticos | ▶ GetReachable/GetPath/GetSimpleReachable/GetSimplePath prontos |
 | M7 | Simulador sem gráficos | Uma missão completa jogada por script de teste, resultado comparável ao original | |
@@ -18,7 +18,7 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 ## Fila imediata
 
 O projeto já foi migrado para a 1.2.93 (ver `CHECKPOINT.md`).
-Etapa 13: terminar M4 (fluxo de `BoardPlayer`, `RandomizeTerrain`), estendendo o teste diferencial a cada regra nova; depois laço de quadro,
+Etapa 13: terminar M4 (resto de `BoardPlayer`: `SelectMap`, `InitializeMission`, posicionamento), estendendo o teste diferencial a cada regra nova; depois laço de quadro,
 `BoardPlayer`, tempo de voo dos projéteis, efeito de chegada completo e turno inimigo (M6).
 Antes disso, a fila vinha do M3:
 ler, para cada callback de `re/evidencias/engine_callbacks.csv`, como o motor o chama, começando por
