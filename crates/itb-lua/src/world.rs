@@ -327,6 +327,26 @@ impl UserData for LBoard {
             Ok(())
         });
         m.add_method("IsBusy", |_, s, ()| Ok(s.0.borrow().is_busy()));
+        // bloco 3
+        q!(m, "IsSafe", "IsSafe(Point)", |b, p| b.is_safe(p));
+        m.add_method("StopWeather", |_, s, ()| { s.0.borrow_mut().stop_weather(); Ok(()) });
+        // 0x5663F0: cópia da lista de prédios (Board+0x2C44)
+        m.add_method("GetBuildings", |_, s, ()| {
+            Ok(crate::skill::LPointList(s.0.borrow().buildings.iter().map(|&p| from_b(p)).collect()))
+        });
+        m.add_method("SetCustomTile", |_, s, (p, name): (LPoint, Value)| {
+            let name = crate::records::arg_str(&name).ok_or_else(|| no_overload("SetCustomTile(Point,string)"))?;
+            s.0.borrow_mut().set_custom_tile(to_b(p.0), &name);
+            Ok(())
+        });
+        // 0x566150 `SetAcid`, 0x566060 `SetSmoke`, 0x56A7E0 `SetCracked`, 0x56D5F0 `SetFrozen` e 0x569770
+        // `RemoveShield` só repassam para a casa (`BoardSpace::SetAcid`, `SetSmoke(bool, bool)`, `SetCracked`,
+        // `SetFrozen`, `RemoveForceField`), ou para a sentinela com casa inválida.
+        m.add_method("SetAcid", |_, s, (p, v): (LPoint, bool)| { s.0.borrow_mut().tile_set_acid(to_b(p.0), v); Ok(()) });
+        m.add_method("SetSmoke", |_, s, (p, v, _extra): (LPoint, bool, bool)| { s.0.borrow_mut().tile_set_smoke(to_b(p.0), v); Ok(()) });
+        m.add_method("SetCracked", |_, s, (p, v): (LPoint, bool)| { s.0.borrow_mut().tile_set_cracked(to_b(p.0), v); Ok(()) });
+        m.add_method("SetFrozen", |_, s, (p, v): (LPoint, bool)| { s.0.borrow_mut().tile_set_frozen(to_b(p.0), v); Ok(()) });
+        m.add_method("RemoveShield", |_, s, p: LPoint| { s.0.borrow_mut().tile_shield_off(to_b(p.0)); Ok(()) });
         // 0x571630 `(int)` e 0x567000 `(string)`
         m.add_method("GetPawnCount", |_, s, v: Value| {
             let b = s.0.borrow();
@@ -416,6 +436,8 @@ impl UserData for LPawn {
         // 0x63B750 `Pawn::IsNonGridStructure`: `NonGrid` da tabela do tipo (lido na criação).
         m.add_method("IsNonGridStructure", |_, p, ()| Ok(with(p, |s| s.non_grid_structure)));
         // 0x63CF50: `LuaData::GetInt("Ranged") == 1`; 0x63A960: `LuaData::GetBool("TempUnit")`.
+        // 0x637810 `Pawn::SetFrozen(bool)`: grava +0x8D1; congelar apaga fogo e infecção (o resto é animação e som).
+        m.add_method("SetFrozen", |_, p, v: bool| { p.board.borrow_mut().pawn_set_frozen(p.idx, v); Ok(()) });
         m.add_method("IsRanged", |lua, p, ()| Ok(crate::pawns::type_int(lua, &with(p, |s| s.type_name.clone()), "Ranged")? == 1));
         m.add_method("IsTempUnit", |lua, p, ()| crate::pawns::type_bool(lua, &with(p, |s| s.type_name.clone()), "TempUnit"));
         // 0x639C00: `CallMethod(tipo, "GetPositionScore", p)` (0x641980, `LuaEnv::CallMethod<int, Point>`). Erro ou
@@ -454,6 +476,7 @@ pub const BOARD_DONE: &[&str] = &[
     "GetZone", "AddPawn", "SpawnPawn", "SpawnQueued", "GetPawns", "SetTerrain", "BlockSpawn", "ClearBlockSpawns",
     "GetHealth", "RandomizeTerrain", "SetWeather", "IsPowered", "IsFrozen", "IsDangerousItem", "GetEnemyCount", "GetPawnCount",
     "GetDistanceToBuilding", "GetDistanceToPawn", "IsDamaged", "GetMechDamage", "AddUniqueBuilding", "MarkSpaceDesc",
+    "IsSafe", "StopWeather", "GetBuildings", "SetCustomTile", "SetAcid", "SetSmoke", "SetCracked", "SetFrozen", "RemoveShield",
 ];
 /// Ligados, mas com parte do estado ainda ausente no Rust (ver `docs/DIVERGENCIAS.md`).
 pub const BOARD_PARTIAL: &[&str] = &["IsTargeted", "IsBusy"];
@@ -462,5 +485,5 @@ pub const PAWN_HOST: &[&str] = &["GetBaseMove", "IsAbility"];
 pub const PAWN_DONE: &[&str] = &[
     "GetHealth", "IsDead", "IsDamaged", "GetTeam", "IsPlayer", "IsEnemy", "GetId", "IsMech", "GetSpace", "SetTeam", "SetMech", "GetPathProf", "IsFire", "IsFrozen", "IsAcid", "IsInfected", "IsPowered", "IsGuarding",
     "IsShield", "IsBoosted", "IsFlying", "GetType", "IsTeleporter", "IsJumper", "IsBurrower", "GetMoveSpeed", "IsCorpse", "IsGrappled",
-    "IsNonGridStructure", "GetCustomPositionScore", "IsRanged", "IsTempUnit",
+    "IsNonGridStructure", "GetCustomPositionScore", "IsRanged", "IsTempUnit", "SetFrozen",
 ];

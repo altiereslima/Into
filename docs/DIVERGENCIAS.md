@@ -59,4 +59,5 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | `Board:IsBusy` (1.2.93: 0x569850) | `GetBusyState`: animações, efeitos e filas pendentes | sempre falso: o executor termina tudo na hora | Scripts que esperam o fim de animações | Laço de quadro (M7) |
 | `GameMap:GetEventCount` (1.2.93: 0x60BD70) | lista global de eventos (0x8B8400) | sempre 0: eventos não existem no Rust | Objetivos que contam eventos (reparos, mortes por ácido, surgimentos bloqueados, inimigos mortos) | Achar quem grava a lista (o laço do jogo e `CApp::OnLoop`) |
 | Vida máxima dos mechs em `GetMechDamage` | 0x6350A0 recalcula o máximo pelos pilotos (`Zoltan_Skill`) | usa o máximo guardado | Mechs com piloto que muda a vida | Pilotos |
+| Projéteis e alertas da casa em `IsSafe` (1.2.93: vetores +0x2644 e +0x7E0) | animações pendentes contam como perigo | sempre vazios: o executor termina tudo na hora | Só durante animações | Laço de quadro (M7) |
 

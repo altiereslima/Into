@@ -263,7 +263,7 @@ local function coleta_casas(secao)
 			emit(secao, k .. ".terreno", Board:GetTerrain(p))
 			for _, n in ipairs({ "IsBuilding", "IsFire", "IsSmoke", "IsVines", "IsAcid", "IsCracked", "IsEdge", "IsPod", "IsItem",
 				"IsDangerous", "IsSpawning", "IsCrackable", "IsValid", "IsPawnSpace", "IsPowered", "IsFrozen", "IsDangerousItem",
-				"IsTargeted", "IsDamaged" }) do
+				"IsTargeted", "IsDamaged", "IsSafe" }) do
 				emit(secao, k .. "." .. n, tostring(Board[n](Board, p)))
 			end
 			emit(secao, k .. ".GetPawnTeam", Board:GetPawnTeam(p))
@@ -397,6 +397,7 @@ local function coleta_missao(mapa)
 		emit("entrada", "GetPawnCount_" .. n, Board:GetPawnCount(n))
 	end
 	emit("entrada", "GetMechDamage", Board:GetMechDamage())
+	emit("entrada", "GetBuildings", lista_pontos(Board:GetBuildings()))
 	for _, e in ipairs({ "EVENT_REPAIR_PICKUP", "EVENT_REPAIR_UNDO", "EVENT_ACID_DESTROYED", "EVENT_SPAWNBLOCKED", "EVENT_ENEMY_KILLED" }) do
 		emit("entrada", "GetEventCount." .. e, Game:GetEventCount(_G[e]))
 	end
@@ -418,6 +419,28 @@ local function coleta_missao(mapa)
 	end
 	Board:MarkSpaceDesc(Point(0, 0), "supervolcano")
 	emit("unico", "crackable_supervolcano", tostring(Board:IsCrackable(Point(0, 0))))
+
+	-- mudanças de casa e de unidade, lidas logo depois
+	local function estado(chave, p)
+		emit("mutacao", chave, Board:GetTerrain(p) .. "," .. tostring(Board:IsAcid(p)) .. "," .. tostring(Board:IsFire(p)) .. ","
+			.. tostring(Board:IsSmoke(p)) .. "," .. tostring(Board:IsCracked(p)) .. "," .. tostring(Board:IsFrozen(p)) .. ","
+			.. Board:GetHealth(p) .. "," .. tostring(Board:IsSafe(p)))
+	end
+	for _, p in ipairs({ Point(6, 6), Point(6, 7), Point(7, 6), Point(7, 7), Point(1, 1) }) do
+		local k = ponto(p)
+		estado(k .. ".antes", p)
+		Board:SetAcid(p, true) estado(k .. ".acido", p)
+		Board:SetSmoke(p, true, false) estado(k .. ".fumaca", p)
+		Board:SetCracked(p, true) estado(k .. ".rachada", p)
+		Board:SetFrozen(p, true) estado(k .. ".congelada", p)
+		Board:RemoveShield(p) estado(k .. ".sem_escudo", p)
+		Board:SetSmoke(p, false, false) Board:SetAcid(p, false) estado(k .. ".limpa", p)
+	end
+	mech:SetFrozen(true)
+	emit("mutacao", "mech_congelado", tostring(mech:IsFrozen()) .. "," .. tostring(mech:IsFire()))
+	emit("mutacao", "mech_casa_congelada", tostring(Board:IsFrozen(mech:GetSpace())))
+	mech:SetFrozen(false)
+	emit("mutacao", "mech_descongelado", tostring(mech:IsFrozen()))
 	emit("fim", "missao", "ok")
 end
 

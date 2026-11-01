@@ -156,6 +156,28 @@ impl OccupancyBoard {
     /// 0x569850 `Board::IsBusy()` → `GetBusyState` (0x569860): animações, efeitos e filas pendentes. O executor do Rust
     /// termina tudo na hora, então nunca há nada pendente quando um script pergunta.
     pub fn is_busy(&self) -> bool { false }
+
+    /// 0x56CE40 `Board::IsSafe(Point)`: verdadeiro quando nenhum perigo se aplica, nesta ordem: `IsPod`, ácido da casa
+    /// (+0x2AF1), `IsFire`, `IsTargeted`, projéteis e alertas pendentes na casa (vetores +0x2644 e +0x7E0, que o executor
+    /// do Rust nunca deixa cheios), terreno 3 (+0x2AE0, sem a exceção de `IsTerrain`), `IsSpawning`, `IsSmoke` e o
+    /// slot 0x0C, `IsBlocked(p, 0)`. No fim, `!IsTargeted(p)` de novo.
+    pub fn is_safe(&self, p: Point) -> bool {
+        if self.is_pod(p) || self.tile(p).acid != 0 || self.is_fire(p) || self.is_targeted(p) { return false; }
+        if self.tile(p).terrain == TERRAIN_WATER || self.is_spawning(p) || self.is_smoke(p) || self.is_blocked(p, 0) {
+            return false;
+        }
+        !self.is_targeted(p)
+    }
+
+    /// 0x56D5C0 `Board::StopWeather()`: `RainCloud::SetWeather(0, 0, (0,0), (8,8), -1.0f)` sobre Board+0x2DA0.
+    pub fn stop_weather(&mut self) {
+        self.set_weather(0, 0, Point::new(0, 0), Point::new(8, 8), -1.0);
+    }
+
+    /// 0x565F00 `Board::SetCustomTile(Point, string)`: grava o nome em `custom` (+0x27B4).
+    pub fn set_custom_tile(&mut self, p: Point, name: &str) {
+        self.tile_mut_or_sentinel(p).custom_tile = name.to_string();
+    }
 }
 
 #[cfg(test)]
@@ -263,6 +285,22 @@ mod tests {
         assert_eq!(b.get_mech_damage(), 1);
         b.mark_space_desc(Point::new(0, 0), "supervolcano");
         assert!(!b.is_crackable(Point::new(0, 0)));
+    }
+
+    #[test]
+    fn casa_segura() {
+        let mut b = OccupancyBoard::new(4, 1).unwrap();
+        assert!(b.is_safe(Point::new(0, 0)));
+        b.tile_mut(Point::new(0, 0)).unwrap().terrain = TERRAIN_WATER;
+        assert!(!b.is_safe(Point::new(0, 0)));
+        b.tile_mut(Point::new(1, 0)).unwrap().acid = 1;
+        assert!(!b.is_safe(Point::new(1, 0)));
+        b.tile_mut(Point::new(2, 0)).unwrap().smoke = 1;
+        assert!(!b.is_safe(Point::new(2, 0)));
+        b.add_pawn(pawn("Firefly1", TEAM_ENEMY, Point::new(3, 0))).unwrap();
+        assert!(!b.is_safe(Point::new(3, 0)));
+        b.stop_weather();
+        assert_eq!(b.weather.as_ref().map(|w| (w.kind, w.time)), Some((0, -1.0)));
     }
 
     #[test]

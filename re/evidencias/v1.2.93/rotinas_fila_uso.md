@@ -53,3 +53,25 @@ A análise do `.so` (fora do repositório) foi o guia; três rotinas diferem do 
 
 Efeito na fila de uso: de 36 para 26 stubs; os 10.932 erros em `ScorePositioning` sumiram.
 
+## Bloco 3
+Conferido contra o jogo: `Mission_Train` no mapa `trainAE4`, 0 divergências em 67.433 linhas, com a seção nova
+`mutacao` (acidifica, enfumaça, racha, congela e tira o escudo de 5 casas e congela um mech, lendo o estado a cada passo).
+
+| Rotina | Regra |
+|---|---|
+| `Board::IsSafe(Point)` 0x56CE40 | **verdadeiro quando seguro**; falso, nesta ordem, com `IsPod`, ácido (+0x2AF1), `IsFire` (0x568AC0), `IsTargeted`, vetores de projéteis e alertas da casa não vazios (+0x2644/+0x2648 e +0x7E0/+0x7E4, de `OnRenderProjectiles` e `AddAlert`), terreno 3 cru (+0x2AE0 por 0x55EAB0), `IsSpawning`, `IsSmoke` (0x566260) e o slot 0x0C (`IsBlocked(p, 0)`); no fim `!IsTargeted(p)`. A análise do Android não conseguiu fixar o sentido do retorno |
+| `Board::StopWeather()` 0x56D5C0 | `RainCloud::SetWeather(0, 0, (0,0), (8,8), -1.0f)` em Board+0x2DA0 |
+| `Board::GetBuildings()` 0x5663F0 | cópia da lista Board+0x2C44 como `PointList` |
+| `Board::SetCustomTile(Point, string)` 0x565F00 | nome em +0x27B4 |
+| `Board::SetAcid` 0x566150, `SetSmoke` 0x566060, `SetCracked` 0x56A7E0, `SetFrozen` 0x56D5F0, `RemoveShield` 0x569770 | só repassam para `BoardSpace::SetAcid` (embutida), `SetSmoke(bool, bool)` 0x5AC5A0, `SetCracked` 0x5ABAA0, `SetFrozen` 0x59F700 e `RemoveForceField` 0x59FC80, que o Rust já tinha da 1.2.88 |
+| `Pawn::SetFrozen(bool)` 0x637810 | grava +0x8D1; ao congelar, `SetOnFire(false)` (0x639F00) e `SetInfected(false)` (0x6380B0); o resto é animação e som |
+
+Lidos para o bloco 4, ainda não implementados:
+* `Board::GetDeployLocScore(Point)` 0x56CD40: com unidade na casa (slot 0x50 do `WeaponTarget`), −10. Senão cria na pilha
+  `Pawn("Wall", 6)` (0x627F30, que gasta `rand()` em 0x628D9A), `AddPawn(pawn, p)` (0x56E830), chama o Lua
+  `ScorePositioning(p, pawn)` (0x4F8650), `RemovePawn` (0x561D20) e destrói a unidade. Falta `RemovePawn` e medir o
+  consumo de `rand()`.
+* `Board::SetItem` 0x5727C0 → `BoardSpace::SetItem(string)` 0x5A0C50: lê `Image` e `Damage` da tabela Lua do item.
+
+Efeito na fila de uso: de 26 para 19 stubs.
+

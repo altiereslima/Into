@@ -23,11 +23,14 @@ Leia antes `CLAUDE.md` e `CHECKPOINT.md`. Endereços abaixo são da 1.2.93.
 - Documentar ao fechar o bloco, não a cada rotina.
 
 ## Próximo passo
-0. Bloco 3 da fila de uso (1 e 2 feitos, ver `rotinas_fila_uso.md`; 26 stubs restantes, quase todos de `BaseStart`):
-   `BoardPawn:SetFrozen`, `Board:AddPawn` (forma com zona), `Board:GetBuildings`, `Board:GetDeployLocScore`, `Board:SetItem`,
-   `Board:SetCustomTile`, `Board:ClearSpace`, `Board:SetAcid`, `Board:StopWeather`, `Board:IsSafe`. A outra IA analisa o
-   `.so` em `C:\Projetos\Into the Breach\so_analise\` (fora do repositório): ler `pseudocodigo_*.md` antes do bloco e
-   conferir no PC (o Android difere em detalhes: `IsRanged`, `IsDamaged`, `GetEventCount`). Depois `itb-uso` e uma rodada.
+0. Bloco 4 da fila de uso (1 a 3 feitos, ver `rotinas_fila_uso.md`; 19 stubs restantes): `Board::RemovePawn` (0x561D20),
+   `ClearSpace`, `GetDeployLocScore` (já lida: unidade "Wall" temporária; medir o consumo de `rand()` no teste com
+   `recupera_estado`/`conta_rand` de `coleta.lua`), `AddPawn`/`SpawnPawn` com nome de zona (`so_analise/stubs_pawn.md` já
+   tem a leitura do PC), `SetItem` (com o dano do item), `SetTerrainIcon`, `Pawn:SetShield`/`SetPowered`/`SetAcid`.
+   Antes do turno inimigo, ler `so_analise/ia_inimiga_pc.md`, `fila_ataque_pc.md` e `turno_pc.md`: a IA começa cada
+   turno com `srand(aiSeed)` (AiController+0x80), então o turno inimigo pode ser testado contra o jogo.
+   `so_analise/nomes_pc_novos.csv` tem evidência fraca (ex.: 0x4F5D50 como `Board::GetPawns`, que é 0x566310): conferir
+   cada nome antes de usar.
 1. `BoardPlayer::SelectMap` 0x582A60: hoje o mapa é argumento, e o teste o acha pelo terreno. Ela chama Lua
    (`GetMapTag`, `GetMapVetoes`, `GetMap`, `RandomMap`) e gasta `rand()` antes do primeiro ponto de sincronia da
    preparação. Reconstruir e conferir: o ponto `01` do cabeçalho do `itb-diff` deve passar a ficar em sincronia.

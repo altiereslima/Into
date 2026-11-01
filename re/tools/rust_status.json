@@ -880,6 +880,56 @@
       "BoardPawn",
       "IsTempUnit",
       "0x0063A960"
+    ],
+    [
+      "Board",
+      "IsSafe",
+      "0x0056CE40"
+    ],
+    [
+      "Board",
+      "StopWeather",
+      "0x0056D5C0"
+    ],
+    [
+      "Board",
+      "GetBuildings",
+      "0x005663F0"
+    ],
+    [
+      "Board",
+      "SetCustomTile",
+      "0x00565F00"
+    ],
+    [
+      "Board",
+      "SetAcid",
+      "0x00566150"
+    ],
+    [
+      "Board",
+      "SetSmoke",
+      "0x00566060"
+    ],
+    [
+      "Board",
+      "SetCracked",
+      "0x0056A7E0"
+    ],
+    [
+      "Board",
+      "SetFrozen",
+      "0x0056D5F0"
+    ],
+    [
+      "Board",
+      "RemoveShield",
+      "0x00569770"
+    ],
+    [
+      "BoardPawn",
+      "SetFrozen",
+      "0x00637810"
     ]
   ],
   "partial": [
