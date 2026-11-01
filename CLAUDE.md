@@ -45,6 +45,7 @@ instalação do usuário (modelo OpenMW/OpenRCT2). As regras são reconstruídas
 - Ao reconstruir uma rotina: atualizar `re/tools/rust_status.json` (done/partial), regenerar inventário,
   `clippy` sem avisos, testes novos, `rotinas_*.md`, `CHECKPOINT.md` (mover o anterior para `docs/historico/`),
   relatórios em `docs/relatorios/`.
+- Assembly: `re/tools/asm/` (ann.py, xdisp.py, decomp.py; variável `ITB_EXE`).
 - Nomes: `python re/tools/match_android_symbols.py <Breach.exe> <libmain.so> re/evidencias/` e
   `python re/tools/gen_nomes_resumo.py`. Prefira o **nome real** (`Pawn::Damage`) ao endereço nos textos novos.
 
