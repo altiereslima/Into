@@ -158,7 +158,7 @@ impl OccupancyBoard {
             t.max_health = 2;
             t.health = t.health.clamp(0, 2);
         }
-        if t.unique_0x27ac != 0 {
+        if !t.unique_building.is_empty() {
             t.max_health = 1;
             t.health = t.health.clamp(0, 1);
         }

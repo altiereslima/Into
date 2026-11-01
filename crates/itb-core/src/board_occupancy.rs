@@ -313,8 +313,11 @@ pub struct Tile {
     pub frozen_0x2aa1: bool,
     /// +0x2630 (BYTE): casa atingida.
     pub hit_0x2630: bool,
-    /// +0x27AC (DWORD): prédio "único" (objetivo) — não vira entulho.
-    pub unique_0x27ac: i32,
+    /// +0x279C `std::string` (tamanho em +0x27AC): nome do prédio único (objetivo), gravado por
+    /// `BoardSpace::SetUniqueBuilding` (0x5A1990). Não vazio = prédio único, que não vira entulho.
+    pub unique_building: String,
+    /// +0x2BB9 (BYTE): zerado por `MarkSpaceDesc` junto com a descrição (+0x26F8).
+    pub byte_0x2bb9: bool,
     /// +0x2710 (BYTE): chave `populated` do mapa; `AddBuilding` também liga. Vale 1 na casa recém-criada.
     pub byte_0x2710: bool,
     /// +0x2640 (BYTE): com ele, a unidade da casa não barra empurrões.

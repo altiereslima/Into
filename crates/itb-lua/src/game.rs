@@ -55,6 +55,12 @@ impl UserData for LGame {
             }
             Ok(())
         });
+        // 0x60BD70 `GameMap::GetEventCount(int)`: lista global de eventos (0x8B8400) com verificação de faixa; fora
+        // dela, "Error: Tried to retrieve invalid event id" e 0. Os eventos ainda não existem no Rust: 0.
+        m.add_method("GetEventCount", |_, _, id: Value| {
+            arg_int(&id).ok_or_else(|| no_overload("GetEventCount(int)"))?;
+            Ok(0)
+        });
         m.add_meta_method(MetaMethod::Index, |lua, _, k: String| stub(lua, "GameMap", &k));
     }
 }
@@ -69,3 +75,5 @@ impl UserData for LValueBar {
 
 /// Nomes ligados, para o relatório de cobertura.
 pub const GAME_DONE: &[&str] = &["GetSector", "GetTeamTurn", "GetTurnCount", "IsIslandUnlocked", "GetPower", "AddObjective"];
+/// Ligados, mas com parte do estado ainda ausente no Rust.
+pub const GAME_PARTIAL: &[&str] = &["GetEventCount"];

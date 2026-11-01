@@ -23,12 +23,11 @@ Leia antes `CLAUDE.md` e `CHECKPOINT.md`. Endereços abaixo são da 1.2.93.
 - Documentar ao fechar o bloco, não a cada rotina.
 
 ## Próximo passo
-0. Bloco 2 da fila de uso (o 1 está feito, ver `rotinas_fila_uso.md`): `BoardPawn:IsRanged`,
-   `Board:GetDistanceToBuilding`, `Board:GetDistanceToPawn`, `BoardPawn:IsTempUnit`, `Board:MarkSpaceDesc`,
-   `Board:IsDamaged`, `Board:AddUniqueBuilding`, `GameMap:GetEventCount`, `Board:IsBusy`, `Board:GetMechDamage`.
-   A outra IA está analisando o `.so` em `C:\Projetos\Into the Breach\so_analise\` (fora do repositório): ler
-   `pseudocodigo_funcoes.md`, `pseudocodigo_fila.md`, `ataques_enfileirados.md` e `fluxo_batalha.md` antes de cada bloco.
-   Depois rodar `itb-uso` e uma rodada contra o jogo.
+0. Bloco 3 da fila de uso (1 e 2 feitos, ver `rotinas_fila_uso.md`; 26 stubs restantes, quase todos de `BaseStart`):
+   `BoardPawn:SetFrozen`, `Board:AddPawn` (forma com zona), `Board:GetBuildings`, `Board:GetDeployLocScore`, `Board:SetItem`,
+   `Board:SetCustomTile`, `Board:ClearSpace`, `Board:SetAcid`, `Board:StopWeather`, `Board:IsSafe`. A outra IA analisa o
+   `.so` em `C:\Projetos\Into the Breach\so_analise\` (fora do repositório): ler `pseudocodigo_*.md` antes do bloco e
+   conferir no PC (o Android difere em detalhes: `IsRanged`, `IsDamaged`, `GetEventCount`). Depois `itb-uso` e uma rodada.
 1. `BoardPlayer::SelectMap` 0x582A60: hoje o mapa é argumento, e o teste o acha pelo terreno. Ela chama Lua
    (`GetMapTag`, `GetMapVetoes`, `GetMap`, `RandomMap`) e gasta `rand()` antes do primeiro ponto de sincronia da
    preparação. Reconstruir e conferir: o ponto `01` do cabeçalho do `itb-diff` deve passar a ficar em sincronia.

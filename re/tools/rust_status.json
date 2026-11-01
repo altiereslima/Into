@@ -835,6 +835,51 @@
       "GameMap",
       "AddObjective",
       "0x0060E0C0"
+    ],
+    [
+      "Board",
+      "GetDistanceToBuilding",
+      "0x00573EA0"
+    ],
+    [
+      "Board",
+      "GetDistanceToPawn",
+      "0x00573C00"
+    ],
+    [
+      "Board",
+      "IsDamaged",
+      "0x005747C0"
+    ],
+    [
+      "Board",
+      "GetMechDamage",
+      "0x005739C0"
+    ],
+    [
+      "Board",
+      "AddUniqueBuilding",
+      "0x005744F0"
+    ],
+    [
+      "Board",
+      "MarkSpaceDesc",
+      "0x00565BC0"
+    ],
+    [
+      "Board",
+      "MarkSpaceDesc",
+      "0x00565C90"
+    ],
+    [
+      "BoardPawn",
+      "IsRanged",
+      "0x0063CF50"
+    ],
+    [
+      "BoardPawn",
+      "IsTempUnit",
+      "0x0063A960"
     ]
   ],
   "partial": [
@@ -982,6 +1027,16 @@
       "Board",
       "IsTargeted",
       "0x0056E6D0"
+    ],
+    [
+      "Board",
+      "IsBusy",
+      "0x00569850"
+    ],
+    [
+      "GameMap",
+      "GetEventCount",
+      "0x0060BD70"
     ]
   ],
   "trivial_accessors": [

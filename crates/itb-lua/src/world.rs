@@ -302,6 +302,31 @@ impl UserData for LBoard {
         q!(m, "IsDangerousItem", "IsDangerousItem(Point)", |b, p| b.is_dangerous_item(p));
         q!(m, "IsTargeted", "IsTargeted(Point)", |b, p| b.is_targeted(p));
         m.add_method("GetEnemyCount", |_, s, ()| Ok(s.0.borrow().get_enemy_count()));
+        // bloco 2
+        m.add_method("GetDistanceToBuilding", |_, s, p: LPoint| Ok(s.0.borrow().get_distance_to_building(to_b(p.0))));
+        m.add_method("GetDistanceToPawn", |_, s, (p, team): (LPoint, Value)| {
+            let team = arg_int(&team).ok_or_else(|| no_overload("GetDistanceToPawn(Point,int)"))?;
+            Ok(s.0.borrow().get_distance_to_pawn(to_b(p.0), team))
+        });
+        m.add_method("IsDamaged", |_, s, p: LPoint| Ok(s.0.borrow().is_damaged(to_b(p.0))));
+        m.add_method("GetMechDamage", |_, s, ()| Ok(s.0.borrow().get_mech_damage()));
+        m.add_method("AddUniqueBuilding", |lua, s, name: Value| {
+            let name = crate::records::arg_str(&name).ok_or_else(|| no_overload("AddUniqueBuilding(string)"))?;
+            let rng = rng_of(lua)?;
+            let p = s.0.borrow_mut().add_unique_building(&name, &mut rng.borrow_mut());
+            Ok(LPoint(from_b(p)))
+        });
+        m.add_method("MarkSpaceDesc", |_, s, a: MultiValue| {
+            let a: Vec<Value> = a.into_iter().collect();
+            let sig = || no_overload("MarkSpaceDesc(Point,string), MarkSpaceDesc(Point,string,bool)");
+            let (p, desc) = match a.as_slice() {
+                [p, d] | [p, d, Value::Boolean(_)] => (pt(p).ok_or_else(sig)?, crate::records::arg_str(d).ok_or_else(sig)?),
+                _ => return Err(sig()),
+            };
+            s.0.borrow_mut().mark_space_desc(to_b(p), &desc);
+            Ok(())
+        });
+        m.add_method("IsBusy", |_, s, ()| Ok(s.0.borrow().is_busy()));
         // 0x571630 `(int)` e 0x567000 `(string)`
         m.add_method("GetPawnCount", |_, s, v: Value| {
             let b = s.0.borrow();
@@ -390,6 +415,9 @@ impl UserData for LPawn {
         m.add_method("GetType", |_, p, ()| Ok(with(p, |s| s.type_name.clone())));
         // 0x63B750 `Pawn::IsNonGridStructure`: `NonGrid` da tabela do tipo (lido na criação).
         m.add_method("IsNonGridStructure", |_, p, ()| Ok(with(p, |s| s.non_grid_structure)));
+        // 0x63CF50: `LuaData::GetInt("Ranged") == 1`; 0x63A960: `LuaData::GetBool("TempUnit")`.
+        m.add_method("IsRanged", |lua, p, ()| Ok(crate::pawns::type_int(lua, &with(p, |s| s.type_name.clone()), "Ranged")? == 1));
+        m.add_method("IsTempUnit", |lua, p, ()| crate::pawns::type_bool(lua, &with(p, |s| s.type_name.clone()), "TempUnit"));
         // 0x639C00: `CallMethod(tipo, "GetPositionScore", p)` (0x641980, `LuaEnv::CallMethod<int, Point>`). Erro ou
         // retorno que não é número dão 0.
         m.add_method("GetCustomPositionScore", |lua, p, pt: LPoint| {
@@ -425,13 +453,14 @@ pub const BOARD_DONE: &[&str] = &[
     "IsDangerous", "IsSpawning", "IsCrackable", "DamageSpace", "AddEffect", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
     "GetZone", "AddPawn", "SpawnPawn", "SpawnQueued", "GetPawns", "SetTerrain", "BlockSpawn", "ClearBlockSpawns",
     "GetHealth", "RandomizeTerrain", "SetWeather", "IsPowered", "IsFrozen", "IsDangerousItem", "GetEnemyCount", "GetPawnCount",
+    "GetDistanceToBuilding", "GetDistanceToPawn", "IsDamaged", "GetMechDamage", "AddUniqueBuilding", "MarkSpaceDesc",
 ];
 /// Ligados, mas com parte do estado ainda ausente no Rust (ver `docs/DIVERGENCIAS.md`).
-pub const BOARD_PARTIAL: &[&str] = &["IsTargeted"];
+pub const BOARD_PARTIAL: &[&str] = &["IsTargeted", "IsBusy"];
 /// Respondidos com dados do estado do jogo (rotina original ainda não reconstruída).
 pub const PAWN_HOST: &[&str] = &["GetBaseMove", "IsAbility"];
 pub const PAWN_DONE: &[&str] = &[
     "GetHealth", "IsDead", "IsDamaged", "GetTeam", "IsPlayer", "IsEnemy", "GetId", "IsMech", "GetSpace", "SetTeam", "SetMech", "GetPathProf", "IsFire", "IsFrozen", "IsAcid", "IsInfected", "IsPowered", "IsGuarding",
     "IsShield", "IsBoosted", "IsFlying", "GetType", "IsTeleporter", "IsJumper", "IsBurrower", "GetMoveSpeed", "IsCorpse", "IsGrappled",
-    "IsNonGridStructure", "GetCustomPositionScore",
+    "IsNonGridStructure", "GetCustomPositionScore", "IsRanged", "IsTempUnit",
 ];

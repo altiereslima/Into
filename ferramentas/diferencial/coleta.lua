@@ -184,7 +184,7 @@ end
 local CONSULTAS = { "GetHealth", "GetTeam", "GetType", "IsDead", "IsDamaged", "IsEnemy", "IsPlayer", "IsMech",
 	"IsAcid", "IsFire", "IsFrozen", "IsInfected", "IsPowered", "IsGuarding", "IsGrappled",
 	"IsFlying", "IsTeleporter", "IsJumper", "IsBurrower", "GetPathProf", "GetMoveSpeed", "IsShield", "IsBoosted", "IsCorpse",
-	"IsNonGridStructure" }
+	"IsNonGridStructure", "IsRanged", "IsTempUnit" }
 
 -- Conta quantos rand() uma chamada gasta: recupera o estado do LCG a partir de valores de random_int(32768)
 -- e procura o valor seguinte adiante na sequência. O produto é feito em partes porque a Lua usa double.
@@ -263,11 +263,14 @@ local function coleta_casas(secao)
 			emit(secao, k .. ".terreno", Board:GetTerrain(p))
 			for _, n in ipairs({ "IsBuilding", "IsFire", "IsSmoke", "IsVines", "IsAcid", "IsCracked", "IsEdge", "IsPod", "IsItem",
 				"IsDangerous", "IsSpawning", "IsCrackable", "IsValid", "IsPawnSpace", "IsPowered", "IsFrozen", "IsDangerousItem",
-				"IsTargeted" }) do
+				"IsTargeted", "IsDamaged" }) do
 				emit(secao, k .. "." .. n, tostring(Board[n](Board, p)))
 			end
 			emit(secao, k .. ".GetPawnTeam", Board:GetPawnTeam(p))
 			emit(secao, k .. ".vida", Board:GetHealth(p))
+			emit(secao, k .. ".dist_predio", Board:GetDistanceToBuilding(p))
+			emit(secao, k .. ".dist_jogador", Board:GetDistanceToPawn(p, TEAM_PLAYER))
+			emit(secao, k .. ".dist_inimigo", Board:GetDistanceToPawn(p, TEAM_ENEMY))
 			emit(secao, k .. ".lava", tostring(Board:IsTerrain(p, TERRAIN_LAVA)))
 			for _, perfil in ipairs(PERFIS) do
 				emit(secao, k .. ".bloqueio" .. perfil, tostring(Board:IsBlocked(p, perfil)))
@@ -393,6 +396,10 @@ local function coleta_missao(mapa)
 	for _, n in ipairs({ "Firefly", "PunchMech", "Punch" }) do
 		emit("entrada", "GetPawnCount_" .. n, Board:GetPawnCount(n))
 	end
+	emit("entrada", "GetMechDamage", Board:GetMechDamage())
+	for _, e in ipairs({ "EVENT_REPAIR_PICKUP", "EVENT_REPAIR_UNDO", "EVENT_ACID_DESTROYED", "EVENT_SPAWNBLOCKED", "EVENT_ENEMY_KILLED" }) do
+		emit("entrada", "GetEventCount." .. e, Game:GetEventCount(_G[e]))
+	end
 	emit("entrada", "time_casa", Board:GetPawnTeam(Point(3, 6)))
 	for _, k in ipairs({ "GetMoveSpeed", "GetPathProf" }) do
 		emit("entrada", "mech_" .. k, mech[k](mech))
@@ -401,6 +408,16 @@ local function coleta_missao(mapa)
 	SetPawn(mech)
 	coleta_armas(mech, alvo)
 	coleta_sorteio()
+	-- depois do sorteio, o rand() segue sincronizado
+	local u1 = Board:AddUniqueBuilding("str_bar1")
+	local u2 = Board:AddUniqueBuilding("str_power1")
+	emit("unico", "casas", ponto(u1) .. " " .. ponto(u2))
+	for _, u in ipairs({ u1, u2 }) do
+		emit("unico", ponto(u) .. ".vida", Board:GetHealth(u))
+		emit("unico", ponto(u) .. ".IsPowered", tostring(Board:IsPowered(u)))
+	end
+	Board:MarkSpaceDesc(Point(0, 0), "supervolcano")
+	emit("unico", "crackable_supervolcano", tostring(Board:IsCrackable(Point(0, 0))))
 	emit("fim", "missao", "ok")
 end
 

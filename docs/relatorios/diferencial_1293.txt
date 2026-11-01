@@ -1,22 +1,22 @@
 # Teste diferencial: jogo original x motor Rust
-linhas: original 66331 | Rust 66320
-preparo pelo Rust: mapa mix6 (jogo real: ?0), setor 0 "grass", missão Mission5 (Mission_Volatile); chuva: não
+linhas: original 66695 | Rust 66684
+preparo pelo Rust: mapa any1 (jogo real: ?0), setor 0 "grass", missão Mission3 (Mission_Tanks); chuva: não
 casas com terreno diferente do jogo real depois do preparo: 0 []
 rand na preparação: 7 pontos, 1 fora de sincronia ["01"]
 
 | Seção | Iguais | Diferentes | Só no original | Só no Rust |
 |---|---|---|---|---|
 | alcance | 125 | 0 | 0 | 0 |
-| arma | 57744 | 0 | 0 | 0 |
+| arma | 57294 | 0 | 0 | 0 |
 | caminho | 200 | 0 | 0 | 0 |
-| casa | 1857 | 0 | 0 | 0 |
-| com_unidades | 1857 | 0 | 0 | 0 |
+| casa | 2113 | 0 | 0 | 0 |
+| com_unidades | 2113 | 0 | 0 | 0 |
 | consumo | 145 | 0 | 0 | 0 |
 | cor | 5 | 0 | 0 | 0 |
 | dano | 260 | 0 | 0 | 0 |
 | direcao | 49 | 0 | 0 | 0 |
 | efeito | 7 | 0 | 0 | 0 |
-| entrada | 16 | 0 | 0 | 0 |
+| entrada | 22 | 0 | 0 | 0 |
 | fim | 3 | 0 | 0 | 0 |
 | global | 208 | 0 | 0 | 0 |
 | jogo | 9 | 0 | 0 | 0 |
@@ -26,9 +26,10 @@ rand na preparação: 7 pontos, 1 fora de sincronia ["01"]
 | preparo | 9 | 0 | 0 | 0 |
 | rect | 4 | 0 | 0 | 0 |
 | sorteio | 6 | 0 | 0 | 0 |
-| unidade | 3771 | 0 | 0 | 0 |
+| unico | 6 | 0 | 0 | 0 |
+| unidade | 4061 | 0 | 0 | 0 |
 | zona | 3 | 0 | 0 | 0 |
 
-Total: 66302 iguais, 0 divergências.
-rand: os 16 valores do original saem do LCG do Rust (estado 0x3e298c74).
+Total: 66666 iguais, 0 divergências.
+rand: os 16 valores do original saem do LCG do Rust (estado 0x4c22a1ac).
 stubs tocados no Rust: [("GetMechColorsInTexture()", 1)]

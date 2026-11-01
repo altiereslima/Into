@@ -56,4 +56,7 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | `Board:IsTargeted` (1.2.93: 0x56E6D0) | consulta a fila de ataques de cada unidade (`SkillManager+0x20..+0x28`) | sempre falso: a fila de ataques não existe no Rust | IA e scripts que evitam casas atacadas | Turno inimigo (M6): `SkillManager::SetQueuedShot`, `FireQueued`, `Skill::ComputeAffectedPoints` |
 | Item da casa (`BoardSpace::IsDangerousItem`, 1.2.93: 0x5A11E0) | lê o `SpaceDamage` do item em +0x288C..+0x2938 | campos com nome provisório; `Board:SetItem` ainda é stub | Só com itens no tabuleiro | Casar os deslocamentos com os campos de `SpaceDamage` ao reconstruir `SetItem` |
 | `GameMap:AddObjective` | entrada em `ObjectiveList` com o resto do estado do objetivo (0x5BBA30) | guarda texto, tipo e os três inteiros; nada lê a lista ainda | Recompensas e tela de objetivos | Ler 0x5BBA30 e quem lê a lista |
+| `Board:IsBusy` (1.2.93: 0x569850) | `GetBusyState`: animações, efeitos e filas pendentes | sempre falso: o executor termina tudo na hora | Scripts que esperam o fim de animações | Laço de quadro (M7) |
+| `GameMap:GetEventCount` (1.2.93: 0x60BD70) | lista global de eventos (0x8B8400) | sempre 0: eventos não existem no Rust | Objetivos que contam eventos (reparos, mortes por ácido, surgimentos bloqueados, inimigos mortos) | Achar quem grava a lista (o laço do jogo e `CApp::OnLoop`) |
+| Vida máxima dos mechs em `GetMechDamage` | 0x6350A0 recalcula o máximo pelos pilotos (`Zoltan_Skill`) | usa o máximo guardado | Mechs com piloto que muda a vida | Pilotos |
 

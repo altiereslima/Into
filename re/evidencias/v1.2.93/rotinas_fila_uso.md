@@ -31,3 +31,25 @@ registra "Already Spawning"; `Board::IsTargeted` chama `SkillManager::BoardUpdat
 Efeito na fila de uso: de 42 para 36 stubs. Os erros de `UpdateSpawning` caíram de 320 para 4, e apareceram stubs que
 ficavam escondidos atrás dos que devolviam `nil` (`BoardPawn:IsRanged`, `Board:GetDistanceToBuilding`,
 `Board:GetDistanceToPawn`).
+
+## Bloco 2
+Conferido contra o jogo: `Mission_Tanks` no mapa `any1`, 0 divergências em 66.666 linhas (seções `casa`, `com_unidades`,
+`entrada`, `unidade` e `unico`, que compara o sorteio de `AddUniqueBuilding` com o `rand()` sincronizado).
+A análise do `.so` (fora do repositório) foi o guia; três rotinas diferem do Android, e vale o PC.
+
+| Rotina | Regra |
+|---|---|
+| `Board::GetDistanceToBuilding(Point)` 0x573EA0 | menor Manhattan até a lista de prédios (Board+0x2C44), começando em `INT_MAX` |
+| `Board::GetDistanceToPawn(Point, int)` 0x573C00 | 0x4CEA50 (mapa de distâncias) chama o Dijkstra 0x4CEC40 com perfil = o próprio `int` e alcance 6 (0x4CEC40 recebe perfil, alcance, ?, x, y; o alcance é o que se compara com a distância em 0x4CEF6B). Menor distância até a casa (`GetSpace`, slot 0x28) de uma unidade da lista com `IsTeam(int)`, ou `INT_MAX`. Os scripts passam 1 ou 6: voador ou saltador |
+| `Board::IsDamaged(Point)` 0x5747C0 | vida atual (+0x78) != máximo (+0x7C). No Android passa por `BoardSpace::IsDamaged` |
+| `Board::GetMechDamage()` 0x5739C0 | soma de `0x6350A0() − vida (+0x8A8)` dos mechs (+0x9E4) da lista; 0x6350A0 recalcula o máximo por pilotos (`Zoltan_Skill`, 0x635960) e o devolve |
+| `Board::AddUniqueBuilding(string)` 0x5744F0 | cópia da lista de prédios; enquanto houver: `rand() % n`, tira a casa; se o nome de prédio único da casa está vazio, `BoardSpace::SetUniqueBuilding` 0x5A1990 e devolve a casa; sem nenhuma, (-1, -1) |
+| `BoardSpace::SetUniqueBuilding(string)` 0x5A1990 | máximo 1, vida presa em 0..1, nome em +0x279C (o tamanho fica em +0x27AC, que o Rust chamava de `unique_0x27ac`), imagens `_on`/`_broken` |
+| `Board::MarkSpaceDesc` 0x565BC0 `(Point, string)` e 0x565C90 `(…, bool)` → `BoardSpace::MarkDescription` 0x5AEB00 | descrição em +0x26F8 (a que `IsCrackable` compara com "supervolcano") e +0x2BB9 = 0 |
+| `Board::IsBusy()` 0x569850 → `GetBusyState` 0x569860 | animações, efeitos e filas pendentes. **Parcial:** o executor do Rust termina tudo na hora, então é falso |
+| `Pawn::IsRanged()` 0x63CF50 | `LuaData::GetInt("Ranged") == 1` (o Android devolve o inteiro) |
+| `Pawn::IsTempUnit()` 0x63A960 | `LuaData::GetBool("TempUnit")` |
+| `GameMap::GetEventCount(int)` 0x60BD70 | lista global de eventos (0x8B8400) com verificação de faixa, senão "Error: Tried to retrieve invalid event id" e 0. **Parcial:** os eventos não existem no Rust; responde 0. No Android é sempre 0 |
+
+Efeito na fila de uso: de 36 para 26 stubs; os 10.932 erros em `ScorePositioning` sumiram.
+

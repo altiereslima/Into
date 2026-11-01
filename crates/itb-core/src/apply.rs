@@ -475,7 +475,7 @@ impl OccupancyBoard {
                 }
             }
         }
-        if self.tile(p).health == 0 && self.tile(p).terrain == TERRAIN_BUILDING && self.tile(p).unique_0x27ac == 0 {
+        if self.tile(p).health == 0 && self.tile(p).terrain == TERRAIN_BUILDING && self.tile(p).unique_building.is_empty() {
             self.set_terrain(p, TERRAIN_RUBBLE);
         }
         if hit.terrain != 10 {

@@ -33,6 +33,16 @@ fn prop_int(ty: &Option<Table>, name: &str) -> mlua::Result<i32> {
     Ok(arg_int(&prop(ty, name)?).unwrap_or(0))
 }
 
+/// Propriedade do tipo de uma unidade lida na hora, como `LuaData::GetBool`/`GetInt` (0x4493D0, 0x4492B0) sobre o
+/// nome do tipo (Pawn+0x94).
+pub fn type_bool(lua: &Lua, type_name: &str, name: &str) -> mlua::Result<bool> {
+    prop_bool(&lua.globals().get::<Option<Table>>(type_name)?, name)
+}
+
+pub fn type_int(lua: &Lua, type_name: &str, name: &str) -> mlua::Result<i32> {
+    prop_int(&lua.globals().get::<Option<Table>>(type_name)?, name)
+}
+
 fn next_id(lua: &Lua) -> mlua::Result<i32> {
     let id = lua.named_registry_value::<Option<i32>>(ID_COUNTER)?.unwrap_or(INITIAL_ID_COUNTER) + 1;
     lua.set_named_registry_value(ID_COUNTER, id)?;

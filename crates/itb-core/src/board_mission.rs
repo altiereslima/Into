@@ -2,6 +2,7 @@
 //! Lidas na 1.2.93, com o `libmain.so` como guia. Provas em `re/evidencias/v1.2.93/rotinas_fila_uso.md`.
 
 use crate::board_occupancy::{consts::*, OccupancyBoard, Point, Tile};
+use crate::rng::MsvcRand;
 
 /// Tipo que `GetPawnCount(int)` não conta.
 const BONUS_DEBRIS: &str = "BonusDebris";
@@ -33,11 +34,11 @@ impl ItemDamage {
 }
 
 impl OccupancyBoard {
-    /// 0x5700A0 `Board::IsPowered(Point)`: prédio único (+0x27AC != 0) está com vida cheia; os outros, casa povoada
-    /// (+0x2710) com prédio (terreno 1).
+    /// 0x5700A0 `Board::IsPowered(Point)`: prédio único (nome em +0x279C, tamanho +0x27AC != 0) está com vida cheia;
+    /// os outros, casa povoada (+0x2710) com prédio (terreno 1).
     pub fn is_powered(&self, p: Point) -> bool {
         let t = self.tile(p);
-        if t.unique_0x27ac != 0 { return t.health == t.max_health; }
+        if !t.unique_building.is_empty() { return t.health == t.max_health; }
         t.byte_0x2710 && t.terrain == TERRAIN_BUILDING
     }
 
@@ -88,6 +89,73 @@ impl OccupancyBoard {
     /// (`SkillManager::IsTargeted`). O Rust ainda não tem a fila de ataques (`SkillManager+0x20..+0x28`, turno
     /// inimigo), então nenhuma unidade tem ataque enfileirado e a resposta é sempre falso.
     pub fn is_targeted(&self, _p: Point) -> bool { false }
+
+    /// 0x573EA0 `Board::GetDistanceToBuilding(Point)`: menor distância de Manhattan até um prédio da lista
+    /// (`UpdateBuildings`, Board+0x2C44), ou `INT_MAX` sem prédios.
+    pub fn get_distance_to_building(&self, p: Point) -> i32 {
+        self.buildings.iter().map(|b| (p.x - b.x).abs() + (p.y - b.y).abs()).fold(i32::MAX, i32::min)
+    }
+
+    /// 0x573C00 `Board::GetDistanceToPawn(Point, int time)`: mapa de distâncias (0x4CEA50 → Dijkstra 0x4CEC40) a
+    /// partir de `p`, com alcance 6 e o próprio `time` como perfil de caminho (os scripts passam 1 ou 6, que viram
+    /// voador ou saltador); depois a menor distância até a casa de uma unidade da lista com `IsTeam(time)`, ou
+    /// `INT_MAX`.
+    pub fn get_distance_to_pawn(&self, p: Point, team: i32) -> i32 {
+        let rm = self.reach_map(p, 6, team);
+        self.pawn_list.iter().filter(|&&i| self.pawns[i].is_team(team))
+            .filter_map(|&i| rm.dist.get(&self.pawns[i].get_space()).copied())
+            .fold(i32::MAX, i32::min)
+    }
+
+    /// 0x5747C0 `Board::IsDamaged(Point)`: vida atual (+0x78) diferente do máximo (+0x7C).
+    pub fn is_damaged(&self, p: Point) -> bool {
+        let t = self.tile(p);
+        t.health != t.max_health
+    }
+
+    /// 0x5739C0 `Board::GetMechDamage()`: soma de máximo − vida de cada mech (+0x9E4) da lista, mortos inclusive.
+    /// O máximo vem de 0x6350A0, que antes o recalcula por pilotos (`Zoltan_Skill`); pilotos ainda não existem no Rust.
+    pub fn get_mech_damage(&self) -> i32 {
+        self.pawn_list.iter().map(|&i| &self.pawns[i]).filter(|p| p.mech).map(|p| p.max_health - p.health).sum()
+    }
+
+    /// 0x5744F0 `Board::AddUniqueBuilding(string)`: copia a lista de prédios e, enquanto houver, sorteia
+    /// `rand() % n`, tira a casa da cópia e, se ela ainda não tem prédio único, chama
+    /// `BoardSpace::SetUniqueBuilding` (0x5A1990) e devolve a casa. Sem nenhuma, (-1, -1).
+    pub fn add_unique_building(&mut self, name: &str, rng: &mut MsvcRand) -> Point {
+        let mut cand = self.buildings.clone();
+        while !cand.is_empty() {
+            let k = (rng.rand() % cand.len() as i32) as usize;
+            let p = cand.remove(k);
+            if self.tile(p).unique_building.is_empty() {
+                self.tile_set_unique_building(p, name);
+                return p;
+            }
+        }
+        Point::INVALID
+    }
+
+    /// 0x5A1990 `BoardSpace::SetUniqueBuilding(string)`: máximo 1, vida atual presa em 0..1, nome em +0x279C. As
+    /// imagens `combat/structures/<nome>_on.png` e `_broken.png` (+0x2794, +0x2798) ficam para os gráficos.
+    pub fn tile_set_unique_building(&mut self, p: Point, name: &str) {
+        let t = self.tile_mut_or_sentinel(p);
+        t.max_health = 1;
+        t.health = t.health.clamp(0, 1);
+        t.unique_building = name.to_string();
+    }
+
+    /// 0x565BC0 `Board::MarkSpaceDesc(Point, string)` e 0x565C90 `(Point, string, bool)` → `BoardSpace::MarkDescription`
+    /// (0x5AEB00): descrição da casa em +0x26F8 (a mesma que `IsCrackable` compara com "supervolcano") e +0x2BB9 = 0.
+    /// O `bool` não é usado.
+    pub fn mark_space_desc(&mut self, p: Point, desc: &str) {
+        let t = self.tile_mut_or_sentinel(p);
+        t.str_0x26f8 = desc.to_string();
+        t.byte_0x2bb9 = false;
+    }
+
+    /// 0x569850 `Board::IsBusy()` → `GetBusyState` (0x569860): animações, efeitos e filas pendentes. O executor do Rust
+    /// termina tudo na hora, então nunca há nada pendente quando um script pergunta.
+    pub fn is_busy(&self) -> bool { false }
 }
 
 #[cfg(test)]
@@ -135,7 +203,7 @@ mod tests {
         assert!(!b.is_powered(p));
         {
             let t = b.tile_mut(p).unwrap();
-            t.unique_0x27ac = 1;
+            t.unique_building = "str_bar1".into();
             t.health = 1;
             t.max_health = 2;
         }
@@ -151,6 +219,50 @@ mod tests {
         assert!(b.is_frozen_at(q));
         b.tile_mut(Point::new(2, 0)).unwrap().frozen_0x2aa1 = true;
         assert!(b.is_frozen_at(Point::new(2, 0)));
+    }
+
+    #[test]
+    fn distancias() {
+        let mut b = OccupancyBoard::new(8, 8).unwrap();
+        assert_eq!(b.get_distance_to_building(Point::new(0, 0)), i32::MAX);
+        b.tile_mut(Point::new(5, 5)).unwrap().terrain = TERRAIN_BUILDING;
+        b.tile_mut(Point::new(1, 6)).unwrap().terrain = TERRAIN_BUILDING;
+        b.update_building_list();
+        assert_eq!(b.get_distance_to_building(Point::new(0, 0)), 7);
+        assert_eq!(b.get_distance_to_pawn(Point::new(0, 0), TEAM_PLAYER), i32::MAX);
+        b.add_pawn(pawn("PunchMech", TEAM_PLAYER, Point::new(2, 0))).unwrap();
+        b.add_pawn(pawn("Firefly1", TEAM_ENEMY, Point::new(1, 0))).unwrap();
+        assert_eq!(b.get_distance_to_pawn(Point::new(0, 0), TEAM_PLAYER), 2);
+        // além do alcance 6, a casa fica com INT_MAX
+        assert_eq!(b.get_distance_to_pawn(Point::new(0, 7), TEAM_PLAYER), i32::MAX);
+    }
+
+    #[test]
+    fn predio_unico_e_dano() {
+        let mut b = OccupancyBoard::new(4, 1).unwrap();
+        for x in [1, 3] {
+            let t = b.tile_mut(Point::new(x, 0)).unwrap();
+            t.terrain = TERRAIN_BUILDING;
+            t.health = 2;
+            t.max_health = 2;
+        }
+        b.update_building_list();
+        let mut rng = MsvcRand::new(9);
+        let mut copia = rng.clone();
+        let p = b.add_unique_building("str_bar1", &mut rng);
+        assert_eq!(p, b.buildings[(copia.rand() % 2) as usize]);
+        assert_eq!((b.tile(p).health, b.tile(p).max_health, b.tile(p).unique_building.as_str()), (1, 1, "str_bar1"));
+        let q = b.add_unique_building("str_bar2", &mut rng);
+        assert_ne!(p, q);
+        assert_eq!(b.add_unique_building("str_bar3", &mut rng), Point::INVALID);
+        assert!(!b.is_damaged(p));
+        b.tile_mut(p).unwrap().health = 0;
+        assert!(b.is_damaged(p));
+        b.add_pawn(PawnState { mech: true, ..pawn("PunchMech", TEAM_PLAYER, Point::new(0, 0)) }).unwrap();
+        b.pawns[0].health = 1;
+        assert_eq!(b.get_mech_damage(), 1);
+        b.mark_space_desc(Point::new(0, 0), "supervolcano");
+        assert!(!b.is_crackable(Point::new(0, 0)));
     }
 
     #[test]
