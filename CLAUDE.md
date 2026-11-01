@@ -45,6 +45,8 @@ versão junto do endereço e prefira o nome real. Em `CHECKPOINT.md`, `docs/*.md
 - Boot e cobertura: `cargo run -p itb-lua --bin itb-boot -- <jogo> --cobertura re/evidencias/cobertura_api.tsv`.
 - Armas: `cargo run -p itb-lua --bin itb-weapon -- <jogo> --todas` (varredura) ou `... <jogo> Prime_Punchmech 5 3 5 4`
   (uma arma, com linha do tempo e diferença do tabuleiro).
+- Mapas: `cargo run -p itb-lua --bin itb-map -- <jogo> acid0` ou `... <jogo> --todos`.
+- Teste diferencial: `ferramentas/diferencial/LEIA-ME.md`. Sempre rode o jogo por `rodar.py`, que protege a pasta de dados do usuário.
 - Inventário: `python re/tools/map_lua_api_v2.py <Breach.exe> re/evidencias/v1.2.93/` e
   `python re/tools/gen_api_manifest.py` (o CI confere que `api_manifest.rs` está atualizado).
 - Conferência na 1.2.93: `python re/tools/conferir_1293.py <Breach.exe>`.
@@ -56,8 +58,13 @@ versão junto do endereço e prefira o nome real. Em `CHECKPOINT.md`, `docs/*.md
   `python re/tools/gen_nomes_resumo.py`. Prefira o **nome real** (`Pawn::Damage`) ao endereço nos textos novos.
 
 ## Fila de trabalho (ver CHECKPOINT.md)
-1. Etapa 13, lida direto na 1.2.93: tempo de voo dos projéteis, efeito de chegada completo
-   (`BoardSpace::CheckTerrainDangers`), turno inimigo (M6).
+Ordem escolhida pelo usuário em 2026-11-01: regras antes de gráficos, para chegar ao teste diferencial.
+1. Etapa 13, lida direto na 1.2.93: terminar M4 (`RandomizeTerrain` e o fluxo de `BoardPlayer`: `SelectMap`, `Start`,
+   `StartState`, posicionamento, vida dos prédios; `startNewGame` e `BaseStart` já rodam; `itb-map <jogo> <mapa> --missao
+   <Tabela>` mostra o estado). A cada regra nova, estender `ferramentas/diferencial/coleta.lua` e comparar com o jogo
+   real: é a prova mais forte que o projeto tem. Depois, laço de quadro
+   (`CApp`/`Game`/`Board`/`Pawn::OnLoop`), `BoardPlayer`, tempo de voo dos projéteis, efeito de chegada completo
+   (`BoardSpace::CheckTerrainDangers`) e turno inimigo (M6).
 2. Gráficos e som (decisão 0001): `itb-assets` lê `resource.dat` e `.bank`, extrai localmente com índice;
    som sem depender do FMOD (só 20 funções da API são usadas: ver `re/evidencias/fontes_externas/vita_loader.md`).
 3. Trocar os nomes provisórios do código pelos reais (`Tile::Push`, `byte_0x91e`...).

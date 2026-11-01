@@ -62,11 +62,12 @@ fn display_and_rng_globals() {
 #[test]
 fn stubs_record_calls_and_coverage_is_reported() {
     let h = host();
-    h.lua.load("PAWN_FACTORY:CreatePawn('x') PAWN_FACTORY:CreatePawn('y')").exec().unwrap();
+    h.lua.load("local g = GameMap() g:GetPower() g:GetPower()").exec().unwrap();
     let rep = h.report.borrow();
-    assert_eq!(rep.stub_calls.get("PawnFactory:CreatePawn"), Some(&2));
+    assert_eq!(rep.stub_calls.get("GameMap:GetPower"), Some(&2));
     assert_eq!(rep.coverage.get("Point:Manhattan"), Some(&Status::Reconstructed));
-    assert_eq!(rep.coverage.get("PawnFactory:CreatePawn"), Some(&Status::Stub));
+    assert_eq!(rep.coverage.get("GameMap:AddNote"), Some(&Status::Stub));
+    assert_eq!(rep.coverage.get("PawnFactory:CreatePawn"), Some(&Status::Reconstructed));
     assert_eq!(rep.coverage.get("SkillEffect:AddDamage"), Some(&Status::Reconstructed));
     assert_eq!(rep.coverage.len(), 475);
 }
@@ -277,6 +278,202 @@ fn board_and_pawn_bindings_reach_the_core() {
         for i = 1, l:size() do r[#r+1] = {l:index(i).x, l:index(i).y} end return r").eval::<Vec<Vec<i32>>>().unwrap()
         .into_iter().map(|v| (v[0], v[1])).collect();
     assert_eq!(reach, vec![(0, 0), (0, 1), (0, 2), (1, 0), (1, 2), (1, 3), (2, 0), (2, 1), (3, 1)]);
+}
+
+/// Mapa sintético, no formato dos `.map` (nenhum arquivo do jogo).
+#[test]
+fn map_table_becomes_a_board() {
+    use itb_core::board_occupancy::{consts::*, Point};
+    let dir = std::env::temp_dir().join(format!("itb_map_teste_{}", std::process::id()));
+    std::fs::create_dir_all(dir.join("maps")).unwrap();
+    std::fs::write(dir.join("maps/teste.map"), r#"teste = {["version"] = 7, ["dimensions"] = Point( 8, 8 ), ["name"] = "teste", ["enemy_kills"] = 5,
+["map"] = {{["loc"] = Point( 0, 0 ), ["terrain"] = 4, },
+{["loc"] = Point( 1, 0 ), ["terrain"] = 1, ["populated"] = 1, ["health_max"] = 4, },
+{["loc"] = Point( 2, 0 ), ["terrain"] = 3, ["poison"] = 1, },
+{["loc"] = Point( 3, 0 ), ["terrain"] = 0, ["lava"] = true, },
+{["loc"] = Point( 4, 0 ), ["terrain"] = 0, ["pawn"] = "Wall", ["team"] = 6, ["custom"] = "ground_rail.png", },
+},
+["spawns"] = {},
+["spawn_ids"] = {},
+["spawn_points"] = {},
+["zones"] = {["dam"] = {Point( 5, 5 ), Point( 5, 6 ), },
+},
+["tags"] = {"generic", "acid", },
+["blocked_points"] = {Point( 7, 7 ), },
+["blocked_type"] = {2, },
+}
+"#).unwrap();
+    let h = Host::new(&dir, HostConfig::default()).unwrap();
+    h.lua.load("function SetBoard(b) Board = b end").exec().unwrap();
+    let (board, loaded) = h.load_map("teste").unwrap();
+    assert!(loaded.unsupported.is_empty(), "{:?}", loaded.unsupported);
+    {
+        let b = board.borrow();
+        assert_eq!((b.get_size().x, b.mission.enemy_kills, b.mission.name.as_str()), (8, 5, "teste"));
+        assert_eq!(b.tile(Point::new(0, 0)).terrain, TERRAIN_MOUNTAIN);
+        assert_eq!((b.tile(Point::new(1, 0)).health, b.tile(Point::new(1, 0)).byte_0x2710), (4, true));
+        assert_eq!(b.tile(Point::new(2, 0)).acid, 1);
+        assert!(b.tile(Point::new(3, 0)).lava_0x2ac8);
+        assert_eq!(b.tile(Point::new(4, 0)).custom_tile, "ground_rail.png");
+        // tipo inexistente vira "PunchMech", como em CreateEmptyPawn; `team` do arquivo não é lida
+        assert!(b.mission.pending_pawns.is_empty());
+        assert_eq!((b.pawns[0].type_name.as_str(), b.pawns[0].space, b.pawns[0].id), ("PunchMech", Point::new(4, 0), 5));
+        assert_eq!(b.mission.tags, vec!["generic".to_string(), "acid".to_string()]);
+        assert_eq!(b.mission.block_spawn.get(&Point::new(7, 7)), Some(&2));
+    }
+    // os scripts recebem o tabuleiro e leem as zonas
+    assert_eq!(eval::<(i32, i32)>(&h, r#"local z = Board:GetZone("dam") return z:size(), z:index(2).y"#), (2, 6));
+    assert_eq!(eval::<i32>(&h, r#"return Board:GetZone("nada"):size()"#), 0);
+    assert_eq!(eval::<i32>(&h, r#"return Board:GetZone("enemy"):size()"#), 12);
+    assert!(eval::<bool>(&h, "return Board:IsBuilding(Point(1,0))"));
+    // chave desconhecida é relatada, não ignorada em silêncio
+    h.lua.load(r#"teste.rain = 3 teste.map[1].vines = 1"#).exec().unwrap();
+    let t: mlua::Table = h.lua.globals().get("teste").unwrap();
+    let mut u = itb_lua::map::read_map(&t).unwrap().unsupported;
+    u.sort();
+    assert_eq!(u, vec!["map.vines".to_string(), "rain".to_string()]);
+    std::fs::remove_dir_all(&dir).ok();
+}
+
+/// Fábrica de unidades com uma tabela sintética, no formato de `CreateClass`.
+#[test]
+fn pawn_factory_reads_getters_and_board_takes_the_pawn() {
+    use itb_core::board_occupancy::{consts::*, OccupancyBoard, Point};
+    let h = host();
+    h.lua.load(r#"
+        Besta = { Health = 3, MoveSpeed = 2, DefaultTeam = TEAM_ENEMY, Pushable = true, SkillList = {"Garra", "Mordida"}, Massive = true }
+        for k, v in pairs({Health = 1, MoveSpeed = 1, DefaultTeam = 1, Pushable = 1, SkillList = 1, Massive = 1}) do
+            local key = k
+            Besta["Get" .. key] = function(self) return self[key] end
+        end
+        function SetBoard(b) Board = b end
+    "#).exec().unwrap();
+    let shared = std::rc::Rc::new(std::cell::RefCell::new(OccupancyBoard::new(8, 8).unwrap()));
+    h.set_board(shared.clone()).unwrap();
+    // antes de entrar no tabuleiro a unidade já responde
+    assert_eq!(eval::<(i32, i32, bool)>(&h, r#"p = PAWN_FACTORY:CreatePawn("Besta") return p:GetId(), p:GetHealth(), p:IsEnemy()"#), (5, 3, true));
+    assert_eq!(eval::<(i32, i32)>(&h, "local l = Board:AddPawn(p, Point(2,3)) return l.x, l.y"), (2, 3));
+    // a mesma referência agora aponta para o tabuleiro
+    assert_eq!(eval::<(i32, i32)>(&h, "local s = p:GetSpace() return s.x, s.y"), (2, 3));
+    assert!(eval::<bool>(&h, "return Board:GetPawn(Point(2,3)) == p"));
+    // forma com nome; time explícito vence o padrão
+    assert_eq!(eval::<(i32, i32)>(&h, r#"local l = Board:AddPawn("Besta", Point(4,4)) return l.x, l.y"#), (4, 4));
+    assert_eq!(eval::<i32>(&h, r#"return PAWN_FACTORY:CreatePawn("Besta", TEAM_PLAYER):GetTeam()"#), TEAM_PLAYER);
+    let b = shared.borrow();
+    assert_eq!(b.pawns[0].skills, vec!["Move".to_string(), "Garra".to_string(), "Mordida".to_string()]);
+    assert_eq!((b.pawns[0].base_move_0x63a8f0, b.pawns[0].status.byte_0x91e, b.pawns[0].movement.massive), (2, 1, true));
+    assert_eq!(b.get_pawn_at(Point::new(4, 4)), Some(1));
+    assert_eq!(b.pawns[1].id, 6);
+}
+
+/// `Game` real, `SpawnPawn` e fila vistos pela Lua, sem arquivos do jogo.
+#[test]
+fn game_and_spawn_queue_through_lua() {
+    use itb_core::board_occupancy::{consts::*, OccupancyBoard};
+    use itb_core::game::GameState;
+    let h = host();
+    h.lua.load(r#"
+        Besta = { Health = 3, DefaultTeam = TEAM_ENEMY, GetHealth = function(s) return s.Health end, GetDefaultTeam = function(s) return s.DefaultTeam end }
+        function SetBoard(b) Board = b end
+        function SetGame(g) Game = g end
+        function getCityPower(sector) return 7 end
+    "#).exec().unwrap();
+    let game = h.new_game(GameState { sector_0x5238: 1, ..Default::default() }).unwrap();
+    assert_eq!(eval::<(i32, i32, i32, bool)>(&h, "return Game:GetSector(), Game:GetTeamTurn(), Game:GetTurnCount(), Game:IsIslandUnlocked(1)"), (2, TEAM_NONE, 0, false));
+    assert_eq!(eval::<(i32, i32)>(&h, "local p = Game:GetPower() return p:GetValue(), p:GetMax()"), (5, 7));
+    game.borrow_mut().turn = Some((2, TEAM_PLAYER));
+    assert_eq!(eval::<(i32, i32)>(&h, "return Game:GetTeamTurn(), Game:GetTurnCount()"), (TEAM_PLAYER, 2));
+    // método ainda não reconstruído continua stub
+    h.lua.load(r#"Game:AddNote("x")"#).exec().unwrap();
+    assert_eq!(h.report.borrow().stub_calls.get("GameMap:AddNote"), Some(&1));
+    let shared = std::rc::Rc::new(std::cell::RefCell::new(OccupancyBoard::new(8, 8).unwrap()));
+    h.set_board(shared.clone()).unwrap();
+    // srand(1): 41, 18467, 6334, 26500... CreatePawn gasta 3, e 26500 % 12 = 4; a referência segue válida
+    h.lua.load(r#"p = PAWN_FACTORY:CreatePawn("Besta") Board:SpawnPawn(p)"#).exec().unwrap();
+    assert!(eval::<bool>(&h, "return Board:IsSpawning(Point(6,2))"));
+    assert_eq!(eval::<i32>(&h, "return Board:GetPawns(TEAM_ENEMY):size()"), 0);
+    assert_eq!(eval::<i32>(&h, r#"return Board:SpawnPawn("Besta", Point(5,2))"#), 6);
+    h.lua.load("Board:SpawnQueued()").exec().unwrap();
+    assert_eq!(eval::<(i32, i32)>(&h, "local s = p:GetSpace() return s.x, s.y"), (6, 2));
+    assert_eq!(eval::<(i32, i32, i32)>(&h, "local l = Board:GetPawns(TEAM_ENEMY) return l:size(), l:index(1), l:index(2)"), (2, 5, 6));
+    // forma sem casa em AddPawn, terreno e bloqueio
+    h.lua.load("Board:SetTerrain(Point(7,2), TERRAIN_MOUNTAIN) Board:BlockSpawn(Point(5,3), 1)").exec().unwrap();
+    assert_eq!(shared.borrow().tile(itb_core::board_occupancy::Point::new(7, 2)).terrain, TERRAIN_MOUNTAIN);
+    assert!(eval::<bool>(&h, r#"local l = Board:AddPawn("Besta") return Board:IsPawnSpace(l)"#));
+}
+
+/// Integração: `startNewGame` e `Mission:BaseStart` originais terminam sem tocar stub.
+#[test]
+#[ignore = "precisa dos arquivos originais do jogo (ITB_GAME_DIR)"]
+fn original_mission_start_runs_without_stubs() {
+    let dir = std::env::var("ITB_GAME_DIR").expect("defina ITB_GAME_DIR");
+    let h = Host::new(&dir, HostConfig::default()).unwrap();
+    h.boot().unwrap();
+    h.new_game(Default::default()).unwrap();
+    let (board, _) = h.load_map("any3").unwrap();
+    h.report.borrow_mut().stub_calls.clear();
+    h.lua.load("startNewGame() Mission_Acid:new():BaseStart()").exec().unwrap();
+    assert!(h.report.borrow().stub_calls.is_empty(), "{:?}", h.report.borrow().stub_calls);
+    {
+        let b = board.borrow();
+        assert_eq!(b.spawn_queue.len(), 3);
+        for (i, p) in b.spawn_queue.iter().zip(&b.spawn_list) {
+            assert_eq!(b.pawns[*i].team, itb_core::board_occupancy::consts::TEAM_ENEMY);
+            assert!((5..=7).contains(&p.x) && (2..=5).contains(&p.y), "{p:?}");
+        }
+    }
+    h.lua.load("Board:SpawnQueued()").exec().unwrap();
+    assert_eq!(eval::<i32>(&h, "return Board:GetPawns(TEAM_ENEMY):size()"), 3);
+}
+
+/// Integração: toda unidade original nasce do seu tipo.
+#[test]
+#[ignore = "precisa dos arquivos originais do jogo (ITB_GAME_DIR)"]
+fn every_original_pawn_type_can_be_created() {
+    use itb_core::board_occupancy::consts::*;
+    let dir = std::env::var("ITB_GAME_DIR").expect("defina ITB_GAME_DIR");
+    let h = Host::new(&dir, HostConfig::default()).unwrap();
+    h.boot().unwrap();
+    let names: Vec<String> = h.lua.load("return PawnList").eval().unwrap();
+    assert!(names.len() > 100, "{}", names.len());
+    for n in &names {
+        let p = itb_lua::pawns::create_pawn(&h.lua, n, TEAM_NONE).unwrap_or_else(|e| panic!("{n}: {e}"));
+        assert_eq!(&p.type_name, n);
+    }
+    let mech = itb_lua::pawns::create_pawn(&h.lua, "PunchMech", TEAM_NONE).unwrap();
+    assert_eq!((mech.team, mech.health, mech.base_move_0x63a8f0, mech.movement.massive), (TEAM_PLAYER, 3, 3, true));
+    assert_eq!(mech.skills, vec!["Move".to_string(), "Prime_Punchmech".to_string()]);
+    let bug = itb_lua::pawns::create_pawn(&h.lua, "Firefly1", TEAM_NONE).unwrap();
+    assert_eq!(bug.team, TEAM_ENEMY);
+    let missing = itb_lua::pawns::create_pawn(&h.lua, "Nao_Existe", TEAM_NONE).unwrap();
+    assert_eq!(missing.type_name, "PunchMech");
+}
+
+/// Integração: todos os mapas originais carregam (`ITB_GAME_DIR=... cargo test -- --ignored`).
+#[test]
+#[ignore = "precisa dos arquivos originais do jogo (ITB_GAME_DIR)"]
+fn every_original_map_loads() {
+    use itb_core::board_occupancy::consts::*;
+    let dir = std::env::var("ITB_GAME_DIR").expect("defina ITB_GAME_DIR");
+    let h = Host::new(&dir, HostConfig::default()).unwrap();
+    h.boot().unwrap();
+    let names = h.load_map_data().unwrap();
+    assert!(names.len() >= 376, "{}", names.len());
+    assert_eq!(eval::<i64>(&h, "return #MAP_LIST") as usize, names.len());
+    for name in &names {
+        let (board, loaded) = h.load_map(name).unwrap_or_else(|e| panic!("{name}: {e}"));
+        assert!(loaded.unsupported.is_empty(), "{name}: {:?}", loaded.unsupported);
+        let b = board.borrow();
+        assert_eq!((b.get_size().x, b.get_size().y), (8, 8), "{name}");
+        for t in &loaded.data.tiles {
+            if !t.lava {
+                assert_eq!(b.tile(t.loc).terrain, t.terrain, "{name} {:?}", t.loc);
+            } else {
+                assert_eq!(b.tile(t.loc).terrain, TERRAIN_WATER, "{name} {:?}", t.loc);
+            }
+            assert!(b.is_valid(t.loc), "{name} {:?}", t.loc);
+        }
+    }
 }
 
 /// Integração: armas originais executam no motor Rust (`ITB_GAME_DIR=... cargo test -- --ignored`).

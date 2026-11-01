@@ -1,0 +1,9 @@
+# Carga dos mapas originais
+arquivos: 376 | carregados: 376 | com erro: 0
+registrados em MAP_LIST por AddMap: 376
+tamanhos: {(8, 8): 376}
+casas listadas: 8915
+terreno por casa: {0: 15672, 1: 2518, 2: 63, 3: 2295, 4: 2393, 5: 329, 6: 99, 7: 440, 9: 255}
+lava: 84 | ácido: 211 | fogo: 1 | populated: 2518 | unidades criadas pelos mapas: 6
+chaves não aplicadas: {}
+stubs tocados: ["GetMechColorsInTexture()"]

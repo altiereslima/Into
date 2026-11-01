@@ -217,6 +217,10 @@ def main():
               'done': [[a, b, tr(c)] for a, b, c in st['done']],
               'partial': [[a, b, tr(c)] for a, b, c in st['partial']],
               'trivial_accessors': [tr(v) for v in st['trivial_accessors']]}
+    # o que já foi reconstruído direto na 1.2.93 não está no arquivo antigo: fica como está
+    current = json.loads((HERE / 'rust_status.json').read_text(encoding='utf-8'))
+    for key in ('done', 'partial', 'trivial_accessors'):
+        new_st[key] += [e for e in current.get(key, []) if e not in new_st[key]]
     (HERE / 'rust_status.json').write_text(json.dumps(new_st, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
 
     cited_rows = [r for r in rows if r['citacoes']]

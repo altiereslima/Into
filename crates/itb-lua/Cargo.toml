@@ -16,3 +16,11 @@ path = "src/bin/itb_boot.rs"
 [[bin]]
 name = "itb-weapon"
 path = "src/bin/itb_weapon.rs"
+
+[[bin]]
+name = "itb-map"
+path = "src/bin/itb_map.rs"
+
+[[bin]]
+name = "itb-diff"
+path = "src/bin/itb_diff.rs"

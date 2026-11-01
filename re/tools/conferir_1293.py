@@ -85,6 +85,38 @@ def main():
     check('OnInit: +0x91E = Pushable', pe.cstr(0x00832374) == 'Pushable' and '0x91e' in oninit)
     check('OnInit: +0x91F = não IgnoreFlip', pe.cstr(0x00832368) == 'IgnoreFlip' and 'sete al' in oninit and '0x91f' in oninit)
 
+    # mapa de missão (re/evidencias/v1.2.93/rotinas_mapa.md)
+    check('BoardSpace nasce com Health(4)', 'push 4' in text(0x00599DC0, 0x17) and 'call 0x4e0ce0' in text(0x00599DC0, 0x17))
+    check('LoadScript: health_max tem padrão 2', pe.cstr(0x0082B4C0) == 'health_max' and 'push 2' in text(0x00563080, 0x21))
+    check('LoadScript aplica lava com SetTerrain(3)', 'push 3' in text(0x00562B1F, 0xD) and 'call 0x5a1b10' in text(0x00562B1F, 0xD))
+    check('GetZone: zona ausente testa "enemy"', pe.cstr(0x0082B904) == 'enemy' and '0x82b904' in text(0x0056DF66, 0x18))
+
+    # unidades (re/evidencias/v1.2.93/rotinas_unidades.md)
+    check('contador de id começa em 4', struct.unpack_from('<i', data, pe.off(0x0088FD64))[0] == 4)
+    check('Pawn::Pawn incrementa o id', 'mov dword ptr [esi + 0x9a4], eax' in text(0x00628DA7, 0x12))
+    empty = text(0x00642670, 0xB0)
+    check('CreateEmptyPawn: tipo ausente vira PunchMech', pe.cstr(0x0082B520) == 'PunchMech' and '0x82b520' in empty)
+    check('CreateEmptyPawn: time 2 usa GetDefaultTeam', 'cmp esi, 2' in empty and pe.cstr(0x00833360) == 'GetDefaultTeam')
+    check('CreatePawn(string) passa time 2', 'push 2' in text(0x006425E0, 0x30))
+    add = text(0x0056E830, 0x3D0)
+    check('AddPawn: três passadas e Filler_Pawn', 'cmp edx, 3' in add and 'cmp edx, 2' in add and pe.cstr(0x00827F44) == 'Filler_Pawn' and '0x827f44' in add)
+    check('getter de inteiro monta "Get"', pe.cstr(0x0081CE68) == 'Get' and '0x81ce68' in text(0x004492B0, 0x50))
+
+    check('Pawn::Pawn chama rand depois de OnInit', 'call 0x7855e3' in text(0x00628D95, 0xC) and 'call 0x629700' in text(0x00628D95, 0xC))
+
+    # surgimento e Game (re/evidencias/v1.2.93/rotinas_unidades.md)
+    sector = text(0x0060D9A0, 0x33)
+    check('GetSector: +0x5238 + 1 em 1..4', '0x5238' in sector and 'inc eax' in sector and 'mov eax, 4' in sector)
+    check('GetTeamTurn sem BoardPlayer dá 2', 'mov eax, 2' in text(0x0060D971, 0x6))
+    check('IsIslandUnlocked compara com o perfil', 'setle al' in text(0x0060A110, 0x3B))
+    check('SpawnPawn(Pawn*) usa (-1,-1)', text(0x005690C0, 0x10).count('push -1') == 2)
+    space = text(0x00572A00, 0x470)
+    check('GetAvailableSpace: rand, zona enemy e time 9', 'call 0x7855e3' in space and '0x82b904' in space and 'push 9' in space)
+    avail = text(0x00572E70, 0x230)
+    check('teste de casa: item, cápsula, tipos de bloqueio', all(k in avail for k in ('0x2b04', '0x2ae4', '0x7458')))
+    check('fila de surgimento grava três listas', all(k in text(0x005693D7, 0x30) for k in ('0x2d44', '0x2d50', '0x2d5c')))
+    check('casa bloqueada: mech com Passive_Burrows', pe.cstr(0x0082B634) == 'Passive_Burrows' and 'push 4' in text(0x00566786, 0x4))
+
     # valores
     check('A*: 1,01f', abs(f32(new(0x00837E1C)) - 1.01) < 1e-6)
     check('Normalize: 255,0f', f32(new(0x00838028)) == 255.0)

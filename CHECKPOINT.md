@@ -1,7 +1,55 @@
-# CHECKPOINT — Migração para o Breach.exe 1.2.93
+# CHECKPOINT — Etapa 13 (em andamento): carga de mapas, sobre a base 1.2.93
 
-**Data:** 2026-11-01. Etapas anteriores em `docs/historico/`. Método e limites em
-`re/evidencias/v1.2.93/LEIA-ME.md`.
+**Data:** 2026-11-01. Etapas anteriores em `docs/historico/`.
+
+## Etapa 13: mapas de missão
+Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao teste diferencial contra o jogo original.
+- **Os `.map` são tabelas Lua.** `Host::load_map` executa o arquivo, e `OccupancyBoard::from_map` aplica as casas na ordem de `Board::LoadScript`. Provas em `re/evidencias/v1.2.93/rotinas_mapa.md`.
+- **`Board:GetZone`** reconstruído, com a zona padrão `"enemy"` que o motor calcula quando o mapa não a declara.
+- **`itb-map`** desenha um mapa (`itb-map <jogo> acid0`) ou resume todos (`--todos`).
+- Achados: `health_min` é a vida atual; `team` não é lida na carga; casa não listada nasce com vida 4/4, e casa listada sem `health_max`, 2/2.
+- **`PAWN_FACTORY:CreatePawn`** cria unidades das tabelas de `pawns.lua`. Toda unidade de `PawnList` nasce do seu tipo. Provas em `re/evidencias/v1.2.93/rotinas_unidades.md`.
+- **`Board:AddPawn`** com casa escolhida, incluindo a reordenação da lista em três passadas. A arena do Rust mantém índices estáveis, e a ordem do motor fica em `pawn_list`.
+- **`Board:SpawnPawn` e a fila de surgimento:** casa disponível, sorteio com `rand()` e entrada na fila, como em `Board::GetAvailableSpace` e `Board::SpawnQueued`; bloqueio de surgimento causa dano.
+- **`Game` real:** `GetSector`, `GetTeamTurn`, `GetTurnCount`, `IsIslandUnlocked` e `GetPower`; os outros métodos seguem como stub. Também `Board:GetPawns`, `SetTerrain`, `BlockSpawn` e `ClearBlockSpawns`.
+- **`startNewGame` e `Mission:BaseStart` originais terminam sem tocar nenhum stub:** `itb-map <jogo> any3 --missao Mission_Acid` mostra os inimigos na fila.
+
+- **Teste diferencial pronto** (`ferramentas/diferencial/`): a mesma coleta roda no jogo original e no Rust.
+
+| Métrica | Antes | Agora |
+|---|---|---|
+| Mapas originais carregados | 0 | **376 de 376**, sem chave ignorada |
+| Unidades criadas pelos mapas | 0 | **6 de 6** |
+| Nomes reconstruídos / plataforma / stubs (475) | 212 / 13 / 250 | **228 / 13 / 234** |
+| Testes | 100 + 2 | **132 + 5** |
+| Fatos conferidos na 1.2.93 | 36 | **56** |
+
+## Teste diferencial contra o jogo original
+Última coleta: missão `Mission_Mines`, mapa `anyAE3`. Resultado em `docs/relatorios/diferencial_1293.txt`.
+
+| Seção | Linhas iguais |
+|---|---|
+| Armas: área e efeito das 559 | 57.894 |
+| Unidades: 24 consultas em 145 tipos | 3.481 |
+| Casas, com e sem unidades | 3.074 |
+| `SpaceDamage` | 260 |
+| Globais | 208 |
+| Caminho e alcance | 325 |
+| `CreatePawn`: consumo de `rand()` | 145 |
+| Sorteio de casas, com `rand()` sincronizado | 6 |
+| Outras | 110 |
+
+O que o teste corrigiu: `CreatePawn` gasta 3 `rand()`; a energia inicial é 5/7; `IsNew*` são opções da partida. O que revelou: o motor troca chão por floresta antes de `BaseStart` (`Board::RandomizeTerrain`).
+
+**Limites:** um único caminho de cada arma, de uma casa para outra, em dois mapas. Não cobre a aplicação de efeitos, turnos, IA, objetivos, vida de casas nem o terreno inicial, que é copiado do jogo real.
+
+**M4 ainda não está pronto:** falta `RandomizeTerrain` e o fluxo de `BoardPlayer` (`SelectMap`, `Start`, `StartState`, posicionamento dos mechs, vida dos prédios, turno).
+
+**Próximo:** `Board::RandomizeTerrain` e `BoardPlayer`, comparando cada passo. Depois, aplicação de efeitos no teste diferencial, laço de quadro e turno inimigo.
+
+# Migração para o Breach.exe 1.2.93
+
+Método e limites em `re/evidencias/v1.2.93/LEIA-ME.md`.
 
 ## Feito
 - **Base do projeto agora é a 1.2.93** (SHA256 `0f5bdc90…b910`, instalação com `resources/`).
@@ -38,5 +86,4 @@
 - Provas em `re/evidencias/rotinas_*.md` e endereços nos comentários do Rust continuam na 1.2.88; a tradução está em `v1.2.93/migracao_enderecos.csv`.
 - Nomes provisórios no código (`Tile::Push`, `byte_0x91e`…) ainda não foram trocados pelos reais.
 
-## Próximo
-Etapa 13, lida direto na 1.2.93: tempo de voo dos projéteis, animações de movimento, efeito de chegada completo; depois o turno inimigo (M6). Gráficos e som (decisão 0001) já têm os arquivos necessários.
+Gráficos e som (decisão 0001) já têm os arquivos necessários e vêm depois das regras.

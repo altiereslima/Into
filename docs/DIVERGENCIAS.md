@@ -25,6 +25,28 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | Unidade morrendo | sólida durante parte da animação de morte (0x0062CB10) | não sólida | Empurrões no mesmo instante | — |
 | Instâncias `Board`/`Game` | criadas pelo motor em missão | ainda não existem | Scripts de missão | M3/M4 |
 | `user/missionData.lua` | arquivo do usuário, opcional | ausente → ignorado | Nenhum | — |
-| Regras lidas na 1.2.88 | versão atual é a 1.2.93 | código não relido rotina a rotina; 36 fatos e 24 provas com bytes conferidos, e `Pawn::Push` relida | Uma mudança do mesmo tamanho em rotina não relida passaria despercebida | Reler ao tocar em cada rotina; comparar com o EXE 1.2.88, se voltar a estar disponível |
+| Regras lidas na 1.2.88 | versão atual é a 1.2.93 | código não relido rotina a rotina. O teste diferencial cobre valores, unidades, consultas de casa, alcance, caminho e efeitos gerados pelas armas, mas não a aplicação de dano, empurrão e o executor | Mudança do mesmo tamanho em rotina fora do teste passaria despercebida | Estender o teste diferencial à aplicação de efeitos |
 | `IgnoreFlip`, `Pushable` | `Pawn::OnInit` lê da definição do tipo | dados de entrada em `PawnStatusBytes` | Unidades reais ainda não vêm de `pawns.lua` | M4 |
+| Ordem de `MAP_LIST` | ordem da listagem da pasta feita pelo motor | alfabética (SUPOSIÇÃO: é o que o NTFS costuma devolver) | Escolha de mapa por sorteio, se a ordem diferir | Ler a rotina de listagem; comparar `MAP_LIST` no teste diferencial |
+| `AddPawn`/`SpawnPawn` com nome de zona | escolhem a casa pela zona | stub que devolve nil | Scripts que usam essas formas (ex.: `"disposal"`) | Ler 0x56EE40, 0x56ECE0, 0x5690E0, 0x569250 |
+| `SpawnPawn` em água, unidade que não voa | caminho com `general_DiamondTarget` | entra na casa com estado 1 | Inimigo em água | Ler 0x568D5A em diante |
+| `GetDropZone` com menos de 3 casas | caminho em 0x560E3A | devolve o que houver | Mechs em mapas apertados | Ler o resto da rotina |
+| Teste de casa para os times 3 e -3 | caminho próprio com `GetDropZone` | recusa | Quem chamar com esses times | Ler 0x57309B em diante |
+| `Board+0x2CA8` | muda o sorteio e `SpawnQueued` | sempre falso | Não identificado | Achar quem grava |
+| Energia ao criar `Game` | 5/7 medido no jogo, dificuldade Normal | 5 fixo | Outras dificuldades podem diferir | Medir nas outras dificuldades; ler a rotina que grava |
+| `Board::RandomizeTerrain` e o resto da preparação do mapa | antes de `BaseStart`, chão vira floresta (6 casas em `any38`, 4 em `anyAE3`) | não existe | Terreno difere do arquivo `.map`; o teste diferencial parte do terreno real | Ler `BoardPlayer::RandomizeEnvironment` e `Board::RandomizeTerrain` |
+| `IsNewEnemies`, `IsNewEquipment`, `IsNewMissions` | opções "Conteúdo avançado" da partida (lidas de 0x4D3E10) | `HostConfig`, ligadas por padrão | Listas de inimigos, armas e missões | Ler a configuração real |
+| Dois dos 3 `rand()` de `CreatePawn` | em construtores não localizados | só o consumo; os valores são descartados | Campos que usem esses valores, além de +0x924 | Localizar as chamadas |
+| Perfil do jogador em `IsIslandUnlocked` | `perfil+0x30` | 0 | Ilhas e inimigos liberados | Ler `GameProfile` |
+| Turno em `Game` | `BoardPlayer` | não existe ainda: time 2, turno 0 | Scripts que olham o turno | Reconstruir `BoardPlayer` |
+| `StartTurn` em `SpawnPawn` do jogador | `Pawn::StartTurn(0)` | não chamada | Estado de início de turno | Ler `Pawn::StartTurn` |
+| Lado visual e sonoro do surgimento | `SpawnAnimation`, sons, conquistas, voz | não modelado | Só visual e som, salvo o que `SpawnAnimation` gravar | Ler 0x637070 |
+| `AddPawn` de unidade que já está em tabuleiro | remove do tabuleiro anterior (+0x944) | só aceita unidade recém-criada; outro tabuleiro não é limpo | Mover unidade entre tabuleiros | Ler 0x625DC0 (1.2.93) |
+| Propriedades de unidade sem uso no Rust | `Leader`, `Minor`, `Class`, `Image`, `Tooltip`, `GetExtraSpaces`... | ignoradas | Unidades grandes, líderes, visual | Ligar ao reconstruir quem as lê |
+| `IsArmor`, `IsFireImmune` | combinam propriedade, piloto e passivas | só `Armor` e `IgnoreFire` | Pilotos e passivas | Reconstruir as duas rotinas |
+| `Game` | objeto real do motor | 5 acessores reais; o resto é stub (`AddObjective`, dicas, voz...) | Objetivos e interface | Reconstruir `GameMap` |
+| `IsAbility`, `Road_Runner` e demais dados de piloto | vêm do piloto (`SetPilot`) | unidade nasce sem piloto | Mechs com habilidades | Reconstruir `Pilot` |
+| Vida dos prédios no início da missão | `Board::SetBuildingHP` ajusta depois da carga (SUPOSIÇÃO pelo nome) | fica o valor do mapa (4) | Rede elétrica e dano a prédios | Ler `Board::SetBuildingHP` e o início de missão |
+| Chaves de jogo salvo em `LoadScript` | `cracked`, `vines`, `item`, `rain`, `teleports`... | relatadas como não aplicadas | Só ao carregar jogo salvo | Salvar e carregar (M9) |
+| Efeitos visuais da carga | `UpdateBuildingImage`, `StartSavePeopleAnim` | não modelados | Só visual | Render (M8) |
 | `Pawn::SetGuard(false)` em `Pawn::Push` | grava +0x8D2 no caminho estável | não modelado | Nenhum conhecido: na 1.2.93 só há escritas nesse deslocamento | Reavaliar se surgir uma leitura indireta |

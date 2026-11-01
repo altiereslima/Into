@@ -71,6 +71,8 @@ pub enum BoardEvent {
     Flip(PawnIdx),
     Retaliation(PawnIdx),
     BuildingPowerCheck(Point),
+    /// Surgimento impedido por quem ocupa a casa (`Alert_Blocked`).
+    EmergeBlocked(Point),
 }
 
 /// 0x004DFFC0 `Health::Add(delta)` sobre (atual, máximo): limita o delta ao possível, soma e

@@ -3,9 +3,9 @@ arquivos: 138 | ok: 137 | ausentes: 1 | com erro: 0
 AUSENTE  user/missionData.lua
 
 # Cobertura da API nativa (475 nomes: métodos, propriedades, construtores, funções globais)
-Reconstructed   212  (44.6%)
+Reconstructed   228  (48.0%)
 Host             13  (2.7%)
-Stub            250  (52.6%)
+Stub            234  (49.3%)
 
 # Stubs chamados durante o boot (prioridade de implementação)
      1  GetMechColorsInTexture()

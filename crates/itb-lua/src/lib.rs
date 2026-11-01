@@ -6,7 +6,10 @@
 //! da instalação do usuário, sem modificá-los e sem redistribuí-los.
 
 pub mod api_manifest;
+pub mod game;
 pub mod host;
+pub mod map;
+pub mod pawns;
 pub mod records;
 pub mod skill;
 pub mod world;

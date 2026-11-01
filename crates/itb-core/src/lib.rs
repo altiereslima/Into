@@ -34,3 +34,9 @@ pub mod pathfinding;
 pub mod apply;
 /// Executor de SkillEffect com relógio: fila do tabuleiro, atrasos, empurrões e projéteis (Etapa 12).
 pub mod executor;
+/// Mapa de missão aplicado ao tabuleiro (Etapa 13).
+pub mod map;
+/// Criação de unidades e entrada no tabuleiro (Etapa 13).
+pub mod pawn_factory;
+/// Estado de `GameMap` lido pelos scripts (Etapa 13).
+pub mod game;

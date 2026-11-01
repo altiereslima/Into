@@ -9,9 +9,11 @@ originais** da sua própria cópia do jogo. Projeto de fã, sem afiliação com 
 ## Estado (Etapa 12, migrado para a 1.2.93)
 - Os scripts originais **carregam sem erro** no host Rust: 137/137 arquivos presentes (`itb-boot`).
 - API nativa mapeada por completo a partir do EXE: 32 classes, 343 métodos, 39 funções globais,
-  111 propriedades, 58 construtores, 190 constantes. 475 nomes expostos à Lua: 212 reconstruídos,
-  13 respostas de plataforma, 250 ainda stubs. O boot só toca 1 stub.
+  111 propriedades, 58 construtores, 190 constantes. 475 nomes expostos à Lua: 228 reconstruídos,
+  13 respostas de plataforma, 234 ainda stubs. O boot só toca 1 stub.
 - **As 559 armas originais rodam sem erro nem stub, e seus efeitos já são aplicados ao tabuleiro** (dano, empurrão, colisão, fogo, fumaça, ácido, gelo, terreno), na ordem e com os atrasos do motor original (`itb-weapon <jogo> --todas`). Uma arma: `cargo run -p itb-lua --bin itb-weapon -- "/caminho/do/jogo" Prime_Lasermech 3 4 3 1`.
+- **Os 376 mapas originais carregam no tabuleiro** (`cargo run -p itb-lua --bin itb-map -- "/caminho/do/jogo" acid0`, ou `--todos`), e as unidades nascem das tabelas de `pawns.lua`. `startNewGame` e `Mission:BaseStart` originais rodam até o fim, com o sorteio de casas do motor; o resto do fluxo da missão ainda não existe.
+- **Teste diferencial contra o jogo original** (`ferramentas/diferencial/`): a mesma coleta roda nos dois lados, e mais de 65 mil linhas batem (valores, 145 tipos de unidade, casas, alcance, caminho, efeitos das 559 armas e sorteio de casas). Ainda não cobre a aplicação de efeitos nem os turnos.
 - Inicialização do Lua igual à do motor original, e 118 funções Lua que o motor chama já inventariadas.
 - Núcleo com regras reconstruídas e testadas: ocupação do tabuleiro, bloqueio de caminho, alcance (Dijkstra) e caminho (A*) idênticos aos do EXE, terreno, dano letal,
   `Point`/`Rect2D`/`GL_Color`/`Button`/`Text`/`SpaceDamage`/`Objective`…, `rand()` idêntico ao do jogo, escalas de tela.

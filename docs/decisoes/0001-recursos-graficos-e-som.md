@@ -30,5 +30,11 @@ também facilitar um port futuro para consoles.
   passam a ser chamadas ao renderizador e ao tocador de som.
 
 ## Pendências para começar
-Primeiro passo técnico: confirmar o formato do `resource.dat`
-(provavelmente semelhante ao do FTL) e o conteúdo dos `.bank` (FSB5/Vorbis esperado).
+Formatos confirmados na 1.2.93 lendo os arquivos; o código do motor que os lê ainda não foi conferido:
+- `resource.dat`: `u32 n`, `n` × `u32 posição`; em cada posição, `u32 tamanho`, `u32 tamanho do nome`, nome, dados.
+  Sem criptografia. São 2854 entradas (2703 PNG, 138 `.font`, 13 `.ttf`), que cobrem 99,96% do arquivo.
+- `.font`: formato próprio com assinatura `FONT`, ainda não decifrado (301 MB no total).
+- `.bank`: RIFF `FEV ` com `FMT `, `LIST PROJ` (regras dos eventos, ainda não decifradas) e `SND ` com FSB5 versão 1,
+  modo 15 (Vorbis). São 689 amostras, sem os cabeçalhos do Vorbis.
+- Os bancos usam só 2 cabeçalhos de setup, identificados por CRC. Os dois estão em tabelas do `fmod.dll` da
+  instalação (ponteiro, tamanho, CRC), então podem ser lidos de lá sem embutir nada no repositório.

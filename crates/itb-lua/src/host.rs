@@ -2,7 +2,9 @@
 //! da instalação do usuário, na mesma ordem do motor (`scripts/scripts.lua` → `GetScripts()`).
 
 use crate::api_manifest::{Const, CLASSES, CONSTANTS, GLOBAL_FUNCTIONS, INSTANCES};
+use crate::game::SharedGame;
 use crate::values::{arg_int, construct_color, construct_point, construct_rect, construct_button, no_overload, LColor, LPoint};
+use itb_core::game::GameState;
 use itb_core::geometry::{get_direction, Color, IPoint};
 use itb_core::rng::MsvcRand;
 use mlua::{Function, Lua, MultiValue, Table, Value};
@@ -85,6 +87,7 @@ impl Host {
             game_dir: game_dir.as_ref().to_path_buf(),
             rng: Rc::new(RefCell::new(MsvcRand::new(cfg.rand_seed))),
         };
+        host.lua.set_app_data(host.rng.clone());
         host.install_constants()?;
         host.install_stub_classes()?;
         host.install_stub_globals()?;
@@ -228,6 +231,8 @@ impl Host {
         for k in crate::world::BOARD_DONE { self.mark(format!("Board:{k}"), Status::Reconstructed); }
         for k in crate::world::PAWN_DONE { self.mark(format!("BoardPawn:{k}"), Status::Reconstructed); }
         for k in crate::world::PAWN_HOST { self.mark(format!("BoardPawn:{k}"), Status::Host); }
+        for k in crate::game::GAME_DONE { self.mark(format!("GameMap:{k}"), Status::Reconstructed); }
+        for k in ["GetValue", "GetMax"] { self.mark(format!("ValueBar:{k}"), Status::Reconstructed); }
         let color = self.lua.create_table()?;
         let mt = self.lua.create_table()?;
         mt.set("__call", self.lua.create_function(|_, args: MultiValue| {
@@ -342,6 +347,8 @@ impl Host {
                 g.set(*name, inst)?;
             }
         }
+        crate::pawns::install(&self.lua)?;
+        self.mark("PawnFactory:CreatePawn", Status::Reconstructed);
         Ok(())
     }
 
@@ -399,6 +406,23 @@ impl Host {
         let f: Function = self.lua.globals().get("SetBoard")?;
         f.call::<()>(lb.clone())?;
         Ok(lb)
+    }
+
+    /// Cria o `Game` e o entrega aos scripts com `SetGame`. O máximo da energia vem de `getCityPower(0)`, como
+    /// em 0x609BFE (1.2.93). A energia atual 5 foi medida no jogo original, na dificuldade Normal; a rotina
+    /// que a grava não foi lida.
+    pub fn new_game(&self, game: GameState) -> mlua::Result<SharedGame> {
+        let shared = Rc::new(RefCell::new(game));
+        let globals = self.lua.globals();
+        if let Some(f) = globals.get::<Option<Function>>("getCityPower")? {
+            let max: i32 = f.call(0)?;
+            let mut g = shared.borrow_mut();
+            g.power.0 = 5;
+            g.set_power_max(max);
+        }
+        let set: Function = globals.get("SetGame")?;
+        set.call::<()>(crate::game::LGame(shared.clone()))?;
+        Ok(shared)
     }
 
     /// Define a unidade ativa: chama `SetPawn(pawn)`.

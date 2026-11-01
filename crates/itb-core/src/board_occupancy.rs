@@ -113,6 +113,10 @@ pub struct PawnState {
     pub type_name: String,
     /// Entradas de `Pawn::WouldDie` (0x006362A0) e `IsBoosted` (0x006313E0); ver `damage.rs`.
     pub damage: DamageTraits,
+    /// Lista de armas do `SkillManager`, com "Move" na primeira posição.
+    pub skills: Vec<String>,
+    /// +0x91C (BYTE): calculado em `Board::AddPawn`; o significado exato ainda não foi lido.
+    pub active_0x91c: bool,
 }
 
 /// Campos e consultas de `Pawn` lidos pelo cálculo de dano letal (Etapa 10).
@@ -311,7 +315,7 @@ pub struct Tile {
     pub hit_0x2630: bool,
     /// +0x27AC (DWORD): prédio "único" (objetivo) — não vira entulho.
     pub unique_0x27ac: i32,
-    /// +0x2710 (BYTE): prédio criado por `AddBuilding`.
+    /// +0x2710 (BYTE): chave `populated` do mapa; `AddBuilding` também liga. Vale 1 na casa recém-criada.
     pub byte_0x2710: bool,
     /// +0x2640 (BYTE): com ele, a unidade da casa não barra empurrões.
     pub byte_0x2640: bool,
@@ -319,7 +323,7 @@ pub struct Tile {
     pub pod_0x2ae4: i32,
     /// +0x2B04 (DWORD): `IsItem` (!= 0).
     pub item_0x2b04: i32,
-    /// +0x2AF0 (BYTE): `IsDangerous`.
+    /// +0x2AF0 (BYTE): `IsDangerous`; chave `spikes` nos jogos salvos.
     pub danger_0x2af0: bool,
     /// +0x27E8 (BYTE): `IsSpawning`.
     pub spawning_0x27e8: bool,
@@ -341,14 +345,21 @@ pub struct OccupancyBoard {
     bounds: BoardBounds,
     tiles: Vec<Tile>,
     pub sentinel: Tile,
-    /// Arena = lista do PawnHolder (Board+0x3C), na ordem de busca de `GetPawn(id)`.
+    /// Arena de unidades. Os índices ficam estáveis; a ordem do motor está em `pawn_list`.
     pub pawns: Vec<PawnState>,
+    /// Lista do PawnHolder (Board+0x3C..0x40), na ordem que `Board::AddPawn` refaz.
+    pub pawn_list: Vec<PawnIdx>,
     /// Estado global lido por `IsCorpse` (lista em 0x008CF84C contém 12).
     pub global_list_has_12: bool,
     /// Board+0x2D70/0x2D74: casa da cápsula (`IsPod`).
     pub pod_space: Point,
     /// Board+0x2D50..: lista de casas com surgimento (`IsSpawning`).
     pub spawn_list: Vec<Point>,
+    /// Board+0x2D44..: unidades na fila de surgimento, em paralelo com `spawn_list`. Já estão na arena,
+    /// mas não na lista do tabuleiro nem em uma casa.
+    pub spawn_queue: Vec<PawnIdx>,
+    /// Board+0x2CA8: lido por `GetAvailableSpace` e `SpawnQueued`; significado ainda não identificado.
+    pub flag_0x2ca8: bool,
     /// Board+0x7460.. e Board+0x7470..: listas de casas perigosas (`IsDangerous`).
     pub danger_list_a: Vec<Point>,
     pub danger_list_b: Vec<Point>,
@@ -360,6 +371,8 @@ pub struct OccupancyBoard {
     /// Unidades que receberam `Pawn::Push` desde a última consulta do executor (o relógio de 0,4 s
     /// do empurrão começa ou recomeça nesse momento).
     pub pushes_started: Vec<PawnIdx>,
+    /// Dados da missão carregada de um `.map`.
+    pub mission: crate::map::MissionInfo,
 }
 
 impl OccupancyBoard {
@@ -369,9 +382,9 @@ impl OccupancyBoard {
         }
         let len = (width as usize) * (height as usize);
         Ok(Self { bounds: BoardBounds { width, height }, tiles: vec![Tile::default(); len],
-                  sentinel: Tile::default(), pawns: Vec::new(), global_list_has_12: false,
-                  pod_space: Point::INVALID, spawn_list: Vec::new(), danger_list_a: Vec::new(), danger_list_b: Vec::new(),
-                  passive_skills: Vec::new(), events: Vec::new(), pushes_started: Vec::new() })
+                  sentinel: Tile::default(), pawns: Vec::new(), pawn_list: Vec::new(), global_list_has_12: false,
+                  pod_space: Point::INVALID, spawn_list: Vec::new(), spawn_queue: Vec::new(), flag_0x2ca8: false, danger_list_a: Vec::new(), danger_list_b: Vec::new(),
+                  passive_skills: Vec::new(), events: Vec::new(), pushes_started: Vec::new(), mission: Default::default() })
     }
 
     /// Board vftable slot 0x08 → 0x00561370 (`IsValid`).
@@ -397,6 +410,7 @@ impl OccupancyBoard {
         let idx = self.pawns.len();
         if self.index(space).is_none() { return Err(OccupancyError::OutOfBounds); }
         self.pawns.push(pawn);
+        self.pawn_list.push(idx);
         self.tile_mut(space)?.pawns.push(idx);
         Ok(idx)
     }
@@ -495,7 +509,7 @@ impl OccupancyBoard {
 
     /// 0x00567700 `Board:GetPawn(int id)` (PawnHolder slot 0): primeira da arena com o id.
     pub fn get_pawn_by_id(&self, id: i32) -> Option<PawnIdx> {
-        self.pawns.iter().position(|p| p.id == id)
+        self.pawn_list.iter().copied().find(|&i| self.pawns[i].id == id)
     }
 
     /// 0x00567840 `Board:IsPawnAlive(int id)`: existe e `!IsDead()`.
