@@ -24,3 +24,7 @@ path = "src/bin/itb_map.rs"
 [[bin]]
 name = "itb-diff"
 path = "src/bin/itb_diff.rs"
+
+[[bin]]
+name = "itb-uso"
+path = "src/bin/itb_uso.rs"

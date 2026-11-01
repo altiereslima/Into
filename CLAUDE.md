@@ -47,6 +47,9 @@ versão junto do endereço e prefira o nome real. Em `CHECKPOINT.md`, `docs/*.md
   (uma arma, com linha do tempo e diferença do tabuleiro).
 - Mapas: `cargo run -p itb-lua --bin itb-map -- <jogo> acid0` ou `... <jogo> --todos`.
 - Teste diferencial: `ferramentas/diferencial/LEIA-ME.md`. Sempre rode o jogo por `rodar.py`, que protege a pasta de dados do usuário.
+  Uma rodada inteira: `python ferramentas/diferencial/rodada.py <jogo> <cópia> --modo missao`.
+- O que reconstruir: `cargo run -p itb-lua --bin itb-uso -- <jogo>` joga os 85 tipos de missão no Rust e lista os
+  stubs tocados por missão e fase (`docs/relatorios/uso_missao.txt`). A fila segue essa lista, do mais usado ao menos.
 - Inventário: `python re/tools/map_lua_api_v2.py <Breach.exe> re/evidencias/v1.2.93/` e
   `python re/tools/gen_api_manifest.py` (o CI confere que `api_manifest.rs` está atualizado).
 - Conferência na 1.2.93: `python re/tools/conferir_1293.py <Breach.exe>`.

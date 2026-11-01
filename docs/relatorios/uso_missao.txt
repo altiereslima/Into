@@ -1,0 +1,153 @@
+# Stubs tocados ao jogar missões no motor Rust (85 tipos de missão)
+
+Ordem: em quantas missões aparece, depois total de chamadas.
+
+| Stub | Missões | Chamadas | Fases |
+|---|---|---|---|
+| `Board:GetEnemyCount` | 83 | 88 | BaseCompletedObjectives, BaseUpdate, MissionEnd |
+| `Board:GetPawnCount` | 80 | 640 | UpdateSpawning |
+| `Board:IsTargeted` | 77 | 13533 | inimigo:GetTargetScore, inimigo:ScorePositioning |
+| `Board:IsDangerousItem` | 77 | 13471 | inimigo:GetTargetScore, inimigo:ScorePositioning |
+| `BoardPawn:GetCustomPositionScore` | 77 | 13366 | inimigo:GetTargetScore, inimigo:ScorePositioning |
+| `GameMap:AddObjective` | 76 | 432 | BaseObjectives |
+| `BoardPawn:IsNonGridStructure` | 72 | 2135 | inimigo:GetTargetScore |
+| `Board:IsFrozen` | 61 | 709 | inimigo:GetTargetScore |
+| `Objective:Failed` | 52 | 53 | BaseCompletedObjectives |
+| `Board:IsPowered` | 36 | 273 | inimigo:GetTargetScore |
+| `Board:MarkSpaceDesc` | 29 | 212 | BaseStart, BaseUpdate |
+| `Board:IsDamaged` | 27 | 342 | BaseCompletedObjectives, BaseObjectives, BaseUpdate |
+| `BoardPawn:IsTempUnit` | 26 | 145 | inimigo:GetTargetScore |
+| `GameMap:GetEventCount` | 26 | 104 | BaseUpdate |
+| `Board:AddUniqueBuilding` | 26 | 30 | BaseStart |
+| `Board:GetMechDamage` | 8 | 40 | BaseCompletedObjectives, BaseObjectives |
+| `Board:IsBusy` | 8 | 36 | BaseUpdate |
+| `BoardPawn:SetFrozen` | 5 | 14 | BaseStart |
+| `Board:AddPawn` | 5 | 5 | BaseStart |
+| `Board:GetBuildings` | 5 | 5 | BaseStart |
+| `Board:SetItem` | 4 | 32 | BaseStart |
+| `Board:SetCustomTile` | 3 | 72 | BaseStart, BaseUpdate |
+| `Board:GetDeployLocScore` | 3 | 35 | inimigo:GetTargetScore |
+| `Board:ClearSpace` | 3 | 16 | BaseStart |
+| `Board:SetAcid` | 3 | 3 | BaseStart |
+| `Board:StopWeather` | 3 | 3 | BaseStart |
+| `Board:SetTerrainIcon` | 2 | 70 | BaseStart, BaseUpdate |
+| `BoardPawn:SetPowered` | 2 | 4 | BaseStart |
+| `Board:IsEnvironmentDanger` | 1 | 222 | BaseUpdate |
+| `Board:IsWall` | 1 | 20 | BaseStart |
+| `Board:IsSafe` | 1 | 16 | BaseStart |
+| `Board:RemoveShield` | 1 | 16 | BaseUpdate |
+| `Board:SetFrozen` | 1 | 16 | BaseUpdate |
+| `Board:MarkSpaceImage` | 1 | 14 | BaseUpdate |
+| `Board:SetSmoke` | 1 | 8 | BaseStart |
+| `Board:SetWall` | 1 | 5 | BaseStart |
+| `GameMap:TriggerSound` | 1 | 4 | PlanEnvironment |
+| `BoardPawn:SetActive` | 1 | 3 | BaseUpdate |
+| `Board:AddTeleport` | 1 | 2 | BaseStart |
+| `BoardPawn:SetMissionCritical` | 1 | 2 | BaseStart |
+| `Board:SetCracked` | 1 | 1 | BaseStart |
+| `Board:SpawnPawn` | 1 | 1 | BaseStart |
+
+## Erros de script (fase, mensagem, vezes)
+
+- UpdateSpawning: attempt to compare nil with number (320)
+- BaseUpdate: attempt to perform arithmetic on a nil value (104)
+- inimigo:GetTargetScore: attempt to perform arithmetic on a nil value (49)
+- BaseObjectives: attempt to compare nil with number (32)
+- inimigo:GetTargetScore: attempt to compare nil with number (19)
+- inimigo:GetTargetScore: attempt to compare number with nil (16)
+- BaseCompletedObjectives: attempt to compare nil with number (9)
+- BaseStart: attempt to index local 'pointlist' (a nil value) (5)
+- BaseObjectives: bad argument #1 to 'ipairs' (table expected, got nil) (4)
+- BaseObjectives: runtime error: No matching overload found, candidates: IsPawnAlive(int) (4)
+- BaseCompletedObjectives: bad argument #1 to 'ipairs' (table expected, got nil) (1)
+- BaseCompletedObjectives: runtime error: No matching overload found, candidates: IsPawnAlive(int) (1)
+- BaseStart: attempt to index local 'choice' (a nil value) (1)
+- BaseStart: bad argument #2 to `LBoard.SetTerrain`: error converting Lua nil to Point (1)
+
+## Missões
+
+- Mission_Acid: mapa any1
+- Mission_AcidStorm: mapa anyAE18
+- Mission_AcidTank: mapa any23
+- Mission_Airstrike: mapa anyAE19
+- Mission_Armored_Train: mapa train7
+- Mission_Artillery: mapa anyAE15
+- Mission_Auto: mapa any35
+- Mission_Barrels: mapa any47
+- Mission_Battle: mapa any35
+- Mission_BeetleBoss: mapa mix5
+- Mission_Belt: mapa anyAE16
+- Mission_BeltRandom: mapa anyAE35
+- Mission_BlobBoss: mapa anyAE38
+- Mission_BlobberBoss: mapa any5
+- Mission_Bomb: mapa any26
+- Mission_BoomBots: mapa any2
+- Mission_Boss: mapa any9
+- Mission_BotBoss: mapa any30
+- Mission_BotDefense: mapa any34
+- Mission_BouncerBoss: mapa anyAE22
+- Mission_BurnbugBoss: mapa anyAE7
+- Mission_Cataclysm: mapa any1
+- Mission_CentipedeBoss: mapa any47
+- Mission_Civilians: mapa any42
+- Mission_CrabBoss: mapa anyAE34
+- Mission_Crack: mapa any48
+- Mission_Critical: mapa any23
+- Mission_Dam: mapa opendamAE2
+- Mission_DiggerBoss: mapa anyAE3
+- Mission_Disposal: mapa any1
+- Mission_DungBoss: mapa anyAE37
+- Mission_Factory: mapa anyAE24
+- Mission_Fence: mapa any20
+- Mission_Filler: mapa any1
+- Mission_Final: mapa any1
+- Mission_Final_Cave: mapa any1
+- Mission_FireflyBoss: mapa anyAE8
+- Mission_Force: mapa hightide11
+- Mission_ForestFire: mapa any29
+- Mission_FreezeBldg: mapa anyAE17
+- Mission_FreezeBots: mapa any25
+- Mission_FreezeMines: mapa anyAE3
+- Mission_Hacking: mapa any45
+- Mission_Holes: mapa any1
+- Mission_HornetBoss: mapa anyAE38
+- Mission_Infinite: mapa anyAE24
+- Mission_JellyBoss: mapa anyAE7
+- Mission_Laser: mapa any1
+- Mission_LeaperBoss: mapa any28
+- Mission_Lightning: mapa any40
+- Mission_MineBase: mapa anyAE29
+- Mission_Mines: mapa anyAE25
+- Mission_Missiles: mapa any1
+- Mission_MosquitoBoss: mapa anyAE14
+- Mission_NanoStorm: mapa any14
+- Mission_Piston: mapa any1
+- Mission_Power: mapa any18
+- Mission_Reactivation: mapa anyAE21
+- Mission_Repair: mapa anyAE10
+- Mission_Respawn: mapa anyAE27
+- Mission_Sandstorm: mapa any23
+- Mission_Satellite: mapa any44
+- Mission_ScarabBoss: mapa any2
+- Mission_ScorpionBoss: mapa any9
+- Mission_ShamanBoss: mapa anyAE40
+- Mission_Shields: mapa anyAE11
+- Mission_SlugBoss: mapa anyAE40
+- Mission_SnowBattle: mapa any13
+- Mission_SnowStorm: mapa any3
+- Mission_Solar: mapa anyAE39
+- Mission_SpiderBoss: mapa anyAE33
+- Mission_StarfishBoss: mapa any42
+- Mission_Stasis: mapa any4
+- Mission_Survive: mapa any42
+- Mission_Tanks: mapa any13
+- Mission_Teleporter: mapa any17
+- Mission_Terraform: mapa any1
+- Mission_Terratide: mapa any0
+- Mission_Test: mapa any48
+- Mission_Tides: mapa hightide6
+- Mission_Train: mapa train11
+- Mission_Trapped: mapa anyAE12
+- Mission_Tutorial: mapa tutorial
+- Mission_Volatile: mapa any47
+- Mission_Wind: mapa any22

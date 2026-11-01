@@ -14,7 +14,18 @@ Leia antes `CLAUDE.md` e `CHECKPOINT.md`. Endereços abaixo são da 1.2.93.
 `InitializeMission`: `Board::Load`, `SetupBuildingHealth`, `RandomizeEnvironment`. Provas em
 `re/evidencias/v1.2.93/rotinas_preparo.md`; código em `itb-core/src/mission_setup.rs` e `itb-lua/src/map.rs`.
 
+## Método (desde 2026-11-01)
+- **Fila por uso:** `itb-uso` joga os 85 tipos de missão e lista os stubs que os scripts tocam
+  (`docs/relatorios/uso_missao.txt`: 42 stubs). Reconstruir do topo para baixo, em blocos, e rodar de novo; a lista muda
+  porque cada stub que devolvia `nil` escondia o resto do script (ver os erros no fim do relatório).
+- **Rodada contra o jogo em um comando:** `rodada.py` em segundo plano e um lote de cliques (abaixo).
+- **Ler primeiro o `.so`** (`re/tools/chamados_android.py`), confirmar no PC só o que muda o resultado.
+- Documentar ao fechar o bloco, não a cada rotina.
+
 ## Próximo passo
+0. Bloco 1 da fila de uso: `Board:GetEnemyCount`, `Board:GetPawnCount`, `Board:IsTargeted`, `Board:IsDangerousItem`,
+   `BoardPawn:GetCustomPositionScore`, `GameMap:AddObjective`, `BoardPawn:IsNonGridStructure`, `Board:IsFrozen`,
+   `Objective:Failed`, `Board:IsPowered`. Depois rodar `itb-uso` de novo.
 1. `BoardPlayer::SelectMap` 0x582A60: hoje o mapa é argumento, e o teste o acha pelo terreno. Ela chama Lua
    (`GetMapTag`, `GetMapVetoes`, `GetMap`, `RandomMap`) e gasta `rand()` antes do primeiro ponto de sincronia da
    preparação. Reconstruir e conferir: o ponto `01` do cabeçalho do `itb-diff` deve passar a ficar em sincronia.
@@ -25,13 +36,13 @@ Leia antes `CLAUDE.md` e `CHECKPOINT.md`. Endereços abaixo são da 1.2.93.
 3. Quem grava o setor (string global 0x8D1A88) e o argumento `int` de `LoadMission` (0x65DCF8 passa `[ebp+8]`).
 
 ## Como testar contra o jogo
-- `python ferramentas/diferencial/preparar.py ../Jogo ../Jogo_diff --modo missao`, depois
-  `python ferramentas/diferencial/rodar.py ../Jogo_diff --tempo 900` em segundo plano.
+- `python ferramentas/diferencial/rodada.py ../Jogo ../Jogo_diff --modo missao --tempo 600` em segundo plano. Ele
+  prepara, roda, compara e grava o relatório.
 - Controle do computador: `request_access` com `Breach.exe` depois que a janela abrir. Clicar na janela antes da tecla
   (a primeira tecla falhou por foco). Sequência, em coordenadas da tela 1456x819 do jogo em janela: tecla na tela de
   `Turret_Base`; Novo jogo (356,351); Iniciar (1004,186); Iniciar da dificuldade (1072,598), Normal já marcada e
-  conteúdo avançado desligado; ilha verde (520,250). O jogo fecha sozinho depois da coleta.
-- `cargo run -p itb-lua --bin itb-diff -- ../Jogo ../Jogo_diff/diff_original.txt`.
+  conteúdo avançado desligado; ilha verde (520,250). O jogo fecha sozinho depois da coleta. Num só `computer_batch`:
+  esperar 12 s, clicar (728,500), tecla espaço, esperar 5 s, (356,351), 3 s, (1004,186), 3 s, (1072,598), 6 s, (520,250).
 - Testes com o jogo: `ITB_GAME_DIR` precisa de caminho absoluto (o teste roda dentro de `crates/itb-lua`).
 
 ## Depois

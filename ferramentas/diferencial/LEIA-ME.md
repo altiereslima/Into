@@ -4,7 +4,17 @@ O mesmo `coleta.lua` roda nos dois lados, e `itb-diff` compara as saídas, linha
 repositório: a cópia fica fora dele, e `diff_original.txt` fica dentro da cópia.
 
 ## Rodar
-Sem missão, sem cliques (constantes, tipos de valor, `rand()` e as unidades):
+Uma rodada inteira em um comando (prepara a cópia, roda o jogo, compara e grava `docs/relatorios/diferencial_1293.txt`):
+
+```bash
+python ferramentas/diferencial/rodada.py "<jogo>" "<cópia>" --modo missao
+```
+
+O jogo não tem comando nem console que abra uma missão (o console de depuração só tem conquistas, idioma e
+animações), então no modo missão alguém passa pelo menu, como abaixo. Com o controle do computador, é um único lote
+de cliques; a sequência com coordenadas está em `docs/CONTINUAR.md`.
+
+Passo a passo, sem missão e sem cliques (constantes, tipos de valor, `rand()` e as unidades):
 
 ```bash
 python ferramentas/diferencial/preparar.py "<jogo>" "<cópia>" --modo boot

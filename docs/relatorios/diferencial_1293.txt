@@ -1,13 +1,13 @@
 # Teste diferencial: jogo original x motor Rust
-linhas: original 64919 | Rust 64908
-preparo pelo Rust: mapa hightide18 (jogo real: ?0), setor 0 "grass", missão Mission3 (Mission_Tides); chuva: não
+linhas: original 65019 | Rust 65008
+preparo pelo Rust: mapa mix5 (jogo real: ?0), setor 0 "grass", missão Mission6 (Mission_Survive); chuva: não
 casas com terreno diferente do jogo real depois do preparo: 0 []
 rand na preparação: 7 pontos, 1 fora de sincronia ["01"]
 
 | Seção | Iguais | Diferentes | Só no original | Só no Rust |
 |---|---|---|---|---|
 | alcance | 125 | 0 | 0 | 0 |
-| arma | 57144 | 0 | 0 | 0 |
+| arma | 57244 | 0 | 0 | 0 |
 | caminho | 200 | 0 | 0 | 0 |
 | casa | 1601 | 0 | 0 | 0 |
 | com_unidades | 1601 | 0 | 0 | 0 |
@@ -29,6 +29,6 @@ rand na preparação: 7 pontos, 1 fora de sincronia ["01"]
 | unidade | 3481 | 0 | 0 | 0 |
 | zona | 3 | 0 | 0 | 0 |
 
-Total: 64890 iguais, 0 divergências.
-rand: os 16 valores do original saem do LCG do Rust (estado 0x08280516).
+Total: 64990 iguais, 0 divergências.
+rand: os 16 valores do original saem do LCG do Rust (estado 0x20bf66bd).
 stubs tocados no Rust: [("GetMechColorsInTexture()", 1)]
