@@ -540,11 +540,13 @@ impl OccupancyBoard {
         if let Some(&last) = self.tile(p).pawns.last() { self.pawn_push(last, dir); }
     }
 
-    /// 0x0062CC00 `Pawn::Push(dir)`: `DIR_FLIP` vira o ataque (evento); unidade "estável"
-    /// (`IsGuarding`) não se move; senão grava a direção pendente se o destino é válido ou bloqueado.
+    /// 0x0062CC00 `Pawn::Push(dir)`: `DIR_FLIP` vira o ataque (evento) se `IsFlippable` (+0x91F) e
+    /// viva; unidade "estável" (`IsGuarding`, +0x91E) não se move; senão grava a direção pendente se o
+    /// destino é válido ou bloqueado. O caminho estável também faz `SetGuard(false)` (+0x8D2), não
+    /// modelado: nenhuma leitura desse byte foi achada.
     pub fn pawn_push(&mut self, i: PawnIdx, dir: i32) {
         if dir == DIR_FLIP {
-            if self.pawns[i].status.byte_0x91e != 0 && !self.pawns[i].is_dead() { self.events.push(BoardEvent::Flip(i)); }
+            if !self.pawns[i].status.ignore_flip && !self.pawns[i].is_dead() { self.events.push(BoardEvent::Flip(i)); }
             return;
         }
         if self.pawns[i].is_guarding() { return; }

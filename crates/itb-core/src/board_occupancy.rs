@@ -151,6 +151,8 @@ pub struct PawnStatusBytes {
     pub infected: bool,
     pub powered: bool,
     pub byte_0x91e: u8,
+    /// Campo `IgnoreFlip` da definição do tipo. `Pawn::OnInit` grava o inverso em +0x91F (`IsFlippable`).
+    pub ignore_flip: bool,
     /// +0x8D6: ferido (`iInjure`).
     pub injured_0x8d6: bool,
     /// +0x921: morreu nesta ação (gravado por `Kill` e `ApplyDamage`).

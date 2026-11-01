@@ -60,7 +60,8 @@ gelo/montanha recebem `Health(2)` 0x004DFE20; água/buraco apagam fogo, rachadur
 
 ## Empurrão
 `Tile::Push` 0x005ADBB0: DIR_NONE ou prédio → nada; empurra a ÚLTIMA unidade da lista; DIR_FLIP (6) também chama
-0x005ADA60. `Pawn::Push` 0x0062CC00: FLIP → 0x00625710; estável (+0x91E == 0) → nada; grava +0x978 se o destino
+0x005ADA60. `Pawn::Push` 0x0062CC00: FLIP → 0x00625710 se +0x91F (`IsFlippable`, inverso de `IgnoreFlip`) e viva,
+lido na 1.2.93 e no Android 1.2.92; estável (+0x91E == 0, campo `Pushable`) → nada; grava +0x978 se o destino
 bloqueia ou é válido. `Pawn::ResolvePush` 0x0062CDD0 (depois da animação): bloqueado (0x0062CAA0 → 0x00571B20 →
 0x005AAA10: prédio, montanha, unidade sólida 0x0062CB10 sem +0x2640, parede 0x0059F7C0) → a unidade toma
 `SpaceDamage(1)` no modo 1 e `Board::Bump` 0x0055F680 aplica `SpaceDamage(1)` modo 1 na casa de destino;

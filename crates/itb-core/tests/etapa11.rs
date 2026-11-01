@@ -1,6 +1,6 @@
 //! Etapa 11: aplicação de dano e empurrão (Tile::ApplyDamage 0x005ABA90, Pawn::ApplyDamage 0x006295B0,
 //! Pawn::Push/ResolvePush 0x0062CC00/0x0062CDD0, Health::Add 0x004DFFC0 e modificadores de casa).
-use itb_core::apply::{health_add, Hit, DIR_FLIP};
+use itb_core::apply::{health_add, BoardEvent, Hit, DIR_FLIP};
 use itb_core::board_occupancy::{consts::*, DamageTraits, MovementTraits, OccupancyBoard, PawnState, PawnStatusBytes, Point};
 use itb_core::damage::{DAMAGE_DEATH, DAMAGE_ZERO};
 
@@ -18,6 +18,24 @@ fn building(b: &mut OccupancyBoard, x: i32, y: i32, hp: i32) {
     t.terrain = TERRAIN_BUILDING;
     t.health = hp;
     t.max_health = hp;
+}
+
+#[test]
+fn flip_depends_on_ignore_flip_not_on_pushable() {
+    // +0x91E (`Pushable`) e +0x91F (não `IgnoreFlip`) são independentes em `Pawn::Push`.
+    let flips = |pushable: u8, ignore_flip: bool| {
+        let mut b = b8();
+        let mut p = pawn(1, TEAM_ENEMY, 2, 2, 3);
+        p.status.byte_0x91e = pushable;
+        p.status.ignore_flip = ignore_flip;
+        let i = b.add_pawn(p).unwrap();
+        b.pawn_push(i, DIR_FLIP);
+        b.events.iter().any(|e| matches!(e, BoardEvent::Flip(_)))
+    };
+    assert!(flips(1, false));
+    assert!(flips(0, false));
+    assert!(!flips(1, true));
+    assert!(!flips(0, true));
 }
 
 #[test]
