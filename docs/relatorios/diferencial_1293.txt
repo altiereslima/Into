@@ -1,34 +1,34 @@
 # Teste diferencial: jogo original x motor Rust
-linhas: original 65019 | Rust 65008
-preparo pelo Rust: mapa mix5 (jogo real: ?0), setor 0 "grass", missão Mission6 (Mission_Survive); chuva: não
+linhas: original 66331 | Rust 66320
+preparo pelo Rust: mapa mix6 (jogo real: ?0), setor 0 "grass", missão Mission5 (Mission_Volatile); chuva: não
 casas com terreno diferente do jogo real depois do preparo: 0 []
 rand na preparação: 7 pontos, 1 fora de sincronia ["01"]
 
 | Seção | Iguais | Diferentes | Só no original | Só no Rust |
 |---|---|---|---|---|
 | alcance | 125 | 0 | 0 | 0 |
-| arma | 57244 | 0 | 0 | 0 |
+| arma | 57744 | 0 | 0 | 0 |
 | caminho | 200 | 0 | 0 | 0 |
-| casa | 1601 | 0 | 0 | 0 |
-| com_unidades | 1601 | 0 | 0 | 0 |
+| casa | 1857 | 0 | 0 | 0 |
+| com_unidades | 1857 | 0 | 0 | 0 |
 | consumo | 145 | 0 | 0 | 0 |
 | cor | 5 | 0 | 0 | 0 |
 | dano | 260 | 0 | 0 | 0 |
 | direcao | 49 | 0 | 0 | 0 |
 | efeito | 7 | 0 | 0 | 0 |
-| entrada | 8 | 0 | 0 | 0 |
+| entrada | 16 | 0 | 0 | 0 |
 | fim | 3 | 0 | 0 | 0 |
 | global | 208 | 0 | 0 | 0 |
 | jogo | 9 | 0 | 0 | 0 |
-| objetivo | 2 | 0 | 0 | 0 |
+| objetivo | 4 | 0 | 0 | 0 |
 | plataforma | 7 | 0 | 0 | 0 |
 | point | 13 | 0 | 0 | 0 |
 | preparo | 9 | 0 | 0 | 0 |
 | rect | 4 | 0 | 0 | 0 |
 | sorteio | 6 | 0 | 0 | 0 |
-| unidade | 3481 | 0 | 0 | 0 |
+| unidade | 3771 | 0 | 0 | 0 |
 | zona | 3 | 0 | 0 | 0 |
 
-Total: 64990 iguais, 0 divergências.
-rand: os 16 valores do original saem do LCG do Rust (estado 0x20bf66bd).
+Total: 66302 iguais, 0 divergências.
+rand: os 16 valores do original saem do LCG do Rust (estado 0x3e298c74).
 stubs tocados no Rust: [("GetMechColorsInTexture()", 1)]

@@ -206,7 +206,27 @@ fn objective(a: &[Value]) -> Option<Record> {
     Some(rec("Objective", vec![
         ("rep", Field::Int(rep)), ("potential", Field::Int(pot)), ("text", Field::Str(text)),
         ("param1", Field::Str(p1)), ("param2", Field::Str(p2)), ("category", Field::Int(cat))],
-        vec![("str_0x58", Field::Str(extra))]))
+        vec![("str_0x58", Field::Str(extra)), ("failed_0x55", Field::Bool(false))]))
+}
+
+/// `RepObj::Failed` (0x5BA850): cópia por `(texto, p1, p2, 0, potential)` (rep 0), com a categoria e +0x58 do
+/// original e o byte +0x55 ligado.
+pub fn objective_failed(o: &Record) -> Record {
+    let mut f = o.clone();
+    f.set("rep", Field::Int(0));
+    f.set("failed_0x55", Field::Bool(true));
+    f
+}
+
+/// Métodos reais de `Objective`.
+pub fn install_objective_methods(lua: &Lua) -> mlua::Result<()> {
+    let t = lua.create_table()?;
+    t.set("Failed", lua.create_function(|_, s: Value| {
+        let Value::UserData(u) = &s else { return Err(no_overload("Objective:Failed()")) };
+        let o = u.borrow::<Record>().ok().filter(|r| r.class == "Objective").ok_or_else(|| no_overload("Objective:Failed()"))?;
+        Ok(objective_failed(&o))
+    })?)?;
+    lua.set_named_registry_value("itb_real_methods_Objective", t)
 }
 
 /// `RegionInfo` (0x14 bytes, sem propriedades): `(Point a)` = (a.x, a.y, 0, 0, 1000) (0x006D79A0);

@@ -205,6 +205,8 @@ impl Host {
         // SkillEffect, listas e métodos reais de SpaceDamage (Etapa 08)
         use crate::skill::*;
         install_space_damage_methods(&self.lua)?;
+        crate::records::install_objective_methods(&self.lua)?;
+        self.mark("Objective:Failed", Status::Reconstructed);
         for k in ["SpaceDamage:IsMovement", "SpaceDamage:MoveStart", "SpaceDamage:MoveEnd"] {
             self.mark(k, Status::Reconstructed);
         }
@@ -229,6 +231,7 @@ impl Host {
             }
         }
         for k in crate::world::BOARD_DONE { self.mark(format!("Board:{k}"), Status::Reconstructed); }
+        for k in crate::world::BOARD_PARTIAL { self.mark(format!("Board:{k}"), Status::Reconstructed); }
         for k in crate::world::PAWN_DONE { self.mark(format!("BoardPawn:{k}"), Status::Reconstructed); }
         for k in crate::world::PAWN_HOST { self.mark(format!("BoardPawn:{k}"), Status::Host); }
         for k in crate::game::GAME_DONE { self.mark(format!("GameMap:{k}"), Status::Reconstructed); }

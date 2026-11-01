@@ -196,7 +196,8 @@ fn main() {
     }
     let mut ordem: Vec<_> = total.iter().collect();
     ordem.sort_by(|a, b| u.missoes[b.0].len().cmp(&u.missoes[a.0].len()).then(b.1 .0.cmp(&a.1 .0)).then(a.0.cmp(b.0)));
-    println!("# Stubs tocados ao jogar missões no motor Rust ({} tipos de missão)\n", tipos.len());
+    // os scripts imprimem com LOG sem quebra de linha no fim
+    println!("\n# Stubs tocados ao jogar missões no motor Rust ({} tipos de missão)\n", tipos.len());
     println!("Ordem: em quantas missões aparece, depois total de chamadas.\n");
     println!("| Stub | Missões | Chamadas | Fases |\n|---|---|---|---|");
     for (stub, (n, fases)) in &ordem {

@@ -38,6 +38,8 @@ pub mod executor;
 pub mod map;
 /// Preparação da missão: terreno aleatório, vida dos prédios e chuva (Etapa 13).
 pub mod mission_setup;
+/// Consultas de tabuleiro usadas pelos scripts de missão (Etapa 13, fila de uso).
+pub mod board_mission;
 /// Criação de unidades e entrada no tabuleiro (Etapa 13).
 pub mod pawn_factory;
 /// Estado de `GameMap` lido pelos scripts (Etapa 13).

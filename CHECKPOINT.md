@@ -15,6 +15,7 @@ Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao test
 - **`Board:SpawnPawn` e a fila de surgimento:** casa disponível, sorteio com `rand()` e entrada na fila, como em `Board::GetAvailableSpace` e `Board::SpawnQueued`; bloqueio de surgimento causa dano.
 - **`Game` real:** `GetSector`, `GetTeamTurn`, `GetTurnCount`, `IsIslandUnlocked` e `GetPower`; os outros métodos seguem como stub. Também `Board:GetPawns`, `SetTerrain`, `BlockSpawn` e `ClearBlockSpawns`.
 - **`startNewGame` e `Mission:BaseStart` originais terminam sem tocar nenhum stub:** `itb-map <jogo> any3 --missao Mission_Acid` mostra os inimigos na fila.
+- **Fila por uso, bloco 1:** `IsPowered`, `IsFrozen`, `IsDangerousItem`, `GetEnemyCount`, `GetPawnCount` (time e tipo), `IsNonGridStructure`, `GetCustomPositionScore`, `Objective:Failed` e `GameMap:AddObjective`; `IsTargeted` parcial (sem fila de ataques). Conferido contra o jogo: `Mission_Volatile`/`mix6`, 0 divergências em 66.302 linhas. Provas em `re/evidencias/v1.2.93/rotinas_fila_uso.md`.
 - **Preparação da missão** (`BoardPlayer::LoadMission` até `InitializeMission`): `Host::load_mission` carrega o mapa, dá vida aos prédios (`SetBuildingHP`, conta em `float` com `ceil`), sorteia floresta, areia, gelo, ácido, rachaduras e chuva (`RandomizeEnvironment`, `RandomizeTerrain`) com as funções Lua originais. Também `Board:GetHealth`, `RandomizeTerrain`, `SetWeather` e a lista de prédios. Provas em `re/evidencias/v1.2.93/rotinas_preparo.md`.
 
 - **Teste diferencial pronto** (`ferramentas/diferencial/`): a mesma coleta roda no jogo original e no Rust.
@@ -23,8 +24,8 @@ Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao test
 |---|---|---|
 | Mapas originais carregados | 0 | **376 de 376**, sem chave ignorada |
 | Unidades criadas pelos mapas | 0 | **6 de 6** |
-| Nomes reconstruídos / plataforma / stubs (475) | 212 / 13 / 250 | **231 / 13 / 231** |
-| Testes | 100 + 2 | **139 + 6** |
+| Nomes reconstruídos / plataforma / stubs (475) | 212 / 13 / 250 | **241 / 13 / 221** |
+| Testes | 100 + 2 | **142 + 6** |
 | Fatos conferidos na 1.2.93 | 36 | **56** |
 
 ## Teste diferencial contra o jogo original

@@ -750,6 +750,91 @@
       "Board",
       "RandomizeTerrain",
       "0x00568940"
+    ],
+    [
+      "Board",
+      "IsPowered",
+      "0x005700A0"
+    ],
+    [
+      "Board",
+      "IsFrozen",
+      "0x0056D650"
+    ],
+    [
+      "Board",
+      "IsDangerousItem",
+      "0x005725C0"
+    ],
+    [
+      "Board",
+      "GetEnemyCount",
+      "0x00566FF0"
+    ],
+    [
+      "Board",
+      "GetPawnCount",
+      "0x00571630"
+    ],
+    [
+      "Board",
+      "GetPawnCount",
+      "0x00567000"
+    ],
+    [
+      "BoardPawn",
+      "IsNonGridStructure",
+      "0x0063B750"
+    ],
+    [
+      "BoardPawn",
+      "GetCustomPositionScore",
+      "0x00639C00"
+    ],
+    [
+      "Objective",
+      "Failed",
+      "0x005BA850"
+    ],
+    [
+      "GameMap",
+      "AddObjective",
+      "0x0060DC20"
+    ],
+    [
+      "GameMap",
+      "AddObjective",
+      "0x0060DCB0"
+    ],
+    [
+      "GameMap",
+      "AddObjective",
+      "0x0060DA30"
+    ],
+    [
+      "GameMap",
+      "AddObjective",
+      "0x0060DAC0"
+    ],
+    [
+      "GameMap",
+      "AddObjective",
+      "0x0060DE10"
+    ],
+    [
+      "GameMap",
+      "AddObjective",
+      "0x0060DEB0"
+    ],
+    [
+      "GameMap",
+      "AddObjective",
+      "0x0060E020"
+    ],
+    [
+      "GameMap",
+      "AddObjective",
+      "0x0060E0C0"
     ]
   ],
   "partial": [
@@ -892,6 +977,11 @@
       "Board",
       "SetWeather",
       "0x0056D580"
+    ],
+    [
+      "Board",
+      "IsTargeted",
+      "0x0056E6D0"
     ]
   ],
   "trivial_accessors": [

@@ -51,6 +51,17 @@ pub struct MapData {
     pub blocked_spawns: Vec<(Point, i32)>,
 }
 
+/// Entrada de `ObjectiveList` (0x58 bytes, montada por 0x5BBA30): um texto, ou texto e dois parâmetros, tipo
+/// (`ObjType`) e três inteiros.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct ObjectiveEntry {
+    pub texts: Vec<String>,
+    pub kind: i32,
+    pub a: i32,
+    pub b: i32,
+    pub c: i32,
+}
+
 /// Dados de missão guardados no tabuleiro.
 #[derive(Clone, Debug, PartialEq, Eq, Default)]
 pub struct MissionInfo {
@@ -66,6 +77,8 @@ pub struct MissionInfo {
     /// Unidades pedidas pelo mapa (0x56EC00), na ordem do laço. O host as cria com a fábrica de unidades,
     /// que depende das tabelas Lua, e esvazia esta lista.
     pub pending_pawns: Vec<(Point, String)>,
+    /// Lista de objetivos do `BoardPlayer` (+0x235C, `ObjectiveList`), preenchida por `GameMap:AddObjective`.
+    pub objectives: Vec<ObjectiveEntry>,
 }
 
 impl OccupancyBoard {
@@ -90,7 +103,8 @@ impl OccupancyBoard {
             }
         }
         b.mission = MissionInfo { name: map.name.clone(), enemy_kills: map.enemy_kills, zones: map.zones.clone(),
-                                  tags: map.tags.clone(), block_spawn: map.blocked_spawns.iter().copied().collect(), pending_pawns: Vec::new() };
+                                  tags: map.tags.clone(), block_spawn: map.blocked_spawns.iter().copied().collect(), pending_pawns: Vec::new(),
+                                  objectives: Vec::new() };
         for tile in &map.tiles {
             b.load_map_tile(tile);
         }

@@ -296,6 +296,20 @@ impl UserData for LBoard {
             Ok(())
         });
         m.add_method("GetHealth", |_, s, p: LPoint| Ok(s.0.borrow().get_health(to_b(p.0))));
+        // Etapa 13, bloco 1 da fila de uso (`board_mission.rs`)
+        q!(m, "IsPowered", "IsPowered(Point)", |b, p| b.is_powered(p));
+        q!(m, "IsFrozen", "IsFrozen(Point)", |b, p| b.is_frozen_at(p));
+        q!(m, "IsDangerousItem", "IsDangerousItem(Point)", |b, p| b.is_dangerous_item(p));
+        q!(m, "IsTargeted", "IsTargeted(Point)", |b, p| b.is_targeted(p));
+        m.add_method("GetEnemyCount", |_, s, ()| Ok(s.0.borrow().get_enemy_count()));
+        // 0x571630 `(int)` e 0x567000 `(string)`
+        m.add_method("GetPawnCount", |_, s, v: Value| {
+            let b = s.0.borrow();
+            match &v {
+                Value::String(n) => Ok(b.get_pawn_count_type(&n.to_string_lossy())),
+                _ => Ok(b.get_pawn_count(arg_int(&v).ok_or_else(|| no_overload("GetPawnCount(int), GetPawnCount(string)"))?)),
+            }
+        });
         m.add_method("RandomizeTerrain", |lua, s, (kind, chance): (Value, Value)| {
             let (kind, chance) = arg_int(&kind).zip(arg_int(&chance)).ok_or_else(|| no_overload("RandomizeTerrain(int,int)"))?;
             let rng = rng_of(lua)?;
@@ -374,6 +388,18 @@ impl UserData for LPawn {
             Ok(b.pawns[p.idx].is_corpse(b.global_list_has_12))
         });
         m.add_method("GetType", |_, p, ()| Ok(with(p, |s| s.type_name.clone())));
+        // 0x63B750 `Pawn::IsNonGridStructure`: `NonGrid` da tabela do tipo (lido na criação).
+        m.add_method("IsNonGridStructure", |_, p, ()| Ok(with(p, |s| s.non_grid_structure)));
+        // 0x639C00: `CallMethod(tipo, "GetPositionScore", p)` (0x641980, `LuaEnv::CallMethod<int, Point>`). Erro ou
+        // retorno que não é número dão 0.
+        m.add_method("GetCustomPositionScore", |lua, p, pt: LPoint| {
+            let ty = with(p, |s| s.type_name.clone());
+            let f: mlua::Function = lua.globals().get("CallMethod")?;
+            Ok(match f.call::<Value>((ty, "GetPositionScore", pt)) {
+                Ok(v) => arg_int(&v).unwrap_or(0),
+                Err(_) => 0,
+            })
+        });
         m.add_method("SetMech", |_, p, ()| { p.board.borrow_mut().pawns[p.idx].set_mech(); Ok(()) });
         m.add_meta_method(MetaMethod::Eq, |_, a, b: LPawnRef| Ok(Rc::ptr_eq(&a.board, &b.0.board) && a.idx == b.0.idx));
         m.add_meta_method(MetaMethod::Index, |lua, _, k: String| stub_lookup(lua, "BoardPawn", &k));
@@ -398,11 +424,14 @@ pub const BOARD_DONE: &[&str] = &[
     "GetPawnTeam", "GetSize", "GetSimpleReachable", "GetSimplePath", "GetReachable", "GetPath", "IsDeadly", "IsTerrain", "IsPod", "IsItem",
     "IsDangerous", "IsSpawning", "IsCrackable", "DamageSpace", "AddEffect", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
     "GetZone", "AddPawn", "SpawnPawn", "SpawnQueued", "GetPawns", "SetTerrain", "BlockSpawn", "ClearBlockSpawns",
-    "GetHealth", "RandomizeTerrain", "SetWeather",
+    "GetHealth", "RandomizeTerrain", "SetWeather", "IsPowered", "IsFrozen", "IsDangerousItem", "GetEnemyCount", "GetPawnCount",
 ];
+/// Ligados, mas com parte do estado ainda ausente no Rust (ver `docs/DIVERGENCIAS.md`).
+pub const BOARD_PARTIAL: &[&str] = &["IsTargeted"];
 /// Respondidos com dados do estado do jogo (rotina original ainda não reconstruída).
 pub const PAWN_HOST: &[&str] = &["GetBaseMove", "IsAbility"];
 pub const PAWN_DONE: &[&str] = &[
     "GetHealth", "IsDead", "IsDamaged", "GetTeam", "IsPlayer", "IsEnemy", "GetId", "IsMech", "GetSpace", "SetTeam", "SetMech", "GetPathProf", "IsFire", "IsFrozen", "IsAcid", "IsInfected", "IsPowered", "IsGuarding",
     "IsShield", "IsBoosted", "IsFlying", "GetType", "IsTeleporter", "IsJumper", "IsBurrower", "GetMoveSpeed", "IsCorpse", "IsGrappled",
+    "IsNonGridStructure", "GetCustomPositionScore",
 ];

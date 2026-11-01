@@ -173,6 +173,8 @@ local function coleta_dano()
 			emit("objetivo", c[1], o)
 		else
 			emit("objetivo", c[1], tostring(o.text) .. "," .. tostring(o.rep) .. "," .. tostring(o.potential) .. "," .. tostring(o.category))
+			local f = o:Failed()
+			emit("objetivo", c[1] .. ".Failed", tostring(f.text) .. "," .. tostring(f.rep) .. "," .. tostring(f.potential) .. "," .. tostring(f.category))
 		end
 	end
 end
@@ -181,7 +183,8 @@ end
 -- Consultas sobre a unidade fora de tabuleiro.
 local CONSULTAS = { "GetHealth", "GetTeam", "GetType", "IsDead", "IsDamaged", "IsEnemy", "IsPlayer", "IsMech",
 	"IsAcid", "IsFire", "IsFrozen", "IsInfected", "IsPowered", "IsGuarding", "IsGrappled",
-	"IsFlying", "IsTeleporter", "IsJumper", "IsBurrower", "GetPathProf", "GetMoveSpeed", "IsShield", "IsBoosted", "IsCorpse" }
+	"IsFlying", "IsTeleporter", "IsJumper", "IsBurrower", "GetPathProf", "GetMoveSpeed", "IsShield", "IsBoosted", "IsCorpse",
+	"IsNonGridStructure" }
 
 -- Conta quantos rand() uma chamada gasta: recupera o estado do LCG a partir de valores de random_int(32768)
 -- e procura o valor seguinte adiante na sequência. O produto é feito em partes porque a Lua usa double.
@@ -237,6 +240,7 @@ local function coleta_unidades()
 			saida:write("# ", n, ":", c, "\n")
 			emit("unidade", n .. "." .. c, tostring(p[c](p)))
 		end
+		emit("unidade", n .. ".GetCustomPositionScore", tostring(p:GetCustomPositionScore(Point(1, 1))))
 	end
 end
 
@@ -258,7 +262,8 @@ local function coleta_casas(secao)
 			local k = x .. "," .. y
 			emit(secao, k .. ".terreno", Board:GetTerrain(p))
 			for _, n in ipairs({ "IsBuilding", "IsFire", "IsSmoke", "IsVines", "IsAcid", "IsCracked", "IsEdge", "IsPod", "IsItem",
-				"IsDangerous", "IsSpawning", "IsCrackable", "IsValid", "IsPawnSpace" }) do
+				"IsDangerous", "IsSpawning", "IsCrackable", "IsValid", "IsPawnSpace", "IsPowered", "IsFrozen", "IsDangerousItem",
+				"IsTargeted" }) do
 				emit(secao, k .. "." .. n, tostring(Board[n](Board, p)))
 			end
 			emit(secao, k .. ".GetPawnTeam", Board:GetPawnTeam(p))
@@ -381,6 +386,13 @@ local function coleta_missao(mapa)
 	emit("entrada", "mech_casa", ponto(Board:GetPawnSpace(mech:GetId())))
 	emit("entrada", "n_jogador", Board:GetPawns(TEAM_PLAYER):size())
 	emit("entrada", "n_inimigo", Board:GetPawns(TEAM_ENEMY):size())
+	emit("entrada", "GetEnemyCount", Board:GetEnemyCount())
+	for _, t in ipairs({ TEAM_PLAYER, TEAM_ENEMY, TEAM_NONE, TEAM_MECH }) do
+		emit("entrada", "GetPawnCount" .. t, Board:GetPawnCount(t))
+	end
+	for _, n in ipairs({ "Firefly", "PunchMech", "Punch" }) do
+		emit("entrada", "GetPawnCount_" .. n, Board:GetPawnCount(n))
+	end
 	emit("entrada", "time_casa", Board:GetPawnTeam(Point(3, 6)))
 	for _, k in ipairs({ "GetMoveSpeed", "GetPathProf" }) do
 		emit("entrada", "mech_" .. k, mech[k](mech))

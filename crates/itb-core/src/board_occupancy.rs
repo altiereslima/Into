@@ -323,6 +323,8 @@ pub struct Tile {
     pub pod_0x2ae4: i32,
     /// +0x2B04 (DWORD): `IsItem` (!= 0).
     pub item_0x2b04: i32,
+    /// +0x288C..+0x2938: dano guardado com o item, lido por `BoardSpace::IsDangerousItem`.
+    pub item_damage: crate::board_mission::ItemDamage,
     /// +0x2AF0 (BYTE): `IsDangerous`; chave `spikes` nos jogos salvos.
     pub danger_0x2af0: bool,
     /// +0x27E8 (BYTE): `IsSpawning`.

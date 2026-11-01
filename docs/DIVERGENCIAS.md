@@ -53,3 +53,7 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | Chaves de jogo salvo em `LoadScript` | `cracked`, `vines`, `item`, `rain`, `teleports`... | relatadas como não aplicadas | Só ao carregar jogo salvo | Salvar e carregar (M9) |
 | Efeitos visuais da carga | `UpdateBuildingImage`, `StartSavePeopleAnim` | não modelados | Só visual | Render (M8) |
 | `Pawn::SetGuard(false)` em `Pawn::Push` | grava +0x8D2 no caminho estável | não modelado | Nenhum conhecido: na 1.2.93 só há escritas nesse deslocamento | Reavaliar se surgir uma leitura indireta |
+| `Board:IsTargeted` (1.2.93: 0x56E6D0) | consulta a fila de ataques de cada unidade (`SkillManager+0x20..+0x28`) | sempre falso: a fila de ataques não existe no Rust | IA e scripts que evitam casas atacadas | Turno inimigo (M6): `SkillManager::SetQueuedShot`, `FireQueued`, `Skill::ComputeAffectedPoints` |
+| Item da casa (`BoardSpace::IsDangerousItem`, 1.2.93: 0x5A11E0) | lê o `SpaceDamage` do item em +0x288C..+0x2938 | campos com nome provisório; `Board:SetItem` ainda é stub | Só com itens no tabuleiro | Casar os deslocamentos com os campos de `SpaceDamage` ao reconstruir `SetItem` |
+| `GameMap:AddObjective` | entrada em `ObjectiveList` com o resto do estado do objetivo (0x5BBA30) | guarda texto, tipo e os três inteiros; nada lê a lista ainda | Recompensas e tela de objetivos | Ler 0x5BBA30 e quem lê a lista |
+
