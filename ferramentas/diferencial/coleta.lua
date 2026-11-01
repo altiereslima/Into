@@ -470,6 +470,34 @@ local function coleta_missao(mapa)
 	end
 	Board:RemovePawn(mech)
 	emit("bloco4", "remove", Board:GetPawns(TEAM_PLAYER):size() .. "," .. tostring(Board:IsPawnSpace(mech:GetSpace())))
+
+	-- bloco 5: paredes, teleportes, avisos, escudos e estados de unidade
+	Board:SetWall(true, Point(5, 5), 1)
+	for _, d in ipairs({ 0, 1, 2, 3, 4 }) do
+		for _, perfil in ipairs({ 0, 1, 2, 3, 6 }) do
+			emit("bloco5", "parede." .. d .. "." .. perfil, tostring(Board:IsWall(Point(5, 5), d, perfil)) .. ","
+				.. tostring(Board:IsWall(Point(6, 5), d, perfil)))
+		end
+	end
+	Board:AddTeleport(Point(0, 6), Point(6, 0))
+	Board:AddTeleport(Point(0, 7), Point(7, 0))
+	for _, p in ipairs({ Point(0, 6), Point(6, 0), Point(0, 7), Point(7, 0) }) do
+		emit("bloco5", "teleporte." .. ponto(p), tostring(Board:IsDangerous(p)) .. "," .. Board:GetTerrain(p))
+	end
+	emit("bloco5", "aviso_antes", tostring(Board:IsEnvironmentDanger(Point(4, 4))))
+	Board:MarkSpaceImage(Point(4, 4), "combat/tile_icon/tile_lightning.png", GL_Color(255, 226, 88, 0.75))
+	emit("bloco5", "aviso_depois", tostring(Board:IsEnvironmentDanger(Point(4, 4))))
+	local u = PAWN_FACTORY:CreatePawn("Firefly1")
+	Board:AddPawn(u, Point(5, 1))
+	u:SetShield(true) emit("bloco5", "escudo", tostring(u:IsShield()))
+	u:SetAcid(true) emit("bloco5", "acido_com_escudo", tostring(u:IsAcid()))
+	u:SetShield(false) u:SetAcid(true) emit("bloco5", "acido", tostring(u:IsAcid()) .. "," .. tostring(u:IsShield()))
+	u:SetPowered(false) emit("bloco5", "sem_energia", tostring(u:IsPowered()) .. "," .. u:GetMoveSpeed())
+	u:SetPowered(true) u:SetMissionCritical(true) u:SetActive(false)
+	emit("bloco5", "minas", tostring(u:IsAvoidingMines()) .. "," .. tostring(PAWN_FACTORY:CreatePawn("PunchMech"):IsAvoidingMines()))
+	Board:AddShield(Point(5, 1)) emit("bloco5", "addshield_unidade", tostring(u:IsShield()))
+	local ve = VoiceEvent("Mission_Test_Start", 3, 7)
+	emit("bloco5", "voz", ve.id .. "," .. ve.pawn1 .. "," .. ve.pawn2)
 	emit("fim", "missao", "ok")
 end
 

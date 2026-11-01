@@ -23,14 +23,13 @@ Leia antes `CLAUDE.md` e `CHECKPOINT.md`. Endereços abaixo são da 1.2.93.
 - Documentar ao fechar o bloco, não a cada rotina.
 
 ## Próximo passo
-0. Bloco 5 da fila de uso (1 a 4 feitos, ver `rotinas_fila_uso.md`; 14 stubs restantes, poucos usos cada):
-   `BoardPawn:IsAvoidingMines`, `SetShield`, `SetPowered`, `SetAcid`, `SetActive`, `SetMissionCritical`;
-   `Board:IsEnvironmentDanger`, `IsWall`, `SetWall` (o núcleo já tem `set_wall`), `AddShield`, `MarkSpaceImage`,
-   `AddTeleport`; `GameMap:TriggerSound`. Depois, o turno inimigo: ler `so_analise/ia_inimiga_pc.md`,
-   `ia_inimiga_formulas.md`, `fila_ataque_pc.md` e `turno_pc.md`. A IA começa cada turno com `srand(aiSeed)`
-   (AiController+0x80, sorteado no construtor). Para o teste, o Lua do jogo tem `io` (a coleta já escreve arquivo),
-   então pode ler `aiSeed` de `saveData.lua` depois que o motor salvar; falta saber quando o motor salva.
-   `SelectMap` está lido em `so_analise/inicio_missao_pc.md`.
+0. A fila de uso está zerada: as 85 missões rodam no `itb-uso` sem tocar stub (blocos 1 a 5 em
+   `rotinas_fila_uso.md`). O próximo passo é o **turno**: estados do `BoardPlayer`, efeitos de início e fim de turno,
+   movimento e chegada, fila de ataques e IA inimiga. Guias em `so_analise/`: `turno_pc.md`, `turno_efeitos_pc.md`,
+   `movimento_pc.md`, `fila_ataque_pc.md`, `execucao_ataque_pc.md`, `ia_inimiga_pc.md`, `ia_inimiga_formulas.md`.
+   Teste do turno inimigo: `so_analise/save_pc.md` mostra que o `aiSeed` gravado no `saveData.lua` é a semente que a IA
+   usa no turno seguinte; o Lua do jogo tem `io`, então a coleta pode lê-lo. O `itb-uso` deve passar a seguir a ordem
+   real do turno (`turno_pc.md`) em vez da aproximada.
 1. `BoardPlayer::SelectMap` 0x582A60: hoje o mapa é argumento, e o teste o acha pelo terreno. Ela chama Lua
    (`GetMapTag`, `GetMapVetoes`, `GetMap`, `RandomMap`) e gasta `rand()` antes do primeiro ponto de sincronia da
    preparação. Reconstruir e conferir: o ponto `01` do cabeçalho do `itb-diff` deve passar a ficar em sincronia.

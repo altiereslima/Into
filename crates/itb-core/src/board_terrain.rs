@@ -58,9 +58,10 @@ impl OccupancyBoard {
     /// 0x005716F0 `Board:IsItem(Point)`: tamanho do nome do item (+0x2B04) != 0 (sentinela se inválida).
     pub fn is_item(&self, p: Point) -> bool { !self.tile(p).item.is_empty() }
 
-    /// 0x005717A0 `Board:IsDangerous(Point)`: byte +0x2AF0, ou `p` em uma das listas Board+0x7460/0x7470.
+    /// 0x005717A0 `Board:IsDangerous(Point)`: byte +0x2AF0, ou `p` na lista Board+0x7460 ou na de teleportes (+0x7470).
+    /// 1.2.93: 0x572610.
     pub fn is_dangerous(&self, p: Point) -> bool {
-        self.tile(p).danger_0x2af0 || self.danger_list_a.contains(&p) || self.danger_list_b.contains(&p)
+        self.tile(p).danger_0x2af0 || self.danger_list_a.contains(&p) || self.teleports.contains(&p)
     }
 
     /// 0x0056D5B0 `Board:IsSpawning(Point)`: byte +0x27E8, ou `p` na lista Board+0x2D50.

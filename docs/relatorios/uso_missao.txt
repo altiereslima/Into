@@ -4,20 +4,7 @@ Ordem: em quantas missões aparece, depois total de chamadas.
 
 | Stub | Missões | Chamadas | Fases |
 |---|---|---|---|
-| `BoardPawn:IsAvoidingMines` | 4 | 455 | inimigo:ScorePositioning |
-| `BoardPawn:SetShield` | 2 | 16 | BaseStart, BaseUpdate |
-| `BoardPawn:SetPowered` | 2 | 4 | BaseStart |
-| `Board:IsEnvironmentDanger` | 1 | 220 | BaseUpdate |
-| `BoardPawn:SetAcid` | 1 | 48 | BaseUpdate |
-| `Board:IsWall` | 1 | 20 | BaseStart |
-| `Board:MarkSpaceImage` | 1 | 15 | BaseUpdate |
-| `Board:AddShield` | 1 | 7 | BaseStart |
-| `Board:SetWall` | 1 | 5 | BaseStart |
-| `GameMap:TriggerSound` | 1 | 4 | PlanEnvironment |
 | `VoiceEvent()` | 1 | 4 | UpdateSpawning |
-| `BoardPawn:SetActive` | 1 | 3 | BaseUpdate |
-| `Board:AddTeleport` | 1 | 2 | BaseStart |
-| `BoardPawn:SetMissionCritical` | 1 | 2 | BaseStart |
 
 ## Erros de script (fase, mensagem, vezes)
 
@@ -62,52 +49,52 @@ Ordem: em quantas missões aparece, depois total de chamadas.
 - Mission_Filler: mapa any1
 - Mission_Final: mapa any1
 - Mission_Final_Cave: mapa any1
-- Mission_FireflyBoss: mapa any27
-- Mission_Force: mapa any42
-- Mission_ForestFire: mapa anyAE19
-- Mission_FreezeBldg: mapa any9
-- Mission_FreezeBots: mapa any42
-- Mission_FreezeMines: mapa any20
-- Mission_Hacking: mapa anyAE25
+- Mission_FireflyBoss: mapa anyAE18
+- Mission_Force: mapa hightideAE1
+- Mission_ForestFire: mapa anyAE28
+- Mission_FreezeBldg: mapa anyAE9
+- Mission_FreezeBots: mapa anyAE5
+- Mission_FreezeMines: mapa any40
+- Mission_Hacking: mapa any32
 - Mission_Holes: mapa any1
-- Mission_HornetBoss: mapa any41
-- Mission_Infinite: mapa anyAE22
-- Mission_JellyBoss: mapa any22
+- Mission_HornetBoss: mapa anyAE13
+- Mission_Infinite: mapa anyAE2
+- Mission_JellyBoss: mapa any4
 - Mission_Laser: mapa any1
-- Mission_LeaperBoss: mapa anyAE32
-- Mission_Lightning: mapa any26
-- Mission_MineBase: mapa anyAE30
-- Mission_Mines: mapa any45
+- Mission_LeaperBoss: mapa anyAE25
+- Mission_Lightning: mapa any35
+- Mission_MineBase: mapa any21
+- Mission_Mines: mapa anyAE22
 - Mission_Missiles: mapa any1
-- Mission_MosquitoBoss: mapa any18
-- Mission_NanoStorm: mapa anyAE22
+- Mission_MosquitoBoss: mapa any42
+- Mission_NanoStorm: mapa any22
 - Mission_Piston: mapa any1
-- Mission_Power: mapa any2
-- Mission_Reactivation: mapa any29
-- Mission_Repair: mapa anyAE38
-- Mission_Respawn: mapa any35
-- Mission_Sandstorm: mapa any18
-- Mission_Satellite: mapa any39
+- Mission_Power: mapa any43
+- Mission_Reactivation: mapa any41
+- Mission_Repair: mapa anyAE10
+- Mission_Respawn: mapa any1
+- Mission_Sandstorm: mapa anyAE9
+- Mission_Satellite: mapa any44
 - Mission_ScarabBoss: mapa anyAE36
-- Mission_ScorpionBoss: mapa any41
-- Mission_ShamanBoss: mapa any34
-- Mission_Shields: mapa anyAE26
-- Mission_SlugBoss: mapa anyAE1
-- Mission_SnowBattle: mapa any44
-- Mission_SnowStorm: mapa anyAE21
-- Mission_Solar: mapa any10
-- Mission_SpiderBoss: mapa any39
-- Mission_StarfishBoss: mapa any31
-- Mission_Stasis: mapa any50
-- Mission_Survive: mapa anyAE21
-- Mission_Tanks: mapa any20
-- Mission_Teleporter: mapa anyAE9
+- Mission_ScorpionBoss: mapa any9
+- Mission_ShamanBoss: mapa anyAE39
+- Mission_Shields: mapa anyAE9
+- Mission_SlugBoss: mapa anyAE21
+- Mission_SnowBattle: mapa any33
+- Mission_SnowStorm: mapa any11
+- Mission_Solar: mapa any39
+- Mission_SpiderBoss: mapa any3
+- Mission_StarfishBoss: mapa any28
+- Mission_Stasis: mapa any24
+- Mission_Survive: mapa any18
+- Mission_Tanks: mapa any40
+- Mission_Teleporter: mapa any2
 - Mission_Terraform: mapa any1
-- Mission_Terratide: mapa anyAE8
-- Mission_Test: mapa anyAE37
-- Mission_Tides: mapa hightideAE2
-- Mission_Train: mapa trainAE7
-- Mission_Trapped: mapa any35
+- Mission_Terratide: mapa any18
+- Mission_Test: mapa anyAE11
+- Mission_Tides: mapa hightideAE3
+- Mission_Train: mapa train5
+- Mission_Trapped: mapa anyAE2
 - Mission_Tutorial: mapa tutorial
 - Mission_Volatile: mapa any40
-- Mission_Wind: mapa any18
+- Mission_Wind: mapa anyAE33

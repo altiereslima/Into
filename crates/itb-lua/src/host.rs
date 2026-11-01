@@ -236,6 +236,7 @@ impl Host {
         for k in crate::world::PAWN_HOST { self.mark(format!("BoardPawn:{k}"), Status::Host); }
         for k in crate::game::GAME_DONE { self.mark(format!("GameMap:{k}"), Status::Reconstructed); }
         for k in crate::game::GAME_PARTIAL { self.mark(format!("GameMap:{k}"), Status::Reconstructed); }
+        self.mark("GameMap:TriggerSound", Status::Host);
         for k in ["GetValue", "GetMax"] { self.mark(format!("ValueBar:{k}"), Status::Reconstructed); }
         let color = self.lua.create_table()?;
         let mt = self.lua.create_table()?;

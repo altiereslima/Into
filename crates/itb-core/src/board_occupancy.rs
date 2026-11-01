@@ -117,6 +117,8 @@ pub struct PawnState {
     pub skills: Vec<String>,
     /// +0x91C (BYTE): calculado em `Board::AddPawn`; o significado exato ainda não foi lido.
     pub active_0x91c: bool,
+    /// +0x10C2 (BYTE): `Pawn::SetMissionCritical`.
+    pub mission_critical: bool,
 }
 
 /// Campos e consultas de `Pawn` lidos pelo cálculo de dano letal (Etapa 10).
@@ -331,6 +333,11 @@ pub struct Tile {
     pub item_damage: crate::board_mission::ItemDamage,
     /// +0x2684 `std::string`: ícone de terreno (`Board::SetTerrainIcon`), só para os gráficos.
     pub terrain_icon: String,
+    /// +0x265C `std::string` (tamanho em +0x266C): imagem de aviso de ambiente (`MarkSpaceImage`); não vazia =
+    /// `IsEnvironmentDanger`.
+    pub image_mark: String,
+    /// +0x2674: cor da imagem de aviso (`GL_Color`, 4 `float`).
+    pub image_mark_color: [u32; 4],
     /// +0x2AF0 (BYTE): `IsDangerous`; chave `spikes` nos jogos salvos.
     pub danger_0x2af0: bool,
     /// +0x27E8 (BYTE): `IsSpawning`.
@@ -370,7 +377,8 @@ pub struct OccupancyBoard {
     pub flag_0x2ca8: bool,
     /// Board+0x7460.. e Board+0x7470..: listas de casas perigosas (`IsDangerous`).
     pub danger_list_a: Vec<Point>,
-    pub danger_list_b: Vec<Point>,
+    /// Board+0x7470: pares de teleporte (`AddTeleport`), que `IsDangerous` também consulta.
+    pub teleports: Vec<Point>,
     /// Passivas do esquadrão para `IsPassiveSkill` lido pelas regras de dano (ex.: "Passive_ForceAmp").
     pub passive_skills: Vec<String>,
     /// Efeitos que o motor original delega a sistemas ainda não reconstruídos (rede elétrica, itens,
@@ -395,7 +403,7 @@ impl OccupancyBoard {
         let len = (width as usize) * (height as usize);
         Ok(Self { bounds: BoardBounds { width, height }, tiles: vec![Tile::default(); len],
                   sentinel: Tile::default(), pawns: Vec::new(), pawn_list: Vec::new(), global_list_has_12: false,
-                  pod_space: Point::INVALID, spawn_list: Vec::new(), spawn_queue: Vec::new(), flag_0x2ca8: false, danger_list_a: Vec::new(), danger_list_b: Vec::new(),
+                  pod_space: Point::INVALID, spawn_list: Vec::new(), spawn_queue: Vec::new(), flag_0x2ca8: false, danger_list_a: Vec::new(), teleports: Vec::new(),
                   passive_skills: Vec::new(), events: Vec::new(), pushes_started: Vec::new(), mission: Default::default(),
                   buildings: Vec::new(), weather: None })
     }

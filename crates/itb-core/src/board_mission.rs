@@ -270,6 +270,42 @@ impl OccupancyBoard {
         self.tile_mut_or_sentinel(p).terrain_icon = icon.to_string();
     }
 
+    /// 0x573240 `Board::IsEnvironmentDanger(Point)`: a casa tem imagem de aviso (tamanho de +0x265C != 0).
+    pub fn is_environment_danger(&self, p: Point) -> bool { !self.tile(p).image_mark.is_empty() }
+
+    /// 0x571800 `Board::MarkSpaceImage(Point, string, GL_Color)`: imagem (+0x265C) e cor (+0x2674) na casa, depois de
+    /// chamar `Tutorial::AddTutorial("Tutorial_Environment", x, y)`.
+    pub fn mark_space_image(&mut self, p: Point, image: &str, color: [u32; 4]) {
+        let t = self.tile_mut_or_sentinel(p);
+        t.image_mark = image.to_string();
+        t.image_mark_color = color;
+    }
+
+    /// 0x5743B0 `Board::IsWall(Point, int dir, int perfil)`: parede na direção (dir 4 = qualquer); com parede, falso
+    /// para os perfis 1, 3, 5 e 6 (`perfil & 0xF`) e verdadeiro para os outros.
+    pub fn is_wall(&self, p: Point, dir: i32, prof: i32) -> bool {
+        let walls = self.tile(p).edge_block_0x2ac4;
+        let any = if dir == 4 { walls.iter().any(|&w| w) } else { walls.get(dir as usize).copied().unwrap_or(false) };
+        any && !matches!(prof & 0xF, 1 | 3 | 5 | 6)
+    }
+
+    /// 0x56C390 `Board::AddTeleport(Point, Point)`: grupo = 1 se a lista de teleportes (Board+0x7470) estava vazia,
+    /// senão 2; os dois pontos entram na lista; `BoardSpace::Clear` nas duas casas; e `BoardSpace::SetTeleport(grupo)`
+    /// (embutida) grava +0x2BA0 em cada uma, salvo em buraco ou água (com a exceção de `IsTerrain`).
+    pub fn add_teleport(&mut self, a: Point, b: Point) {
+        let group = if self.teleports.is_empty() { 1 } else { 2 };
+        self.teleports.push(a);
+        self.teleports.push(b);
+        self.tile_clear(a);
+        self.tile_clear(b);
+        for p in [a, b] {
+            let t = self.tile(p);
+            if t.terrain != TERRAIN_HOLE && !Self::tile_is_terrain(t, TERRAIN_WATER) {
+                self.tile_mut_or_sentinel(p).int_0x2ba0 = group;
+            }
+        }
+    }
+
     /// 0x565F00 `Board::SetCustomTile(Point, string)`: grava o nome em `custom` (+0x27B4).
     pub fn set_custom_tile(&mut self, p: Point, name: &str) {
         self.tile_mut_or_sentinel(p).custom_tile = name.to_string();
@@ -424,6 +460,23 @@ mod tests {
         let i = b.add_pawn_zone(pawn("Firefly1", TEAM_ENEMY, Point::INVALID), "z", &mut rng).unwrap().unwrap();
         // (4,4) está ocupada: sobram (5,5) e (6,6)
         assert_eq!(b.pawns[i].space, [Point::new(5, 5), Point::new(6, 6)][(copia.rand() % 2) as usize]);
+    }
+
+    #[test]
+    fn paredes_teleportes_e_avisos() {
+        let mut b = OccupancyBoard::new(4, 4).unwrap();
+        let p = Point::new(1, 1);
+        assert!(!b.is_wall(p, 4, 0));
+        b.set_wall(true, p, 2);
+        assert!(b.is_wall(p, 2, 0) && b.is_wall(p, 4, 2) && !b.is_wall(p, 4, 1) && !b.is_wall(p, 1, 0));
+        b.add_pawn(pawn("Firefly1", TEAM_ENEMY, Point::new(2, 2))).unwrap();
+        b.add_teleport(Point::new(0, 0), Point::new(2, 2));
+        b.add_teleport(Point::new(3, 0), Point::new(3, 3));
+        assert_eq!((b.tile(Point::new(0, 0)).int_0x2ba0, b.tile(Point::new(3, 3)).int_0x2ba0), (1, 2));
+        assert!(b.pawns[0].is_dead() && b.is_dangerous(Point::new(2, 2)));
+        assert!(!b.is_environment_danger(p));
+        b.mark_space_image(p, "combat/tile_icon/tile_lightning.png", [0; 4]);
+        assert!(b.is_environment_danger(p));
     }
 
     #[test]

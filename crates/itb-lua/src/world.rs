@@ -310,6 +310,25 @@ impl UserData for LBoard {
             }
             Ok(())
         });
+        // bloco 5
+        m.add_method("AddShield", |_, s, p: LPoint| { s.0.borrow_mut().tile_shield_on(to_b(p.0)); Ok(()) });
+        m.add_method("IsEnvironmentDanger", |_, s, p: LPoint| Ok(s.0.borrow().is_environment_danger(to_b(p.0))));
+        m.add_method("IsWall", |_, s, (p, dir, prof): (LPoint, Value, Value)| {
+            let (dir, prof) = arg_int(&dir).zip(arg_int(&prof)).ok_or_else(|| no_overload("IsWall(Point,int,int)"))?;
+            Ok(s.0.borrow().is_wall(to_b(p.0), dir, prof))
+        });
+        m.add_method("SetWall", |_, s, (v, p, dir): (bool, LPoint, Value)| {
+            let dir = arg_int(&dir).filter(|d| (0..4).contains(d)).ok_or_else(|| no_overload("SetWall(bool,Point,int)"))?;
+            s.0.borrow_mut().set_wall(v, to_b(p.0), dir as usize);
+            Ok(())
+        });
+        m.add_method("MarkSpaceImage", |_, s, (p, image, color): (LPoint, Value, crate::values::LColor)| {
+            let image = crate::records::arg_str(&image).ok_or_else(|| no_overload("MarkSpaceImage(Point,string,GL_Color)"))?;
+            let c = color.0;
+            s.0.borrow_mut().mark_space_image(to_b(p.0), &image, [c.r.to_bits(), c.g.to_bits(), c.b.to_bits(), c.a.to_bits()]);
+            Ok(())
+        });
+        m.add_method("AddTeleport", |_, s, (a, b): (LPoint, LPoint)| { s.0.borrow_mut().add_teleport(to_b(a.0), to_b(b.0)); Ok(()) });
         m.add_method("ClearSpace", |_, s, p: LPoint| { s.0.borrow_mut().clear_space(to_b(p.0)); Ok(()) });
         m.add_method("SetTerrainIcon", |_, s, (p, icon): (LPoint, Value)| {
             let icon = crate::records::arg_str(&icon).ok_or_else(|| no_overload("SetTerrainIcon(Point,string)"))?;
@@ -505,6 +524,14 @@ impl UserData for LPawn {
         // 0x63CF50: `LuaData::GetInt("Ranged") == 1`; 0x63A960: `LuaData::GetBool("TempUnit")`.
         // 0x637810 `Pawn::SetFrozen(bool)`: grava +0x8D1; congelar apaga fogo e infecção (o resto é animação e som).
         m.add_method("SetFrozen", |_, p, v: bool| { p.board.borrow_mut().pawn_set_frozen(p.idx, v); Ok(()) });
+        // bloco 5: 0x634490 `SetShield`, 0x637580 `SetPowered` (+0x10C0), 0x63A660 `SetAcid`, 0x634C00 `SetActive`,
+        // 0x637CB0 `SetMissionCritical` (+0x10C2) e 0x6384B0 `IsAvoidingMines` (`LuaData::GetBool("AvoidingMines")`).
+        m.add_method("SetShield", |_, p, v: bool| { p.board.borrow_mut().pawn_set_shield(p.idx, v); Ok(()) });
+        m.add_method("SetPowered", |_, p, v: bool| { p.board.borrow_mut().pawns[p.idx].status.powered = v; Ok(()) });
+        m.add_method("SetAcid", |_, p, v: bool| { p.board.borrow_mut().pawn_set_acid(p.idx, v); Ok(()) });
+        m.add_method("SetActive", |_, p, v: bool| { p.board.borrow_mut().pawns[p.idx].set_active(v); Ok(()) });
+        m.add_method("SetMissionCritical", |_, p, v: bool| { p.board.borrow_mut().pawns[p.idx].mission_critical = v; Ok(()) });
+        m.add_method("IsAvoidingMines", |lua, p, ()| crate::pawns::type_bool(lua, &with(p, |s| s.type_name.clone()), "AvoidingMines"));
         m.add_method("IsRanged", |lua, p, ()| Ok(crate::pawns::type_int(lua, &with(p, |s| s.type_name.clone()), "Ranged")? == 1));
         m.add_method("IsTempUnit", |lua, p, ()| crate::pawns::type_bool(lua, &with(p, |s| s.type_name.clone()), "TempUnit"));
         // 0x639C00: `CallMethod(tipo, "GetPositionScore", p)` (0x641980, `LuaEnv::CallMethod<int, Point>`). Erro ou
@@ -545,6 +572,7 @@ pub const BOARD_DONE: &[&str] = &[
     "GetDistanceToBuilding", "GetDistanceToPawn", "IsDamaged", "GetMechDamage", "AddUniqueBuilding", "MarkSpaceDesc",
     "IsSafe", "StopWeather", "GetBuildings", "SetCustomTile", "SetAcid", "SetSmoke", "SetCracked", "SetFrozen", "RemoveShield",
     "RemovePawn", "ClearSpace", "SetTerrainIcon", "SetItem", "GetDeployLocScore",
+    "AddShield", "IsEnvironmentDanger", "IsWall", "SetWall", "MarkSpaceImage", "AddTeleport",
 ];
 /// Ligados, mas com parte do estado ainda ausente no Rust (ver `docs/DIVERGENCIAS.md`).
 pub const BOARD_PARTIAL: &[&str] = &["IsTargeted", "IsBusy"];
@@ -554,4 +582,5 @@ pub const PAWN_DONE: &[&str] = &[
     "GetHealth", "IsDead", "IsDamaged", "GetTeam", "IsPlayer", "IsEnemy", "GetId", "IsMech", "GetSpace", "SetTeam", "SetMech", "GetPathProf", "IsFire", "IsFrozen", "IsAcid", "IsInfected", "IsPowered", "IsGuarding",
     "IsShield", "IsBoosted", "IsFlying", "GetType", "IsTeleporter", "IsJumper", "IsBurrower", "GetMoveSpeed", "IsCorpse", "IsGrappled",
     "IsNonGridStructure", "GetCustomPositionScore", "IsRanged", "IsTempUnit", "SetFrozen",
+    "SetShield", "SetPowered", "SetAcid", "SetActive", "SetMissionCritical", "IsAvoidingMines",
 ];

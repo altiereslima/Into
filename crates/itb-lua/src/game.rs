@@ -55,6 +55,8 @@ impl UserData for LGame {
             }
             Ok(())
         });
+        // 0x60BCA0 `GameMap::TriggerSound(string)`: só som.
+        m.add_method("TriggerSound", |_, _, _name: Value| Ok(()));
         // 0x60BD70 `GameMap::GetEventCount(int)`: lista global de eventos (0x8B8400) com verificação de faixa; fora
         // dela, "Error: Tried to retrieve invalid event id" e 0. Os eventos ainda não existem no Rust: 0.
         m.add_method("GetEventCount", |_, _, id: Value| {

@@ -97,3 +97,30 @@ duas habilidades sorteadas em `Pilot::OnInit` (0x623BB5, duas vezes) e a semente
 
 Efeito na fila de uso: de 19 para 14 stubs; nas 85 missões sobram 5 erros de script.
 
+## Bloco 5
+Conferido contra o jogo: `Mission_Dam` no mapa `opendam19`, 0 divergências em 67.813 linhas, com a seção `bloco5`
+(paredes por direção e perfil, dois pares de teleporte, aviso de ambiente, escudo, ácido, energia, minas e `VoiceEvent`).
+Guia: `so_analise/bloco5_pc.md`.
+
+| Rotina | Regra |
+|---|---|
+| `Pawn::SetShield(bool)` 0x634490 (no Android, `Pawn::SetForceField`) | desligar com `IsTurnShield` (0x62D4A0) não faz nada; ligar grava +0x8D4 só se a unidade não está morta; desligar grava 0; o resto é animação e som |
+| `Board::AddShield(Point)` 0x569720 | `BoardSpace::SetForceField` 0x59FA40, que o Rust já tinha (`tile_shield_on`) |
+| `Pawn::SetPowered(bool)` 0x637580 | +0x10C0; ao ligar, um parâmetro visual de 16 bytes em +0x10D4 |
+| `Pawn::SetAcid(bool)` 0x63A660, `SetActive` 0x634C00 | iguais ao que o Rust já tinha (`pawn_set_acid`, `set_active`) |
+| `Pawn::SetMissionCritical(bool)` 0x637CB0 | +0x10C2 |
+| `Pawn::IsAvoidingMines()` 0x6384B0 | `LuaData::GetBool("AvoidingMines")` |
+| `Board::IsEnvironmentDanger(Point)` 0x573240 | tamanho da imagem de aviso (+0x266C, da string em +0x265C) != 0 |
+| `Board::MarkSpaceImage(Point, string, GL_Color)` 0x571800 | `Tutorial::AddTutorial("Tutorial_Environment", x, y)`, imagem em +0x265C e cor em +0x2674 |
+| `Board::IsWall(Point, int dir, int perfil)` 0x5743B0 | parede em +0x2AC4+dir (dir 4 = qualquer); com parede, falso para os perfis 1, 3, 5 e 6 |
+| `Board::SetWall(bool, Point, int)` 0x574450 | lida no bloco 4 |
+| `Board::AddTeleport(Point, Point)` 0x56C390 | grupo 1 se a lista Board+0x7470 estava vazia, senão 2; os dois pontos entram na lista; `BoardSpace::Clear` nas duas casas; `SetTeleport(grupo)` embutida grava +0x2BA0, salvo em buraco ou água |
+| `GameMap::TriggerSound(string)` 0x60BCA0 | só som |
+| `VoiceEvent(string, int, int)` (registro 0x67AB90) | `id` +0x00, `pawn1` +0x18, `pawn2` +0x1C; o corpo do construtor não foi localizado, e o teste confirmou a cópia dos argumentos na ordem |
+
+A lista de teleportes é Board+0x7470, a mesma que `Board::IsDangerous` (0x572610) consulta: casa de teleporte conta como
+perigosa. O Rust chamava essa lista de `danger_list_b`; agora é `teleports`.
+
+Efeito na fila de uso: de 14 stubs para nenhum. Nas 85 missões sobra 1 erro de script (`BaseStart: attempt to index
+local 'choice'`), que não vem de stub.
+

@@ -229,6 +229,16 @@ pub fn install_objective_methods(lua: &Lua) -> mlua::Result<()> {
     lua.set_named_registry_value("itb_real_methods_Objective", t)
 }
 
+/// `VoiceEvent(string, int, int)` (registro 0x67AB90): `id` +0x00, `pawn1` +0x18, `pawn2` +0x1C. O corpo do
+/// construtor não foi localizado: a cópia dos argumentos na ordem é SUPOSIÇÃO, conferida pelo teste diferencial.
+fn voice_event(a: &[Value]) -> Option<Record> {
+    match a {
+        [id, p1, p2] => Some(rec("VoiceEvent", vec![("id", Field::Str(arg_str(id)?)), ("pawn1", Field::Int(arg_int(p1)?)),
+                                                   ("pawn2", Field::Int(arg_int(p2)?))], vec![])),
+        _ => None,
+    }
+}
+
 /// `RegionInfo` (0x14 bytes, sem propriedades): `(Point a)` = (a.x, a.y, 0, 0, 1000) (0x006D79A0);
 /// `(Point a, Point b, int n)` = (a.x, a.y, b.x, b.y, n) (0x006D78E4).
 fn region_info(a: &[Value]) -> Option<Record> {
@@ -278,6 +288,7 @@ pub static RECORD_CLASSES: &[RecordClass] = &[
     RecordClass { name: "Objective", properties: &["rep", "potential", "text", "param1", "param2", "category"], ctor: objective,
                   signature: "Objective(string,int), Objective(string,string), Objective(string,int,int), Objective(string,string,string,int), Objective(string,string,string,string), Objective(string,string,string,int,int)" },
     RecordClass { name: "RegionInfo", properties: &[], ctor: region_info, signature: "RegionInfo(Point), RegionInfo(Point,Point,int)" },
+    RecordClass { name: "VoiceEvent", properties: &["id", "pawn1", "pawn2"], ctor: voice_event, signature: "VoiceEvent(string,int,int)" },
     RecordClass { name: "Text", properties: &["text", "pos", "size", "align", "width"], ctor: text,
                   signature: "Text(), Text(string,Point,int), Text(string,Point,int,int), Text(Text)" },
     RecordClass { name: "StyleInfo", properties: &[], ctor: style_info, signature: "StyleInfo(), StyleInfo(string,int)" },

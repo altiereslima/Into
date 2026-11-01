@@ -980,6 +980,66 @@
       "Board",
       "SpawnPawn",
       "0x00569250"
+    ],
+    [
+      "BoardPawn",
+      "SetShield",
+      "0x00634490"
+    ],
+    [
+      "BoardPawn",
+      "SetPowered",
+      "0x00637580"
+    ],
+    [
+      "BoardPawn",
+      "SetAcid",
+      "0x0063A660"
+    ],
+    [
+      "BoardPawn",
+      "SetActive",
+      "0x00634C00"
+    ],
+    [
+      "BoardPawn",
+      "SetMissionCritical",
+      "0x00637CB0"
+    ],
+    [
+      "BoardPawn",
+      "IsAvoidingMines",
+      "0x006384B0"
+    ],
+    [
+      "Board",
+      "AddShield",
+      "0x00569720"
+    ],
+    [
+      "Board",
+      "IsEnvironmentDanger",
+      "0x00573240"
+    ],
+    [
+      "Board",
+      "IsWall",
+      "0x005743B0"
+    ],
+    [
+      "Board",
+      "SetWall",
+      "0x00574450"
+    ],
+    [
+      "Board",
+      "MarkSpaceImage",
+      "0x00571800"
+    ],
+    [
+      "Board",
+      "AddTeleport",
+      "0x0056C390"
     ]
   ],
   "partial": [

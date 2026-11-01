@@ -154,8 +154,15 @@ impl OccupancyBoard {
         self.pawns[i].status.acid = v;
     }
 
-    /// 0x006335F0 `SetShield(bool)` (parte de estado: byte +0x8D4).
-    pub fn pawn_set_shield(&mut self, i: PawnIdx, v: bool) { self.pawns[i].damage.shield_0x8d4 = v; }
+    /// 0x006335F0 `SetShield(bool)` (1.2.93: 0x634490), parte de estado: desligar com a passiva de escudo de turno
+    /// (`IsTurnShield`, 0x62D4A0) não faz nada; ligar só grava +0x8D4 se a unidade não está morta (slot 0x10);
+    /// desligar grava 0. O resto é animação e som.
+    pub fn pawn_set_shield(&mut self, i: PawnIdx, v: bool) {
+        let p = &mut self.pawns[i];
+        if !v && p.damage.query_0x62c5f0 { return; }
+        if v && p.is_dead() { return; }
+        p.damage.shield_0x8d4 = v;
+    }
 
     /// 0x00639A50 `Kill(bool)`: se vivo, marca +0x921, tira 100 de vida e limpa a infecção.
     pub fn pawn_kill(&mut self, i: PawnIdx) {
