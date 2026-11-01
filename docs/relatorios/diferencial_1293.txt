@@ -1,14 +1,16 @@
 # Teste diferencial: jogo original x motor Rust
-linhas: original 65524 | Rust 65520
-mapa do jogo real: anyAE3; casas com terreno diferente do arquivo: 4 ["(1,0) 0→6", "(4,6) 0→6", "(6,4) 0→6", "(7,3) 0→6"]
+linhas: original 64919 | Rust 64908
+preparo pelo Rust: mapa hightide18 (jogo real: ?0), setor 0 "grass", missão Mission3 (Mission_Tides); chuva: não
+casas com terreno diferente do jogo real depois do preparo: 0 []
+rand na preparação: 7 pontos, 1 fora de sincronia ["01"]
 
 | Seção | Iguais | Diferentes | Só no original | Só no Rust |
 |---|---|---|---|---|
 | alcance | 125 | 0 | 0 | 0 |
-| arma | 57894 | 0 | 0 | 0 |
+| arma | 57144 | 0 | 0 | 0 |
 | caminho | 200 | 0 | 0 | 0 |
-| casa | 1537 | 0 | 0 | 0 |
-| com_unidades | 1537 | 0 | 0 | 0 |
+| casa | 1601 | 0 | 0 | 0 |
+| com_unidades | 1601 | 0 | 0 | 0 |
 | consumo | 145 | 0 | 0 | 0 |
 | cor | 5 | 0 | 0 | 0 |
 | dano | 260 | 0 | 0 | 0 |
@@ -21,11 +23,12 @@ mapa do jogo real: anyAE3; casas com terreno diferente do arquivo: 4 ["(1,0) 0�
 | objetivo | 2 | 0 | 0 | 0 |
 | plataforma | 7 | 0 | 0 | 0 |
 | point | 13 | 0 | 0 | 0 |
+| preparo | 9 | 0 | 0 | 0 |
 | rect | 4 | 0 | 0 | 0 |
 | sorteio | 6 | 0 | 0 | 0 |
 | unidade | 3481 | 0 | 0 | 0 |
 | zona | 3 | 0 | 0 | 0 |
 
-Total: 65503 iguais, 0 divergências.
-rand: os 16 valores do original saem do LCG do Rust (estado 0x324d3699).
+Total: 64890 iguais, 0 divergências.
+rand: os 16 valores do original saem do LCG do Rust (estado 0x08280516).
 stubs tocados no Rust: [("GetMechColorsInTexture()", 1)]

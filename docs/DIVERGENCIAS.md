@@ -34,7 +34,10 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | Teste de casa para os times 3 e -3 | caminho próprio com `GetDropZone` | recusa | Quem chamar com esses times | Ler 0x57309B em diante |
 | `Board+0x2CA8` | muda o sorteio e `SpawnQueued` | sempre falso | Não identificado | Achar quem grava |
 | Energia ao criar `Game` | 5/7 medido no jogo, dificuldade Normal | 5 fixo | Outras dificuldades podem diferir | Medir nas outras dificuldades; ler a rotina que grava |
-| `Board::RandomizeTerrain` e o resto da preparação do mapa | antes de `BaseStart`, chão vira floresta (6 casas em `any38`, 4 em `anyAE3`) | não existe | Terreno difere do arquivo `.map`; o teste diferencial parte do terreno real | Ler `BoardPlayer::RandomizeEnvironment` e `Board::RandomizeTerrain` |
+| `BoardPlayer::SelectMap` (1.2.93: 0x582A60) | escolhe o mapa da missão e gasta `rand()` | não existe: quem chama informa o mapa | O teste diferencial acha o mapa pelo terreno | Ler `SelectMap` (`GetMapTag`, `GetMapVetoes`, `GetMap`, `RandomMap`) |
+| Setor da preparação (string 1.2.93: 0x8D1A88) | gravado pelo motor ("grass", "snow"...) | argumento de `load_mission` | — | Achar quem grava |
+| Clima (`Board::SetWeather`, 1.2.93: 0x56D580) | objeto em Board+0x2DA0 (0x504840) | só guarda os argumentos | Chuva não tem efeito nas regras ainda; o sorteio não é comparado com o jogo | Ler 0x504840 |
+| Retorno das funções Lua da preparação (1.2.93: 0x597F50, 0x597890) | conversão do luabind | número vira `int`; outro tipo vira 0 (SUPOSIÇÃO) | Só com scripts alterados | Ler a conversão |
 | `IsNewEnemies`, `IsNewEquipment`, `IsNewMissions` | opções "Conteúdo avançado" da partida (lidas de 0x4D3E10) | `HostConfig`, ligadas por padrão | Listas de inimigos, armas e missões | Ler a configuração real |
 | Dois dos 3 `rand()` de `CreatePawn` | em construtores não localizados | só o consumo; os valores são descartados | Campos que usem esses valores, além de +0x924 | Localizar as chamadas |
 | Perfil do jogador em `IsIslandUnlocked` | `perfil+0x30` | 0 | Ilhas e inimigos liberados | Ler `GameProfile` |

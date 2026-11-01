@@ -493,3 +493,33 @@ fn original_laser_weapon_produces_falloff_damage() {
         for i = 1, r.effect:size() do t[i] = r.effect:index(i).iDamage end return t").eval().unwrap();
     assert_eq!(dmg, vec![3, 2, 1, 1]);
 }
+
+/// Integração: a preparação de `BoardPlayer::LoadMission` roda em todos os mapas, com as funções Lua originais e
+/// sem stub. Setor 0 de grama: metade dos prédios com vida 1 e metade com vida 2 (`getBuildingHealth(0)`).
+#[test]
+#[ignore = "precisa dos arquivos originais do jogo (ITB_GAME_DIR)"]
+fn original_mission_setup_runs_on_every_map() {
+    use itb_core::board_occupancy::consts::*;
+    let dir = std::env::var("ITB_GAME_DIR").expect("defina ITB_GAME_DIR");
+    let h = Host::new(&dir, HostConfig::default()).unwrap();
+    h.boot().unwrap();
+    h.new_game(Default::default()).unwrap();
+    h.lua.load("startNewGame() GAME.Missions = { [1] = CreateMission('Mission_Acid') }").exec().unwrap();
+    let names = h.load_map_data().unwrap();
+    h.report.borrow_mut().stub_calls.clear();
+    for name in &names {
+        let (board, _) = h.load_mission(name, 0, "grass", "Mission1").unwrap_or_else(|e| panic!("{name}: {e}"));
+        let b = board.borrow();
+        let n = b.buildings.len() as i32;
+        let um = b.buildings.iter().filter(|&&p| b.get_health(p) == 1).count() as i32;
+        let dois = b.buildings.iter().filter(|&&p| b.get_health(p) == 2).count() as i32;
+        let meio = itb_core::mission_setup::building_count(50, n as usize);
+        assert_eq!((um, dois), (meio.min(n), (n - meio).clamp(0, meio)), "{name}");
+        for x in 0..8 {
+            for y in 0..8 {
+                let p = itb_core::board_occupancy::Point::new(x, y);
+                if b.get_terrain(p) == TERRAIN_RUBBLE { assert_eq!(b.get_health(p), 0, "{name} {p:?}"); }            }
+        }
+    }
+    assert!(h.report.borrow().stub_calls.is_empty(), "{:?}", h.report.borrow().stub_calls);
+}

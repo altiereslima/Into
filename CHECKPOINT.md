@@ -2,6 +2,8 @@
 
 **Data:** 2026-11-01. Etapas anteriores em `docs/historico/`.
 
+**Para continuar o trabalho, leia `docs/CONTINUAR.md`.**
+
 ## Etapa 13: mapas de missão
 Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao teste diferencial contra o jogo original.
 - **Os `.map` são tabelas Lua.** `Host::load_map` executa o arquivo, e `OccupancyBoard::from_map` aplica as casas na ordem de `Board::LoadScript`. Provas em `re/evidencias/v1.2.93/rotinas_mapa.md`.
@@ -13,6 +15,7 @@ Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao test
 - **`Board:SpawnPawn` e a fila de surgimento:** casa disponível, sorteio com `rand()` e entrada na fila, como em `Board::GetAvailableSpace` e `Board::SpawnQueued`; bloqueio de surgimento causa dano.
 - **`Game` real:** `GetSector`, `GetTeamTurn`, `GetTurnCount`, `IsIslandUnlocked` e `GetPower`; os outros métodos seguem como stub. Também `Board:GetPawns`, `SetTerrain`, `BlockSpawn` e `ClearBlockSpawns`.
 - **`startNewGame` e `Mission:BaseStart` originais terminam sem tocar nenhum stub:** `itb-map <jogo> any3 --missao Mission_Acid` mostra os inimigos na fila.
+- **Preparação da missão** (`BoardPlayer::LoadMission` até `InitializeMission`): `Host::load_mission` carrega o mapa, dá vida aos prédios (`SetBuildingHP`, conta em `float` com `ceil`), sorteia floresta, areia, gelo, ácido, rachaduras e chuva (`RandomizeEnvironment`, `RandomizeTerrain`) com as funções Lua originais. Também `Board:GetHealth`, `RandomizeTerrain`, `SetWeather` e a lista de prédios. Provas em `re/evidencias/v1.2.93/rotinas_preparo.md`.
 
 - **Teste diferencial pronto** (`ferramentas/diferencial/`): a mesma coleta roda no jogo original e no Rust.
 
@@ -20,18 +23,22 @@ Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao test
 |---|---|---|
 | Mapas originais carregados | 0 | **376 de 376**, sem chave ignorada |
 | Unidades criadas pelos mapas | 0 | **6 de 6** |
-| Nomes reconstruídos / plataforma / stubs (475) | 212 / 13 / 250 | **228 / 13 / 234** |
-| Testes | 100 + 2 | **132 + 5** |
+| Nomes reconstruídos / plataforma / stubs (475) | 212 / 13 / 250 | **231 / 13 / 231** |
+| Testes | 100 + 2 | **139 + 6** |
 | Fatos conferidos na 1.2.93 | 36 | **56** |
 
 ## Teste diferencial contra o jogo original
-Última coleta: missão `Mission_Mines`, mapa `anyAE3`. Resultado em `docs/relatorios/diferencial_1293.txt`.
+Duas partidas novas, agora com a preparação da missão feita pelo Rust (o terreno real não é mais copiado):
+`Mission_Airstrike` no mapa `any30` e `Mission_Tides` no `hightide18`. Ambas dão **0 divergências** (65.790 e 64.890
+linhas iguais), com terreno e vida das 64 casas iguais aos do jogo e o `rand()` em sincronia em 6 dos 7 pontos da
+preparação (o primeiro depende de `SelectMap`). Resultado da segunda em `docs/relatorios/diferencial_1293.txt`.
 
-| Seção | Linhas iguais |
+| Seção (segunda partida) | Linhas iguais |
 |---|---|
-| Armas: área e efeito das 559 | 57.894 |
+| Armas: área e efeito das 559 | 57.144 (varia com o tabuleiro: 58.044 na primeira) |
 | Unidades: 24 consultas em 145 tipos | 3.481 |
-| Casas, com e sem unidades | 3.074 |
+| Casas, com e sem unidades, agora com a vida | 3.202 |
+| Preparação: chamadas às funções Lua, com argumentos e retorno | 9 |
 | `SpaceDamage` | 260 |
 | Globais | 208 |
 | Caminho e alcance | 325 |
@@ -39,13 +46,13 @@ Regras antes de gráficos, por escolha do usuário: o objetivo é chegar ao test
 | Sorteio de casas, com `rand()` sincronizado | 6 |
 | Outras | 110 |
 
-O que o teste corrigiu: `CreatePawn` gasta 3 `rand()`; a energia inicial é 5/7; `IsNew*` são opções da partida. O que revelou: o motor troca chão por floresta antes de `BaseStart` (`Board::RandomizeTerrain`).
+O que o teste corrigiu: `CreatePawn` gasta 3 `rand()`; a energia inicial é 5/7; `IsNew*` são opções da partida. O que revelou: o motor troca chão por floresta antes de `BaseStart`, agora reconstruído e conferido.
 
-**Limites:** um único caminho de cada arma, de uma casa para outra, em dois mapas. Não cobre a aplicação de efeitos, turnos, IA, objetivos, vida de casas nem o terreno inicial, que é copiado do jogo real.
+**Limites:** um único caminho de cada arma, de uma casa para outra. Só setor de grama na dificuldade Normal. Não cobre a aplicação de efeitos, turnos, IA, objetivos, a escolha do mapa nem a chuva (sem método de leitura).
 
-**M4 ainda não está pronto:** falta `RandomizeTerrain` e o fluxo de `BoardPlayer` (`SelectMap`, `Start`, `StartState`, posicionamento dos mechs, vida dos prédios, turno).
+**M4 ainda não está pronto:** falta o resto de `BoardPlayer` (`SelectMap`, `InitializeMission`, `Start`, `StartState`, posicionamento dos mechs, turno).
 
-**Próximo:** `Board::RandomizeTerrain` e `BoardPlayer`, comparando cada passo. Depois, aplicação de efeitos no teste diferencial, laço de quadro e turno inimigo.
+**Próximo:** ver `docs/CONTINUAR.md`.
 
 # Migração para o Breach.exe 1.2.93
 

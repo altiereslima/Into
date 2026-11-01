@@ -4,8 +4,9 @@
 -- Variáveis definidas por quem carrega este arquivo:
 --   DIF_SAIDA  caminho do arquivo de saída
 --   DIF_MODO   "boot": coleta o que não depende de missão e encerra o processo
---              "missao": além disso, espera uma missão começar no jogo, coleta o tabuleiro e encerra
---              "rust": roda tudo de uma vez; com DIF_MAPA, inclui o tabuleiro já carregado
+--              "missao": além disso, grava a preparação da missão, espera ela começar, coleta o tabuleiro e encerra
+--              "rust": coleta o que não depende de missão; com DIF_MAPA, deixa DIF_COLETA_MISSAO para depois
+--              que o Rust preparar a missão
 --
 -- Só chama o que o motor Rust já reconstruiu e o que não depende de haver missão: no original, um método
 -- que use o tabuleiro sem haver tabuleiro derruba o jogo. A saída não tem buffer, então a última linha
@@ -261,6 +262,7 @@ local function coleta_casas(secao)
 				emit(secao, k .. "." .. n, tostring(Board[n](Board, p)))
 			end
 			emit(secao, k .. ".GetPawnTeam", Board:GetPawnTeam(p))
+			emit(secao, k .. ".vida", Board:GetHealth(p))
 			emit(secao, k .. ".lava", tostring(Board:IsTerrain(p, TERRAIN_LAVA)))
 			for _, perfil in ipairs(PERFIS) do
 				emit(secao, k .. ".bloqueio" .. perfil, tostring(Board:IsBlocked(p, perfil)))
@@ -390,6 +392,101 @@ local function coleta_missao(mapa)
 	emit("fim", "missao", "ok")
 end
 
+---------------------------------------------------------------------- preparação da missão
+-- Antes de BaseStart, o motor dá vida aos prédios, sorteia terreno e chuva (BoardPlayer::LoadMission), com chances
+-- vindas destas funções Lua. Cada chamada grava argumentos e retorno. Antes dela, 4 valores de rand() deixam o Rust
+-- conferir se está no mesmo estado e, se não estiver, voltar a ele. O nome do mapa é tentado por AddMap e pela troca
+-- da global do mapa; na 1.2.93 nenhum dos dois funcionou ("?0"), e o comparador acha o mapa pelo terreno.
+local ultimo_mapa = "?"
+local n_preparo = 0
+-- Board::Load executa maps/<nome>.map de novo: a global do mapa escolhido passa a ser outra tabela.
+local tabelas_mapa = {}
+
+local function guarda_mapas()
+	if MAP_LIST == nil then return end
+	for _, nome in ipairs(MAP_LIST) do tabelas_mapa[nome] = rawget(_G, nome) end
+end
+
+local function mapa_recarregado()
+	local achados = {}
+	for nome, t in pairs(tabelas_mapa) do
+		if rawget(_G, nome) ~= t then achados[#achados + 1] = nome end
+	end
+	if #achados == 1 then return achados[1] end
+	return "?" .. #achados
+end
+
+local function marca_preparo()
+	n_preparo = n_preparo + 1
+	local k = string.format("%02d", n_preparo)
+	if DIF_MODO == "rust" then
+		DIF_SINCRONIZA_PREPARO(k)
+	else
+		local v = {}
+		for i = 1, 4 do v[i] = random_int(32768) end
+		emit("sincronia_preparo", k, table.concat(v, " "))
+	end
+	return k
+end
+
+local function valores(t)
+	if type(t) ~= "table" then return tostring(t) end
+	local r = {}
+	for i, v in ipairs(t) do r[i] = tostring(v) end
+	return table.concat(r, ",")
+end
+
+-- maps/maphelper.lua pode ser executado de novo depois da coleta: o envoltório é refeito quando some.
+local dif_addmap
+local function envolve_addmap()
+	if AddMap == nil or AddMap == dif_addmap then return end
+	local original = AddMap
+	dif_addmap = function(nome)
+		ultimo_mapa = nome
+		return original(nome)
+	end
+	AddMap = dif_addmap
+end
+
+local function envolve_preparo()
+	envolve_addmap()
+	local building, env, crack, rain, call = getBuildingHealth, getEnvironmentChance, getCrackChance, getRainChance, CallMethod
+	function getBuildingHealth(setor)
+		local k = marca_preparo()
+		if ultimo_mapa == "?" then ultimo_mapa = mapa_recarregado() end
+		-- não comparado: no Rust o nome vem do comparador
+		emit("missao", "mapa_preparo", ultimo_mapa)
+		local r = building(setor)
+		emit("preparo", k .. ".getBuildingHealth", tostring(setor) .. "=" .. valores(r))
+		return r
+	end
+	function getEnvironmentChance(setor, tipo)
+		local k = marca_preparo()
+		local r = env(setor, tipo)
+		emit("preparo", k .. ".getEnvironmentChance", tostring(setor) .. "," .. tostring(tipo) .. "=" .. tostring(r))
+		return r
+	end
+	function getCrackChance(setor)
+		local k = marca_preparo()
+		local r = crack(setor)
+		emit("preparo", k .. ".getCrackChance", tostring(setor) .. "=" .. tostring(r))
+		return r
+	end
+	function getRainChance(setor)
+		local k = marca_preparo()
+		local r = rain(setor)
+		emit("preparo", k .. ".getRainChance", tostring(setor) .. "=" .. tostring(r))
+		return r
+	end
+	function CallMethod(obj, func, a1, a2)
+		if func ~= "IsCracksAllowed" then return call(obj, func, a1, a2) end
+		local r = call(obj, func, a1, a2)
+		emit("preparo", "IsCracksAllowed", tostring(obj) .. "=" .. tostring(r))
+		emit("preparo", "missao_id", tostring(tenta(function() return GAME:GetMission(obj).ID end)))
+		return r
+	end
+end
+
 coleta_globais()
 coleta_valores()
 coleta_rand()
@@ -399,6 +496,8 @@ emit("fim", "boot", "ok")
 -- `CreatePawn` derruba o jogo durante a inicialização: as unidades esperam o menu. O gancho é uma função
 -- que o motor chama ao desenhar textos.
 local function fim_do_menu()
+	envolve_addmap()
+	guarda_mapas()
 	coleta_unidades()
 	emit("fim", "menu", "ok")
 	if DIF_MODO == "boot" then
@@ -409,10 +508,18 @@ end
 
 if DIF_MODO == "rust" then
 	fim_do_menu()
-	if DIF_MAPA then coleta_missao(DIF_MAPA) end
-	saida:close()
+	if DIF_MAPA then
+		envolve_preparo()
+		DIF_COLETA_MISSAO = function()
+			coleta_missao(DIF_MAPA)
+			saida:close()
+		end
+	else
+		saida:close()
+	end
 else
 	if DIF_MODO == "missao" then
+		envolve_preparo()
 		-- A coleta roda quando a missão começa. O motor escolhe o mapa: o comparador o identifica pelo terreno.
 		Mission.BaseStart = function(self)
 			saida:write("# missao: BaseStart\n")
@@ -427,6 +534,7 @@ else
 	local get_text = GetText
 	local chamadas = 0
 	function GetText(...)
+		envolve_addmap()
 		chamadas = chamadas + 1
 		if chamadas == 100 then
 			saida:write("# menu: GetText chamada 100 vezes\n")

@@ -59,9 +59,9 @@ versão junto do endereço e prefira o nome real. Em `CHECKPOINT.md`, `docs/*.md
 
 ## Fila de trabalho (ver CHECKPOINT.md)
 Ordem escolhida pelo usuário em 2026-11-01: regras antes de gráficos, para chegar ao teste diferencial.
-1. Etapa 13, lida direto na 1.2.93: terminar M4 (`RandomizeTerrain` e o fluxo de `BoardPlayer`: `SelectMap`, `Start`,
-   `StartState`, posicionamento, vida dos prédios; `startNewGame` e `BaseStart` já rodam; `itb-map <jogo> <mapa> --missao
-   <Tabela>` mostra o estado). A cada regra nova, estender `ferramentas/diferencial/coleta.lua` e comparar com o jogo
+1. Etapa 13, lida direto na 1.2.93: terminar M4 (o resto de `BoardPlayer`: `SelectMap`, `InitializeMission`, `Start`,
+   `StartState`, posicionamento; a preparação com terreno e vida dos prédios já está em `Host::load_mission`, e
+   `startNewGame` e `BaseStart` já rodam; `itb-map <jogo> <mapa> --missao <Tabela>` mostra o estado). A cada regra nova, estender `ferramentas/diferencial/coleta.lua` e comparar com o jogo
    real: é a prova mais forte que o projeto tem. Depois, laço de quadro
    (`CApp`/`Game`/`Board`/`Pawn::OnLoop`), `BoardPlayer`, tempo de voo dos projéteis, efeito de chegada completo
    (`BoardSpace::CheckTerrainDangers`) e turno inimigo (M6).

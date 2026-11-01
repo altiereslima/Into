@@ -4,7 +4,7 @@
 //! `SetPawn(pawn)`. Aqui `LBoard` compartilha o mesmo `OccupancyBoard` com as unidades `LPawn`.
 //! Métodos ainda não reconstruídos respondem como stubs (registram uso, devolvem nil).
 
-use crate::values::{arg_int, no_overload, LPoint};
+use crate::values::{arg_f32, arg_int, no_overload, LPoint};
 use itb_core::board_occupancy::{consts::TEAM_NONE, OccupancyBoard, OccupancyError, Point as BPoint};
 use itb_core::geometry::IPoint;
 use itb_core::rng::MsvcRand;
@@ -286,10 +286,26 @@ impl UserData for LBoard {
             let b = s.0.borrow();
             Ok(crate::skill::LIntList(b.get_pawns(team).into_iter().map(|i| b.pawns[i].id).collect()))
         });
-        // 0x565EE0 → 0x565E90 → `BoardSpace::SetTerrain`.
+        // 0x565EE0 → 0x565E90 → `BoardSpace::SetTerrain`, depois 0x573260 refaz a lista de prédios.
         m.add_method("SetTerrain", |_, s, (p, t): (LPoint, Value)| {
             let t = arg_int(&t).ok_or_else(|| no_overload("SetTerrain(Point,int)"))?;
-            s.0.borrow_mut().set_terrain(to_b(p.0), t);
+            let mut b = s.0.borrow_mut();
+            b.set_terrain(to_b(p.0), t);
+            b.update_building_list();
+            Ok(())
+        });
+        m.add_method("GetHealth", |_, s, p: LPoint| Ok(s.0.borrow().get_health(to_b(p.0))));
+        m.add_method("RandomizeTerrain", |lua, s, (kind, chance): (Value, Value)| {
+            let (kind, chance) = arg_int(&kind).zip(arg_int(&chance)).ok_or_else(|| no_overload("RandomizeTerrain(int,int)"))?;
+            let rng = rng_of(lua)?;
+            s.0.borrow_mut().randomize_terrain(kind, chance, &mut rng.borrow_mut());
+            Ok(())
+        });
+        m.add_method("SetWeather", |_, s, (kind, sub, from, to, time): (Value, Value, LPoint, LPoint, Value)| {
+            let sig = || no_overload("SetWeather(int,int,Point,Point,float)");
+            let (kind, sub) = arg_int(&kind).zip(arg_int(&sub)).ok_or_else(sig)?;
+            let time = arg_f32(&time).ok_or_else(sig)?;
+            s.0.borrow_mut().set_weather(kind, sub, to_b(from.0), to_b(to.0), time);
             Ok(())
         });
         m.add_method("BlockSpawn", |_, s, (p, kind): (LPoint, Value)| {
@@ -381,6 +397,7 @@ pub const BOARD_DONE: &[&str] = &[
     "GetPawnTeam", "GetSize", "GetSimpleReachable", "GetSimplePath", "GetReachable", "GetPath", "IsDeadly", "IsTerrain", "IsPod", "IsItem",
     "IsDangerous", "IsSpawning", "IsCrackable", "DamageSpace", "AddEffect", "IsPawnSpace", "IsBlocked", "IsPawnTeam", "GetPawn", "IsPawnAlive", "GetPawnSpace",
     "GetZone", "AddPawn", "SpawnPawn", "SpawnQueued", "GetPawns", "SetTerrain", "BlockSpawn", "ClearBlockSpawns",
+    "GetHealth", "RandomizeTerrain", "SetWeather",
 ];
 /// Respondidos com dados do estado do jogo (rotina original ainda não reconstruída).
 pub const PAWN_HOST: &[&str] = &["GetBaseMove", "IsAbility"];

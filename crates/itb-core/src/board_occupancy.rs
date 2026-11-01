@@ -373,6 +373,10 @@ pub struct OccupancyBoard {
     pub pushes_started: Vec<PawnIdx>,
     /// Dados da missão carregada de um `.map`.
     pub mission: crate::map::MissionInfo,
+    /// Board+0x2C44..: casas com prédio, em x e depois y, refeita por `update_building_list`.
+    pub buildings: Vec<Point>,
+    /// Board+0x2DA0: clima gravado por `Board::SetWeather`.
+    pub weather: Option<crate::mission_setup::Weather>,
 }
 
 impl OccupancyBoard {
@@ -384,7 +388,8 @@ impl OccupancyBoard {
         Ok(Self { bounds: BoardBounds { width, height }, tiles: vec![Tile::default(); len],
                   sentinel: Tile::default(), pawns: Vec::new(), pawn_list: Vec::new(), global_list_has_12: false,
                   pod_space: Point::INVALID, spawn_list: Vec::new(), spawn_queue: Vec::new(), flag_0x2ca8: false, danger_list_a: Vec::new(), danger_list_b: Vec::new(),
-                  passive_skills: Vec::new(), events: Vec::new(), pushes_started: Vec::new(), mission: Default::default() })
+                  passive_skills: Vec::new(), events: Vec::new(), pushes_started: Vec::new(), mission: Default::default(),
+                  buildings: Vec::new(), weather: None })
     }
 
     /// Board vftable slot 0x08 → 0x00561370 (`IsValid`).

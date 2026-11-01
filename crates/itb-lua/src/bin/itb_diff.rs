@@ -3,7 +3,9 @@
 use itb_core::board_occupancy::{OccupancyBoard, Point};
 use itb_core::rng::MsvcRand;
 use itb_lua::{Host, HostConfig};
+use std::cell::RefCell;
 use std::collections::BTreeMap;
+use std::rc::Rc;
 
 const COLETA: &str = include_str!("../../../../ferramentas/diferencial/coleta.lua");
 
@@ -48,6 +50,40 @@ fn rand_na_ordem(linhas: &Linhas) -> Vec<i32> {
     linhas.iter().filter(|(k, _)| k.0 == "rand").filter_map(|(_, v)| v.parse().ok()).collect()
 }
 
+/// Estado do LCG logo depois do último dos valores.
+fn estado_apos(valores: &[i32]) -> Option<u32> {
+    let estado = confere_rand(valores)?;
+    let mut r = MsvcRand::new(estado);
+    for _ in 1..valores.len() { r.rand(); }
+    Some(r.seed())
+}
+
+fn valor<'a>(linhas: &'a Linhas, secao: &str, chave: &str) -> Option<&'a str> {
+    linhas.get(&(secao.to_string(), chave.to_string())).map(String::as_str)
+}
+
+/// O que o jogo real passou às funções Lua da preparação (linhas `preparo|...`).
+struct Preparo {
+    mapa: String,
+    setor: i32,
+    tipo_setor: String,
+    missao: String,
+    missao_id: String,
+}
+
+fn preparo_original(linhas: &Linhas) -> Option<Preparo> {
+    let mapa = valor(linhas, "missao", "mapa_preparo").or(valor(linhas, "preparo", "mapa")).unwrap_or("?").to_string();
+    linhas.keys().find(|k| k.0 == "preparo")?;
+    let chamada = |nome: &str| linhas.iter().find(|(k, _)| k.0 == "preparo" && k.1.ends_with(nome)).map(|(_, v)| v.as_str());
+    let setor = chamada(".getBuildingHealth")?.split('=').next()?.parse().ok()?;
+    let tipo_setor = chamada(".getEnvironmentChance")?.split(',').next()?.to_string();
+    let (missao, missao_id) = match valor(linhas, "preparo", "IsCracksAllowed") {
+        Some(v) => (v.rsplit_once('=')?.0.to_string(), valor(linhas, "preparo", "missao_id").unwrap_or("nil").to_string()),
+        None => (String::new(), "nil".to_string()),
+    };
+    Some(Preparo { mapa, setor, tipo_setor, missao, missao_id })
+}
+
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     if args.len() < 3 {
@@ -65,45 +101,96 @@ fn main() {
     let saida = std::env::temp_dir().join(format!("itb_diff_{}.txt", std::process::id()));
     host.lua.globals().set("DIF_SAIDA", saida.to_string_lossy().replace('\\', "/")).unwrap();
     host.lua.globals().set("DIF_MODO", "rust").unwrap();
-    // com tabuleiro: o mesmo mapa, e o mesmo estado de rand() que o original gravou antes do sorteio
-    if original.contains_key(&("missao".to_string(), "mapa".to_string())) {
+    let com_tabuleiro = original.contains_key(&("missao".to_string(), "mapa".to_string()));
+    let preparo = preparo_original(&original);
+    let sincronias_preparo: Rc<RefCell<Vec<(String, bool)>>> = Rc::default();
+    let mut nomes = Vec::new();
+    if com_tabuleiro {
         host.new_game(Default::default()).expect("Game");
-        // O motor escolhe o mapa e ainda mexe no terreno antes de BaseStart: acha o mais parecido e parte do
-        // terreno que o jogo tinha, para comparar as regras sobre o mesmo tabuleiro.
-        let terreno = terreno_original(&original);
-        let nomes = host.load_map_data().expect("mapas");
-        let mut melhor: Option<(usize, String)> = None;
-        for n in &nomes {
-            let dados = host.read_map_file(n).expect("mapa");
-            let b = OccupancyBoard::from_map(&dados.data).expect("tabuleiro");
-            let dif = terreno.iter().filter(|(p, t)| b.tile(**p).terrain != **t).count();
-            if melhor.as_ref().is_none_or(|m| dif < m.0) { melhor = Some((dif, n.clone())); }
-        }
-        let (dif, mapa) = melhor.expect("há mapas");
-        let (board, _) = host.load_map(&mapa).expect("mapa");
-        let mudadas: Vec<String> = terreno.iter().filter(|(p, t)| board.borrow().tile(**p).terrain != **t)
-            .map(|(p, t)| format!("({},{}) {}→{}", p.x, p.y, board.borrow().tile(*p).terrain, t)).collect();
-        for (p, t) in &terreno {
-            if board.borrow().tile(*p).terrain != *t { board.borrow_mut().set_terrain(*p, *t); }
-        }
-        cabecalho.push(format!("mapa do jogo real: {mapa}; casas com terreno diferente do arquivo: {dif} {mudadas:?}"));
+        nomes = host.load_map_data().expect("mapas");
         host.lua.globals().set("DIF_MAPA", "real").unwrap();
+        // o mesmo estado de rand() que o original gravou antes do sorteio
         let sincronia: Vec<i32> = original.iter().filter(|(k, _)| k.0 == "sincronia").filter_map(|(_, v)| v.parse().ok()).collect();
         let rng = host.rng.clone();
         let sync = host.lua.create_function(move |_, ()| {
-            if let Some(estado) = confere_rand(&sincronia) {
-                let mut r = MsvcRand::new(estado);
-                for _ in 1..sincronia.len() { r.rand(); }
-                rng.borrow_mut().srand(r.seed());
-            }
+            if let Some(estado) = estado_apos(&sincronia) { rng.borrow_mut().srand(estado); }
             Ok(())
         }).unwrap();
         host.lua.globals().set("DIF_SINCRONIZA", sync).unwrap();
+        // na preparação: confere se o Rust está no estado do original; se não, volta a ele
+        let valores: BTreeMap<String, Vec<i32>> = original.iter().filter(|(k, _)| k.0 == "sincronia_preparo")
+            .map(|(k, v)| (k.1.clone(), v.split(' ').filter_map(|x| x.parse().ok()).collect())).collect();
+        let rng = host.rng.clone();
+        let registro = sincronias_preparo.clone();
+        let sync = host.lua.create_function(move |_, chave: String| {
+            let Some(v) = valores.get(&chave) else {
+                registro.borrow_mut().push((chave, false));
+                return Ok(());
+            };
+            let mut r = rng.borrow().clone();
+            let igual = v.iter().all(|&x| r.rand() == x);
+            if igual { *rng.borrow_mut() = r; } else if let Some(estado) = estado_apos(v) { rng.borrow_mut().srand(estado); }
+            registro.borrow_mut().push((chave, igual));
+            Ok(())
+        }).unwrap();
+        host.lua.globals().set("DIF_SINCRONIZA_PREPARO", sync).unwrap();
     } else {
         host.lua.globals().set("DIF_SINCRONIZA", host.lua.create_function(|_, ()| Ok(())).unwrap()).unwrap();
     }
     if let Err(e) = host.lua.load(COLETA).set_name("@coleta.lua").exec() {
         println!("a coleta parou no motor Rust: {e}");
+    }
+    if let Some(coleta_missao) = host.lua.globals().get::<Option<mlua::Function>>("DIF_COLETA_MISSAO").unwrap() {
+        let terreno = terreno_original(&original);
+        let parecido = || {
+            let mut melhor: Option<(usize, String)> = None;
+            for n in &nomes {
+                let dados = host.read_map_file(n).expect("mapa");
+                let b = OccupancyBoard::from_map(&dados.data).expect("tabuleiro");
+                let dif = terreno.iter().filter(|(p, t)| b.tile(**p).terrain != **t).count();
+                if melhor.as_ref().is_none_or(|m| dif < m.0) { melhor = Some((dif, n.clone())); }
+            }
+            melhor.expect("há mapas").1
+        };
+        match &preparo {
+            Some(pr) => {
+                let mapa = if nomes.contains(&pr.mapa) { pr.mapa.clone() } else { parecido() };
+                // CallMethod acha a missão em GAME.Missions, como no jogo
+                if !pr.missao.is_empty() && pr.missao_id != "nil" {
+                    let cria = host.lua.load("local obj, id = ...\nif GAME == nil then startNewGame() end\nGAME.Missions = GAME.Missions or {}\nGAME.Missions[GAME:GetMissionId(obj)] = CreateMission(id)");
+                    if let Err(e) = cria.call::<()>((pr.missao.as_str(), pr.missao_id.as_str())) {
+                        cabecalho.push(format!("a missão {} ({}) não foi criada no Rust: {}", pr.missao, pr.missao_id, e.to_string().lines().next().unwrap_or("")));
+                    }
+                }
+                let (board, _) = host.load_mission(&mapa, pr.setor, &pr.tipo_setor, &pr.missao).expect("missão");
+                let b = board.borrow();
+                let chuva = b.weather.as_ref().map_or("não".to_string(), |w| format!("tipo {} subtipo {}", w.kind, w.subtype));
+                cabecalho.push(format!("preparo pelo Rust: mapa {mapa} (jogo real: {}), setor {} \"{}\", missão {} ({}); chuva: {chuva}",
+                    pr.mapa, pr.setor, pr.tipo_setor, pr.missao, pr.missao_id));
+                let mudadas: Vec<String> = terreno.iter().filter(|(p, t)| b.tile(**p).terrain != **t)
+                    .map(|(p, t)| format!("({},{}) Rust {} | original {t}", p.x, p.y, b.tile(*p).terrain)).collect();
+                cabecalho.push(format!("casas com terreno diferente do jogo real depois do preparo: {} {mudadas:?}", mudadas.len()));
+            }
+            None => {
+                // saída antiga, sem a preparação: acha o mapa mais parecido e parte do terreno que o jogo tinha
+                let mapa = parecido();
+                let (board, _) = host.load_map(&mapa).expect("mapa");
+                let mudadas: Vec<String> = terreno.iter().filter(|(p, t)| board.borrow().tile(**p).terrain != **t)
+                    .map(|(p, t)| format!("({},{}) {}→{}", p.x, p.y, board.borrow().tile(*p).terrain, t)).collect();
+                for (p, t) in &terreno {
+                    if board.borrow().tile(*p).terrain != *t { board.borrow_mut().set_terrain(*p, *t); }
+                }
+                cabecalho.push(format!("mapa do jogo real: {mapa}; casas com terreno diferente do arquivo: {} {mudadas:?}", mudadas.len()));
+            }
+        }
+        if let Err(e) = coleta_missao.call::<()>(()) {
+            println!("a coleta da missão parou no motor Rust: {e}");
+        }
+    }
+    let sinc = sincronias_preparo.borrow();
+    if !sinc.is_empty() {
+        let fora: Vec<&str> = sinc.iter().filter(|s| !s.1).map(|s| s.0.as_str()).collect();
+        cabecalho.push(format!("rand na preparação: {} pontos, {} fora de sincronia {fora:?}", sinc.len(), fora.len()));
     }
     let rust_texto = std::fs::read_to_string(&saida).unwrap_or_default();
     std::fs::remove_file(&saida).ok();
@@ -119,7 +206,7 @@ fn main() {
     let mut resumo: BTreeMap<String, (usize, usize, usize, usize)> = BTreeMap::new();
     let mut diferencas = Vec::new();
     for (k, v) in &original {
-        if k.0 == "rand" || k.0 == "sincronia" || k.0 == "missao" { continue; }
+        if matches!(k.0.as_str(), "rand" | "sincronia" | "sincronia_preparo" | "missao") || k.1 == "mapa" && k.0 == "preparo" { continue; }
         let e = resumo.entry(k.0.clone()).or_default();
         match rust.get(k) {
             Some(r) if r == v => e.0 += 1,
@@ -128,7 +215,7 @@ fn main() {
         }
     }
     for (k, r) in &rust {
-        if k.0 != "rand" && k.0 != "missao" && !original.contains_key(k) {
+        if !matches!(k.0.as_str(), "rand" | "sincronia" | "sincronia_preparo" | "missao") && !original.contains_key(k) {
             resumo.entry(k.0.clone()).or_default().3 += 1;
             diferencas.push(format!("{}|{}: Rust {r:?} | original não tem", k.0, k.1));
         }

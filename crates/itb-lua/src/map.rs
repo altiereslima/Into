@@ -9,9 +9,10 @@ use crate::host::{Host, Outcome};
 use crate::records::arg_str;
 use crate::values::{arg_int, LPoint};
 use crate::world::SharedBoard;
-use itb_core::board_occupancy::consts::TEAM_NONE;
+use itb_core::board_occupancy::consts::{TEAM_NONE, TERRAIN_ACID, TERRAIN_FOREST, TERRAIN_ICE, TERRAIN_SAND};
 use itb_core::board_occupancy::{OccupancyBoard, Point};
 use itb_core::map::{MapData, MapTile};
+use itb_core::mission_setup::{rain_subtype, TERRAIN_CRACK, WEATHER_RAIN};
 use mlua::{Function, Table, Value};
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -144,16 +145,26 @@ impl Host {
         Ok(names)
     }
 
-    /// `Board::Load`: executa `maps/<nome>.map` e lê a global `<nome>`.
+    /// Executa `maps/<nome>.map` e lê a global `<nome>`.
     pub fn read_map_file(&self, name: &str) -> mlua::Result<LoadedMap> {
         self.run_map_file(&format!("maps/{name}.map"))?;
         let table: Table = self.lua.globals().get(name)?;
         read_map(&table)
     }
 
+    /// `Board::Load` (0x565860): executa o arquivo, chama `AddMap(nome)` e lê a tabela.
+    fn load_map_file(&self, name: &str) -> mlua::Result<LoadedMap> {
+        self.run_map_file(&format!("maps/{name}.map"))?;
+        if let Some(add) = self.lua.globals().get::<Option<Function>>("AddMap")? {
+            add.call::<()>(name)?;
+        }
+        let table: Table = self.lua.globals().get(name)?;
+        read_map(&table)
+    }
+
     /// Monta o tabuleiro da missão e o entrega aos scripts com `SetBoard`.
     pub fn load_map(&self, name: &str) -> mlua::Result<(SharedBoard, LoadedMap)> {
-        let loaded = self.read_map_file(name)?;
+        let loaded = self.load_map_file(name)?;
         let mut board = OccupancyBoard::from_map(&loaded.data).map_err(|e| bad(format!("{name}: {e:?}")))?;
         // 0x56EC00 → PawnFactory::CreatePawn(string) com time 2 → Board::AddPawn
         for (loc, ty) in std::mem::take(&mut board.mission.pending_pawns) {
@@ -163,5 +174,81 @@ impl Host {
         let shared = Rc::new(RefCell::new(board));
         self.set_board(shared.clone())?;
         Ok((shared, loaded))
+    }
+
+    /// Chama uma função Lua global como os ajudantes 0x597060 (`(string, int)`) e 0x597190 (`(string)`):
+    /// um erro dentro da chamada vira 0, depois da mensagem "Something went wrong".
+    fn call_int(&self, func: &str, args: impl mlua::IntoLuaMulti) -> mlua::Result<i32> {
+        let f: Function = self.lua.globals().get(func)?;
+        match f.call::<Value>(args) {
+            Ok(v) => Ok(arg_int(&v).unwrap_or(0)),
+            Err(e) => {
+                self.report.borrow_mut().console.push(format!("Something went wrong in {func}: {e}"));
+                Ok(0)
+            }
+        }
+    }
+
+    /// 0x449640: `CallMethod(obj, func)` pela pilha Lua (`lua_pcall`). Só um booleano conta; erro ou outro
+    /// tipo dá falso, depois da mensagem "Something went wrong in <obj>::<func>".
+    pub fn call_method_bool(&self, obj: &str, func: &str) -> mlua::Result<bool> {
+        let f: Function = self.lua.globals().get("CallMethod")?;
+        match f.call::<Value>((obj, func)) {
+            Ok(Value::Boolean(b)) => Ok(b),
+            Ok(_) | Err(_) => {
+                self.report.borrow_mut().console.push(format!("Something went wrong in {obj}::{func}"));
+                Ok(false)
+            }
+        }
+    }
+
+    /// `BoardPlayer::SetupBuildingHealth(int setor)` (0x591540): `getBuildingHealth(setor)` vira o vetor
+    /// de `Board::SetBuildingHP`.
+    pub fn setup_building_health(&self, board: &SharedBoard, sector: i32) -> mlua::Result<()> {
+        let f: Function = self.lua.globals().get("getBuildingHealth")?;
+        let percent: Vec<i32> = match f.call::<Value>(sector) {
+            Ok(Value::Table(t)) => t.sequence_values::<Value>().map(|v| Ok(arg_int(&v?).unwrap_or(0))).collect::<mlua::Result<_>>()?,
+            Ok(_) => Vec::new(),
+            Err(e) => {
+                self.report.borrow_mut().console.push(format!("Something went wrong in getBuildingHealth: {e}"));
+                Vec::new()
+            }
+        };
+        board.borrow_mut().set_building_hp(&percent, &mut self.rng.borrow_mut());
+        Ok(())
+    }
+
+    /// `BoardPlayer::RandomizeEnvironment` (0x58B380). `setor` é a string global 0x8D1A88 ("grass",
+    /// "snow"...) e `missao`, o nome que `CallMethod` resolve (BoardPlayer+0xFD4).
+    ///
+    /// 1. Para floresta, areia, gelo e ácido (tabela 0x8392D0), nesta ordem: `getEnvironmentChance(setor,
+    ///    tipo)` e `RandomizeTerrain(tipo, chance)`.
+    /// 2. Se `CallMethod(missao, "IsCracksAllowed")`: `RandomizeTerrain(16, getCrackChance(setor))`.
+    /// 3. `rand() % 100 < getRainChance(setor)`, sempre gastando o `rand()`: chuva em todo o tabuleiro.
+    pub fn randomize_environment(&self, board: &SharedBoard, sector: &str, mission: &str) -> mlua::Result<()> {
+        for kind in [TERRAIN_FOREST, TERRAIN_SAND, TERRAIN_ICE, TERRAIN_ACID] {
+            let chance = self.call_int("getEnvironmentChance", (sector, kind))?;
+            board.borrow_mut().randomize_terrain(kind, chance, &mut self.rng.borrow_mut());
+        }
+        if self.call_method_bool(mission, "IsCracksAllowed")? {
+            let chance = self.call_int("getCrackChance", sector)?;
+            board.borrow_mut().randomize_terrain(TERRAIN_CRACK, chance, &mut self.rng.borrow_mut());
+        }
+        let chance = self.call_int("getRainChance", sector)?;
+        if self.rng.borrow_mut().rand() % 100 < chance {
+            board.borrow_mut().set_weather(WEATHER_RAIN, rain_subtype(sector), Point::new(0, 0), Point::new(8, 8), -1.0);
+        }
+        Ok(())
+    }
+
+    /// `BoardPlayer::LoadMission` (0x580D50) até `InitializeMission`, exclusive. O mapa vem de
+    /// `BoardPlayer::SelectMap` (0x582A60), ainda não reconstruído: quem chama informa o nome.
+    pub fn load_mission(&self, map: &str, sector: i32, sector_type: &str, mission: &str) -> mlua::Result<(SharedBoard, LoadedMap)> {
+        let (board, loaded) = self.load_map(map)?;
+        self.setup_building_health(&board, sector)?;
+        if mission != "Mission_ActiveTutorial" {
+            self.randomize_environment(&board, sector_type, mission)?;
+        }
+        Ok((board, loaded))
     }
 }

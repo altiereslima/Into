@@ -740,6 +740,16 @@
       "Board",
       "ClearBlockSpawns",
       "0x0056C0E0"
+    ],
+    [
+      "Board",
+      "GetHealth",
+      "0x0055FFB0"
+    ],
+    [
+      "Board",
+      "RandomizeTerrain",
+      "0x00568940"
     ]
   ],
   "partial": [
@@ -877,6 +887,11 @@
       "Board",
       "SpawnPawn",
       "0x00569030"
+    ],
+    [
+      "Board",
+      "SetWeather",
+      "0x0056D580"
     ]
   ],
   "trivial_accessors": [

@@ -25,10 +25,15 @@ O jogo grava em `Documents/My Games/Into The Breach` mesmo rodando da cópia, e 
 jogo para jogar enquanto ele estiver rodando: o progresso seria descartado.
 
 ## Como lê o resultado
-* O motor escolhe o mapa e muda o terreno antes de `BaseStart`. `itb-diff` acha o mapa mais parecido, informa as casas
-  diferentes e parte do terreno real, para comparar as regras sobre o mesmo tabuleiro. Esse passo não é testado: ver
-  `Board::RandomizeTerrain` em `docs/DIVERGENCIAS.md`.
-* `rand()`: `coleta.lua` recupera o estado do LCG. Antes do sorteio de casas, o Rust é posto no mesmo estado.
+* Preparação da missão: o jogo dá vida aos prédios e sorteia terreno e chuva antes de `BaseStart`. `coleta.lua` grava
+  o que o motor passa a `getBuildingHealth`, `getEnvironmentChance`, `getCrackChance`, `getRainChance` e
+  `CallMethod(..., "IsCracksAllowed")` (seção `preparo`). `itb-diff` escolhe o mapa pelo terreno (o nome não sai pela
+  Lua), cria a missão em `GAME.Missions` e roda `Host::load_mission`. O terreno e a vida finais (`casa|x,y.vida`) são
+  comparados com o jogo. Saídas antigas, sem `preparo`, ainda usam o terreno real copiado.
+* `rand()`: `coleta.lua` recupera o estado do LCG. Antes de cada chamada da preparação, o original grava 4 valores
+  (`sincronia_preparo`); o Rust confere se já estava naquele estado, informa no cabeçalho os pontos fora de sincronia e
+  volta ao estado do original. O primeiro ponto fica fora porque `SelectMap` não existe no Rust. Antes do sorteio de
+  casas, o Rust é posto no mesmo estado.
 * `consumo`: quantos `rand()` cada `CreatePawn` gasta.
 
 ## Cuidados ao estender a coleta
@@ -37,4 +42,4 @@ então a última linha de `diff_original.txt` aponta a chamada culpada. Exemplos
 inicialização, e `MoveEnd` em dano sem movimento.
 
 ## O que não é comparado
-Aplicação de efeitos ao tabuleiro, turnos, IA, objetivos, vida de casas e prédios (sem método de leitura), interface e som.
+Aplicação de efeitos ao tabuleiro, turnos, IA, objetivos, a escolha do mapa, a chuva (sem método de leitura), interface e som.
