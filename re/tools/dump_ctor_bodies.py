@@ -2,7 +2,7 @@
 """Desmonta o corpo dos construtores Lua (luabind `construct<T, auto_ptr<T>, vectorN<...>>`).
 
 Para cada classe pedida, acha a vftable RTTI do function_object_impl<construct<...>>, segue as
-chamadas a partir do slot de invocacao ate o `operator new` (0x00753C6F) e imprime as instrucoes
+chamadas a partir do slot de invocacao ate o `operator new` e imprime as instrucoes
 seguintes (onde os campos do objeto novo sao preenchidos ou o ctor C++ e chamado).
 
 Uso: python re/tools/dump_ctor_bodies.py Breach.exe Rect2D [Classe ...]  > saida.txt
@@ -12,12 +12,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import map_lua_api_v2 as m
 
-NEW = 0x00753C6F
-
 
 def main():
     data = Path(sys.argv[1]).read_bytes()
     an = m.Analyzer(data)
+    NEW = an.profile['operator_new']
     for cls in sys.argv[2:]:
         for name, offs in sorted(an.vtables.items()):
             mm = re.search(r'construct@[UV]' + re.escape(cls) + r'@@.*?vector(\d)@X(.*?)@mpl@boost', name)

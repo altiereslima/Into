@@ -1,0 +1,1194 @@
+pc_va,android_va,nome,metodo,confianca,evidencia
+0x00433EB0,0x00469378,ImGui::NewFrame(),texto,alta,4 string(s)
+0x004359E0,0x0046D45C,"ImGui::BeginChild(char const*, ImVec2, bool, int)",texto,media,1 string(s)
+0x00435BF0,0x00477910,"ImGui::Combo(char const*, int*, bool (*)(void*, int, char const**), void*, int, int)",texto,media,1 string(s)
+0x00437450,0x0046C538,ImGui::End(),texto,media,1 string(s)
+0x0043AAB0,0x00477278,"ImGui::InputFloat(char const*, float*, float, float, int)",texto,media,1 string(s)
+0x0043F360,0x0048400C,"stbi_loadf_main(stbi__context*, int*, int*, int*, int)",texto,media,1 string(s)
+0x00449BB0,0x0022895C,luabind::cast_failed::what() const,texto,media,1 string(s)
+0x00449D90,0x00228598,luabind::error::what() const,texto,media,1 string(s)
+0x0044AC60,0x004AB9F4,LuaEnv::BindUniversalDefinitions(),texto,alta,21 string(s)
+0x0044CB40,0x004AF460,"LuaEnv::DirectLua(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0044D1A0,0x004AF2A0,LuaEnv::RefreshScripts(),texto,media,1 string(s)
+0x0044D2E0,0x004AFE08,LuaEnv::RefreshAll(),vtable,alta,mesma posição na vftable
+0x0044D7F0,0x004B06F8,"LuaEnv::GetLocation(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0044DA60,0x004B0C88,"LuaEnv::CallListFunction(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0044E080,0x004B1D44,"LuaString::AddPoint(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point)",texto,media,1 string(s)
+0x0046BC20,0x003C7864,BoardManager::GetVictoryState(),vtable,alta,mesma posição na vftable
+0x0046C4E0,0x004AED24,GL_Color::WithAlpha(float) const,lua,alta,GL_Color:WithAlpha
+0x0046C510,0x004AECF0,GL_Color::Normalize() const,lua,alta,GL_Color:Normalize
+0x0046C7A0,0x0053F770,CSaveGameDir::~CSaveGameDir(),vtable,alta,mesma posição na vftable
+0x0046C9B0,0x0053A174,"CSaveGameCache::FillCache(int, CSaveGameDir*, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&, long*)",texto,media,1 string(s)
+0x0046CEA0,0x0053CAA8,"CSaveGameCache::CreateDirectory(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",texto,alta,2 string(s)
+0x0046CF80,0x0053CB28,"CSaveGameCache::DeleteFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",texto,media,1 string(s)
+0x0046D180,0x0053CBB4,"CSaveGameCache::RenameFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, bool)",texto,alta,2 string(s)
+0x0046D5D0,0x0053CF64,"CSaveGameCache::GetFileList(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",texto,alta,3 string(s)
+0x0046E8D0,0x0053D0F4,CSaveGameDirEntry::~CSaveGameDirEntry(),vtable,alta,mesma posição na vftable
+0x0046E9C0,0x00541A60,CSaveGameFile::~CSaveGameFile(),vtable,alta,mesma posição na vftable
+0x0046EC30,0x0053E5C4,CSaveGameDir::Clone(CSaveGameDir*),vtable,alta,mesma posição na vftable
+0x0046ED70,0x0053E81C,CSaveGameDir::LogInfo(unsigned int),vtable,alta,mesma posição na vftable
+0x0046EDD0,0x0053E8A0,CSaveGameDir::ResetAction(),vtable,alta,mesma posição na vftable
+0x0046EE40,0x0053E948,CSaveGameDir::HasChanges() const,vtable,alta,mesma posição na vftable
+0x0046EEA0,0x0053E9AA,CSaveGameDir::RestoreAction(CSaveGameDirEntry*),vtable,alta,mesma posição na vftable
+0x0046EFA0,0x0053EA84,"CSaveGameDir::Flush(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&)",vtable,alta,mesma posição na vftable
+0x0046F280,0x0053EEE8,"CSaveGameDir::DoOperation(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, IDirectoryOperation*)",vizinhos,media,3 de 3 vizinhos
+0x00472F00,0x00540E94,"CSaveGameDirEntry::Log(char const*, ...)",texto,media,1 string(s)
+0x00473360,0x005411AC,CSaveGameFile::Clone(CSaveGameDir*),vtable,alta,mesma posição na vftable
+0x00473450,0x00541290,CSaveGameFile::LogInfo(unsigned int),vtable,alta,mesma posição na vftable
+0x00473490,0x005412D0,CSaveGameFile::ResetAction(),vtable,alta,mesma posição na vftable
+0x004734A0,0x005412DC,CSaveGameFile::HasChanges() const,vtable,alta,mesma posição na vftable
+0x004734C0,0x005412E8,CSaveGameFile::RestoreAction(CSaveGameDirEntry*),vtable,alta,mesma posição na vftable
+0x00473500,0x00541314,"CSaveGameFile::Flush(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&)",vtable,alta,mesma posição na vftable
+0x00473790,0x00541760,"CSaveGameFile::FillWithFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&, long*)",texto,media,1 string(s)
+0x00473DF0,0x004C87D4,Button::~Button(),vtable,alta,mesma posição na vftable
+0x00474720,0x004C8A84,"Button::OnInit(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, bool)",vtable,alta,mesma posição na vftable
+0x00474AA0,0x004C925E,Button::SetGamepadSelect(bool),vtable,alta,mesma posição na vftable
+0x00474AC0,0x004C9276,Button::SetFont(int),vtable,alta,mesma posição na vftable
+0x00474AD0,0x004C927C,Button::SetTextShift(Point),vtable,alta,mesma posição na vftable
+0x00474AF0,0x004C928E,Button::IsPotential(),vtable,alta,mesma posição na vftable
+0x00474B10,0x004C92A0,Button::Reset(),vtable,alta,mesma posição na vftable
+0x00474B30,0x004C92AE,Button::OnLoop(),vtable,alta,mesma posição na vftable
+0x00474B40,0x004C92B4,Button::OnRender(),vtable,alta,mesma posição na vftable
+0x004751E0,0x004C9B0C,Button::GetHighlightHeight(),vtable,alta,mesma posição na vftable
+0x004752A0,0x004C9B98,Button::GetAutoWidth(),vtable,alta,mesma posição na vftable
+0x00475370,0x004C9C34,Button::GetAutoHeight(),vtable,alta,mesma posição na vftable
+0x00475440,0x004C9CD0,Button::IsHighlighted(),vtable,alta,mesma posição na vftable
+0x00475470,0x004C9CFE,Button::IsHovering(),vtable,alta,mesma posição na vftable
+0x004754C0,0x004C9D48,Button::SetActive(bool),vtable,alta,mesma posição na vftable
+0x00475560,0x004C9E16,Button::GetLocation(),vtable,alta,mesma posição na vftable
+0x004755C0,0x004C9E60,"Button::MouseMove(int, int, bool)",vtable,alta,mesma posição na vftable
+0x004756D0,0x004CA01C,"Button::IsContained(int, int)",vtable,alta,mesma posição na vftable
+0x00475710,0x004CA024,"Button::OnTouch(TouchAction, int, int, int)",vtable,alta,mesma posição na vftable
+0x00475E70,0x004C8398,Button::LoadLua(),texto,media,1 string(s)
+0x00476020,0x0029D558,"Button::SetName(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vtable,alta,mesma posição na vftable
+0x00476090,0x0029D59A,Button::GetHitBox(),vtable,alta,mesma posição na vftable
+0x004760C0,0x0029E0E8,Button::IsActive(),vtable,alta,mesma posição na vftable
+0x004760D0,0x0025C0A2,OptionsItem::GetHighlightHeight(),vtable,alta,mesma posição na vftable
+0x004760E0,0x0025C080,OptionsItem::GetLocation(),vtable,alta,mesma posição na vftable
+0x00476100,0x0025C06A,OptionsItem::SetMaxLineSize(int),vtable,alta,mesma posição na vftable
+0x004761A0,0x002D9FB4,AnimTracker::~AnimTracker(),vtable,alta,mesma posição na vftable
+0x00476300,0x004CA4A2,"ChoiceBox::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00476350,0x004CA4D6,ChoiceBox::Close(),vtable,alta,mesma posição na vftable
+0x00476360,0x004CA4E2,ChoiceBox::SetOpen(bool),vtable,alta,mesma posição na vftable
+0x004764E0,0x004CA66C,ChoiceBox::~ChoiceBox(),vtable,alta,mesma posição na vftable
+0x00476610,0x004CA760,ChoiceBox::OnRender(),vtable,alta,mesma posição na vftable
+0x00478300,0x004CBDE8,"ChoiceBox::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00478410,0x004CBEE0,"ChoiceBox::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x00478590,0x004CC060,"ChoiceBox::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x004786F0,0x004CC210,"ChoiceBox::OnTouch(TouchAction, int, int, int, int, int)",vtable,alta,mesma posição na vftable
+0x004787C0,0x004CC2F0,"ChoiceBox::Open(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::vector<ChoiceText, std::__ndk1::allocator<ChoiceText> >)",texto,media,1 string(s)
+0x0047A060,0x004CCCF0,FocusWindow::~FocusWindow(),vtable,alta,mesma posição na vftable
+0x0047A0B0,0x004CC968,FocusWindow::Close(),vtable,alta,mesma posição na vftable
+0x0047A150,0x004CCA2C,FocusWindow::UpdateJoyMouse(),vtable,alta,mesma posição na vftable
+0x0047A370,0x004CCC10,FocusWindow::Open(),vtable,alta,mesma posição na vftable
+0x0047A420,0x004CCCE4,FocusWindow::SetOpen(bool),vtable,alta,mesma posição na vftable
+0x0047AB30,0x004CD328,"JoyControl::Rumble(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0047AC00,0x004CD5EC,JoyControl::GetButtonImage(int),texto,alta,4 string(s)
+0x0047B080,0x004CDA08,JoyControl::GetButtonString(int),texto,media,1 string(s)
+0x0047FCA0,0x004D0DB0,MouseControl::GetCurrentMouse(),texto,alta,8 string(s)
+0x00481890,0x004D10F8,ShadowBox::InitializeImages(),texto,media,1 string(s)
+0x00482380,0x004D1E5C,SlideBar::SetSliderWidth(int),vtable,alta,mesma posição na vftable
+0x00482390,0x004D1E60,SlideBar::SetSliderHeight(int),vtable,alta,mesma posição na vftable
+0x004823A0,0x004D1E6E,SlideBar::SetFont(int),vtable,alta,mesma posição na vftable
+0x004823B0,0x004D1EA0,SlideBar::SetLocation(Point),vtable,alta,mesma posição na vftable
+0x00482440,0x004D1EDE,SlideBar::IsPotential(),vtable,alta,mesma posição na vftable
+0x00482460,0x004D1EFC,SlideBar::GetLocation(),vtable,alta,mesma posição na vftable
+0x00482480,0x004D1F50,SlideBar::OnRender(),vtable,alta,mesma posição na vftable
+0x00482B60,0x004D232C,"SlideBar::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00482CE0,0x004D2578,"SlideBar::MouseMove(int, int, bool)",vtable,alta,mesma posição na vftable
+0x00483090,0x004D2B9E,SlideBar::IsActive(),vtable,alta,mesma posição na vftable
+0x00484F60,0x004D43D0,ToggleBox::SetLocation(Point),vtable,alta,mesma posição na vftable
+0x00485370,0x004D46D8,ToggleBox::GetLocation(),vtable,alta,mesma posição na vftable
+0x004853C0,0x004D4754,ToggleBox::OnRender(),vtable,alta,mesma posição na vftable
+0x00485790,0x004D4D4C,ToggleBox::GetHighlightHeight(),vtable,alta,mesma posição na vftable
+0x00485890,0x004D4E08,ToggleBox::SetFont(int),vtable,alta,mesma posição na vftable
+0x004858A0,0x004D4E0C,ToggleBox::SetTextShift(Point),vtable,alta,mesma posição na vftable
+0x004858D0,0x004D4E60,ToggleBox::IsPotential(),vtable,alta,mesma posição na vftable
+0x004858F0,0x004D4E84,"ToggleBox::MouseMove(int, int, bool)",vtable,alta,mesma posição na vftable
+0x004859A0,0x004D4F88,ToggleBox::OnConfirmAction(),vtable,alta,mesma posição na vftable
+0x00485C10,0x004D5306,ToggleBox::IsActive(),vtable,alta,mesma posição na vftable
+0x00486310,0x004D5778,"Animation::GetAnimInfo(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool)",texto,alta,2 string(s)
+0x00487630,0x004D6FB4,AnimTracker::Update(),vtable,alta,mesma posição na vftable
+0x0048AE20,0x004D9E90,"freetype::tex_parse_header(void const*, int, TexFileHeader*)",texto,alta,11 string(s)
+0x0048B530,0x004DA0EC,"freetype::texture_parse(SFontTexture&, void*, int, bool)",texto,alta,3 string(s)
+0x0048B8C0,0x004DA590,"freetype::parse_char_info(void const*, int, int, int, std::__ndk1::map<char32_t, FontFileCharInfo2, std::__ndk1::less<char32_t>, std::__ndk1::allocator<std::__ndk1::pair<char32_t const, FontFileCharInfo2> > >&)",texto,alta,3 string(s)
+0x0048C090,0x004DAB70,"freetype::font_data::init_bitmap(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, void const*, int, boost::unordered::unordered_set<int, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<int> > const&, bool)",texto,alta,15 string(s)
+0x0048DE30,0x004DBD90,CEvent::~CEvent(),vtable,alta,mesma posição na vftable
+0x0048DE60,0x004DBD98,CEvent::OnEvent(SDL_Event const*),vtable,alta,mesma posição na vftable
+0x0048FC70,0x004E7D8C,Console::OnLoop(),texto,alta,9 string(s)
+0x00490B80,0x004E9CC4,Console::OnRender(),texto,alta,5 string(s)
+0x004918C0,0x004EA888,Console::RenderUnitAnims(),texto,alta,3 string(s)
+0x00491EA0,0x004E9250,"Console::SetupUnitAnims(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x00495810,0x004DE340,CSurface::InitShaders(),texto,alta,3 string(s)
+0x00499AC0,0x004E4F14,"CSurface::GL_CreateMultiImagePrimitive(GL_Texture*, std::__ndk1::vector<GL_TexVertex, std::__ndk1::allocator<GL_TexVertex> > const&, float, float, float, float)",texto,media,1 string(s)
+0x00499C20,0x004E5200,"CSurface::GL_CreateMultiImageColorPrimitive(GL_Texture*, std::__ndk1::vector<GL_ColorTexVertex, std::__ndk1::allocator<GL_ColorTexVertex> > const&)",texto,media,1 string(s)
+0x0049B930,0x004E5DC8,CShaderProgram::~CShaderProgram(),vtable,alta,mesma posição na vftable
+0x0049C580,0x004ED868,LastShot::Clear(),texto,media,1 string(s)
+0x0049C670,0x004ED994,LastShot::PrepVoice(Pawn*),texto,alta,8 string(s)
+0x0049E240,0x004EF0D4,"FileHelper::openBinaryFileFromDisk(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",texto,alta,4 string(s)
+0x0049E740,0x004EF994,"FileHelper::removeDir(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x0049EFA0,0x004F01AC,FileHelper::checkWritePermissions(),texto,alta,2 string(s)
+0x0049F7C0,0x004F0684,"FileHelper::writeFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0049FBB0,0x004F1044,FileHelper::initFileHelper(),texto,media,1 string(s)
+0x004A3700,0x004F5AE0,"FontControl::LoadFont(boost::unordered::unordered_map<int, freetype::font_data, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<std::__ndk1::pair<int const, freetype::font_data> > >&, FontControl::STypeIndex&, float, void const*, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,104 string(s)
+0x004A6520,0x004FB784,FontControl::OnLanguageChanged(),texto,media,1 string(s)
+0x004A7200,0x004FBC58,"FontControl::LoadFontFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x004A7C70,0x004FC58C,"FontControl::GetFont(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,media,1 string(s)
+0x004A82F0,0x004FD034,FontControl::LoadFontStyles(),texto,media,1 string(s)
+0x004A85A0,0x004FCA78,"StyleInfo LuaEnv::CallFunction<StyleInfo, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, bool>(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, bool)",texto,media,1 string(s)
+0x004AA7A0,0x004FECC4,freetype::InitCharSet(),texto,alta,15 string(s)
+0x004AB510,0x004FFE70,"freetype::make_dlist(CFontAtlasGenerator&, FT_FaceRec_*, FT_StrokerRec_**, unsigned int, unsigned int, freetype::font_char*, std::__ndk1::vector<SFontTexture, std::__ndk1::allocator<SFontTexture> >&, float, boost::unordered::unordered_set<int, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<int> >*)",texto,alta,3 string(s)
+0x004ABA70,0x0050027C,"freetype::font_data::init(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, float, void const*, int, unsigned int, int, boost::unordered::unordered_set<int, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<int> > const&, bool)",texto,alta,2 string(s)
+0x004B30D0,0x0050A1B8,utf8::invalid_code_point::what() const,texto,media,1 string(s)
+0x004B30E0,0x0050A19C,utf8::invalid_utf8::what() const,texto,media,1 string(s)
+0x004B30F0,0x0050A180,utf8::not_enough_room::what() const,texto,media,1 string(s)
+0x004B3B20,0x00508CC0,"Globals::GetTimeString(float, bool)",texto,media,1 string(s)
+0x004B4790,0x00509D70,outputOpenglError(),texto,alta,5 string(s)
+0x004B5C00,0x0031F928,"std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > LuaEnv::CallFunction<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x004BB910,0x0050C950,"ParticleEmitter::ParticleEmitter(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,11 string(s)
+0x004BD130,0x0050DF34,Point::Manhattan(Point) const,lua,alta,Point:Manhattan
+0x004BD160,0x0050DF4C,Point::GetString(),lua,alta,Point:GetString
+0x004BD2F0,0x0050E0D4,Point::GetLuaString(),lua,alta,Point:GetLuaString
+0x004BD380,0x0050E560,ResourceControl::ResourceControl(),texto,media,1 string(s)
+0x004BE8F0,0x005100DC,"ResourceControl::GetImage(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x004BF1E0,0x005130B4,"ResourceControl::LoadMouseImage(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, unsigned char*, int)",texto,alta,2 string(s)
+0x004BF350,0x005105A0,ResourceControl::PreparePalettes(),texto,alta,8 string(s)
+0x004C1D20,0x00515BC0,ResourceControl::PreloadResources(CApp*),texto,alta,6 string(s)
+0x004C3450,0x00517DD8,ResourceControl::OnInit(),texto,alta,7 string(s)
+0x004C3830,0x00518344,"ResourceControl::RenderLoadingBar(float, float)",texto,alta,3 string(s)
+0x004C3B30,0x00516880,"ResourceControl::RenderLoadingBarFrame(float, float)",texto,alta,6 string(s)
+0x004C5BB0,0x002755D0,"std::__ndk1::enable_if<__is_forward_iterator<Point*>::value&&is_constructible<Point, std::__ndk1::iterator_traits<Point*>::reference>::value, void>::type std::__ndk1::vector<Point, std::__ndk1::allocator<Point> >::assign<Point*>(Point*, Point*)",vizinhos,media,5 de 6 vizinhos
+0x004C6FB0,0x005174A0,"TextData::LoadScript(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x004CE3F0,0x003C2B5E,"GridSearchable::IsWall(Point, int, int)",vtable,alta,mesma posição na vftable
+0x004CE410,0x003C2B00,GridSearchable::~GridSearchable(),vtable,alta,mesma posição na vftable
+0x004CEAB0,0x00525E88,"GridSearchable::GetDistance(Point, Point, int)",lua,alta,Board:GetDistance
+0x004D4A40,0x00529F9C,Settings::GetLanguageFolder(int),texto,alta,3 string(s)
+0x004D50A0,0x0052A6A4,"Settings::GetLanguageId(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",texto,alta,4 string(s)
+0x004D5460,0x0052B9FC,Settings::IsTextureSwap(),texto,media,1 string(s)
+0x004D56A0,0x003C7874,BoardManager::IsCursor(),vtable,alta,mesma posição na vftable
+0x004D5860,0x0052C1F8,"Settings::GetHotkeyName(int, int)",texto,media,1 string(s)
+0x004D5C50,0x0052C710,Settings::GetDefaultKey(int),texto,alta,9 string(s)
+0x004D6390,0x0052CD1C,Settings::GetGamepadImage(bool),texto,alta,8 string(s)
+0x004D7140,0x0052D440,Settings::GetDpadSetting(),texto,alta,3 string(s)
+0x004D7630,0x0052DB74,Settings::LoadSettings(),texto,alta,2 string(s)
+0x004D86A0,0x0052E96C,Settings::GetMutationString(),texto,media,1 string(s)
+0x004D94C0,0x00531490,GetShaderDefines(unsigned int),texto,media,1 string(s)
+0x004D95B0,0x00531554,"CShaderProgram::Init(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",texto,alta,8 string(s)
+0x004D9AD0,0x005318E8,CShader::~CShader(),vtable,alta,mesma posição na vftable
+0x004D9F40,0x00531F84,SoundControl::OnInit(),texto,alta,6 string(s)
+0x004DA980,0x00532ED0,SoundControl::OnLoop(),texto,media,1 string(s)
+0x004DAEC0,0x005336FC,"SoundControl::PlayEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,media,1 string(s)
+0x004DB050,0x00533858,"SoundControl::TriggerEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,alta,2 string(s)
+0x004DB680,0x0053448C,"SoundControl::StartEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x004DBFD0,0x00532A88,SoundControl::StartMenuMusic(),texto,media,1 string(s)
+0x004DC280,0x0053523C,SoundControl::StartBattleMusic(),texto,alta,2 string(s)
+0x004DC370,0x005355F8,SoundControl::StartBattle(),texto,media,1 string(s)
+0x004DC420,0x005356A0,SoundControl::TriggerGameover(),texto,media,1 string(s)
+0x004DC510,0x0053578C,SoundControl::StopBattle(int),texto,media,1 string(s)
+0x004DCBF0,0x0053537C,SoundControl::StartNewBattleTrack(),texto,alta,4 string(s)
+0x004DFA90,0x00531E14,"ERRCHECK_fn(FMOD_RESULT, char const*, int)",texto,media,1 string(s)
+0x004E0E20,0x00538834,ValueBar::Modify(int),vtable,alta,mesma posição na vftable
+0x004E10B0,0x00538C7C,ValueBar::GetValue() const,lua,alta,ValueBar:GetValue
+0x004E10C0,0x00538C80,ValueBar::GetMax(),lua,alta,ValueBar:GetMax
+0x004E1AC0,0x003E6B54,ValueBar::~ValueBar(),vtable,alta,mesma posição na vftable
+0x004E1B70,0x00530EF8,"CShader::Init(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, unsigned int)",texto,alta,2 string(s)
+0x004E22B0,0x005444F0,brk_load_default_dict(),texto,alta,4 string(s)
+0x004E3660,0x00227600,CApp::~CApp(),vtable,alta,mesma posição na vftable
+0x004E36C0,0x0022216C,CApp::OnInputFocus(),vtable,alta,mesma posição na vftable
+0x004E3710,0x00222204,CApp::OnInputBlur(),vtable,alta,mesma posição na vftable
+0x004E3740,0x002222B8,CApp::OnExecute(),texto,alta,16 string(s)
+0x004E3ED0,0x00224F24,CApp::ListCommands(),texto,alta,8 string(s)
+0x004E40F0,0x00225254,SDL_main,texto,alta,3 string(s)
+0x004E45F0,0x00222BD8,CApp::OnLoop(),texto,alta,34 string(s)
+0x004E5620,0x00224A7C,CApp::OnRender(),texto,media,1 string(s)
+0x004E5C00,0x00225A54,CApp::SetupWindow(),texto,alta,2 string(s)
+0x004E5F10,0x00225E44,"CApp::OnWindowResize(int, int)",vtable,alta,mesma posição na vftable
+0x004E67E0,0x00226370,CApp::OnWindowMaximize(),vtable,alta,mesma posição na vftable
+0x004E6920,0x00226460,CApp::OnWindowMoved(),vtable,alta,mesma posição na vftable
+0x004E6AA0,0x002265F4,CApp::OnGoingToBackground(),vtable,alta,mesma posição na vftable
+0x004E6AF0,0x00226660,"CApp::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x004E6B50,0x002226B4,CApp::OnInit(),texto,alta,10 string(s)
+0x004E7130,0x002266D4,CApp::OnEvent(SDL_Event const*),vtable,alta,mesma posição na vftable
+0x004E7140,0x002266DE,CApp::OnRequestExit(),vtable,alta,mesma posição na vftable
+0x004E7150,0x002266E4,CApp::OnExit(),vtable,alta,mesma posição na vftable
+0x004E71A0,0x00226748,"CApp::TranslateMouse(int, int)",vizinhos,media,7 de 7 vizinhos
+0x004E72F0,0x002267E8,"CApp::OnMouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x004E7340,0x00226848,CApp::OnMouseWheel(bool),vtable,alta,mesma posição na vftable
+0x004E7380,0x00226878,"CApp::OnMultiGesture(int, int, int)",vtable,alta,mesma posição na vftable
+0x004E7400,0x002268C8,"CApp::OnFingerEvent(KeyAction, int, int)",vtable,alta,mesma posição na vftable
+0x004E7480,0x00226978,"CApp::OnFingerMove(int, int)",vtable,alta,mesma posição na vftable
+0x004E74F0,0x002269F4,CApp::OnKeyUp(int),vtable,alta,mesma posição na vftable
+0x004E7560,0x00226A7C,CApp::OnKeyDown(int),vtable,alta,mesma posição na vftable
+0x004E7800,0x00226EB0,"CApp::OnTouchDown(int, int, int)",vtable,alta,mesma posição na vftable
+0x004E7840,0x00226F00,"CApp::OnTouchMove(int, int, int, int, int)",vtable,alta,mesma posição na vftable
+0x004E7890,0x00226F64,"CApp::OnTouchUp(int, int, int, int, int)",vtable,alta,mesma posição na vftable
+0x004E78E0,0x00226FC8,"CApp::OnTouchCancel(int, int, int, int, int)",vtable,alta,mesma posição na vftable
+0x004E7930,0x0022702C,"CApp::OnJoystickMove(int, int, int)",vtable,alta,mesma posição na vftable
+0x004E79D0,0x002270E8,"CApp::OnGamepadButton(int, int, int)",vtable,alta,mesma posição na vftable
+0x004E7AD0,0x0022727C,CApp::OnGamepadEvent(int),vtable,alta,mesma posição na vftable
+0x004E7AE0,0x00227280,CApp::SetupController(),texto,alta,2 string(s)
+0x004E7BE0,0x00227350,"CApp::OnExternalProfileChange(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",vtable,alta,mesma posição na vftable
+0x004E8470,0x0029EA50,"AchButton::AchButton(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,4 string(s)
+0x004E8850,0x0029E0F4,AchButton::~AchButton(),vtable,alta,mesma posição na vftable
+0x004E8910,0x0029F244,"AchButton::OnRender(int, int)",texto,alta,2 string(s)
+0x004E8D90,0x0029F780,"AchButton::OnRenderTooltip(int, Point, bool)",texto,alta,2 string(s)
+0x004E96E0,0x002A0784,"AchTracker::IsUpdateable(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x004EC460,0x002A4410,AchTracker::OnRender(),texto,alta,5 string(s)
+0x004ED630,0x002A3F88,AchTracker::CheckVictoryAch(),texto,alta,2 string(s)
+0x004EDC00,0x002A5650,"AchDisplay::OnRender(Point, int)",texto,media,1 string(s)
+0x004EE2C0,0x002A640C,"AchDisplay::OnRenderTooltips(Point, bool)",texto,media,1 string(s)
+0x004EE7C0,0x002A6858,"AchDisplay::OnRenderSummary(int, Point)",texto,alta,2 string(s)
+0x004EE9D0,0x002A5B58,"AchDisplay::OnRenderIcons(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, GL_Color, int)",texto,alta,4 string(s)
+0x004EFF10,0x00299F70,AchScreen::AchScreen(),texto,alta,6 string(s)
+0x004F02D0,0x0029DD64,AchScreen::~AchScreen(),vtable,alta,mesma posição na vftable
+0x004F0930,0x0029ABF4,AchScreen::OnRender(),vtable,alta,mesma posição na vftable
+0x004F1C80,0x0029CE5C,AchScreen::GetHeaderText(int),texto,media,1 string(s)
+0x004F2840,0x0029D5E8,"AchScreen::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x004F28A0,0x0029D640,"AchScreen::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x004F2B40,0x0029D9B4,"AchScreen::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x004F2ED0,0x0029DCB8,"AchScreen::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x004F3460,0x002AA400,AdvancedOptions::AdvancedOptions(),texto,alta,2 string(s)
+0x004F3930,0x002ACF40,AdvancedOptions::~AdvancedOptions(),vtable,alta,mesma posição na vftable
+0x004F3AE0,0x002AAF80,AdvancedOptions::OnRender(),vtable,alta,mesma posição na vftable
+0x004F5830,0x002ACB98,AdvancedOptions::Open(),vtable,alta,mesma posição na vftable
+0x004F5860,0x002ACBB4,AdvancedOptions::Close(),vtable,alta,mesma posição na vftable
+0x004F5890,0x002ACBDE,"AdvancedOptions::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x004F58B0,0x002ACBEC,"AdvancedOptions::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x004F5990,0x002ACC8A,"AdvancedOptions::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x004F5AA0,0x002ACD3C,"AdvancedOptions::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x004F6270,0x003A20F8,AiController::StartState(int),texto,alta,3 string(s)
+0x004F7300,0x0023917C,Pawn::GetHealth(),lua,alta,BoardPawn:GetHealth
+0x004F7310,0x003A3A98,AiPlan::GetString(),texto,alta,2 string(s)
+0x004F8060,0x003A4A6C,AiPlanner::IsFast(),texto,media,1 string(s)
+0x004F9240,0x002AD8B0,"AlertAnim::Start(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, bool)",texto,media,1 string(s)
+0x004F9A90,0x002AE2AC,"AlertAnim::RenderWarning(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, GL_Color, int, int, bool, bool)",texto,alta,9 string(s)
+0x004FA790,0x002AF2E8,Bank::OnRender(int),texto,alta,4 string(s)
+0x004FB1E0,0x002AFFEC,Bank::ModifyRep(int),texto,media,1 string(s)
+0x004FB2D0,0x002B00C8,Bank::ModifyCores(int),texto,media,1 string(s)
+0x004FB3A0,0x002B0190,Bank::CheckUnusedCores(),vizinhos,media,3 de 3 vizinhos
+0x004FB400,0x0040712C,CaveTile::CaveTile(),texto,media,1 string(s)
+0x004FB6A0,0x004073DC,CaveTile::Crack(),texto,media,1 string(s)
+0x004FB740,0x0040749C,CaveTile::Tentacle(),texto,media,1 string(s)
+0x004FBBF0,0x00410900,NetworkedBox::RenderBase(),texto,alta,2 string(s)
+0x004FC620,0x00419744,"OrderOverlay::OrderOverlay(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x004FC7C0,0x0041CD4C,OrderOverlay::~OrderOverlay(),vtable,alta,mesma posição na vftable
+0x004FC8B0,0x004198E0,OrderOverlay::OnRender(),vtable,alta,mesma posição na vftable
+0x004FD2E0,0x0041A1B8,OrderOverlay::RenderInfo(),texto,alta,18 string(s)
+0x004FFBD0,0x0041C8CC,"OrderOverlay::Update(Board*, EnvWarning*)",texto,media,1 string(s)
+0x005002D0,0x00422EE0,PawnList::PawnList(),texto,media,1 string(s)
+0x005005F0,0x00423218,"PawnList::SetPawns(std::__ndk1::vector<Pawn*, std::__ndk1::allocator<Pawn*> >)",vizinhos,media,3 de 3 vizinhos
+0x00500910,0x00423B18,"PawnList::RenderPilot(Point, int)",texto,media,1 string(s)
+0x00501160,0x00424398,"PawnList::RenderXP(Point, GL_Color, Pawn*, bool)",texto,alta,4 string(s)
+0x00501590,0x00424948,PawnList::OnRender(),vtable,alta,mesma posição na vftable
+0x00503A70,0x00426798,PawnList::GetRects(),vtable,alta,mesma posição na vftable
+0x00504A50,0x0023904A,Board::GetTerrain(Point),lua,alta,Board:GetTerrain
+0x00504A70,0x0042AA80,SpaceInfo::SpaceInfo(),texto,media,1 string(s)
+0x00504C80,0x0042ABA0,"SpaceInfo::OnRender(Point, Board*)",texto,alta,10 string(s)
+0x00506B20,0x0042C9A0,"SpaceInfo::InputAction(Point, Board*)",texto,media,1 string(s)
+0x00506DF0,0x0042CC74,StatusEffects::OnRender(bool),texto,media,1 string(s)
+0x00507CA0,0x0042DA48,"StatusEffects::OnRenderTooltip(bool, int)",texto,alta,2 string(s)
+0x00509F00,0x002B5830,CorpReward::~CorpReward(),vtable,alta,mesma posição na vftable
+0x0050A330,0x002B2A88,CorpReward::Open(),vtable,alta,mesma posição na vftable
+0x0050A570,0x002B2B6C,CorpReward::OpenWindow(),texto,alta,2 string(s)
+0x0050AEC0,0x002B3E8C,CorpReward::OnRender(),vtable,alta,mesma posição na vftable
+0x0050C6E0,0x002B528C,CorpReward::Close(),vtable,alta,mesma posição na vftable
+0x0050C7E0,0x002B5340,"CorpReward::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0050C9E0,0x002B5658,"CorpReward::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0050CC30,0x002B5790,"CorpReward::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x0050CD30,0x002B5812,CorpReward::GetBackFade(),vtable,alta,mesma posição na vftable
+0x0050EE20,0x002BF408,CorpStore::~CorpStore(),vtable,alta,mesma posição na vftable
+0x0050F420,0x002B7A40,CorpStore::GetBackFade(),vtable,alta,mesma posição na vftable
+0x00510080,0x002B9378,CorpStore::OnLoop(),vtable,alta,mesma posição na vftable
+0x005104F0,0x002BA230,CorpStore::Open(),vtable,alta,mesma posição na vftable
+0x00510620,0x002BA318,CorpStore::Close(),vtable,alta,mesma posição na vftable
+0x005109D0,0x002BA4F4,CorpStore::OnRender(),vtable,alta,mesma posição na vftable
+0x00512860,0x002BD5E4,CorpStore::RenderTooltips(),texto,alta,3 string(s)
+0x00513810,0x002BE79C,"CorpStore::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x00513A60,0x002BEB64,"CorpStore::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00513E90,0x002BED38,CorpStore::PotentialAction(),texto,alta,3 string(s)
+0x00514150,0x002BF0B0,"CorpStore::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00514B60,0x002BC5D0,"StoreBox::OnRender(bool, bool)",texto,alta,4 string(s)
+0x00515860,0x002BDD74,StoreBox::RenderTooltip(Point),vizinhos,media,4 de 4 vizinhos
+0x005171D0,0x00319324,"PawnHolder::GetPortraitLoc(int, int)",vtable,alta,mesma posição na vftable
+0x00517210,0x002C1998,PawnHolder::GetPortraitWidth(int),vtable,alta,mesma posição na vftable
+0x00517590,0x002C0DFC,CorpWindow::Open(Point),texto,media,1 string(s)
+0x005184D0,0x002C5AAC,"FinalAnim::Start(std::__ndk1::vector<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::allocator<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > > >, int)",texto,media,1 string(s)
+0x005186D0,0x002C5BF8,FinalAnim::OnRender(),texto,alta,43 string(s)
+0x0051C580,0x002C93F8,FinalAnim::RenderBackground(int),texto,media,1 string(s)
+0x0051C900,0x002DAFA0,GameMenu::GameMenu(),texto,alta,12 string(s)
+0x0051CD90,0x002CA160,GameMenu::~GameMenu(),vtable,alta,mesma posição na vftable
+0x0051D4C0,0x002DBDD0,GameMenu::Close(),vtable,alta,mesma posição na vftable
+0x0051D9E0,0x002DC2F8,GameMenu::OnRender(),vtable,alta,mesma posição na vftable
+0x0051FAA0,0x002DE444,"GameMenu::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x0051FC40,0x002DE5AC,"GameMenu::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0051FD80,0x002DE6B4,GameMenu::ConfirmCommand(),texto,alta,2 string(s)
+0x0051FE70,0x002DE800,"GameMenu::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005200F0,0x002DEB1C,"GameMenu::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005202E0,0x002EA380,HangarScreen::HangarScreen(),texto,alta,14 string(s)
+0x00521A10,0x002EBC94,HangarScreen::Open(),texto,alta,3 string(s)
+0x005227C0,0x002EE928,HangarScreen::RenderStartButton(),texto,media,1 string(s)
+0x00523AE0,0x002F0260,HangarScreen::OnRender(),texto,alta,11 string(s)
+0x00525DA0,0x002F40C0,HangarScreen::OnRenderSquad(),texto,alta,2 string(s)
+0x00529F30,0x002F7340,HangarScreen::OnRenderCustomization(),texto,alta,10 string(s)
+0x0052C6D0,0x002F0F00,HangarScreen::RenderHangar(),texto,alta,5 string(s)
+0x0052DE30,0x002F0D30,HangarScreen::StartDeploy(),texto,alta,2 string(s)
+0x0052E060,0x002EE5A0,HangarScreen::ResetDeploy(),texto,media,1 string(s)
+0x0052E4C0,0x002EF4B0,HangarScreen::GetRandomSquad(int),texto,alta,2 string(s)
+0x0052F390,0x002ECAA0,HangarScreen::GenerateMechList(),texto,alta,6 string(s)
+0x005301A0,0x002FBD94,"HangarScreen::RenderSummary(Point, Pawn*, GL_Color)",texto,media,1 string(s)
+0x005339E0,0x002E9110,HDRSettings::HDRSettings(),texto,media,1 string(s)
+0x00533BC0,0x002EA268,HDRSettings::~HDRSettings(),vtable,alta,mesma posição na vftable
+0x00533D00,0x002E9410,HDRSettings::OnRender(),vtable,alta,mesma posição na vftable
+0x00534AD0,0x002E9E78,"HDRSettings::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x00534B30,0x002E9EC4,"HDRSettings::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00534BE0,0x002E9F54,"HDRSettings::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00534CE0,0x002EA0F6,"HDRSettings::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00534D10,0x002EA114,HDRSettings::Open(),vtable,alta,mesma posição na vftable
+0x00534DD0,0x002EA1B4,HDRSettings::Close(),vtable,alta,mesma posição na vftable
+0x00534F00,0x00319FD4,QuestManager::GetState(bool),texto,alta,3 string(s)
+0x005363F0,0x002CE71C,LanguageMenu::~LanguageMenu(),vtable,alta,mesma posição na vftable
+0x00536420,0x0031C044,LanguageMenu::OnRender(),texto,media,1 string(s)
+0x00536870,0x0031C044,LanguageMenu::OnRender(),vtable,alta,mesma posição na vftable
+0x00537970,0x0031CCCC,"LanguageMenu::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x005379D0,0x0031CD18,"LanguageMenu::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00537A70,0x0031CE38,"LanguageMenu::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00537CB0,0x0031D038,"LanguageMenu::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00537CE0,0x0031D060,LanguageMenu::Open(),vtable,alta,mesma posição na vftable
+0x00537E00,0x0031D144,LanguageMenu::Close(),vtable,alta,mesma posição na vftable
+0x00538000,0x0031EE80,"aria::csv::CsvParser::CsvParser(std::__ndk1::basic_istream<char, std::__ndk1::char_traits<char> >&)",texto,media,1 string(s)
+0x00538150,0x00320140,aria::csv::CsvParser::next_field(),texto,media,1 string(s)
+0x00538670,0x0031D220,Library::InitTexts(),texto,alta,7 string(s)
+0x00538F80,0x0031E104,"Library::InitTexts(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, boost::unordered::unordered_set<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, boost::hash<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >, std::__ndk1::equal_to<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >, std::__ndk1::allocator<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > > > const&)",texto,media,1 string(s)
+0x0053A0D0,0x0031FA64,"Library::GetDialogText(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",texto,media,1 string(s)
+0x0053D930,0x002CF5C8,OnScreenRename::~OnScreenRename(),vtable,alta,mesma posição na vftable
+0x0053D9A0,0x0032AFB4,OnScreenRename::Close(),vtable,alta,mesma posição na vftable
+0x0053D9B0,0x0032AFB8,OnScreenRename::OnRender(),vtable,alta,mesma posição na vftable
+0x00540090,0x0032D684,"OnScreenRename::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00542C30,0x002CF748,OptionsMenu::~OptionsMenu(),vtable,alta,mesma posição na vftable
+0x00543020,0x003316C8,OptionsMenu::OnRender(),vtable,alta,mesma posição na vftable
+0x00545880,0x003352C4,"OptionsMenu::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x005459F0,0x003353DC,"OptionsMenu::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00545EA0,0x00335D30,"OptionsMenu::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005460A0,0x00335FFC,"OptionsMenu::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00546220,0x00336204,"OptionsMenu::OnFingerEvent(KeyAction, int, int)",vtable,alta,mesma posição na vftable
+0x00546320,0x003362A2,"OptionsMenu::OnFingerMove(int, int)",vtable,alta,mesma posição na vftable
+0x005463C0,0x00336304,OptionsMenu::Open(),vtable,alta,mesma posição na vftable
+0x00546600,0x00336684,OptionsMenu::Close(),vtable,alta,mesma posição na vftable
+0x00546AE0,0x00334978,OptionsMenu::RenderHotkeys(),texto,media,1 string(s)
+0x005480A0,0x004614B0,"Reactor::Render(Point, bool)",texto,alta,7 string(s)
+0x00548830,0x002CF4F8,PhoneRename::~PhoneRename(),vtable,alta,mesma posição na vftable
+0x00548860,0x00336E24,PhoneRename::Close(),vtable,alta,mesma posição na vftable
+0x00548880,0x00336E40,PhoneRename::OnRender(),vtable,alta,mesma posição na vftable
+0x00549890,0x00337D50,"PhoneRename::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x00549950,0x00337E74,"PhoneRename::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00549B00,0x003380D8,PilotNews::PilotNews(),texto,alta,5 string(s)
+0x00549D50,0x00339E04,PilotNews::~PilotNews(),vtable,alta,mesma posição na vftable
+0x00549F10,0x00338470,PilotNews::OnRender(),vtable,alta,mesma posição na vftable
+0x0054B570,0x00339A10,"PilotNews::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x0054B5B0,0x00339A3C,"PilotNews::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0054B5E0,0x00339A80,PilotNews::SetPilot(std::__ndk1::shared_ptr<Pilot>),texto,media,1 string(s)
+0x0054B720,0x00339C00,PilotNews::OnLoop(),vtable,alta,mesma posição na vftable
+0x0054B9D0,0x00339F30,PilotScreen::PilotScreen(),texto,media,1 string(s)
+0x0054BB70,0x002CF3C0,PilotScreen::~PilotScreen(),vtable,alta,mesma posição na vftable
+0x0054BBE0,0x0033A1D8,PilotScreen::Initialize(),texto,alta,2 string(s)
+0x0054C320,0x0033AF80,PilotScreen::OnRender(),vtable,alta,mesma posição na vftable
+0x0054D820,0x0033C040,"PilotScreen::RenderPilot(int, Point const&)",texto,alta,3 string(s)
+0x0054DD40,0x0033C45C,"PilotScreen::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0054DD70,0x0033C484,"PilotScreen::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0054DEC0,0x0033C584,"PilotScreen::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x0054E060,0x0033C668,"PilotScreen::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0054E4E0,0x0033CC0C,"PowerState::RenderState(Point, GL_Color, bool)",texto,alta,6 string(s)
+0x0054EAB0,0x0033D1CC,"PowerState::RenderStateOutline(Point, GL_Color)",texto,media,1 string(s)
+0x0054F590,0x002DF1F4,GameProfile::IsProfileSelected(),vizinhos,media,8 de 8 vizinhos
+0x0054F710,0x002DF684,"GameProfile::DeleteProfile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x005503A0,0x002E19FC,GameProfile::LoadProfiles(),texto,alta,2 string(s)
+0x00551520,0x002E4218,GameProfile::GetFtlPilot(),texto,alta,2 string(s)
+0x005517F0,0x002E4918,GameProfile::PollWarning(),texto,media,1 string(s)
+0x00551870,0x002E49FC,GameProfile::GetCurrentSquadName(),texto,media,1 string(s)
+0x00551AC0,0x002E4EB8,GameProfile::UnlockSquad(int),texto,media,1 string(s)
+0x00552CB0,0x002E3094,GameProfile::LoadProfile(),texto,alta,2 string(s)
+0x00553EC0,0x002E4C80,GameProfile::GetSquadId(int),texto,alta,10 string(s)
+0x00556510,0x0033D300,ProfileManager::ProfileManager(),texto,media,1 string(s)
+0x005567E0,0x0033D924,ProfileManager::~ProfileManager(),vtable,alta,mesma posição na vftable
+0x00556AF0,0x0033DA4C,ProfileManager::OnRender(),vtable,alta,mesma posição na vftable
+0x005579B0,0x0033E4D6,"ProfileManager::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x00557A70,0x0033E59C,"ProfileManager::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00557B70,0x0033E77C,"ProfileManager::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00557DF0,0x0033E978,"ProfileManager::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00557E50,0x0033E9C8,ProfileManager::Open(),vtable,alta,mesma posição na vftable
+0x00557F00,0x0033EA40,ProfileSelector::ProfileSelector(),texto,alta,3 string(s)
+0x005582F0,0x0033EFD0,ProfileSelector::~ProfileSelector(),vtable,alta,mesma posição na vftable
+0x00558470,0x0033F130,ProfileSelector::OnRender(),vtable,alta,mesma posição na vftable
+0x0055A150,0x00340D82,"ProfileSelector::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x0055A220,0x00340E30,"ProfileSelector::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0055A450,0x00341544,"ProfileSelector::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0055A740,0x00340FC4,ProfileSelector::OnConfirmCreation(),texto,media,1 string(s)
+0x0055A9C0,0x0034109C,ProfileSelector::DeleteProfile(int),texto,media,1 string(s)
+0x0055AAA0,0x00341A44,"ProfileSelector::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0055AB80,0x00341B64,ProfileSelector::Open(),vtable,alta,mesma posição na vftable
+0x0055B290,0x003455AE,WeaponAnimation::IsBusy(),vtable,alta,mesma posição na vftable
+0x0055B2A0,0x003455B4,WeaponAnimation::SetImpactSound(SoundEvent),vtable,alta,mesma posição na vftable
+0x0055B370,0x00345690,ProjectileAnimation::~ProjectileAnimation(),vtable,alta,mesma posição na vftable
+0x0055BC20,0x0034277C,"ProjectileAnimation::StartProjectile(WeaponTarget*, Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,5 string(s)
+0x0055BF80,0x00342BB8,"ProjectileAnimation::StartArc(WeaponTarget*, Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,7 string(s)
+0x0055C3C0,0x00343154,ProjectileAnimation::SetImpactSound(SoundEvent),vtable,alta,mesma posição na vftable
+0x0055C440,0x0034319E,ProjectileAnimation::IsActive(),vtable,alta,mesma posição na vftable
+0x0055C480,0x003431C0,ProjectileAnimation::IsBusy(),vtable,alta,mesma posição na vftable
+0x0055C490,0x003431D8,ProjectileAnimation::RenderProjectile(),vtable,alta,mesma posição na vftable
+0x0055C820,0x003435EC,ProjectileAnimation::OnLoop(),vtable,alta,mesma posição na vftable
+0x0055CB10,0x0034389C,"LaserAnimation::StartLaser(WeaponTarget*, Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,3 string(s)
+0x0055CE70,0x00343C58,LaserAnimation::IsActive(),vtable,alta,mesma posição na vftable
+0x0055CE90,0x00343C6C,LaserAnimation::RenderProjectile(),vtable,alta,mesma posição na vftable
+0x0055D110,0x00343E64,LaserAnimation::OnLoop(),vtable,alta,mesma posição na vftable
+0x0055D120,0x00343E6A,PodAnimation::IsBusy(),vtable,alta,mesma posição na vftable
+0x0055D160,0x00343E90,"PodAnimation::PodAnimation(Point, WeaponTarget*, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,3 string(s)
+0x0055D590,0x003455B8,PodAnimation::~PodAnimation(),vtable,alta,mesma posição na vftable
+0x0055D630,0x0034438E,PodAnimation::IsActive(),vtable,alta,mesma posição na vftable
+0x0055D690,0x003443C0,PodAnimation::RenderProjectile(),vtable,alta,mesma posição na vftable
+0x0055D970,0x00344638,PodAnimation::RenderObject(Point),vtable,alta,mesma posição na vftable
+0x0055DAB0,0x00344744,PodAnimation::Finalize(),vtable,alta,mesma posição na vftable
+0x0055DB70,0x003447CC,PodAnimation::LoadImages(),vtable,alta,mesma posição na vftable
+0x0055DC10,0x00344914,PodAnimation::GetImpactSound(),vtable,alta,mesma posição na vftable
+0x0055DC50,0x0034494C,PodAnimation::OnLoop(),vtable,alta,mesma posição na vftable
+0x0055E040,0x00344E3C,AirAnimation::RenderProjectile(),vtable,alta,mesma posição na vftable
+0x0055E0E0,0x00344EA4,"PylonAnimation::PylonAnimation(SpaceDamage, WeaponTarget*, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x0055E340,0x003456F8,PylonAnimation::~PylonAnimation(),vtable,alta,mesma posição na vftable
+0x0055E380,0x00345214,PylonAnimation::Finalize(),vtable,alta,mesma posição na vftable
+0x0055E3D0,0x003452C4,PylonAnimation::RenderObject(Point),vtable,alta,mesma posição na vftable
+0x0055E470,0x00345398,PylonAnimation::GetImpactSound(),vtable,alta,mesma posição na vftable
+0x0055E590,0x00344AF0,WeaponSmoke::Burst(),texto,media,1 string(s)
+0x0055E8A0,0x003C2A88,"WeaponTarget::ApplyEffect(SkillEffect, int)",vtable,alta,mesma posição na vftable
+0x0055E8F0,0x003C2ABA,"WeaponTarget::MarkMovement(Point, Point)",vtable,alta,mesma posição na vftable
+0x0055E920,0x003C2ACC,WeaponTarget::GetPawnType(Point),vtable,alta,mesma posição na vftable
+0x0055E960,0x003C2AD6,"WeaponTarget::MarkArtillery(Point, Point, GL_Color, int)",vtable,alta,mesma posição na vftable
+0x0055E980,0x003C2AEA,"WeaponTarget::GetSimplePath(Point, Point)",vtable,alta,mesma posição na vftable
+0x0055E9A0,0x003C2AFC,WeaponTarget::IsPawnBoosted(int),vtable,alta,mesma posição na vftable
+0x0055E9B0,0x00404D2C,"SkillManager::IsAbility(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vtable,alta,mesma posição na vftable
+0x0055E9D0,0x002D526C,"GameMap::AddEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,ValueBar:AddEvent
+0x0055E9F0,0x00455162,SkillManager::IsSelected(),lua,alta,BoardPawn:IsSelected
+0x0055EA40,0x00465E84,SkillManager::GetSpace(),vtable,alta,mesma posição na vftable
+0x0055EA90,0x003C2A28,Board::GetSize() const,lua,alta,Board:GetSize
+0x0055F030,0x003BB7E8,Pawn::~Pawn(),vtable,alta,mesma posição na vftable
+0x0055FEB0,0x003A6020,"Board::IsBlocked(Point, int)",lua,alta,Board:IsBlocked
+0x0055FF50,0x003A6146,"Board::IsTerrain(Point, int)",lua,alta,Board:IsTerrain
+0x0055FFB0,0x003A61C8,Board::GetHealth(Point),lua,alta,Board:GetHealth
+0x00560010,0x003A62BC,"Board::SetHealth(Point, int, int)",lua,alta,Board:SetHealth
+0x00560080,0x003A63B4,Board::DamageSpace(SpaceDamage),lua,alta,Board:DamageSpace
+0x00560430,0x003A7012,"Board::DamageSpace(Point, int)",lua,alta,Board:DamageSpace
+0x00560630,0x003A730C,Board::AddEffect(SkillEffect),lua,alta,Board:AddEffect
+0x005607F0,0x003A7528,Board::AddEffect(SpaceDamage),lua,alta,Board:AddEffect
+0x00560A90,0x003A7974,Board::GetDropZone(bool),texto,media,1 string(s)
+0x00561040,0x003A8B8C,"Board::ApplyEffect(SkillEffect, int)",texto,alta,2 string(s)
+0x00561D20,0x003AA2BC,Board::RemovePawn(Pawn*),lua,alta,Board:RemovePawn
+0x00561F00,0x003AA414,Board::RemovePawn(Point),lua,alta,Board:RemovePawn
+0x005621F0,0x003AA6D0,Board::IsValid(Point),lua,alta,Board:IsValid
+0x00562220,0x003AA720,Board::LoadScript(LuaTable&),vizinhos,media,14 de 17 vizinhos
+0x00563CF0,0x003AE808,"Board::SaveScript(LuaString&, bool)",vizinhos,media,5 de 5 vizinhos
+0x00565500,0x003B047C,"Board::Save(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vizinhos,media,3 de 3 vizinhos
+0x00565860,0x003B0974,"Board::Load(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x00565BA0,0x003B1022,"Board::MarkFlashing(Point, bool)",lua,alta,Board:MarkFlashing
+0x00565D40,0x003B1248,Board::ClearSpace(Point),lua,alta,Board:ClearSpace
+0x00565EE0,0x003B1478,"Board::SetTerrain(Point, int)",lua,alta,Board:SetTerrain
+0x00565F00,0x003B14EC,"Board::SetCustomTile(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,Board:SetCustomTile
+0x00565FC0,0x003B15DC,Board::GetCustomTile(Point),lua,alta,Board:GetCustomTile
+0x00566060,0x003B165E,"Board::SetSmoke(Point, bool, bool)",lua,alta,Board:SetSmoke
+0x005660C0,0x003B16A0,"Board::AddAlert(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,Board:AddAlert
+0x00566150,0x003B179A,"Board::SetAcid(Point, bool)",lua,alta,Board:SetAcid
+0x00566240,0x003B181A,Board::IsVines(Point),lua,alta,Board:IsVines
+0x00566260,0x003B1856,Board::IsSmoke(Point),lua,alta,Board:IsSmoke
+0x00566310,0x003B19C4,Board::GetPawns(int),lua,alta,Board:GetPawns
+0x005663F0,0x003B1B10,Board::GetBuildingsLua(),lua~,media,Board:GetBuildings
+0x00566470,0x003B1B48,"Board::UpdateSpawning(bool, bool)",texto,alta,6 string(s)
+0x00566960,0x003B22A4,Board::CheckConsole(),texto,media,1 string(s)
+0x00566FF0,0x003B3E72,Board::GetEnemyCount(),lua,alta,Board:GetEnemyCount
+0x00567770,0x003B4744,Board::OnRender(int),texto,alta,3 string(s)
+0x00567FE0,0x003B4F68,Board::OnRenderSpaces(int),texto,media,1 string(s)
+0x00568570,0x003B5A1A,Board::GetPawn(int),lua,alta,Board:GetPawn
+0x005685C0,0x003A9CCC,"Board::GetPawn(Point, bool)",lua,alta,Board:GetPawn
+0x005686B0,0x003B5B94,Board::IsPawnAlive(int),lua,alta,Board:IsPawnAlive
+0x005687E0,0x003B5D28,Board::GetPawnSpace(int),lua,alta,Board:GetPawnSpace
+0x00568880,0x003B5E04,"Board::SetTerrainIcon(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,Board:SetTerrainIcon
+0x00568940,0x003B5EF4,"Board::RandomizeTerrain(int, int)",lua,alta,Board:RandomizeTerrain
+0x00568AC0,0x003B6064,Board::IsFire(Point),lua,alta,Board:IsFire
+0x00568B20,0x003B60A0,Board::IsAcid(Point),lua,alta,Board:IsAcid
+0x00568B70,0x003B60DC,Board::IsBuilding(Point),lua,alta,Board:IsBuilding
+0x00568CA0,0x003B63E0,"Board::SpawnPawn(Pawn*, Point)",lua,alta,Board:SpawnPawn
+0x005690C0,0x003B72C8,Board::SpawnPawn(Pawn*),lua,alta,Board:SpawnPawn
+0x00569540,0x003B7760,Board::SpawnQueued(),lua,alta,Board:SpawnQueued
+0x005696D0,0x003B78DC,Board::IsCrackable(Point),lua,alta,Board:IsCrackable
+0x005697C0,0x003A6104,Board::GetPawnTeam(Point),lua,alta,Board:GetPawnTeam
+0x00569830,0x003B79CC,"Board::GetPawnTeam(int, int)",lua,alta,Board:GetPawnTeam
+0x00569850,0x003B7A34,Board::IsBusy(),lua,alta,Board:IsBusy
+0x00569860,0x003B7A44,Board::GetBusyState(),lua,alta,Board:GetBusyState
+0x00569B60,0x003B7C4C,Board::UpdateStackedEffects(),texto,alta,4 string(s)
+0x0056A450,0x003B87B4,Board::KillTempUnits(),texto,media,1 string(s)
+0x0056A790,0x003B8EC4,Board::IsCracked(Point),lua,alta,Board:IsCracked
+0x0056A7E0,0x003B8F00,"Board::SetCracked(Point, bool)",lua,alta,Board:SetCracked
+0x0056A840,0x003B8F40,Board::OnLoop(),texto,alta,5 string(s)
+0x0056BEE0,0x003AE76E,Board::UpdateLeaders(),vizinhos,media,3 de 4 vizinhos
+0x0056C0B0,0x003AE594,"Board::SetBlockSpawn(Point, int)",lua~,media,Board:BlockSpawn
+0x0056C0E0,0x003B62B0,Board::ClearBlockSpawns(),lua,alta,Board:ClearBlockSpawns
+0x0056C390,0x003BAEF8,"Board::AddTeleport(Point, Point)",lua,alta,Board:AddTeleport
+0x0056C510,0x003BA58C,Board::Teleport(int),texto,media,1 string(s)
+0x0056CD00,0x003BB670,"Board::SetLava(Point, bool)",lua,alta,Board:SetLava
+0x0056CD40,0x003BB6B0,Board::GetDeployLocScore(Point),lua,alta,Board:GetDeployLocScore
+0x0056CE30,0x003BBE14,Board::GetTurn(),lua,alta,Board:GetTurn
+0x0056CE40,0x003BBE1C,Board::IsSafe(Point),lua,alta,Board:IsSafe
+0x0056CF60,0x003BC1BC,Board::LoadMapData(),texto,alta,3 string(s)
+0x0056D580,0x003BCA3C,"Board::SetWeather(int, int, Point, Point, float)",lua,alta,Board:SetWeather
+0x0056D5C0,0x003BCA6C,Board::StopWeather(),lua,alta,Board:StopWeather
+0x0056D5F0,0x003BCAC8,"Board::SetFrozen(Point, bool)",lua,alta,Board:SetFrozen
+0x0056D650,0x003BCB48,Board::IsFrozen(Point),lua,alta,Board:IsFrozen
+0x0056D960,0x003A801C,"Board::GetZone(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,Board:GetZone
+0x0056E3B0,0x003BD376,"Board::Bounce(Point, int)",lua,alta,Board:Bounce
+0x0056E420,0x003BC150,Board::IsSpawning(Point),lua,alta,Board:IsSpawning
+0x0056E6D0,0x003BC0EE,Board::IsTargeted(Point),lua,alta,Board:IsTargeted
+0x0056E7A0,0x003B3AB0,"Board::Ping(Point, GL_Color)",lua,alta,Board:Ping
+0x0056E830,0x003A6B1C,"Board::AddPawn(Pawn*, Point)",lua,alta,Board:AddPawn
+0x0056ECC0,0x003BD62C,Board::AddPawn(Pawn*),lua,alta,Board:AddPawn
+0x0056EE40,0x003BD7EC,"Board::AddPawn(Pawn*, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0056F070,0x003BDDA8,Board::Fade(int),texto,alta,2 string(s)
+0x0056F400,0x003BDDA8,Board::Fade(int),lua,alta,Board:Fade
+0x0056F8B0,0x003BE250,Board::Slide(int),lua,alta,Board:Slide
+0x0056FBC0,0x003BE872,"Board::IsPawnTeam(Point, int)",lua,alta,Board:IsPawnTeam
+0x0056FC10,0x003BE95C,"Board::IsPawnTeam(int, int, int)",lua,alta,Board:IsPawnTeam
+0x0056FCC0,0x003BEA78,Board::IsPawnSpace(Point),lua,alta,Board:IsPawnSpace
+0x0056FCE0,0x003BEA8E,"Board::IsPawnSpace(Point, bool)",lua,alta,Board:IsPawnSpace
+0x0056FFE0,0x003BECF8,"Board::SetPopulated(bool, Point)",lua,alta,Board:SetPopulated
+0x005707B0,0x003BFA44,Board::GetBuildingCount(int),lua,alta,Board:GetBuildingCount
+0x00570990,0x003B6944,Board::IsEdge(Point),lua,alta,Board:IsEdge
+0x005709C0,0x003BFBD4,Board::SetQueuedOverlay(int),texto,media,1 string(s)
+0x00570FD0,0x003B510C,Board::RenderExplosion(),texto,media,1 string(s)
+0x005712A0,0x003BFD90,Board::LockBomb(),lua,alta,Board:LockBomb
+0x005714D0,0x003C0024,"Board::MarkSpaceColor(Point, GL_Color)",lua,alta,Board:MarkSpaceColor
+0x00571530,0x003C0110,"Board::MarkSpaceSimpleColor(Point, GL_Color)",lua,alta,Board:MarkSpaceSimpleColor
+0x00571550,0x003C0184,Board::MarkSpaceDamage(SpaceDamage),lua,alta,Board:MarkSpaceDamage
+0x00571630,0x003B3E78,Board::GetPawnCount(int),lua,alta,Board:GetPawnCount
+0x00571800,0x003C0294,"Board::MarkSpaceImage(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, GL_Color)",lua,alta,Board:MarkSpaceImage
+0x00571C70,0x003A8AF0,Board::GetPawn(Point),lua,alta,Board:GetPawn
+0x00571DB0,0x003B8A28,Board::AddPod(),texto,alta,6 string(s)
+0x00571FF0,0x003C0AC4,Board::AddPod(Point),texto,alta,2 string(s)
+0x005724F0,0x003BC094,Board::IsPod(Point),lua,alta,Board:IsPod
+0x00572560,0x003C0C0A,Board::IsItem(Point),lua,alta,Board:IsItem
+0x005725C0,0x003C0C46,Board::IsDangerousItem(Point),lua,alta,Board:IsDangerousItem
+0x00572610,0x003C0C82,Board::IsDangerous(Point),lua,alta,Board:IsDangerous
+0x005726E0,0x003C0D28,Board::GetItem(Point),lua,alta,Board:GetItem
+0x005727A0,0x003C0DA8,Board::SetDangerous(Point),lua,alta,Board:SetDangerous
+0x005727C0,0x003C0E80,"Board::SetItem(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,Board:SetItem
+0x00572A00,0x003B6970,Board::GetAvailableSpace(Pawn*),texto,alta,2 string(s)
+0x00573240,0x003C1128,Board::IsEnvironmentDanger(Point),lua,alta,Board:IsEnvironmentDanger
+0x005734F0,0x003BED7C,Board::GetRandomBuilding(bool),lua,alta,Board:GetRandomBuilding
+0x00573740,0x003C12E0,Board::GetInfectedCount(),lua,alta,Board:GetInfectedCount
+0x005738C0,0x003C14D4,"Board::GetAnotherPlayerPawn(int, int)",lua,alta,Board:GetAnotherPlayerPawn
+0x005739C0,0x003C1680,Board::GetMechDamage(),lua,alta,Board:GetMechDamage
+0x00573C00,0x003C1748,"Board::GetDistanceToPawn(Point, int)",lua,alta,Board:GetDistanceToPawn
+0x00573EA0,0x003C1928,Board::GetDistanceToBuilding(Point),lua,alta,Board:GetDistanceToBuilding
+0x00573F20,0x003C19A4,"Board::AddAnimation(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",lua,alta,Board:AddAnimation
+0x00573FD0,0x003C1A98,"Board::GetSimpleReachable(Point, int, bool)",lua,alta,Board:GetSimpleReachable
+0x00574060,0x003C1B54,"Board::GetSimplePath(Point, Point)",lua,alta,Board:GetSimplePath
+0x005740F0,0x003C1C28,"Board::GetReachablePointList(Point, int, int)",lua~,media,Board:GetReachable
+0x00574240,0x003C1DB0,"Board::GetPath(Point, Point, int)",lua,alta,Board:GetPath
+0x00574300,0x003C1E80,"Board::AddBurst(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",lua,alta,Board:AddBurst
+0x005743B0,0x003C1F74,"Board::IsWall(Point, int, int)",lua,alta,Board:IsWall
+0x00574450,0x003A7244,"Board::SetWall(bool, Point, int)",lua,alta,Board:SetWall
+0x005744F0,0x003C1FE0,"Board::AddUniqueBuilding(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,Board:AddUniqueBuilding
+0x00574690,0x003C21D8,Board::IsUniqueBuilding(Point),lua,alta,Board:IsUniqueBuilding
+0x005747C0,0x003C2378,Board::IsDamaged(Point),lua,alta,Board:IsDamaged
+0x005749F0,0x003B3C70,Board::StartMechTravel(),lua,alta,Board:StartMechTravel
+0x00574D20,0x003B3144,"Board::StartPopEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,Board:StartPopEvent
+0x00575060,0x003C28BC,"Board::AutoDeploy(std::__ndk1::vector<Point, std::__ndk1::allocator<Point> >)",vizinhos,media,4 de 4 vizinhos
+0x00579B60,0x003EA214,BoardSpace::~BoardSpace(),vtable,alta,mesma posição na vftable
+0x0057A0B0,0x00462688,SkillManager::~SkillManager(),vtable,alta,mesma posição na vftable
+0x0057AE80,0x003C785E,BoardEditor::IsSwapReady(),vtable,alta,mesma posição na vftable
+0x0057B040,0x003C4870,BoardEditor::~BoardEditor(),vtable,alta,mesma posição na vftable
+0x0057B200,0x003C4944,BoardEditor::OnLoop(),vtable,alta,mesma posição na vftable
+0x0057DB70,0x003C7184,BoardEditor::Start(),vtable,alta,mesma posição na vftable
+0x0057DC70,0x003C71C8,"BoardEditor::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0057E290,0x003C7BF0,BoardManager::~BoardManager(),vtable,alta,mesma posição na vftable
+0x0057E3E0,0x003C7C84,BoardManager::MouseMove(bool),vtable,alta,mesma posição na vftable
+0x0057E9E0,0x003C8538,"BoardManager::OnFingerMove(bool, int, int)",vtable,alta,mesma posição na vftable
+0x0057EA00,0x003C8558,"BoardManager::OnFingerEvent(bool, KeyAction, int, int)",vtable,alta,mesma posição na vftable
+0x0057EA60,0x003C85DC,BoardManager::CheckCool(),vtable,alta,mesma posição na vftable
+0x0057EAB0,0x003C8626,BoardManager::GetBoardPosition(),vtable,alta,mesma posição na vftable
+0x0057EAD0,0x003C8638,BoardManager::GetBoardScale(),vtable,alta,mesma posição na vftable
+0x0057F0D0,0x003C880C,BoardManager::OnRender(),vtable,alta,mesma posição na vftable
+0x0057F930,0x00239184,SkillManager::GetArmedWeaponId(),lua,alta,BoardPawn:GetArmedWeaponId
+0x0057F940,0x00239188,SkillManager::IsWeaponArmed(),lua,alta,BoardPawn:IsWeaponArmed
+0x0057F960,0x00460920,Pilot::PrepareEffect(Effect*),vtable,alta,mesma posição na vftable
+0x0057F970,0x003E3940,EffectApplier::GetPower(),vtable,alta,mesma posição na vftable
+0x0057F990,0x00460928,"EffectApplier::GetSkillLevel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vtable,alta,mesma posição na vftable
+0x0057F9C0,0x003E3952,EffectApplier::GetRewardLoc(int),vtable,alta,mesma posição na vftable
+0x0057F9F0,0x003C9090,BoardPlayer::BoardPlayer(),texto,alta,6 string(s)
+0x00580D50,0x003C9FA0,"BoardPlayer::LoadMission(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vizinhos,media,7 de 7 vizinhos
+0x00580EE0,0x003CB398,BoardPlayer::OnRenderTopPad(),texto,alta,5 string(s)
+0x00582A60,0x003CA158,"BoardPlayer::SelectMap(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x00582EA0,0x003CC904,BoardPlayer::IsNextPhase(),texto,media,1 string(s)
+0x00583130,0x003CAEF8,BoardPlayer::InitializeMission(),texto,media,1 string(s)
+0x005832C0,0x00360F64,Skill::IsZoneTargeting(),texto,media,1 string(s)
+0x00583480,0x003CDD60,BoardPlayer::Start(),vizinhos,media,4 de 4 vizinhos
+0x00583990,0x003CED5C,BoardPlayer::SetupButtons(),texto,alta,2 string(s)
+0x00583A70,0x003CF24C,BoardPlayer::SetTestMode(bool),vizinhos,media,3 de 3 vizinhos
+0x00584560,0x003CFF70,BoardPlayer::MouseMove(bool),texto,alta,2 string(s)
+0x005849E0,0x003CEF6C,BoardPlayer::UpdateObjectives(bool),texto,media,1 string(s)
+0x00584C40,0x003D0778,BoardPlayer::CheckConsole(),texto,alta,6 string(s)
+0x005856B0,0x003D1A8C,BoardPlayer::StateLabelDone(),texto,alta,2 string(s)
+0x00585B30,0x003D2334,BoardPlayer::IsMissionEnd(),texto,media,1 string(s)
+0x00585DB0,0x003D2770,BoardPlayer::TriggerGameover(),texto,media,1 string(s)
+0x005863E0,0x003D2EA8,BoardPlayer::RenderActiveUnits(),texto,media,1 string(s)
+0x00586AB0,0x003D3300,BoardPlayer::EndTurn(),texto,alta,2 string(s)
+0x00586B90,0x003D3640,BoardPlayer::AttemptAction(),texto,alta,2 string(s)
+0x00586FB0,0x003D3E4C,BoardPlayer::DeployAction(),texto,media,1 string(s)
+0x005872A0,0x003D4240,BoardPlayer::RenderEndTurn(),texto,alta,3 string(s)
+0x005885B0,0x003D55D8,BoardPlayer::RenderGamepadContext(),texto,alta,9 string(s)
+0x00588D10,0x003D5F30,"BoardPlayer::RenderGamepadContext(Point, std::__ndk1::vector<JoyTip, std::__ndk1::allocator<JoyTip> >)",texto,alta,3 string(s)
+0x00589140,0x003D6348,BoardPlayer::StartNextPhase(),texto,media,1 string(s)
+0x00589780,0x003D70B0,BoardPlayer::UpdateQueued(),texto,media,1 string(s)
+0x00589A90,0x003D7488,BoardPlayer::UpdateState(),texto,alta,7 string(s)
+0x0058A230,0x003CDFA0,BoardPlayer::StartState(int),texto,alta,2 string(s)
+0x0058A8E0,0x003D4168,BoardPlayer::FinalizeDeployment(),texto,media,1 string(s)
+0x0058A990,0x003D7F88,BoardPlayer::EndState(int),texto,media,1 string(s)
+0x0058AE00,0x003D89E4,BoardPlayer::OnLoop(),texto,media,1 string(s)
+0x0058B380,0x003CA9C0,BoardPlayer::RandomizeEnvironment(),texto,alta,4 string(s)
+0x0058B6F0,0x003D81A8,BoardPlayer::CheckVictory(bool),texto,alta,4 string(s)
+0x0058BB60,0x003DA9C0,BoardPlayer::SetupVictoryScreen(),texto,alta,4 string(s)
+0x0058C110,0x003D9198,BoardPlayer::UpdateTips(),texto,media,1 string(s)
+0x0058C210,0x003D9990,BoardPlayer::UpdateConfirm(),texto,media,1 string(s)
+0x0058C5B0,0x003D9354,BoardPlayer::UpdateAmbience(),texto,alta,5 string(s)
+0x0058C870,0x003D979C,BoardPlayer::UpdateOrderOverlay(),vizinhos,media,3 de 3 vizinhos
+0x0058C8F0,0x003D989C,"BoardPlayer::UpdateTestMode(std::__ndk1::vector<Pawn*, std::__ndk1::allocator<Pawn*> >&)",vizinhos,media,3 de 4 vizinhos
+0x0058CB80,0x003DA1FC,"BoardPlayer::UpdateEndTurn(std::__ndk1::vector<Pawn*, std::__ndk1::allocator<Pawn*> >&)",texto,media,1 string(s)
+0x0058CDC0,0x003DB734,BoardPlayer::GetDiffMod(),texto,media,1 string(s)
+0x0058CE70,0x003DB854,BoardPlayer::GetPodObjective(bool),texto,alta,3 string(s)
+0x0058D150,0x003DB188,BoardPlayer::GetCompletedObjectives(),texto,media,1 string(s)
+0x0058F540,0x003DD940,BoardPlayer::OnRenderUI(),texto,alta,13 string(s)
+0x00590F00,0x003DD69C,BoardPlayer::UndoMovement(),texto,media,1 string(s)
+0x00591070,0x003DD7E0,BoardPlayer::UndoTurn(),texto,alta,3 string(s)
+0x00591540,0x003CA908,BoardPlayer::SetupBuildingHealth(int),texto,media,1 string(s)
+0x00591CB0,0x003D1748,BoardPlayer::IsSecretPossible(),texto,media,1 string(s)
+0x00592270,0x003E0AA0,"BoardPlayer::OnMouseAction(KeyAction, int)",vizinhos,media,3 de 4 vizinhos
+0x005925D0,0x003E0DCC,"BoardPlayer::OnFingerEvent(KeyAction, int, int)",texto,media,1 string(s)
+0x00592980,0x003DF8DC,BoardPlayer::RenderTouchArming(),texto,alta,2 string(s)
+0x00592E10,0x003E11D0,"BoardPlayer::OnGamepadButton(KeyAction, int)",texto,media,1 string(s)
+0x005933C0,0x003CB1D0,BoardPlayer::GetBriefingMessage(),texto,alta,2 string(s)
+0x00593CA0,0x003E1750,BoardPlayer::SaveGameData(LuaString&),vizinhos,media,3 de 3 vizinhos
+0x00595270,0x003DA3C8,"BoardPlayer::AddInterfaceTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, int, bool)",texto,media,1 string(s)
+0x00595630,0x003CD07C,"EnvWarning::Start(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,8 string(s)
+0x00595BF0,0x003E3374,EnvWarning::OnRender(),vtable,alta,mesma posição na vftable
+0x00599D70,0x003E45AC,BoardSpace::BoardSpace(),texto,alta,17 string(s)
+0x0059B3B0,0x003E6BB8,BoardSpace::UpdateBuildingImage(),texto,media,1 string(s)
+0x0059BA10,0x003E74E0,BoardSpace::RenderPopulation(),texto,alta,2 string(s)
+0x0059BD10,0x003E7878,BoardSpace::StartSavePeopleAnim(),texto,media,1 string(s)
+0x0059C720,0x003EA134,"BoardSpace::AddAlert(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vtable,alta,mesma posição na vftable
+0x0059D420,0x003EB718,BoardSpace::CheckTerrainDangers(),texto,alta,2 string(s)
+0x0059D9D0,0x003ECA4C,BoardSpace::CheckAcidFire(Pawn*),texto,alta,3 string(s)
+0x0059E400,0x003EE130,BoardSpace::OnLoop(),texto,alta,5 string(s)
+0x0059F700,0x003F0BFC,BoardSpace::SetFrozen(bool),vizinhos,media,8 de 10 vizinhos
+0x0059FA40,0x003E928C,BoardSpace::SetForceField(),texto,alta,2 string(s)
+0x005A0A80,0x003EFE90,"BoardSpace::SetPod(int, int)",texto,alta,3 string(s)
+0x005A1240,0x003EC35C,BoardSpace::ClearItem(),texto,alta,3 string(s)
+0x005A1520,0x003F5970,BoardSpace::GetTerrainIcon(int),texto,alta,2 string(s)
+0x005A1990,0x003F5F88,"BoardSpace::SetUniqueBuilding(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x005A1B10,0x003EF4D0,BoardSpace::SetTerrain(int),texto,alta,2 string(s)
+0x005A2010,0x003EBDF8,BoardSpace::TriggerSplash(int),texto,alta,4 string(s)
+0x005A21D0,0x003F6574,"BoardSpace::RenderArrow(int, float)",texto,alta,7 string(s)
+0x005A2540,0x003F6A2C,BoardSpace::RenderFloorOverlay(bool),texto,media,1 string(s)
+0x005A2A90,0x003F721C,"BoardSpace::RenderLayer(int, bool)",vizinhos,media,6 de 7 vizinhos
+0x005A2EC0,0x003F9210,BoardSpace::RenderPawnLayer(bool),texto,alta,14 string(s)
+0x005A5690,0x003F74B4,BoardSpace::RenderFloorLayer(bool),texto,media,1 string(s)
+0x005A7410,0x003FB648,BoardSpace::RenderPawnOverlay(bool),vizinhos,media,3 de 3 vizinhos
+0x005A7DF0,0x003FDAC0,BoardSpace::RenderDamageInfo(),texto,alta,18 string(s)
+0x005A8880,0x003FB9B0,BoardSpace::RenderPawnHealth(),texto,alta,2 string(s)
+0x005A9650,0x003FD154,BoardSpace::OnRenderProjectiles(),texto,media,1 string(s)
+0x005A9C90,0x003FF1F8,"BoardSpace::RenderCloseRange(int, GL_Color)",texto,alta,5 string(s)
+0x005A9EA0,0x003FF640,"BoardSpace::OnRenderVector(MoveVector, float)",texto,alta,11 string(s)
+0x005AA3B0,0x003FFC5C,"BoardSpace::SetTileset(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,47 string(s)
+0x005AB720,0x003FC66C,"BoardSpace::GetTile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x005AB940,0x004028B0,"BoardSpace::SetSpawning(bool, bool)",texto,alta,2 string(s)
+0x005ABA90,0x00402A5C,BoardSpace::IsSelected(),vtable,alta,mesma posição na vftable
+0x005ABAA0,0x003EFC04,BoardSpace::SetCracked(bool),texto,media,1 string(s)
+0x005ABC70,0x00402A64,BoardSpace::DamageTerrain(int),texto,media,1 string(s)
+0x005ABEE0,0x00402C50,BoardSpace::SetSelected(bool),vtable,alta,mesma posição na vftable
+0x005ABEF0,0x003FC7BC,BoardSpace::OnRenderPawn(),texto,alta,3 string(s)
+0x005AC3E0,0x003EC80C,BoardSpace::SetFire(bool),texto,alta,2 string(s)
+0x005AC5A0,0x003ECD20,"BoardSpace::SetSmoke(bool, bool)",texto,media,1 string(s)
+0x005AC6C0,0x003EDD38,BoardSpace::GetSmoke(int),texto,media,1 string(s)
+0x005AC8F0,0x003F36B4,"BoardSpace::DamageSpace(SpaceDamage, int)",texto,alta,11 string(s)
+0x005AE100,0x003F0738,"BoardSpace::SetGrappled(int, bool)",texto,alta,2 string(s)
+0x005AE4A0,0x00402F40,BoardSpace::Threaten(),texto,media,1 string(s)
+0x005AE5A0,0x00403110,"BoardSpace::DustBurst(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,media,1 string(s)
+0x005AEBC0,0x004035C8,BoardSpace::MarkDamage(SpaceDamage),texto,media,1 string(s)
+0x005AF0E0,0x00403B62,BoardSpace::GetSpace(),vtable,alta,mesma posição na vftable
+0x005AF6E0,0x00403C14,BoardSpace::GetDescription(),texto,alta,3 string(s)
+0x005AFFD0,0x003E8B14,"BoardSpace::AddAnimation(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,alta,4 string(s)
+0x005B22B0,0x003F3374,"std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > LuaEnv::GetValue<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x005B3810,0x00407BC0,ConfirmBox::ConfirmBox(),texto,alta,8 string(s)
+0x005B3B70,0x00407FF0,ConfirmBox::~ConfirmBox(),vtable,alta,mesma posição na vftable
+0x005B3D90,0x004080BC,"ConfirmBox::Open(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool, bool)",texto,media,1 string(s)
+0x005B4040,0x004086C0,ConfirmBox::OnRender(),vtable,alta,mesma posição na vftable
+0x005B5B20,0x0040A370,"ConfirmBox::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005B5B80,0x0040A3A6,"ConfirmBox::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x005B5BE0,0x0040A3F4,"ConfirmBox::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005B5D70,0x0040A55C,"ConfirmBox::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005B5DE0,0x00410F90,ObjectiveList::ObjectiveList(BoardPlayer*),texto,alta,5 string(s)
+0x005B6750,0x00411BB2,ObjectiveList::GetRects(),vtable,alta,mesma posição na vftable
+0x005B6C40,0x00412328,ObjectiveList::RenderTurnText(Point),texto,media,1 string(s)
+0x005B74D0,0x00413C18,ObjectiveList::OnRender(),vtable,alta,mesma posição na vftable
+0x005B8D00,0x00416614,ObjectiveList::RenderTooltips(),texto,alta,4 string(s)
+0x005B9BC0,0x00417290,RepObj::GetText(),texto,media,1 string(s)
+0x005BA190,0x004134CC,"RepObj::GetImage(int, bool, bool)",texto,alta,19 string(s)
+0x005BA850,0x00417A9C,RepObj::Failed(),lua,alta,Objective:Failed
+0x005BA980,0x00417D14,RepObj::GetLuaString(),lua,alta,Objective:GetLuaString
+0x005BABF0,0x00417F8C,RepObj::RenderTooltip(),texto,alta,5 string(s)
+0x005BAE70,0x00418338,RepAnim::OnRender(Point),texto,media,1 string(s)
+0x005BBA00,0x002D9FB4,AnimTracker::~AnimTracker(),vtable,alta,mesma posição na vftable
+0x005BC9A0,0x0041CE20,PawnBox::PawnBox(),texto,alta,2 string(s)
+0x005BCD40,0x0041D404,PawnBox::~PawnBox(),vtable,alta,mesma posição na vftable
+0x005BD500,0x0041DB84,"PawnBox::RenderPortrait(Rect2D, int, bool)",texto,alta,3 string(s)
+0x005BDC80,0x0041E2A8,PawnBox::OnRender(),vtable,alta,mesma posição na vftable
+0x005C1DE0,0x00421540,PawnBox::GetBlockedImage(int),texto,alta,11 string(s)
+0x005C2220,0x00420E24,PawnBox::RenderLabel(Point),vizinhos,media,3 de 4 vizinhos
+0x005C2D60,0x0042864C,PowerBar::RenderTooltips(int),texto,alta,7 string(s)
+0x005C3940,0x00426D98,PowerBar::OnRender(int),texto,alta,9 string(s)
+0x005C5400,0x0042918C,"PowerBar::Modify(int, bool)",texto,alta,2 string(s)
+0x005C59F0,0x004299AC,PowerBar::Damage(int),texto,media,1 string(s)
+0x005C6210,0x0040C5F0,InventoryItem::InventoryItem(),texto,alta,3 string(s)
+0x005C6450,0x003477A4,InventoryItem::~InventoryItem(),vtable,alta,mesma posição na vftable
+0x005C6650,0x0040CC54,"InventoryItem::OnRender(int, int)",texto,alta,3 string(s)
+0x005C7D20,0x0040E234,InventoryItem::RenderOutline(bool),vizinhos,media,3 de 3 vizinhos
+0x005C8FA0,0x0040F9DC,SkillToggle::~SkillToggle(),vtable,alta,mesma posição na vftable
+0x005C90D0,0x0040FD6C,SkillToggle::OnRender(),vtable,alta,mesma posição na vftable
+0x005C9660,0x0041039A,"SkillToggle::SetName(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vtable,alta,mesma posição na vftable
+0x005C9EF0,0x0042E8D0,VictoryScreen::VictoryScreen(),texto,alta,9 string(s)
+0x005CA810,0x0042F1E8,VictoryScreen::OnRender(),texto,alta,2 string(s)
+0x005CC120,0x0042FFF0,VictoryScreen::RenderPod(),texto,alta,4 string(s)
+0x005CCAE0,0x00430B04,VictoryScreen::RenderStats(),vizinhos,media,4 de 8 vizinhos
+0x005CE0B0,0x0042FA88,VictoryScreen::RenderBoard(),vizinhos,media,3 de 3 vizinhos
+0x005CE850,0x0043296C,VictoryScreen::OpenPod(),texto,media,1 string(s)
+0x005CF280,0x002B0668,ChoiceEvent::~ChoiceEvent(),vtable,alta,mesma posição na vftable
+0x005CF880,0x002B1BB4,ChoiceEvent::SetEffect(Effect),lua,alta,ChoiceEvent:SetEffect
+0x005CF8E0,0x002B1C22,"ChoiceEvent::SetStartText(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,ChoiceEvent:SetStartText
+0x005D04D0,0x002B1DB8,ChoiceEvent::OnLoop(),vtable,alta,mesma posição na vftable
+0x005D0500,0x002B1DD8,ChoiceEvent::MakeChoice(int),texto,alta,2 string(s)
+0x005D0990,0x002B2136,ChoiceEvent::AddChoice(Choice),lua,alta,ChoiceEvent:AddChoice
+0x005D0B00,0x002B2168,ChoiceEvent::GetText(),lua,alta,ChoiceEvent:GetText
+0x005D0B20,0x002B21A8,ChoiceEvent::SetHiddenEffects(bool),lua,alta,ChoiceEvent:SetHiddenEffects
+0x005D0B30,0x002B21AE,ChoiceEvent::SetUniqueMech(bool),lua,alta,ChoiceEvent:SetUniqueMech
+0x005D0B40,0x002B21B4,ChoiceEvent::OnRender(),vtable,alta,mesma posição na vftable
+0x005D0B50,0x002B21C0,"ChoiceEvent::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x005D0B60,0x002B21C4,"ChoiceEvent::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005D21A0,0x0036FB68,"SlidingWindow::RenderTabIcon(int, Point, GL_Color)",vtable,alta,mesma posição na vftable
+0x005D21B0,0x0035948C,SlidingWindow::GetTabAlert(int),vtable,alta,mesma posição na vftable
+0x005D21F0,0x0036E24C,"SlidingWindow::SlidingWindow(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,4 string(s)
+0x005D2640,0x0036FA48,SlidingWindow::~SlidingWindow(),vtable,alta,mesma posição na vftable
+0x005D31D0,0x0036F78C,"SlidingWindow::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005D3280,0x0036F816,SlidingWindow::GetBackFade(),vtable,alta,mesma posição na vftable
+0x005D32F0,0x0036F830,"SlidingWindow::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005D3310,0x0036F648,SlidingWindow::Open(int),texto,media,1 string(s)
+0x005D3560,0x0036F84C,SlidingWindow::Close(),vtable,alta,mesma posição na vftable
+0x005D3710,0x0036F970,"SlidingWindow::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005D3940,0x00376C20,SquadList::SquadList(),texto,media,1 string(s)
+0x005D3DB0,0x002CE9BC,SquadList::~SquadList(),vtable,alta,mesma posição na vftable
+0x005D3DE0,0x003774CC,SquadList::Open(),vtable,alta,mesma posição na vftable
+0x005D3F70,0x003777A4,SquadList::OnRender(),vtable,alta,mesma posição na vftable
+0x005D83D0,0x0037B9B6,"SquadList::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005D84B0,0x0037BA80,"SquadList::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005D8970,0x0037BF90,"SquadList::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005D8B80,0x0037C13C,"SquadList::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x005D8D50,0x0037C760,StatScreen::StatScreen(),texto,alta,7 string(s)
+0x005D9250,0x002CE810,StatScreen::~StatScreen(),vtable,alta,mesma posição na vftable
+0x005D9280,0x0037CFDC,StatScreen::Open(),vtable,alta,mesma posição na vftable
+0x005D9410,0x0037D130,StatScreen::OnRender(),vtable,alta,mesma posição na vftable
+0x005DA150,0x003849D4,"StatScreen::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x005DA2A0,0x0037E768,"StatScreen::RenderTopScores(Rect2D, bool)",texto,alta,4 string(s)
+0x005DB530,0x0037F5F0,"StatScreen::RenderScore(Rect2D, bool)",texto,alta,5 string(s)
+0x005DCFF0,0x00382C50,"StatScreen::RenderSquadInfo(Rect2D, bool)",texto,media,1 string(s)
+0x005DDE80,0x00383AA4,"StatScreen::RenderPilotInfo(Rect2D, bool)",texto,alta,5 string(s)
+0x005DEF10,0x00384CA0,"StatScreen::RenderVictories(Point, std::__ndk1::vector<int, std::__ndk1::allocator<int> >, bool)",texto,media,1 string(s)
+0x005DF6B0,0x00380F2C,"StatScreen::RenderRight(Rect2D, bool)",texto,alta,11 string(s)
+0x005E1700,0x00385044,"StatScreen::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005E1C30,0x00385528,"StatScreen::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005E1CA0,0x0038558C,"StatScreen::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005E7070,0x0038C9DC,TipAnimation::~TipAnimation(),vtable,alta,mesma posição na vftable
+0x005E71D0,0x0038B118,TipAnimation::OnRender(Point),vtable,alta,mesma posição na vftable
+0x005E7400,0x0050DE30,"Point::Point(int, int)",vizinhos,media,4 de 4 vizinhos
+0x005E7460,0x0038B3BA,TipAnimation::OnLoop(),vtable,alta,mesma posição na vftable
+0x005E76A0,0x0038C9DC,TipAnimation::~TipAnimation(),vtable,alta,mesma posição na vftable
+0x005E76D0,0x0038B5E8,PushAnim::TriggerStep(int),vtable,alta,mesma posição na vftable
+0x005E7990,0x0038B9D0,PushAnim::UpdateStep(int),vtable,alta,mesma posição na vftable
+0x005E7AD0,0x0038C9DC,TipAnimation::~TipAnimation(),vtable,alta,mesma posição na vftable
+0x005E7B00,0x0038BC48,DamageAnim::TriggerStep(int),vtable,alta,mesma posição na vftable
+0x005E7B70,0x0038BD60,DamageAnim::UpdateStep(int),vtable,alta,mesma posição na vftable
+0x005E7E20,0x0038ED30,"TipBox::TipBox(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool, Point)",texto,media,1 string(s)
+0x005E8370,0x0038F288,TipBox::OnRender(),texto,alta,6 string(s)
+0x005E9060,0x0039027C,TipBox::UpdateText(),texto,alta,10 string(s)
+0x005E98A0,0x00390BDC,TipBox::UpdateLoc(),texto,alta,2 string(s)
+0x005E9C30,0x003925EC,TutorialAnim::~TutorialAnim(),vtable,alta,mesma posição na vftable
+0x005E9DC0,0x0039273C,TutorialAnim::OnRender(),vtable,alta,mesma posição na vftable
+0x005EC1F0,0x00395D82,"TutorialAnim::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x005EC210,0x00395DA8,"TutorialAnim::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005EC300,0x00396B58,UnlockWindow::~UnlockWindow(),vtable,alta,mesma posição na vftable
+0x005EC350,0x00395EC0,UnlockWindow::OnRender(),vtable,alta,mesma posição na vftable
+0x005ED430,0x00396AB4,"UnlockWindow::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x005ED460,0x00396B08,"UnlockWindow::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x005ED8A0,0x00398220,VoiceBox::OnRender(),texto,media,1 string(s)
+0x005EEA80,0x00399B30,VoiceBox::Update(),texto,alta,2 string(s)
+0x005F0E50,0x002C1BD8,Effect::GetText(),texto,alta,12 string(s)
+0x005F1340,0x002C2324,"Effect::AddReward(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",lua,alta,Effect:AddReward
+0x005F1400,0x002C241C,"Effect::RenderIcon(Point, int)",texto,alta,4 string(s)
+0x005F3040,0x002C3BF0,Effect::GetTooltip(),texto,alta,2 string(s)
+0x005F3310,0x002C40DC,Effect::Save(),texto,alta,18 string(s)
+0x005F47C0,0x00300480,IncidentManager::IncidentManager(),texto,alta,7 string(s)
+0x005F5130,0x00300F50,IncidentManager::Start(),texto,alta,3 string(s)
+0x005F5A00,0x003027D8,IncidentManager::RenderGamepadUI(),texto,alta,2 string(s)
+0x005F64B0,0x0030301C,IncidentManager::CreateMap(),texto,alta,3 string(s)
+0x005F6AB0,0x00303AEC,IncidentManager::RefreshRegionNames(),texto,media,1 string(s)
+0x005F72A0,0x00304408,IncidentManager::SetupFinalMusic(),texto,alta,2 string(s)
+0x005F7390,0x00304C40,IncidentManager::InitializeIncidents(int),texto,alta,2 string(s)
+0x005F7900,0x003057E4,IncidentManager::RenderExploration(),vizinhos,media,3 de 3 vizinhos
+0x005F83B0,0x0030641C,IncidentManager::ProcessConsoleCommands(),texto,alta,8 string(s)
+0x005F8BB0,0x003076E8,IncidentManager::SetupIsland(int),texto,media,1 string(s)
+0x005F8C80,0x00307CFC,IncidentManager::BurnRegion(),vizinhos,media,3 de 3 vizinhos
+0x005F8E20,0x00307E04,IncidentManager::LeaveIsland(),texto,media,1 string(s)
+0x005F9300,0x003071CC,IncidentManager::CreateFinalMission(),texto,media,1 string(s)
+0x005F9750,0x003084D0,IncidentManager::UpdateIncidentLocations(),texto,media,1 string(s)
+0x005F9A60,0x00308658,IncidentManager::GetMagicBullshit(int),texto,media,1 string(s)
+0x005F9B80,0x0030881C,"IncidentManager::OnRenderMap(bool, int, bool)",texto,alta,4 string(s)
+0x005FB6F0,0x003099A8,IncidentManager::OnRenderWindows(),texto,alta,2 string(s)
+0x005FBDD0,0x0030C424,IncidentManager::RenderSeismicWarning(),texto,alta,4 string(s)
+0x005FC550,0x0030A148,IncidentManager::RenderIslandInfo(int),texto,alta,20 string(s)
+0x005FEED0,0x0030CE7C,IncidentManager::OnLoop(),texto,alta,2 string(s)
+0x005FF6A0,0x00305514,"IncidentManager::MouseMove(int, int)",texto,media,1 string(s)
+0x005FFDC0,0x0030DCF8,IncidentManager::SelectIsland(),texto,media,1 string(s)
+0x00600A50,0x0030EBB8,IncidentManager::LoadGameData(),vizinhos,media,5 de 6 vizinhos
+0x006015E0,0x00301460,"Island::SetCorporation(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,8 string(s)
+0x00605170,0x002CA020,Game::Game(),vizinhos,media,3 de 3 vizinhos
+0x006052A0,0x002CE594,Game::~Game(),vtable,alta,mesma posição na vftable
+0x00605EB0,0x00324028,MainMenu::FileWriteIssue(),texto,media,1 string(s)
+0x00605F50,0x002CA70C,Game::OnRender(),vizinhos,media,4 de 4 vizinhos
+0x00606230,0x002CAD24,Game::OnLoop(),vtable,alta,mesma posição na vftable
+0x00606720,0x002CD8EC,"Game::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00606820,0x002CDB38,"Game::OnKeyAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00606B70,0x002CDDC0,"Game::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x00606C60,0x002CDEDC,Game::OnCleanup(),vtable,alta,mesma posição na vftable
+0x00606EF0,0x002CC2A4,"Game::LoadGame(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,5 string(s)
+0x006079F0,0x002CD038,Game::UpdateConsole(),texto,alta,2 string(s)
+0x00607C60,0x002CD5B8,Game::UpdateMenus(),vizinhos,media,3 de 3 vizinhos
+0x006080F0,0x002CFD40,GameMap::GameMap(),texto,media,1 string(s)
+0x006085D0,0x002D0580,GameMap::~GameMap(),vtable,alta,mesma posição na vftable
+0x00609770,0x002D1AE4,"GameMap::AddWeapon(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,GameMap:AddWeapon
+0x00609840,0x002D1BAC,"GameMap::RemoveItem(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,GameMap:RemoveItem
+0x00609910,0x002D1C74,"GameMap::AddPilot(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,GameMap:AddPilot
+0x006099E0,0x00374F80,SquadControl::ModifyRepairs(int),texto,media,1 string(s)
+0x00609D30,0x002D222C,GameMap::ApplyEffect(Effect),vtable,alta,mesma posição na vftable
+0x0060A060,0x002D2608,GameMap::PrepareEffect(Effect*),vtable,alta,mesma posição na vftable
+0x0060A110,0x002D2690,GameMap::IsIslandUnlocked(int),lua,alta,GameMap:IsIslandUnlocked
+0x0060A150,0x002D26F4,GameMap::CheckSingleReq(Choice&),vtable,alta,mesma posição na vftable
+0x0060A3F0,0x002D287C,"GameMap::GetSkillLevel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vtable,alta,mesma posição na vftable
+0x0060A460,0x002D28D4,GameMap::OnRender(),texto,alta,2 string(s)
+0x0060AF70,0x002D498E,GameMap::GetMoney(),vtable,alta,mesma posição na vftable
+0x0060AF80,0x002D4754,GameMap::RenderFakeHangar(),texto,media,1 string(s)
+0x0060BA00,0x002D5088,GameMap::GetItems(),lua,alta,GameMap:GetItems
+0x0060BB90,0x002D51D0,GameMap::GetNextDefense(int),vtable,alta,mesma posição na vftable
+0x0060BBA0,0x002D51DA,GameMap::GetRandomVoice(),lua,alta,GameMap:GetRandomVoice
+0x0060BC00,0x002D51FE,GameMap::GetPawn(int),lua,alta,GameMap:GetPawn
+0x0060BC30,0x002D5222,"GameMap::GetAnotherVoice(int, int)",lua,alta,GameMap:GetAnotherVoice
+0x0060BC60,0x002D525C,GameMap::IsEvent(int),lua,alta,GameMap:IsEvent
+0x0060BCA0,0x002D5270,"GameMap::TriggerSound(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,GameMap:TriggerSound
+0x0060BD70,0x002D5384,GameMap::GetEventCount(int),lua,alta,GameMap:GetEventCount
+0x0060BDC0,0x002D542C,GameMap::UpdateConsole(),texto,media,1 string(s)
+0x0060C450,0x002D648C,GameMap::OnLoop(),texto,alta,4 string(s)
+0x0060D080,0x002D6244,GameMap::TestLanguageLengths(),texto,alta,2 string(s)
+0x0060D2A0,0x002D76B8,GameMap::CheckBattle(),texto,media,1 string(s)
+0x0060D8C0,0x002D7EBC,GameMap::GetPower(),lua,alta,GameMap:GetPower
+0x0060D960,0x002D7F74,GameMap::GetTeamTurn(),lua,alta,GameMap:GetTeamTurn
+0x0060D9A0,0x002D7F98,GameMap::GetSector(),lua,alta,GameMap:GetSector
+0x0060D9E0,0x002D7FC8,GameMap::ModifyPowerGrid(int),lua,alta,GameMap:ModifyPowerGrid
+0x0060E230,0x002D8C24,"GameMap::AddPermaTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point)",lua,alta,GameMap:AddPermaTip
+0x0060E2D0,0x002D4906,GameMap::ClearTips(),lua,alta,GameMap:ClearTips
+0x0060E380,0x002D394C,GameMap::IsTip(),lua,alta,GameMap:IsTip
+0x0060E3C0,0x002D8D00,"GameMap::AddInterfaceTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, bool)",lua,alta,GameMap:AddInterfaceTip
+0x0060E4D0,0x002D8F98,"GameMap::AddVerticalInterfaceTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, bool)",lua,alta,GameMap:AddVerticalInterfaceTip
+0x0060E5F0,0x002D924C,"GameMap::AddTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point)",lua,alta,GameMap:AddTip
+0x0060E790,0x002D95DC,"GameMap::AddTutorial(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point)",lua,alta,GameMap:AddTutorial
+0x0060E820,0x002D96A8,GameMap::AddVoicePopup(VoicePopup),lua,alta,GameMap:AddVoicePopup
+0x0060E8A0,0x002D9734,GameMap::IsVoicePopup(),lua,alta,GameMap:IsVoicePopup
+0x0060E900,0x002D9746,GameMap::BlockNextTurn(),lua,alta,GameMap:BlockNextTurn
+0x0060E920,0x002D9758,"GameMap::AddNote(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,GameMap:AddNote
+0x0060EA10,0x002D3130,GameMap::SetupBackground(),texto,alta,3 string(s)
+0x0060F670,0x002D9A84,GameMap::GetRewardLoc(int),vtable,alta,mesma posição na vftable
+0x0060F730,0x002D9C30,"GameMap::IsMechClass(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,GameMap:IsMechClass
+0x0060F7B0,0x002D9D00,GameMap::GetCorp(),lua,alta,GameMap:GetCorp
+0x0060F7D0,0x002D9D0A,GameMap::GetSavedCorp(),lua,alta,GameMap:GetSavedCorp
+0x0060F7F0,0x002D9D18,GameMap::GetSquad(),lua,alta,GameMap:GetSquad
+0x0060F880,0x002D3974,GameMap::RenderTopBar(),texto,alta,4 string(s)
+0x00614B30,0x002CA314,MainMenu::~MainMenu(),vtable,alta,mesma posição na vftable
+0x00614B60,0x00323BE8,MainMenu::Open(bool),texto,media,1 string(s)
+0x00615010,0x003240B0,"MainMenu::OpenEndState(int, int, std::__ndk1::vector<std::__ndk1::shared_ptr<Pilot>, std::__ndk1::allocator<std::__ndk1::shared_ptr<Pilot> > >)",texto,media,1 string(s)
+0x00615390,0x003244EC,MainMenu::OnLoop(),vtable,alta,mesma posição na vftable
+0x006157F0,0x00324A00,MainMenu::OnRender(),vtable,alta,mesma posição na vftable
+0x00616D50,0x00326E9C,MainMenu::RenderBar(),texto,alta,9 string(s)
+0x00618C80,0x00326588,MainMenu::RenderBackground(),texto,alta,2 string(s)
+0x00619430,0x003284E0,"MainMenu::MouseMove(int, int)",vtable,alta,mesma posição na vftable
+0x00619710,0x00328764,"MainMenu::OnMouseAction(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x00619820,0x00328838,MainMenu::OnConfirmAction(),texto,media,1 string(s)
+0x00619C60,0x00328E8C,"MainMenu::OnGamepadButton(KeyAction, int)",vtable,alta,mesma posição na vftable
+0x0061A390,0x00323BE4,MenuButton::~MenuButton(),vtable,alta,mesma posição na vftable
+0x0061A9D0,0x00329582,MenuButton::Reset(),vtable,alta,mesma posição na vftable
+0x0061AAC0,0x003295BE,MenuButton::IsHovering(),vtable,alta,mesma posição na vftable
+0x0061AB40,0x003295F0,"MenuButton::MouseMove(int, int, bool)",vtable,alta,mesma posição na vftable
+0x0061AF90,0x002BFEF8,Pilot::~Pilot(),vtable,alta,mesma posição na vftable
+0x0061B450,0x00456D90,"GetRandomName(int, int)",texto,alta,4 string(s)
+0x0061B870,0x004572B4,"Pilot::Pilot(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0061BCF0,0x004584D4,Pilot::GetAllPilotSkills(),texto,alta,2 string(s)
+0x0061C380,0x00458B94,"Pilot::GetPossibleSkills(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0061C6A0,0x004576C0,Pilot::OnInit(),texto,alta,3 string(s)
+0x0061D290,0x00458EF4,"Pilot::SetPortrait(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool)",texto,alta,7 string(s)
+0x0061DEC0,0x0045B4E0,Pilot::GetPersonality(),texto,media,1 string(s)
+0x0061E680,0x004598B8,Pilot::GetAbilityInfo(),texto,media,1 string(s)
+0x0061E810,0x0045B620,Pilot::IncreaseXP(int),texto,media,1 string(s)
+0x0061E8F0,0x0045BC30,"Pilot::ForceSkillAndLevel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x0061ECA0,0x0045BF6C,Pilot::GetRankString(),texto,alta,3 string(s)
+0x0061FC30,0x0045CDBC,Pilot::GetMaxXP(),texto,media,1 string(s)
+0x0061FD60,0x0045D250,Pilot::RenderRankTip(Point),texto,alta,2 string(s)
+0x0061FE50,0x0045D3A4,"Pilot::MeasureSkills(bool, bool)",vizinhos,media,4 de 4 vizinhos
+0x006206D0,0x0045DA28,"Pilot::RenderSkills(Point, bool, bool)",texto,alta,6 string(s)
+0x00622EE0,0x00460260,Pilot::UpdateAnimations(),texto,alta,2 string(s)
+0x006233D0,0x00460918,Pilot::ApplyEffect(Effect),vtable,alta,mesma posição na vftable
+0x00624DF0,0x00462794,SkillManager::StartBattle(),vtable,alta,mesma posição na vftable
+0x00624E70,0x004628C4,SkillManager::LoopWeapons(),texto,alta,2 string(s)
+0x006250A0,0x00462C90,SkillManager::SetSelected(bool),vtable,alta,mesma posição na vftable
+0x00625200,0x004630B8,"SkillManager::FireWeapon(Point, int)",texto,media,1 string(s)
+0x00625E10,0x00462DA8,SkillManager::ArmWeapon(int),texto,media,1 string(s)
+0x00625FF0,0x00464376,SkillManager::SetPriorityTarget(Point),lua,alta,BoardPawn:SetPriorityTarget
+0x00626010,0x004643AE,SkillManager::GetShotsRemaining(),lua,alta,BoardPawn:GetShotsRemaining
+0x00626470,0x00463974,SkillManager::ClearQueuedShot(),lua~,media,BoardPawn:ClearQueued
+0x00626920,0x0035E67C,Skill::GetTargetScore(Point),texto,media,1 string(s)
+0x00626BF0,0x00465184,SkillManager::GetTarget(),lua,alta,BoardPawn:GetTarget
+0x00626D70,0x00462894,SkillManager::ResetUses(),lua,alta,BoardPawn:ResetUses
+0x00627340,0x00465B10,SkillManager::GetFirstClick(),lua,alta,BoardPawn:GetFirstClick
+0x00627E00,0x00433810,"Pawn::TimeTravel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x00627F30,0x00433A40,"Pawn::Pawn(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,alta,4 string(s)
+0x006290E0,0x00435CFC,"Pawn::SetCustomAnim(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,BoardPawn:SetCustomAnim
+0x00629700,0x00435090,"Pawn::OnInit(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,8 string(s)
+0x0062A1D0,0x00436CE0,Pawn::UndoTurnUsed(),texto,media,1 string(s)
+0x0062A2F0,0x00437D30,Pawn::IsBusy(),lua,alta,BoardPawn:IsBusy
+0x0062A3E0,0x00437E86,Pawn::IsDead(),lua,alta,BoardPawn:IsDead
+0x0062A3F0,0x00436328,Pawn::IsCorpse(),lua,alta,BoardPawn:IsCorpse
+0x0062A460,0x0043801C,"Pawn::Damage(SpaceDamage, int)",texto,media,1 string(s)
+0x0062AC00,0x0043A364,Pawn::ProcessDeath(),texto,alta,10 string(s)
+0x0062B940,0x0043B7C8,Pawn::DetonateCorpse(),texto,alta,5 string(s)
+0x0062C0C0,0x0043C474,Pawn::TriggerDeathEffect(),texto,alta,2 string(s)
+0x0062C460,0x004378FC,"Pawn::MutateAnim(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool, GL_Color)",texto,alta,5 string(s)
+0x0062CC00,0x0043D76C,Pawn::GetPrimaryStatus(),texto,media,1 string(s)
+0x0062CE40,0x004397EC,"Pawn::ModifyHealth(int, bool, int)",lua,alta,BoardPawn:ModifyHealth
+0x0062D500,0x0043DF38,Pawn::SetHealth(int),lua,alta,BoardPawn:SetHealth
+0x0062D930,0x0043E53E,Pawn::SetSpace(Point),lua,alta,BoardPawn:SetSpace
+0x0062DAB0,0x0043E7B4,Pawn::Push(int),texto,media,1 string(s)
+0x0062DC70,0x0043E9E8,Pawn::FinishPush(),texto,media,1 string(s)
+0x00630170,0x0044141C,Pawn::SetTeam(int),lua,alta,BoardPawn:SetTeam
+0x00630180,0x00441428,Pawn::SetInvisible(bool),lua,alta,BoardPawn:SetInvisible
+0x00630220,0x0044142E,Pawn::GetTurnCount(),lua,alta,BoardPawn:GetTurnCount
+0x006305A0,0x0043E1AC,Pawn::GetPathingProfile(),texto,media,1 string(s)
+0x006306E0,0x0043A354,Pawn::IsPlayer(),lua,alta,BoardPawn:IsPlayer
+0x00630710,0x00435CEC,Pawn::IsEnemy(),lua,alta,BoardPawn:IsEnemy
+0x006308E0,0x00441BE4,Pawn::UpdateEffectAnim(),texto,alta,3 string(s)
+0x006314F0,0x004429FC,Pawn::OnLoop(),texto,alta,9 string(s)
+0x00632280,0x0043DC50,Pawn::IsBoosted(),lua,alta,BoardPawn:IsBoosted
+0x00632330,0x00444234,Pawn::IsGrappled(),lua,alta,BoardPawn:IsGrappled
+0x00632350,0x00444268,Pawn::SetGrappled(bool),texto,alta,2 string(s)
+0x006325A0,0x0044475C,Pawn::IncreasePilotXp(int),texto,media,1 string(s)
+0x006329C0,0x004450AC,Pawn::GetPilotName(int),lua,alta,BoardPawn:GetPilotName
+0x00632CC0,0x00445490,Pawn::GetPilotLanguage(),lua,alta,BoardPawn:GetPilotLanguage
+0x00633110,0x00441A04,Pawn::Move(Point),lua,alta,BoardPawn:Move
+0x00633300,0x00441A04,Pawn::Move(Point),texto,media,1 string(s)
+0x00633510,0x00445B9C,"Pawn::SetManualPath(std::__ndk1::vector<Point, std::__ndk1::allocator<Point> >, bool)",texto,media,1 string(s)
+0x006335F0,0x00445904,"Pawn::Leap(std::__ndk1::vector<Point, std::__ndk1::allocator<Point> >, bool, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x00633AB0,0x00445EBC,Pawn::StartTurn(int),texto,alta,2 string(s)
+0x00633D80,0x00446364,Pawn::UpdateDot(int),texto,alta,7 string(s)
+0x00634490,0x00436DE0,Pawn::SetForceField(bool),texto,alta,5 string(s)
+0x00634990,0x00440FA0,Pawn::IsLargeShield(),texto,alta,6 string(s)
+0x00634C00,0x0044701E,Pawn::SetActive(bool),lua,alta,BoardPawn:SetActive
+0x00634D40,0x00447114,"Pawn::FireWeapon(Point, int)",lua,alta,BoardPawn:FireWeapon
+0x00634F50,0x004478E0,Pawn::SetSelected(bool),vtable,alta,mesma posição na vftable
+0x00635110,0x0043684C,Pawn::SetPilot(std::__ndk1::shared_ptr<Pilot>),texto,media,1 string(s)
+0x00635B30,0x00448C64,Pawn::GetHealthString(),texto,media,1 string(s)
+0x00636790,0x00449678,Pawn::GetMoveString(),texto,alta,2 string(s)
+0x00636E00,0x00449BD0,Pawn::GetDangerScore(),lua,alta,BoardPawn:GetDangerScore
+0x00636E40,0x00449C58,Pawn::GetSpace(),lua,alta,BoardPawn:GetSpace
+0x00637070,0x00449E4C,Pawn::SpawnAnimation(),lua,alta,BoardPawn:SpawnAnimation
+0x006373F0,0x0044A188,Pawn::IsDeadly(SpaceDamage),lua,alta,BoardPawn:IsDeadly
+0x00637470,0x0043DDA4,Pawn::IsBurrower(),lua,alta,BoardPawn:IsBurrower
+0x00637580,0x0044A2D0,Pawn::SetPowered(bool),lua,alta,BoardPawn:SetPowered
+0x00637810,0x00438B04,Pawn::SetFrozen(bool),lua,alta,BoardPawn:SetFrozen
+0x00637A10,0x00438AFC,Pawn::IsFrozen(),lua,alta,BoardPawn:IsFrozen
+0x00637CB0,0x0044A54C,Pawn::SetMissionCritical(bool),lua,alta,BoardPawn:SetMissionCritical
+0x00637CC0,0x0044A558,Pawn::Retreat(),lua,alta,BoardPawn:Retreat
+0x00637F70,0x0044A88E,Pawn::GetId(),lua,alta,BoardPawn:GetId
+0x00637F80,0x0044A894,Pawn::IsVoidShockImmune(),texto,media,1 string(s)
+0x006380B0,0x00439150,Pawn::SetInfected(bool),lua,alta,BoardPawn:SetInfected
+0x00638190,0x004412E0,Pawn::IsInfected(),lua,alta,BoardPawn:IsInfected
+0x00638210,0x0044AA9C,Pawn::IsPowered(),lua,alta,BoardPawn:IsPowered
+0x00638270,0x0044AAAC,Pawn::SetMutation(int),lua,alta,BoardPawn:SetMutation
+0x006384B0,0x0044AC58,Pawn::IsAvoidingMines(),lua,alta,BoardPawn:IsAvoidingMines
+0x006384F0,0x0044ACE0,"Pawn::IsAbility(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,BoardPawn:IsAbility
+0x00638740,0x004462CC,Pawn::AddMoveBonus(int),lua,alta,BoardPawn:AddMoveBonus
+0x00638790,0x0044B044,Pawn::GetStatusEffects(),texto,alta,14 string(s)
+0x00639A70,0x0044D118,Pawn::IsFireImmune(),texto,alta,2 string(s)
+0x00639BF0,0x00444118,Pawn::IsDamaged(),lua,alta,BoardPawn:IsDamaged
+0x00639CA0,0x0044D678,Pawn::GetExtraSpaces(),vtable,alta,mesma posição na vftable
+0x00639E60,0x0044D7C8,Pawn::GetClass(),vtable,alta,mesma posição na vftable
+0x00639EA0,0x0044D846,Pawn::GetSounds(),vtable,alta,mesma posição na vftable
+0x00639EE0,0x00437F84,Pawn::IsMech(),lua,alta,BoardPawn:IsMech
+0x00639EF0,0x0044D8C4,Pawn::SetMech(),lua,alta,BoardPawn:SetMech
+0x00639F00,0x0043936C,Pawn::SetOnFire(bool),texto,media,1 string(s)
+0x0063A1A0,0x0044D8CC,Pawn::UpdateKills(),texto,alta,2 string(s)
+0x0063A660,0x0043A11C,Pawn::SetAcid(bool),lua,alta,BoardPawn:SetAcid
+0x0063A770,0x00439148,Pawn::IsAcid(),lua,alta,BoardPawn:IsAcid
+0x0063A8F0,0x0044A78C,Pawn::Kill(bool),lua,alta,BoardPawn:Kill
+0x0063A960,0x0044D098,Pawn::IsTempUnit(),lua,alta,BoardPawn:IsTempUnit
+0x0063AA90,0x00443F64,Pawn::Fall(int),lua,alta,BoardPawn:Fall
+0x0063AC40,0x0044A7D4,Pawn::FlyAway(),lua,alta,BoardPawn:FlyAway
+0x0063ACB0,0x0043D564,Pawn::IsPsionAffected(int),texto,alta,2 string(s)
+0x0063AE60,0x0043C46C,Pawn::GetTeam(),lua,alta,BoardPawn:GetTeam
+0x0063B0F0,0x0043E9D4,Pawn::IsGuarding(),lua,alta,BoardPawn:IsGuarding
+0x0063B100,0x00443A68,Pawn::SetBoosted(bool),lua,alta,BoardPawn:SetBoosted
+0x0063B2F0,0x00443F24,Pawn::IsUndoPossible(),lua,alta,BoardPawn:IsUndoPossible
+0x0063B430,0x0044E348,Pawn::Undo(),vizinhos,media,3 de 4 vizinhos
+0x0063B700,0x0043E16C,Pawn::GetMoveSpeed(),lua,alta,BoardPawn:GetMoveSpeed
+0x0063B750,0x0044E7D4,Pawn::IsNonGridStructure(),lua,alta,BoardPawn:IsNonGridStructure
+0x0063B790,0x00447544,Pawn::GetBaseMove(),lua,alta,BoardPawn:GetBaseMove
+0x0063B9B0,0x0044E84C,Pawn::SetMoveSpeed(int),lua,alta,BoardPawn:SetMoveSpeed
+0x0063B9F0,0x0044E8FE,Pawn::GetPersonality(),lua,alta,BoardPawn:GetPersonality
+0x0063BA90,0x0044E9A6,Pawn::SetNeutral(bool),lua,alta,BoardPawn:SetNeutral
+0x0063BAA0,0x00440B00,Pawn::IsFlying(),lua,alta,BoardPawn:IsFlying
+0x0063BB90,0x0044E9AC,"Pawn::RenderStat(Point, int, bool)",texto,media,1 string(s)
+0x0063BE00,0x004416A4,Pawn::IsTeleporter(),lua,alta,BoardPawn:IsTeleporter
+0x0063BE60,0x00441734,Pawn::IsJumper(),lua,alta,BoardPawn:IsJumper
+0x0063BEC0,0x00444170,Pawn::IsActive(),lua,alta,BoardPawn:IsActive
+0x0063BF50,0x0044ECC0,"Pawn::RenderOverlay(bool, Point)",texto,alta,9 string(s)
+0x0063CB60,0x004502EC,"Pawn::AddAlert(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",vtable,alta,mesma posição na vftable
+0x0063CBF0,0x004503C8,Pawn::StartBattle(),vtable,alta,mesma posição na vftable
+0x0063CF50,0x00450830,Pawn::IsRanged(),lua,alta,BoardPawn:IsRanged
+0x0063D0B0,0x00445878,Pawn::PlayMoveSound(),texto,media,1 string(s)
+0x0063D150,0x004508B0,Pawn::SaveGameData(LuaString&),texto,media,1 string(s)
+0x0063E0E0,0x004527A4,Pawn::LoadGameData(LuaTable&),texto,media,1 string(s)
+0x00640250,0x004397E0,Pawn::GetType(),lua,alta,BoardPawn:GetType
+0x006423F0,0x00455E44,"PawnFactory::CreatePawn(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,media,1 string(s)
+0x00642670,0x004560E8,"PawnFactory::CreateEmptyPawn(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,alta,2 string(s)
+0x00642AA0,0x00345750,ResearchControl::ResearchControl(),texto,media,1 string(s)
+0x00644370,0x00347DAC,ResearchControl::RenderReactor(),texto,alta,7 string(s)
+0x00645750,0x003495E0,ResearchControl::RenderTooltips(),texto,alta,9 string(s)
+0x006460B0,0x0034A368,ResearchControl::RenderPilotInfo(),texto,alta,3 string(s)
+0x00647470,0x0034B0B4,ResearchControl::SetupPilotBoxes(),texto,alta,5 string(s)
+0x00647D30,0x0034BF9C,ResearchControl::RenderUpgrades(),texto,alta,4 string(s)
+0x00648520,0x0034C718,ResearchControl::RenderMain(),texto,media,1 string(s)
+0x00648E40,0x0034E9E0,ResearchControl::RenderTouchConfirm(),texto,alta,2 string(s)
+0x0064A190,0x0034FCA0,ResearchControl::RenderSecondary(),vizinhos,media,3 de 5 vizinhos
+0x0064A620,0x00350250,ResearchControl::RenderStorage(),texto,alta,2 string(s)
+0x0064B1A0,0x00350C14,ResearchControl::RenderTesting(),texto,alta,2 string(s)
+0x0064B650,0x0034D0CC,"ResearchControl::RenderSkill(InventoryItem*, int)",texto,alta,2 string(s)
+0x0064C380,0x00351FFC,"ResearchControl::RenderTabIcon(int, Point, GL_Color)",texto,alta,2 string(s)
+0x0064C520,0x00352194,"ResearchControl::RenderWarning(Pawn*, Point, bool)",texto,alta,4 string(s)
+0x0064C6B0,0x0035248C,ResearchControl::RenderUnopenedGamepad(),texto,alta,2 string(s)
+0x0064CA30,0x00352778,ResearchControl::OnLoop(),texto,alta,3 string(s)
+0x0064D740,0x003534F4,ResearchControl::UpgradeReactor(),texto,alta,2 string(s)
+0x0064D960,0x00353A40,"ResearchControl::SwapSlots(int, int)",texto,alta,5 string(s)
+0x0064E580,0x00355360,ResearchControl::AttemptPower(),texto,alta,4 string(s)
+0x0064FB20,0x0034D484,ResearchControl::RenderGamepadSelection(),texto,alta,4 string(s)
+0x006531D0,0x00356B80,ResearchControl::Undo(),texto,media,1 string(s)
+0x00653760,0x0036A7C8,SkillEffect::GetDamageCount(),lua,alta,SkillEffect:GetDamageCount
+0x00653780,0x0036AC24,SkillEffect::GetDamage(int),lua,alta,SkillEffect:GetDamage
+0x006537A0,0x003703C0,Squad::IsEmpty(),lua,alta,Squad:IsEmpty
+0x00653840,0x003455A8,LaserAnimation::~LaserAnimation(),vtable,alta,mesma posição na vftable
+0x006538D0,0x0036A318,SkillEffect::AddDamage(SpaceDamage),lua,alta,SkillEffect:AddDamage
+0x00653950,0x0036A3E4,"SkillEffect::AddVoice(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",lua,alta,SkillEffect:AddVoice
+0x00653A40,0x0036A66C,"SkillEffect::AddQueuedVoice(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",lua,alta,SkillEffect:AddQueuedVoice
+0x00653B30,0x0036A774,SkillEffect::AddQueuedDamage(SpaceDamage),lua,alta,SkillEffect:AddQueuedDamage
+0x00653BB0,0x0036A7DC,"SkillEffect::AddGrapple(Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,SkillEffect:AddGrapple
+0x00653CB0,0x0036A890,SkillEffect::GetQueuedCount(),lua,alta,SkillEffect:GetQueuedCount
+0x00653CD0,0x0036A8A4,"SkillEffect::AddBurst(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",lua,alta,SkillEffect:AddBurst
+0x00653F80,0x0036AC18,SkillEffect::GetQueuedDamage(int),lua,alta,SkillEffect:GetQueuedDamage
+0x00653FA0,0x0036AC30,SkillEffect::AddDelay(float),lua,alta,SkillEffect:AddDelay
+0x00654960,0x0036B5F8,"SkillEffect::AddMove(PointList, float)",lua,alta,SkillEffect:AddMove
+0x00654A50,0x0036B690,"SkillEffect::AddLeap(PointList, float)",lua,alta,SkillEffect:AddLeap
+0x00654C80,0x0036B898,"SkillEffect::AddBurrow(PointList, float)",lua,alta,SkillEffect:AddBurrow
+0x00654D10,0x0036B950,"SkillEffect::AddCharge(PointList, float)",lua,alta,SkillEffect:AddCharge
+0x00654DA0,0x0036BA08,"SkillEffect::AddAirstrike(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,SkillEffect:AddAirstrike
+0x00654EB0,0x0036BCF0,"SkillEffect::AddReverseAirstrike(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,SkillEffect:AddReverseAirstrike
+0x00654FC0,0x0036BE1C,"SkillEffect::AddDropper(SpaceDamage, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,SkillEffect:AddDropper
+0x006550A0,0x0036AB74,"SkillEffect::AddScript(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,SkillEffect:AddScript
+0x00655380,0x0036C004,"SkillEffect::AddEmitter(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,SkillEffect:AddEmitter
+0x00655400,0x0036C078,"SkillEffect::AddQueuedScript(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,SkillEffect:AddQueuedScript
+0x006554F0,0x0036C11C,"SkillEffect::AddSound(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",lua,alta,SkillEffect:AddSound
+0x006555E0,0x0036C1C0,"SkillEffect::AddTeleport(Point, Point, float)",lua,alta,SkillEffect:AddTeleport
+0x006557E0,0x0036C368,"SkillEffect::AddQueuedCharge(PointList, float)",lua,alta,SkillEffect:AddQueuedCharge
+0x00655870,0x0036C420,"SkillEffect::AddQueuedMove(PointList, float)",lua,alta,SkillEffect:AddQueuedMove
+0x00655960,0x0036C4B8,"SkillEffect::AddMelee(Point, SpaceDamage)",lua,alta,SkillEffect:AddMelee
+0x006559D0,0x0036C520,"SkillEffect::AddMelee(Point, SpaceDamage, float)",lua,alta,SkillEffect:AddMelee
+0x00655A80,0x0036C648,"SkillEffect::AddQueuedMelee(Point, SpaceDamage)",lua,alta,SkillEffect:AddQueuedMelee
+0x00655AF0,0x0036C6B0,"SkillEffect::AddQueuedMelee(Point, SpaceDamage, float)",lua,alta,SkillEffect:AddQueuedMelee
+0x00655BA0,0x0036C7DC,SkillEffect::AddBoardShake(float),lua,alta,SkillEffect:AddBoardShake
+0x00655D40,0x0036C920,"SkillEffect::AddBounce(Point, int)",lua,alta,SkillEffect:AddBounce
+0x00656160,0x0036CCB4,"SkillEffect::MarkAffectedArea(WeaponTarget*, bool, bool)",texto,alta,2 string(s)
+0x00656D90,0x0036CBE0,SpaceDamage::IsMovement(),lua,alta,SpaceDamage:IsMovement
+0x00656DC0,0x0036D6CE,SpaceDamage::MoveStart(),lua,alta,SpaceDamage:MoveStart
+0x00656E00,0x0036D96A,SpaceDamage::MoveEnd(),lua,alta,SpaceDamage:MoveEnd
+0x00656E20,0x0036A4EC,"SpaceDamage::AddVoice(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",texto,media,1 string(s)
+0x00656FC0,0x0036D978,SpaceDamage::GetProjectileArc(WeaponTarget*),vizinhos,media,5 de 5 vizinhos
+0x00657E50,0x00370278,Squad::AddPawn(Pawn*),lua,alta,Squad:AddPawn
+0x006583D0,0x00370AE0,SquadControl::SquadControl(),texto,media,1 string(s)
+0x00659380,0x003722F0,SquadControl::StartGame(Squad),texto,alta,2 string(s)
+0x0065A540,0x0037306C,SquadControl::RenderStoreUI(bool),texto,alta,4 string(s)
+0x0065BF90,0x00375040,SquadControl::GetPawn(int),vtable,alta,mesma posição na vftable
+0x0065BFE0,0x0037508C,"SquadControl::GetPortraitLoc(int, int)",vtable,alta,mesma posição na vftable
+0x0065C140,0x00375274,SquadControl::GetPortraitWidth(int),vtable,alta,mesma posição na vftable
+0x0065C1A0,0x003752B8,SquadControl::OnLoop(),texto,media,1 string(s)
+0x0065CCD0,0x00376650,SquadControl::AddPilot(std::__ndk1::shared_ptr<Pilot>),texto,media,1 string(s)
+0x0065E200,0x00313238,IncidentRegion::GetBaseText(),texto,alta,3 string(s)
+0x0065E820,0x00313770,IncidentRegion::RenderSummary(),texto,media,1 string(s)
+0x0065FAE0,0x003146F0,IncidentRegion::UpdateBoxSize(),texto,media,1 string(s)
+0x00660050,0x00314A24,IncidentRegion::RenderMission(),vizinhos,media,4 de 4 vizinhos
+0x00660300,0x0031586C,"IncidentRegion::GetPortraitLoc(int, int)",texto,media,1 string(s)
+0x006604C0,0x00315FF4,"IncidentRegion::RenderRegion(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,6 string(s)
+0x00660BA0,0x003165B4,IncidentRegion::FlashNew(),texto,media,1 string(s)
+0x00660C70,0x00316678,IncidentRegion::RenderMouseover(Rect2D),vizinhos,media,3 de 4 vizinhos
+0x00661190,0x00314C00,IncidentRegion::RenderMap(),texto,alta,2 string(s)
+0x00662310,0x00316D2C,IncidentRegion::CreateFinalIsland(Point),texto,alta,2 string(s)
+0x00662AA0,0x00316ECC,"IncidentRegion::SetRegionInfo(RegionInfo, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x00663190,0x00317B48,IncidentRegion::Success(),texto,media,1 string(s)
+0x00663280,0x00317C34,IncidentRegion::Burn(),texto,media,1 string(s)
+0x00663870,0x00318770,IncidentRegion::LoadRegionData(LuaTable&),texto,alta,2 string(s)
+0x00664CA0,0x0035A3C4,Skill::GetTwoClickError(),texto,media,1 string(s)
+0x006656A0,0x0035B078,Skill::ComputeAffectedPoints(),texto,alta,2 string(s)
+0x00665990,0x0035BDAC,Skill::CheckAlterations(DamageList&),texto,alta,4 string(s)
+0x00665C50,0x0035C3EC,Skill::GetSecondTargetZone(Point),texto,media,1 string(s)
+0x00665E00,0x0035C74C,Skill::GetTargetZone(Point),texto,media,1 string(s)
+0x00666040,0x0035CE38,Skill::DoDamage(),texto,alta,11 string(s)
+0x00667310,0x0035CA9C,Skill::GetTargetArea(Point),texto,media,1 string(s)
+0x00667660,0x0035EB00,Skill::SetFirstClick(),texto,media,1 string(s)
+0x00668340,0x00359FC4,Skill::GetUpgradeCost(int),texto,media,1 string(s)
+0x006687F0,0x003600D0,"Skill::GetUpgrades(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x00669180,0x0036113C,"Skill::RenderModInfo(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, bool)",texto,media,1 string(s)
+0x0066A450,0x00361F68,"Skill::RenderInfoSimple(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Animation*, Point, std::__ndk1::vector<PowerState, std::__ndk1::allocator<PowerState> >)",texto,media,1 string(s)
+0x0066DC50,0x003668F4,"Skill::MeasureInfoSimple(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Animation*, std::__ndk1::vector<PowerState, std::__ndk1::allocator<PowerState> >)",vizinhos,media,3 de 3 vizinhos
+0x00670320,0x00368018,"std::__ndk1::vector<int, std::__ndk1::allocator<int> > LuaData::GetList<int>(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,media,1 string(s)
+0x00671D00,0x003916AC,"Tutorial::GetTutorial(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,3 string(s)
+0x006721B0,0x0039C220,"WeaponTip::WeaponTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,2 string(s)
+0x00673F90,0x0039FA74,WeaponTip::TriggerStep(int),texto,media,1 string(s)
+0x00674D50,0x0039F36C,"WeaponTip::GetMech(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",texto,alta,5 string(s)
+0x006767B0,0x0023904E,TipData::IsValid(),lua,alta,TipData:IsValid
+0x00676AF0,0x00228968,ActiveLua::Initialize(),vtable,alta,mesma posição na vftable
+0x00676B80,0x00228D4C,ActiveLua::GetScripts(),vtable,alta,mesma posição na vftable
+0x00676C90,0x00228E9C,ActiveLua::RefreshAll(),vtable,alta,mesma posição na vftable
+0x00676EE0,0x0022940C,ActiveLua::BindDefinitions(),vtable,alta,mesma posição na vftable
+0x006E3F20,0x004AA1C8,luabind::open(lua_State*),texto,alta,3 string(s)
+0x006E78F0,0x004A9C5C,luabind::detail::push_instance_metatable(lua_State*),texto,media,1 string(s)
+0x006E7B00,0x004A8768,"luabind::detail::make_function_aux(lua_State*, luabind::detail::function_object*)",texto,media,1 string(s)
+0x006E7EC0,0x004A8874,"luabind::detail::invoke_context::format_error(lua_State*, luabind::detail::function_object const*) const",texto,alta,2 string(s)
+0x006E8070,0x004A73B0,luabind::detail::property_tag(lua_State*),texto,media,1 string(s)
+0x006E89F0,0x004A7C20,luabind::detail::class_rep::static_class_gettable(lua_State*),texto,alta,2 string(s)
+0x006E8D50,0x004A8198,luabind::detail::handle_exception_aux(lua_State*),texto,alta,4 string(s)
+0x006E9730,0x004A7F40,luabind::detail::create_class::stage2(lua_State*),texto,media,1 string(s)
+0x006E9840,0x004A80AC,luabind::detail::create_class::stage1(lua_State*),texto,alta,2 string(s)
+0x0073D0A0,0x0054BA34,inflate,texto,alta,4 string(s)
+0x007725A9,0x004AA864,"luabind::detail::stack_content_by_name(lua_State*, int)",texto,media,1 string(s)

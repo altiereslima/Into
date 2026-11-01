@@ -2,6 +2,8 @@
 """QA da Etapa 05: reproduz o inventario v2 e prova que ele CONTEM as etapas anteriores.
 
 Uso: python tools/check_inventory_v2.py /caminho/Breach.exe /caminho/Into.the.Breach.v1.2.88.zip
+     python tools/check_inventory_v2.py /caminho/Breach.exe /caminho/pasta_do_jogo
+Aceita a 1.2.88 e a 1.2.93. Os itens 4 e 5 comparam enderecos da 1.2.88 e so valem nela.
 Falha (exit != 0) em qualquer regressao.
 """
 import collections, csv, hashlib, re, sys, zipfile
@@ -9,17 +11,33 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from map_lua_api_v2 import EXE_SHA256, Analyzer, cpp_class_of          # noqa: E402
+from map_lua_api_v2 import EXE_SHA256, PROFILES, Analyzer, cpp_class_of  # noqa: E402
 from map_all_lua_bindings import build as build_v1                    # noqa: E402
 
 EXPECTED = {'method': 343, 'property': 111, 'constructor': 58, 'global_function': 39}
 
 
+def script_lines(path, data):
+    """Linhas dos scripts do jogo, de um ZIP ou de uma pasta."""
+    p = Path(path)
+    if p.is_dir():
+        assert (p / 'Breach.exe').read_bytes() == data, 'pasta e EXE divergentes'
+        for f in (p / 'scripts').rglob('*.lua'):
+            yield from f.read_text(encoding='utf-8', errors='replace').splitlines()
+        return
+    with zipfile.ZipFile(p) as z:
+        assert z.read('Breach.exe') == data, 'ZIP e EXE divergentes'
+        for n in z.namelist():
+            if n.startswith('scripts/') and n.endswith('.lua'):
+                yield from z.read(n).decode('utf-8', 'replace').splitlines()
+
+
 def main():
     if len(sys.argv) < 3:
-        raise SystemExit('Uso: check_inventory_v2.py Breach.exe JOGO.zip')
+        raise SystemExit('Uso: check_inventory_v2.py Breach.exe JOGO.zip|pasta_do_jogo')
     data = Path(sys.argv[1]).read_bytes()
-    assert hashlib.sha256(data).hexdigest() == EXE_SHA256, 'EXE diferente'
+    sha = hashlib.sha256(data).hexdigest()
+    assert sha in PROFILES, 'EXE diferente'
     an = Analyzer(data)
     rows, classes, missed, regs = an.build()
     kinds = collections.Counter(r['kind'] for r in rows)
@@ -53,19 +71,20 @@ def main():
             if res is None or not an.pe.in_text(res):
                 unresolved.append((r['lua_class'], r['name']))
     assert not unresolved, unresolved
-    # 4) Os 228 registros estritos da Etapa 04 sao subconjunto exato.
-    v1, cand = build_v1(data)
-    pairs = {(r['name'], r['target']) for r in rows if r['kind'] == 'method' and r['name_form'] == 'arg'}
-    for r in v1:
-        assert (r['name'], int(r['native_target_va'], 16)) in pairs, ('regressao Etapa 04', r)
-    assert len(v1) == 228
-    # 5) As 83 entradas Board da Etapa 03 continuam presentes.
-    with (HERE.parent / 'evidencias' / 'board_bindings.csv').open(encoding='utf-8', newline='') as f:
-        old = list(csv.DictReader(f))
-    board = {(r['name'], r['target']) for r in rows if r['lua_class'] == 'Board'}
-    assert len(old) == 83
-    for r in old:
-        assert (r['method'], int(r['native_target'], 16)) in board, ('regressao Etapa 03', r)
+    if sha == EXE_SHA256:
+        # 4) Os 228 registros estritos da Etapa 04 sao subconjunto exato.
+        v1, cand = build_v1(data)
+        pairs = {(r['name'], r['target']) for r in rows if r['kind'] == 'method' and r['name_form'] == 'arg'}
+        for r in v1:
+            assert (r['name'], int(r['native_target_va'], 16)) in pairs, ('regressao Etapa 04', r)
+        assert len(v1) == 228
+        # 5) As 83 entradas Board da Etapa 03 continuam presentes.
+        with (HERE.parent / 'evidencias' / 'board_bindings.csv').open(encoding='utf-8', newline='') as f:
+            old = list(csv.DictReader(f))
+        board = {(r['name'], r['target']) for r in rows if r['lua_class'] == 'Board'}
+        assert len(old) == 83
+        for r in old:
+            assert (r['method'], int(r['native_target'], 16)) in board, ('regressao Etapa 03', r)
     # 6) Os 3 "candidatos" da Etapa 04 foram classificados como PROPRIEDADES.
     props = {(r['lua_class'], r['name']) for r in rows if r['kind'] == 'property'}
     assert {('PilotSkill', 'desc'), ('Cost', 'money'), ('PilotInfo', 'type')} <= props
@@ -76,13 +95,9 @@ def main():
         by_class[r['lua_class']].add(r['name'])
     call = re.compile(r'\b(Board|Game|PAWN_FACTORY)[\.:]([A-Za-z_][A-Za-z_0-9]*)\s*\(')
     seen = set()
-    with zipfile.ZipFile(sys.argv[2]) as z:
-        assert z.read('Breach.exe') == data, 'ZIP e EXE divergentes'
-        for n in z.namelist():
-            if n.startswith('scripts/') and n.endswith('.lua'):
-                for line in z.read(n).decode('utf-8', 'replace').splitlines():
-                    seen.update(call.findall(line.split('--', 1)[0]))
-    miss = [(o, m) for o, m in seen if m not in by_class[objmap[o]]]
+    for line in script_lines(sys.argv[2], data):
+        seen.update(call.findall(line.split('--', 1)[0]))
+    miss =[(o, m) for o, m in seen if m not in by_class[objmap[o]]]
     assert len(seen) == 110 and not miss, (len(seen), miss)
     # 8) Valores globais (constantes) atribuidos pelo EXE.
     gv = an.find_global_values()
@@ -109,9 +124,10 @@ def main():
     via_wrapper = {r['registrar'] for r in rows if r['name_form'] == 'global_name_arg'}
     for k in known - via_wrapper:
         assert len(an.calls.get(k, [])) == per[k], ('chamada de registrador sem linha', hex(k))
-    print('PASS: SHA256; 32 classes; 343 metodos, 111 propriedades, 58 construtores, 39 funcoes globais, '
-          'todos tipados por RTTI; 0 thunks virtuais sem resolucao; 228 registros da Etapa 04 e 83 da Etapa 03 '
-          'contidos; desc/money/type = propriedades; 110/110 pares dos scripts casados com a classe; 164 constantes inteiras + 21 cores + 4 vetores + 2 booleanos; '
+    print(f'PASS ({an.profile["version"]}): SHA256; 32 classes; 343 metodos, 111 propriedades, 58 construtores, 39 funcoes globais, '
+          'todos tipados por RTTI; 0 thunks virtuais sem resolucao; '
+          + ('228 registros da Etapa 04 e 83 da Etapa 03 contidos; ' if sha == EXE_SHA256 else '') +
+          'desc/money/type = propriedades; 110/110 pares dos scripts casados com a classe; 164 constantes inteiras + 21 cores + 4 vetores + 2 booleanos; '
           f'fechamento RTTI: 300/300 tipos de registro usados, {sites} escritas de vftable dentro de registradores.')
 
 

@@ -209,7 +209,7 @@ fn is_blocked_combines_bounds_terrain_and_pawns() {
 #[test]
 fn rust_constants_match_values_extracted_from_exe() {
     // CSV gerado por tools/map_lua_api_v2.py a partir de lua_pushinteger no EXE.
-    let csv = include_str!("../../../re/evidencias/lua_global_values.csv");
+    let csv = include_str!("../../../re/evidencias/v1.2.93/lua_global_values.csv");
     let get = |name: &str| -> i32 {
         csv.lines()
             .filter_map(|l| { let c: Vec<&str> = l.split(',').collect(); (c.len() == 4 && c[0] == name && c[2] == "integer").then(|| c[3].parse().unwrap()) })

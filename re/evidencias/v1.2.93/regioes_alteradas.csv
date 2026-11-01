@@ -1,0 +1,53 @@
+ancora_1288,proxima_1288,ancora_1293,proxima_1293,cresceu_bytes,nome_ancora,nome_proxima
+0x00472F00,0x004731D0,0x00472F00,0x00473360,400,"CSaveGameDirEntry::Log(char const*, ...)",CSaveGameFile::Clone(CSaveGameDir*)
+0x00473600,0x00473C50,0x00473790,0x00473DF0,16,"CSaveGameFile::FillWithFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&, long*)",Button::~Button()
+0x0047FB00,0x00481760,0x0047FCA0,0x00481890,-112,MouseControl::GetCurrentMouse(),ShadowBox::InitializeImages()
+0x00492DB0,0x004956D0,0x00492EE0,0x00495810,16,,CSurface::InitShaders()
+0x00496CB0,0x00497000,0x00496DF0,0x00497130,-16,,
+0x0049B800,0x0049C440,0x0049B930,0x0049C580,16,CShaderProgram::~CShaderProgram(),LastShot::Clear()
+0x0049C530,0x0049E0F0,0x0049C670,0x0049E240,16,LastShot::PrepVoice(Pawn*),"FileHelper::openBinaryFileFromDisk(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)"
+0x0049FA60,0x004A2920,0x0049FBB0,0x004A3700,3216,FileHelper::initFileHelper(),"FontControl::LoadFont(boost::unordered::unordered_map<int, freetype::font_data, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<std::__ndk1::pair<int const, freetype::font_data> > >&, FontControl::STypeIndex&, float, void const*, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)"
+0x004A77C0,0x004A99E0,0x004A85A0,0x004AA7A0,-32,"StyleInfo LuaEnv::CallFunction<StyleInfo, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, bool>(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, bool)",freetype::InitCharSet()
+0x004B4E40,0x004BAB30,0x004B5C00,0x004BB910,32,"std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > LuaEnv::CallFunction<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)","ParticleEmitter::ParticleEmitter(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)"
+0x004D3C60,0x004D42D0,0x004D4A40,0x004D50A0,-16,Settings::GetLanguageFolder(int),"Settings::GetLanguageId(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)"
+0x004D6860,0x004D7720,0x004D7630,0x004D8500,16,Settings::LoadSettings(),
+0x004D9160,0x004D9AC0,0x004D9F40,0x004DA980,224,SoundControl::OnInit(),SoundControl::OnLoop()
+0x004E2880,0x004E3000,0x004E3740,0x004E3ED0,16,CApp::OnExecute(),CApp::ListCommands()
+0x004E3220,0x004E3710,0x004E40F0,0x004E45F0,16,SDL_main,CApp::OnLoop()
+0x004E8800,0x004EB570,0x004E96E0,0x004EC460,16,"AchTracker::IsUpdateable(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",AchTracker::OnRender()
+0x00505C30,0x00505EF0,0x00506B20,0x00506DF0,16,"SpaceInfo::InputAction(Point, Board*)",StatusEffects::OnRender(bool)
+0x005175D0,0x005177B0,0x005184D0,0x005186D0,32,"FinalAnim::Start(std::__ndk1::vector<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::allocator<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > > >, int)",FinalAnim::OnRender()
+0x00524E80,0x00529000,0x00525DA0,0x00529F30,16,HangarScreen::OnRenderSquad(),HangarScreen::OnRenderCustomization()
+0x0052D590,0x0052E450,0x0052E4C0,0x0052F390,16,HangarScreen::GetRandomSquad(int),HangarScreen::GenerateMechList()
+0x0052F260,0x00532BB0,0x005301A0,0x005339E0,-272,"HangarScreen::RenderSummary(Point, Pawn*, GL_Color)",HDRSettings::HDRSettings()
+0x005392A0,0x0053CAF0,0x0053A0D0,0x0053D930,16,"Library::GetDialogText(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",OnScreenRename::~OnScreenRename()
+0x0053F250,0x00541DE0,0x00540090,0x00542C30,16,"OnScreenRename::OnGamepadButton(KeyAction, int)",OptionsMenu::~OptionsMenu()
+0x00547A10,0x00547A40,0x00548860,0x00548880,-16,PhoneRename::Close(),PhoneRename::OnRender()
+0x00553080,0x005556A0,0x00553EC0,0x00556510,48,GameProfile::GetSquadId(int),ProfileManager::ProfileManager()
+0x0055ADB0,0x0055B100,0x0055BC20,0x0055BF80,16,"ProjectileAnimation::StartProjectile(WeaponTarget*, Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)","ProjectileAnimation::StartArc(WeaponTarget*, Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)"
+0x00566180,0x00566900,0x00567000,0x00567770,-16,,Board::OnRender(int)
+0x00594D80,0x00598AB0,0x00595BF0,0x00599910,-16,EnvWarning::OnRender(),
+0x005D2F80,0x005D3100,0x005D3DE0,0x005D3F70,16,SquadList::Open(),SquadList::OnRender()
+0x005D92E0,0x005D9420,0x005DA150,0x005DA2A0,16,"StatScreen::MouseMove(int, int)","StatScreen::RenderTopScores(Rect2D, bool)"
+0x005E8DB0,0x005E8F30,0x005E9C30,0x005E9DC0,16,TutorialAnim::~TutorialAnim(),TutorialAnim::OnRender()
+0x005FEF30,0x005FFBD0,0x005FFDC0,0x00600A50,-16,IncidentManager::SelectIsland(),IncidentManager::LoadGameData()
+0x006053B0,0x00605890,0x00606230,0x00606720,16,Game::OnLoop(),"Game::OnMouseAction(KeyAction, int)"
+0x00606060,0x00606DB0,0x00606EF0,0x00607C60,32,"Game::LoadGame(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",Game::UpdateMenus()
+0x00607720,0x006088E0,0x006085D0,0x00609770,-32,GameMap::~GameMap(),"GameMap::AddWeapon(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)"
+0x0060AEE0,0x0060AF40,0x0060BD70,0x0060BDC0,-16,GameMap::GetEventCount(int),GameMap::UpdateConsole()
+0x0060EA00,0x00613CA0,0x0060F880,0x00614B30,16,GameMap::RenderTopBar(),MainMenu::~MainMenu()
+0x00614960,0x00615EA0,0x006157F0,0x00616D50,32,MainMenu::OnRender(),MainMenu::RenderBar()
+0x0061F820,0x00622020,0x006206D0,0x00622EE0,16,"Pilot::RenderSkills(Point, bool, bool)",Pilot::UpdateAnimations()
+0x00626480,0x00626F50,0x00627340,0x00627E00,-16,SkillManager::GetFirstClick(),"Pawn::TimeTravel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)"
+0x0062CD51,0x0062CDD0,0x0062DC01,0x0062DC70,-16,,Pawn::FinishPush()
+0x0063F3B0,0x00641560,0x00640250,0x006423F0,-16,Pawn::GetType(),"PawnFactory::CreatePawn(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)"
+0x00647690,0x00647FC0,0x00648520,0x00648E40,-16,ResearchControl::RenderMain(),ResearchControl::RenderTouchConfirm()
+0x00657550,0x00658510,0x006583D0,0x00659380,-16,SquadControl::SquadControl(),SquadControl::StartGame(Squad)
+0x0065B120,0x0065B160,0x0065BF90,0x0065BFE0,16,SquadControl::GetPawn(int),"SquadControl::GetPortraitLoc(int, int)"
+0x006629F0,0x00664800,0x00663870,0x006656A0,32,IncidentRegion::LoadRegionData(LuaTable&),Skill::ComputeAffectedPoints()
+0x006695B0,0x0066CDC0,0x0066A450,0x0066DC50,-16,"Skill::RenderInfoSimple(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Animation*, Point, std::__ndk1::vector<PowerState, std::__ndk1::allocator<PowerState> >)","Skill::MeasureInfoSimple(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Animation*, std::__ndk1::vector<PowerState, std::__ndk1::allocator<PowerState> >)"
+0x00671320,0x00673110,0x006721B0,0x00673F90,-16,"WeaponTip::WeaponTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",WeaponTip::TriggerStep(int)
+0x00675F80,0x00676020,0x00676E00,0x00676EE0,64,,ActiveLua::BindDefinitions()
+0x006D8AE6,0x006E0114,0x006D99A6,0x006E0FB4,-32,,
+0x006E89A0,0x00780857,0x006E9840,0x00781687,-112,luabind::detail::create_class::stage1(lua_State*),
+0x00780857,0x0078478E,0x00781687,0x007855E3,37,,

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Dá nome às funções do Breach.exe (PC 1.2.88, x86, sem nomes) usando o libmain.so da versão Android
-(ARMv7 Thumb, 1.2.92), que exporta ~6000 funções C++ com nome.
+"""Dá nome às funções do Breach.exe (PC 1.2.88 ou 1.2.93, x86, sem nomes) usando o libmain.so da versão
+Android (ARMv7 Thumb, 1.2.92), que exporta ~6000 funções C++ com nome.
 
-Uso: python re/tools/match_android_symbols.py Breach.exe libmain.so re/evidencias/
-Saída: <saida>/nomes_android.csv e <saida>/nomes_android_resumo.md
+Uso: python re/tools/match_android_symbols.py Breach.exe libmain.so re/evidencias/v1.2.93/
+Precisa de c++filt no PATH e do lua_api_v2_all.csv da mesma versão na pasta de saída.
+Saída: <saida>/nomes_android.csv
 
 Três sinais, do mais forte ao mais fraco:
   1. lua    — registros luabind já inventariados (classe + nome Lua + assinatura) ↔ símbolo C++ de mesmo

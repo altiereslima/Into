@@ -1,44 +1,42 @@
-# CHECKPOINT — Etapa 12: executor de SkillEffect com relógio
+# CHECKPOINT — Migração para o Breach.exe 1.2.93
 
-**Data:** 2026-10-31. Etapas anteriores em `docs/historico/`.
+**Data:** 2026-11-01. Etapas anteriores em `docs/historico/`. Método e limites em
+`re/evidencias/v1.2.93/LEIA-ME.md`.
 
 ## Feito
-- **Fila de efeitos do tabuleiro** (`itb-core/src/executor.rs`), lida no EXE: `Board:AddEffect` enfileira com
-  cronômetro −1; a atualização do tabuleiro espera atrasos positivos, `FULL_DELAY` (−1, espera tudo parar) e
-  `PROJ_DELAY` (−2, espera só os projéteis) e inicia uma lista por vez.
-- **Executor** (0x005601C0): corpo a corpo guardado na unidade e aplicado 0,15 s depois; dano direto na hora;
-  projéteis/artilharia aplicam o dano ao chegar; movimento depois do dano; uma entrada com `fDelay` manda o
-  resto da lista para o fim da fila com aquele cronômetro.
-- **Empurrões com o relógio do EXE**: 0,4 s até resolver, reiniciados por um novo empurrão.
-- `Board:AddEffect` na Lua; `itb-weapon` mostra a **linha do tempo** de cada arma.
-- Provas: `re/evidencias/rotinas_executor.md`.
+- **Base do projeto agora é a 1.2.93** (SHA256 `0f5bdc90…b910`, instalação com `resources/`).
+- **Inventário da API** gerado na 1.2.93: `map_lua_api_v2.py` aceita as duas versões (`PROFILES`). O manifesto só mudou nos endereços.
+- **Tabela de endereços 1.2.88 → 1.2.93** (`migrar_enderecos.py`), sem o EXE antigo: inventário, Android e bytes das provas, conferidos entre si.
+- **Nomes do Android** casados direto com a 1.2.93, com o mesmo `libmain.so` de antes.
+- **Conferência repetível:** `conferir_1293.py` lê 36 fatos no EXE novo (tempos, tabelas, constantes, slots de vftable).
+- **Erro corrigido em `Pawn::Push`:** `DIR_FLIP` depende de `IgnoreFlip` (+0x91F), não de `Pushable` (+0x91E). Vale na 1.2.93 e no Android 1.2.92.
+- **Erro corrigido nos nomes:** `ActiveLua::GetScripts` é o slot 2; o slot 1 só faz `SetPawn/SetBoard/SetGame(nil)`.
 
-## Exemplo (`itb-weapon <jogo> Prime_Punchmech 5 3 5 4`)
-```
-0.00s corpo a corpo de 0 armado
-0.00s pausa -1 (0 entradas restantes)
-0.15s golpe corpo a corpo de 0 em (5,4)
-0.55s empurrão de 1 resolvido
-```
-
-## Ainda suposto
-Tempo de voo de projéteis (0,25 s) e de artilharia/ataque aéreo (0,5 s), e animações de movimento (a unidade
-chega na hora). Estão em `Timing` e em `docs/DIVERGENCIAS.md`.
+## O que mudou entre as versões
+| Item | Resultado |
+|---|---|
+| Registros luabind (551), ordem e assinaturas RTTI | idênticos |
+| Classes Lua (32) | idênticas |
+| Valores globais (197) | idênticos |
+| Provas da Etapa 05 com bytes (24) | as 24 achadas, iguais fora os campos de endereço |
+| Pontos em que o deslocamento muda | 52, somando 3669 bytes em cerca de 4 MB |
+| Maior mudança | carregamento de arquivos e fontes (+3216 bytes); depois salvamento (+400) |
 
 ## Números
-| Métrica | Etapa 11 | Etapa 12 |
+| Métrica | Antes | Agora |
 |---|---|---|
-| Armas aplicadas ao tabuleiro sem falha (559) | 559 | **559**, agora com a ordem e os atrasos do motor |
-| Nomes da API reconstruídos / plataforma / stubs (475) | 211 / 13 / 251 | **212 / 13 / 250** |
-| Testes | 94 | **99** + 2 de integração |
+| Versão de referência | 1.2.88 | **1.2.93** |
+| Endereços citados no projeto com par na 1.2.93 (342) | — | **342** (312 início de função ou prova direta; 30 pontos internos interpolados) |
+| Boot: arquivos ok / ausentes / erros | 137 / 1 / 0 | **137 / 1 / 0** |
+| Armas sem erro nem stub (559) | 559 | **559** |
+| Nomes reconstruídos / plataforma / stubs (475) | 212 / 13 / 250 | **212 / 13 / 250** |
+| Testes | 99 + 2 | **100 + 2** |
 
-## Extra: nomes das funções (Android)
-Com o `libmain.so` da versão Android (1.2.92, fora do repositório), `re/tools/match_android_symbols.py` deu nome
-a 1192 funções do `Breach.exe` por quatro sinais conferidos entre si (Lua, vftable, strings, vizinhos no grafo),
-mais 38 leituras manuais. 332 dos endereços citados no projeto agora têm nome — ex.: `0x005ABA90` é
-`BoardSpace::DamageSpace`, `0x004CDE60` é `GridSearchable::CalculateDijkstraMap`. Tabela:
-`re/evidencias/nomes_android_resumo.md`.
+## Ainda não provado
+- Sem o EXE 1.2.88, deslocamento igual prova tamanho igual, não bytes iguais. Uma mudança do mesmo tamanho passaria despercebida.
+- Das 52 regiões, só foram lidas as que contêm rotinas citadas nas regras (`Pawn::Push`, `Pawn::GetType`, `ActiveLua`, `GetPawnCount`). Em `Pawn::Push`, o código muda depois de armar o cronômetro de 0,4 s; o motivo não foi identificado, porque não há os bytes antigos, mas a versão atual segue igual à do Android.
+- Provas em `re/evidencias/rotinas_*.md` e endereços nos comentários do Rust continuam na 1.2.88; a tradução está em `v1.2.93/migracao_enderecos.csv`.
+- Nomes provisórios no código (`Tile::Push`, `byte_0x91e`…) ainda não foram trocados pelos reais.
 
 ## Próximo
-Ler a atualização dos projéteis (tempo de voo) e das animações de movimento; efeito de chegada completo
-(0x0059C5C0); depois o turno inimigo (M6): preparar ataques (`q_effect`), mover e atacar.
+Etapa 13, lida direto na 1.2.93: tempo de voo dos projéteis, animações de movimento, efeito de chegada completo; depois o turno inimigo (M6). Gráficos e som (decisão 0001) já têm os arquivos necessários.

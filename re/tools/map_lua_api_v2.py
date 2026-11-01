@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inventario COMPLETO (por familia) da API Lua registrada via luabind no Breach.exe v1.2.88.
+"""Inventario COMPLETO (por familia) da API Lua registrada via luabind no Breach.exe (1.2.88 e 1.2.93).
 
 Etapa 05. Substitui o catalogo de 5 padroes estritos da Etapa 04 (que continua
 reproduzido como subconjunto e verificado por tools/check_inventory_v2.py).
@@ -14,14 +14,14 @@ Metodo (somente leitura do EXE):
     recuperar, em cada chamada, nome (argumento ou imediato embutido), ponteiro de
     membro (alvo + ajuste de this) e offset de propriedade.
  3. Atribui cada registro a classe Lua aberta mais recentemente (`class_<T>("Nome")`,
-    chamada ao construtor base 0x006E3F10).
+    chamada ao construtor base).
  4. Localiza funcoes globais (luabind::def em escopo de modulo):
     function_registration com nome/funcao imediatos ou passados por wrapper.
  5. Resolve thunks `vcall` (mov eax,[ecx]; jmp [eax+N]) pela vftable RTTI da classe
     concreta no subobjeto indicado pelo ajuste de this.
 
 Dependencia: `pip install capstone`. Demangling opcional com `llvm-undname` no PATH.
-Uso: python tools/map_lua_api_v2.py /caminho/Breach.exe evidencias/
+Uso: python tools/map_lua_api_v2.py /caminho/Breach.exe evidencias/v1.2.93/
 """
 from __future__ import annotations
 import collections, csv, hashlib, json, re, shutil, struct, subprocess, sys
@@ -32,11 +32,31 @@ try:
 except ImportError:  # pragma: no cover
     raise SystemExit('Instale capstone: pip install capstone')
 
-EXE_SHA256 = '4bd9e4cc43140244d7def56d440346be836efc5b072dd3e8b0dda3ff31fc84b0'
-OPERATOR_NEW = 0x00753C6F          # chamado por todos os construtores de registro
-CLASS_BASE_CTOR = 0x006E3F10
-OBJ_ASSIGN_POINT = 0x00450910     # luabind::object::operator=(Point const&) (instanciacao)
-OBJ_ASSIGN_COLOR = 0x004509E0     # luabind::object::operator=(GL_Color const&)       # luabind::detail::class_base::class_base(const char*)
+EXE_SHA256 = '4bd9e4cc43140244d7def56d440346be836efc5b072dd3e8b0dda3ff31fc84b0'  # 1.2.88
+EXE_SHA256_1293 = '0f5bdc9098135d4c77ce5bd96614addf371896523ffeaea045b9f9a0d872b910'
+
+# Enderecos fixos de cada versao. Na 1.2.93 foram achados por estrutura, sem partir dos da 1.2.88:
+# ver re/evidencias/v1.2.93/LEIA-ME.md.
+PROFILES = {
+    EXE_SHA256: dict(
+        version='1.2.88', status_file='rust_status_1.2.88.json',
+        operator_new=0x00753C6F,        # chamado por todos os construtores de registro
+        class_base_ctor=0x006E3F10,     # luabind::detail::class_base::class_base(const char*)
+        obj_index=0x00450870,           # operator[](const char*)
+        assign={0x004508B0: 'integer_ref', 0x00450910: 'Point', 0x004509E0: 'GL_Color',
+                0x006802F0: 'integer_local', 0x00680B90: 'unsigned_local', 0x00680D00: 'boolean_local',
+                0x00680AE0: 'object_pointer'},
+        lua_api={0x007D253C: 'integer', 0x007D2538: 'number', 0x007D2554: 'boolean', 0x007D2544: 'string'}),
+    EXE_SHA256_1293: dict(
+        version='1.2.93', status_file='rust_status.json',
+        operator_new=0x00754AD5,
+        class_base_ctor=0x006E4DB0,
+        obj_index=0x00450870,
+        assign={0x004508B0: 'integer_ref', 0x00450910: 'Point', 0x004509E0: 'GL_Color',
+                0x006811B0: 'integer_local', 0x00681A50: 'unsigned_local', 0x00681BC0: 'boolean_local',
+                0x006819A0: 'object_pointer'},
+        lua_api={0x007D3544: 'integer', 0x007D3540: 'number', 0x007D355C: 'boolean', 0x007D354C: 'string'}),
+}
 VCALL_RE = re.compile(r'^mov eax, dword ptr \[ecx\]$')
 
 # Alvos com semantica Rust escrita E testada com cargo (etapas 01R-05).
@@ -49,9 +69,6 @@ RUST_DONE = {
     ('Board', 'IsEdge', 0x0056FB20),
 }
 RUST_PARTIAL = {('Board', 'GetPawnTeam', 0x00568950)}
-# Preenchido pela Etapa 05 (ver src/board_occupancy.rs). Mantido em arquivo
-# separado para o diff entre etapas ficar evidente.
-ETAPA05_FILE = Path(__file__).with_name('rust_status.json')
 
 
 class PE:
@@ -108,6 +125,7 @@ class Analyzer:
     def __init__(self, data: bytes):
         self.pe = PE(data)
         self.d = data
+        self.profile = PROFILES[hashlib.sha256(data).hexdigest()]
         self.md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
         t = self.pe.text
         self.o0, self.o1 = t[3], t[3] + t[2]
@@ -187,7 +205,7 @@ class Analyzer:
                 continue
             body = self.d[self.pe.off(fs):self.pe.off(va)]
             if not any(
-                    (self.pe.va(self.pe.off(fs) + c.start()) + 5 + struct.unpack('<i', c.group(1))[0]) & 0xFFFFFFFF == OPERATOR_NEW
+                    (self.pe.va(self.pe.off(fs) + c.start()) + 5 + struct.unpack('<i', c.group(1))[0]) & 0xFFFFFFFF == self.profile['operator_new']
                     for c in re.finditer(rb'\xe8(.{4})', body, re.S)):
                 continue
             k = None
@@ -210,7 +228,7 @@ class Analyzer:
 
     def find_class_wrappers(self):
         out = {}
-        for c in self.calls.get(CLASS_BASE_CTOR, []):
+        for c in self.calls.get(self.profile['class_base_ctor'], []):
             o = self.pe.off(c)
             mm = list(re.finditer(rb'\x68(.{4})\x8b\xc8', self.d[o - 0x14:o], re.S))
             if not mm:
@@ -319,18 +337,17 @@ class Analyzer:
         """`luabind::globals(L)["NOME"] = valor`.
 
         Formas encontradas (todas em .text, somente leitura):
-          A) operator[](const char*) 0x00450870 com nome empilhado, seguido de lua_pushinteger(imm) embutido;
-          B) operator[] + object::operator=(int const&)      0x004508B0  (valor = int em .rdata/.data)
-          C) operator[] + object::operator=(Point const&)    0x00450910  (valor = 2 int)
-          D) operator[] + object::operator=(GL_Color const&) 0x004509E0  (valor = 4 float)
-          E) operator[] + operator=(int local)               0x006802F0  (valor = ultimo `mov [ebp+d],imm`)
-        operator[] pode ser 0x00450870 (nome como argumento) ou uma instancia com o nome embutido.
-        Leituras (`globals["ANIMS"]` sem atribuicao) ficam como value_type='read_or_unknown'."""
-        OBJ_INDEX = 0x00450870
-        ASSIGN = {0x004508B0: 'integer_ref', OBJ_ASSIGN_POINT: 'Point', OBJ_ASSIGN_COLOR: 'GL_Color',
-                  0x006802F0: 'integer_local', 0x00680B90: 'unsigned_local', 0x00680D00: 'boolean_local',
-                  0x00680AE0: 'object_pointer'}
-        API = {0x007D253C: 'integer', 0x007D2538: 'number', 0x007D2554: 'boolean', 0x007D2544: 'string'}
+          A) operator[](const char*) com nome empilhado, seguido de lua_pushinteger(imm) embutido;
+          B) operator[] + object::operator=(int const&)      (valor = int em .rdata/.data)
+          C) operator[] + object::operator=(Point const&)    (valor = 2 int)
+          D) operator[] + object::operator=(GL_Color const&) (valor = 4 float)
+          E) operator[] + operator=(int local)               (valor = ultimo `mov [ebp+d],imm`)
+        operator[] pode receber o nome como argumento ou ser uma instancia com o nome embutido.
+        Leituras (`globals["ANIMS"]` sem atribuicao) ficam como value_type='read_or_unknown'.
+        Os enderecos de cada forma estao em PROFILES."""
+        OBJ_INDEX = self.profile['obj_index']
+        ASSIGN = self.profile['assign']
+        API = self.profile['lua_api']
 
         def pushed_name(c):
             o = self.pe.off(c)
@@ -396,7 +413,7 @@ class Analyzer:
                 vt = {'integer_ref': 'integer', 'integer_local': 'integer', 'unsigned_local': 'integer',
                       'boolean_local': 'boolean', 'object_pointer': 'object'}.get(kind, kind)
                 out[pva] = dict(name=name, call_va=pva, value_type=vt if value is not None else 'unresolved', value=value)
-        # Forma A (e leituras): chamadas a 0x00450870 ainda nao vistas
+        # Forma A (e leituras): chamadas a operator[] ainda nao vistas
         cs = sorted(self.calls.get(OBJ_INDEX, []))
         for i, c in enumerate(cs):
             if c in out:
@@ -497,18 +514,24 @@ def main():
         raise SystemExit('Uso: map_lua_api_v2.py Breach.exe diretorio_saida')
     data = Path(sys.argv[1]).read_bytes()
     sha = hashlib.sha256(data).hexdigest()
-    if sha != EXE_SHA256:
+    if sha not in PROFILES:
         raise SystemExit('SHA256 inesperado: ' + sha)
     dest = Path(sys.argv[2]); dest.mkdir(parents=True, exist_ok=True)
     an = Analyzer(data)
     rows, classes, missed, regs = an.build()
-    extra = json.loads(ETAPA05_FILE.read_text(encoding='utf-8')) if ETAPA05_FILE.exists() else {}
+    # Mantido em arquivo separado para o diff entre etapas ficar evidente.
+    status_file = Path(__file__).with_name(an.profile['status_file'])
+    extra = json.loads(status_file.read_text(encoding='utf-8')) if status_file.exists() else {}
     new_done = {(a, b, int(c, 16)) for a, b, c in extra.get('done', [])}
-    done = set(RUST_DONE) | new_done
-    partial = (set(RUST_PARTIAL) - new_done) | {(a, b, int(c, 16)) for a, b, c in extra.get('partial', [])}
+    old = sha == EXE_SHA256  # RUST_DONE/RUST_PARTIAL usam enderecos da 1.2.88
+    done = (set(RUST_DONE) if old else set()) | new_done
+    partial = ((set(RUST_PARTIAL) if old else set()) - new_done) | {(a, b, int(c, 16)) for a, b, c in extra.get('partial', [])}
     done -= partial
     trivial = {int(v, 16) for v in extra.get('trivial_accessors', [])}
     dem = demangle_all(sorted({r['rtti'] for r in rows if r['rtti']}))
+    if not dem:  # sem llvm-undname: o mesmo nome RTTI tem a assinatura ja guardada no inventario da 1.2.88
+        with Path(__file__).parents[1].joinpath('evidencias', 'lua_api_v2_all.csv').open(encoding='utf-8') as f:
+            dem = {r['cpp_registration_rtti']: r['cpp_signature_demangled'] for r in csv.DictReader(f)}
     out = []
     for r in rows:
         cpp = cpp_class_of(r['rtti'])
@@ -585,7 +608,7 @@ def main():
                   'achados por tipagem RTTI + emulacao de pilha. Fora do escopo: metametodos internos do '
                   'luabind e tabelas/constantes Lua criadas pelos proprios scripts.'),
     }
-    (dest / 'lua_api_v2_progress.json').write_text(json.dumps(stats, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    (dest / 'lua_api_v2_progress.json').write_text(json.dumps(stats, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
     print(json.dumps(stats, ensure_ascii=False, indent=2))
 
 

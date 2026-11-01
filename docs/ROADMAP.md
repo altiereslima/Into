@@ -12,11 +12,12 @@ Cada marco tem um critério verificável. ✅ = feito, ▶ = próximo.
 | M5 | Armas e dano | `SkillEffect`/`SpaceDamage` aplicados ao tabuleiro (empurrão, fogo, fumaça, ácido, prédios) | ▶ 559/559 armas geram e **aplicam** seus efeitos, com fila e atrasos do motor; faltam tempo de voo, rede elétrica, itens |
 | M6 | Turno inimigo | IA (scripts) + pathfinding nativo (`GetPath`, `GetReachable`...) idênticos | ▶ GetReachable/GetPath/GetSimpleReachable/GetSimplePath prontos |
 | M7 | Simulador sem gráficos | Uma missão completa jogada por script de teste, resultado comparável ao original | |
-| M8 | Assets + render + som | `itb-assets` extrai localmente PNG/fontes/sons (sem versionar nada do jogo); motor lê do `resource.dat`/`.bank` ou da pasta extraída; desenhar tabuleiro/unidades/UI (SDL2); som sem FMOD — ver [decisão 0001](decisoes/0001-recursos-graficos-e-som.md) | decidido; começa após M6, no PC do usuário |
+| M8 | Assets + render + som | `itb-assets` extrai localmente PNG/fontes/sons (sem versionar nada do jogo); motor lê do `resource.dat`/`.bank` ou da pasta extraída; desenhar tabuleiro/unidades/UI (SDL2); som sem FMOD — ver [decisão 0001](decisoes/0001-recursos-graficos-e-som.md) | decidido; arquivos disponíveis na 1.2.93; ainda não começou |
 | M9 | Jogável | Menu, hangar, ilhas, missões, salvar/carregar | |
 
 ## Fila imediata
 
+O projeto já foi migrado para a 1.2.93 (ver `CHECKPOINT.md`).
 Etapa 13: tempo de voo dos projéteis, efeito de chegada completo e início do turno inimigo (M6).
 Antes disso, a fila vinha do M3:
 ler, para cada callback de `re/evidencias/engine_callbacks.csv`, como o motor o chama, começando por

@@ -37,3 +37,5 @@ pc_va,nome,confianca,evidencia
 0x0062F2F0,Pawn::IsForceField(),media,idem; usada por IsShield
 0x0063C100,Pawn::IsArmor(),media,blindagem (−1 de dano)
 0x005754D0,Board::StackEffect(SkillEffect; float),media,o executor põe o resto da lista na fila com o cronômetro
+0x00675C70,ActiveLua (slot 1: SetPawn/SetBoard/SetGame com nil),alta,o sinal de texto do Android errou aqui; o código da 1.2.93 grava só esses três
+0x00675D00,ActiveLua::GetScripts(),alta,slot 2: scripts/scripts.lua e GetScripts; casa com 0x00676B80 na 1.2.93

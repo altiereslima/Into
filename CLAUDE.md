@@ -10,14 +10,19 @@ Leia este arquivo inteiro antes de começar. Depois leia `CHECKPOINT.md` (estado
 ## O projeto
 Reimplementação do motor do **Into the Breach** em Rust que executa os **scripts Lua originais** da
 instalação do usuário (modelo OpenMW/OpenRCT2). As regras são reconstruídas lendo o assembly do
-`Breach.exe` (PC, v1.2.88 hoje; 1.2.92/93 a caminho, igual à versão Netflix).
+`Breach.exe` (PC, **v1.2.93**, igual à versão Netflix). As provas antigas foram lidas na 1.2.88.
+
+**Endereços:** os `0x…` em `re/evidencias/rotinas_*.md` e nos comentários do Rust são da 1.2.88. Para achar um deles
+na 1.2.93, consulte `re/evidencias/v1.2.93/migracao_enderecos.csv`. O que for lido daqui em diante é da 1.2.93: diga a
+versão junto do endereço e prefira o nome real. Em `CHECKPOINT.md`, `docs/*.md`, `crates/` e `re/evidencias/*.md`,
+`migrar_enderecos.py` toma todo `0x00XXXXXX` como endereço da 1.2.88; escreva os novos sem os zeros (`0x62DAB0`).
 
 - `crates/itb-core`: regras em Rust puro (tabuleiro, ocupação, pathing/pathfinding, dano, aplicação de
   efeitos, executor com relógio).
 - `crates/itb-lua`: host Lua 5.1 (mlua) que expõe a API nativa aos scripts; binários `itb-boot` e `itb-weapon`.
 - `re/tools`: ferramentas Python de engenharia reversa (só leitura dos binários).
-- `re/evidencias`: inventário da API (`lua_api_v2_all.csv`), provas de cada rotina (`rotinas_*.md`),
-  nomes vindos do Android (`nomes_android*.csv`, `nomes_android_resumo.md`).
+- `re/evidencias`: provas de cada rotina (`rotinas_*.md`), inventário e nomes da 1.2.88.
+- `re/evidencias/v1.2.93`: inventário atual (`lua_api_v2_all.csv`), nomes, tabela de migração e `LEIA-ME.md`.
 
 ## Regras invioláveis
 1. **Nenhum arquivo do jogo no repositório**: EXE, DLLs, `scripts/`, `maps/`, `resources/`, `.bank`,
@@ -40,20 +45,20 @@ instalação do usuário (modelo OpenMW/OpenRCT2). As regras são reconstruídas
 - Boot e cobertura: `cargo run -p itb-lua --bin itb-boot -- <jogo> --cobertura re/evidencias/cobertura_api.tsv`.
 - Armas: `cargo run -p itb-lua --bin itb-weapon -- <jogo> --todas` (varredura) ou `... <jogo> Prime_Punchmech 5 3 5 4`
   (uma arma, com linha do tempo e diferença do tabuleiro).
-- Inventário: `python re/tools/map_lua_api_v2.py <Breach.exe> re/evidencias/` e
+- Inventário: `python re/tools/map_lua_api_v2.py <Breach.exe> re/evidencias/v1.2.93/` e
   `python re/tools/gen_api_manifest.py` (o CI confere que `api_manifest.rs` está atualizado).
+- Conferência na 1.2.93: `python re/tools/conferir_1293.py <Breach.exe>`.
 - Ao reconstruir uma rotina: atualizar `re/tools/rust_status.json` (done/partial), regenerar inventário,
   `clippy` sem avisos, testes novos, `rotinas_*.md`, `CHECKPOINT.md` (mover o anterior para `docs/historico/`),
   relatórios em `docs/relatorios/`.
 - Assembly: `re/tools/asm/` (ann.py, xdisp.py, decomp.py; variável `ITB_EXE`).
-- Nomes: `python re/tools/match_android_symbols.py <Breach.exe> <libmain.so> re/evidencias/` e
+- Nomes: `python re/tools/match_android_symbols.py <Breach.exe> <libmain.so> re/evidencias/v1.2.93/` e
   `python re/tools/gen_nomes_resumo.py`. Prefira o **nome real** (`Pawn::Damage`) ao endereço nos textos novos.
 
 ## Fila de trabalho (ver CHECKPOINT.md)
-1. Quando chegar a versão 1.2.92/93 do PC: conferir que bate com o Android; migrar endereços pelos nomes;
-   reler as rotinas que mudaram; refazer boot, varredura e testes; trocar nomes provisórios por reais.
+1. Etapa 13, lida direto na 1.2.93: tempo de voo dos projéteis, efeito de chegada completo
+   (`BoardSpace::CheckTerrainDangers`), turno inimigo (M6).
 2. Gráficos e som (decisão 0001): `itb-assets` lê `resource.dat` e `.bank`, extrai localmente com índice;
    som sem depender do FMOD (só 20 funções da API são usadas: ver `re/evidencias/fontes_externas/vita_loader.md`).
-3. Etapa 13: tempo de voo dos projéteis, efeito de chegada completo (0x0059C5C0
-   `BoardSpace::CheckTerrainDangers`), turno inimigo (M6).
+3. Trocar os nomes provisórios do código pelos reais (`Tile::Push`, `byte_0x91e`...).
 4. Os idiomas são tratados por outra IA, fora deste trabalho.

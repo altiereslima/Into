@@ -1,150 +1,150 @@
 {
-  "_doc": "Alvos (classe Lua ou '' para funcao global, nome, VA resolvido) com semantica Rust TESTADA. 'trivial_accessors' = leitura/escrita direta de campo, contados a parte.",
+  "_doc": "Alvos (classe Lua ou '' para funcao global, nome, VA resolvido) com semantica Rust TESTADA. 'trivial_accessors' = leitura/escrita direta de campo, contados a parte. Enderecos da 1.2.93; a versao 1.2.88 esta em rust_status_1.2.88.json.",
   "done": [
     [
       "Board",
       "IsPawnSpace",
-      "0x0056EE50"
+      "0x0056FCC0"
     ],
     [
       "Board",
       "IsPawnSpace",
-      "0x0056EE70"
+      "0x0056FCE0"
     ],
     [
       "Board",
       "GetPawn",
-      "0x00570E00"
+      "0x00571C70"
     ],
     [
       "Board",
       "GetPawn",
-      "0x00567750"
+      "0x005685C0"
     ],
     [
       "Board",
       "GetPawn",
-      "0x00567700"
+      "0x00568570"
     ],
     [
       "Board",
       "IsPawnAlive",
-      "0x00567840"
+      "0x005686B0"
     ],
     [
       "Board",
       "GetPawnSpace",
-      "0x00567970"
+      "0x005687E0"
     ],
     [
       "Board",
       "IsBlocked",
-      "0x0055F030"
+      "0x0055FEB0"
     ],
     [
       "Board",
       "GetPawnTeam",
-      "0x00568950"
+      "0x005697C0"
     ],
     [
       "BoardPawn",
       "GetHealth",
-      "0x004F6410"
+      "0x004F7300"
     ],
     [
       "BoardPawn",
       "IsDead",
-      "0x00629530"
+      "0x0062A3E0"
     ],
     [
       "BoardPawn",
       "IsDamaged",
-      "0x00638D50"
+      "0x00639BF0"
     ],
     [
       "BoardPawn",
       "GetTeam",
-      "0x00639FC0"
+      "0x0063AE60"
     ],
     [
       "BoardPawn",
       "SetTeam",
-      "0x0062F2D0"
+      "0x00630170"
     ],
     [
       "BoardPawn",
       "IsPlayer",
-      "0x0062F840"
+      "0x006306E0"
     ],
     [
       "BoardPawn",
       "IsEnemy",
-      "0x0062F870"
+      "0x00630710"
     ],
     [
       "BoardPawn",
       "GetId",
-      "0x006370D0"
+      "0x00637F70"
     ],
     [
       "BoardPawn",
       "IsMech",
-      "0x00639040"
+      "0x00639EE0"
     ],
     [
       "BoardPawn",
       "SetMech",
-      "0x00639050"
+      "0x00639EF0"
     ],
     [
       "BoardPawn",
       "GetSpace",
-      "0x00635FA0"
+      "0x00636E40"
     ],
     [
       "",
       "GetDirection",
-      "0x004B2340"
+      "0x004B3100"
     ],
     [
       "",
       "random_int",
-      "0x004DFD50"
+      "0x004E0C10"
     ],
     [
       "",
       "random_int",
-      "0x004DFD70"
+      "0x004E0C30"
     ],
     [
       "",
       "random_bool",
-      "0x004DFDE0"
+      "0x004E0CA0"
     ],
     [
       "",
       "random_bool",
-      "0x004DFE00"
+      "0x004E0CC0"
     ],
     [
       "",
       "ScreenSizeX",
-      "0x004B2560"
+      "0x004B3320"
     ],
     [
       "",
       "ScreenSizeY",
-      "0x004B25F0"
+      "0x004B33B0"
     ],
     [
       "",
       "GetDefaultScale",
-      "0x004D47F0"
+      "0x004D55C0"
     ],
     [
       "",
       "GetBoardScale",
-      "0x004D4640"
+      "0x004D5410"
     ],
     [
       "Point",
@@ -169,17 +169,17 @@
     [
       "Point",
       "Manhattan",
-      "0x004BC350"
+      "0x004BD130"
     ],
     [
       "Point",
       "GetString",
-      "0x004BC380"
+      "0x004BD160"
     ],
     [
       "Point",
       "GetLuaString",
-      "0x004BC510"
+      "0x004BD2F0"
     ],
     [
       "GL_Color",
@@ -194,616 +194,616 @@
     [
       "PointList",
       "size",
-      "0x00675740"
+      "0x006765C0"
     ],
     [
       "PointList",
       "index",
-      "0x00675750"
+      "0x006765D0"
     ],
     [
       "PointList",
       "push_back",
-      "0x006528D0"
+      "0x00653750"
     ],
     [
       "PointList",
       "back",
-      "0x00675770"
+      "0x006765F0"
     ],
     [
       "PointList",
       "erase",
-      "0x00656520"
+      "0x006573A0"
     ],
     [
       "PointList",
       "empty",
-      "0x00652920"
+      "0x006537A0"
     ],
     [
       "IntList",
       "size",
-      "0x00675710"
+      "0x00676590"
     ],
     [
       "IntList",
       "index",
-      "0x00675720"
+      "0x006765A0"
     ],
     [
       "IntList",
       "push_back",
-      "0x0055D8E0"
+      "0x0055E760"
     ],
     [
       "IntList",
       "back",
-      "0x00675730"
+      "0x006765B0"
     ],
     [
       "IntList",
       "erase",
-      "0x00656550"
+      "0x006573D0"
     ],
     [
       "IntList",
       "empty",
-      "0x00652920"
+      "0x006537A0"
     ],
     [
       "Board",
       "IsCracked",
-      "0x00569920"
+      "0x0056A790"
     ],
     [
       "Board",
       "GetSize",
-      "0x0055DC10"
+      "0x0055EA90"
     ],
     [
       "Board",
       "IsValid",
-      "0x00561370"
+      "0x005621F0"
     ],
     [
       "Board",
       "GetTerrain",
-      "0x00503B60"
+      "0x00504A50"
     ],
     [
       "Board",
       "IsBuilding",
-      "0x00567D00"
+      "0x00568B70"
     ],
     [
       "Board",
       "GetPawnTeam",
-      "0x005689C0"
+      "0x00569830"
     ],
     [
       "Board",
       "IsPawnTeam",
-      "0x0056ED50"
+      "0x0056FBC0"
     ],
     [
       "Board",
       "IsPawnTeam",
-      "0x0056EDA0"
+      "0x0056FC10"
     ],
     [
       "Board",
       "IsFire",
-      "0x00567C50"
+      "0x00568AC0"
     ],
     [
       "Board",
       "IsSmoke",
-      "0x005653E0"
+      "0x00566260"
     ],
     [
       "Board",
       "IsVines",
-      "0x005653C0"
+      "0x00566240"
     ],
     [
       "Board",
       "IsAcid",
-      "0x00567CB0"
+      "0x00568B20"
     ],
     [
       "Board",
       "IsEdge",
-      "0x0056FB20"
+      "0x00570990"
     ],
     [
       "SpaceDamage",
       "IsMovement",
-      "0x00655F10"
+      "0x00656D90"
     ],
     [
       "SpaceDamage",
       "MoveStart",
-      "0x00655F40"
+      "0x00656DC0"
     ],
     [
       "SpaceDamage",
       "MoveEnd",
-      "0x00655F80"
+      "0x00656E00"
     ],
     [
       "DamageList",
       "size",
-      "0x006528E0"
+      "0x00653760"
     ],
     [
       "DamageList",
       "index",
-      "0x00652900"
+      "0x00653780"
     ],
     [
       "DamageList",
       "push_back",
-      "0x0066E4E0"
+      "0x0066F370"
     ],
     [
       "DamageList",
       "back",
-      "0x00675790"
+      "0x00676610"
     ],
     [
       "DamageList",
       "empty",
-      "0x00652920"
+      "0x006537A0"
     ],
     [
       "SkillEffect",
       "AddDamage",
-      "0x00652A50"
+      "0x006538D0"
     ],
     [
       "SkillEffect",
       "AddAnimation",
-      "0x00654310"
+      "0x00655190"
     ],
     [
       "SkillEffect",
       "AddAnimation",
-      "0x00654400"
+      "0x00655280"
     ],
     [
       "SkillEffect",
       "AddQueuedDamage",
-      "0x00652CB0"
+      "0x00653B30"
     ],
     [
       "SkillEffect",
       "AddMove",
-      "0x00653AE0"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedScript",
-      "0x00654580"
-    ],
-    [
-      "SkillEffect",
-      "AddScript",
-      "0x00654220"
-    ],
-    [
-      "SkillEffect",
-      "AddSound",
-      "0x00654670"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedMove",
-      "0x006549F0"
-    ],
-    [
-      "SkillEffect",
-      "GetDamageCount",
-      "0x006528E0"
-    ],
-    [
-      "SkillEffect",
-      "GetQueuedCount",
-      "0x00652E30"
-    ],
-    [
-      "SkillEffect",
-      "AddDelay",
-      "0x00653120"
-    ],
-    [
-      "SkillEffect",
-      "GetDamage",
-      "0x00652900"
-    ],
-    [
-      "SkillEffect",
-      "GetQueuedDamage",
-      "0x00653100"
-    ],
-    [
-      "SkillEffect",
-      "AddProjectile",
-      "0x006531D0"
-    ],
-    [
-      "SkillEffect",
-      "AddProjectile",
-      "0x006532A0"
-    ],
-    [
-      "SkillEffect",
-      "AddProjectile",
-      "0x00653370"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedProjectile",
-      "0x00653740"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedArtillery",
-      "0x00653920"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedProjectile",
-      "0x00653850"
-    ],
-    [
-      "SkillEffect",
-      "AddArtillery",
-      "0x00653640"
-    ],
-    [
-      "SkillEffect",
-      "AddArtillery",
-      "0x006534A0"
-    ],
-    [
-      "SkillEffect",
-      "AddArtillery",
-      "0x00653570"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedArtillery",
-      "0x00653A10"
-    ],
-    [
-      "SkillEffect",
-      "AddMelee",
-      "0x00654B50"
-    ],
-    [
-      "SkillEffect",
-      "AddMelee",
-      "0x00654AE0"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedMelee",
-      "0x00654C70"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedMelee",
-      "0x00654C00"
-    ],
-    [
-      "UIntList",
-      "size",
-      "0x00675710"
-    ],
-    [
-      "UIntList",
-      "index",
-      "0x00675720"
-    ],
-    [
-      "UIntList",
-      "push_back",
-      "0x00656FD0"
-    ],
-    [
-      "UIntList",
-      "back",
-      "0x00675730"
-    ],
-    [
-      "Board",
-      "GetSimpleReachable",
-      "0x00573160"
-    ],
-    [
-      "Board",
-      "GetSimplePath",
-      "0x005731F0"
-    ],
-    [
-      "SkillEffect",
-      "AddCharge",
-      "0x00653E90"
-    ],
-    [
-      "SkillEffect",
-      "AddBurst",
-      "0x00652E50"
-    ],
-    [
-      "SkillEffect",
-      "AddQueuedCharge",
       "0x00654960"
     ],
     [
       "SkillEffect",
+      "AddQueuedScript",
+      "0x00655400"
+    ],
+    [
+      "SkillEffect",
+      "AddScript",
+      "0x006550A0"
+    ],
+    [
+      "SkillEffect",
+      "AddSound",
+      "0x006554F0"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedMove",
+      "0x00655870"
+    ],
+    [
+      "SkillEffect",
+      "GetDamageCount",
+      "0x00653760"
+    ],
+    [
+      "SkillEffect",
+      "GetQueuedCount",
+      "0x00653CB0"
+    ],
+    [
+      "SkillEffect",
+      "AddDelay",
+      "0x00653FA0"
+    ],
+    [
+      "SkillEffect",
+      "GetDamage",
+      "0x00653780"
+    ],
+    [
+      "SkillEffect",
+      "GetQueuedDamage",
+      "0x00653F80"
+    ],
+    [
+      "SkillEffect",
+      "AddProjectile",
+      "0x00654050"
+    ],
+    [
+      "SkillEffect",
+      "AddProjectile",
+      "0x00654120"
+    ],
+    [
+      "SkillEffect",
+      "AddProjectile",
+      "0x006541F0"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedProjectile",
+      "0x006545C0"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedArtillery",
+      "0x006547A0"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedProjectile",
+      "0x006546D0"
+    ],
+    [
+      "SkillEffect",
+      "AddArtillery",
+      "0x006544C0"
+    ],
+    [
+      "SkillEffect",
+      "AddArtillery",
+      "0x00654320"
+    ],
+    [
+      "SkillEffect",
+      "AddArtillery",
+      "0x006543F0"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedArtillery",
+      "0x00654890"
+    ],
+    [
+      "SkillEffect",
+      "AddMelee",
+      "0x006559D0"
+    ],
+    [
+      "SkillEffect",
+      "AddMelee",
+      "0x00655960"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedMelee",
+      "0x00655AF0"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedMelee",
+      "0x00655A80"
+    ],
+    [
+      "UIntList",
+      "size",
+      "0x00676590"
+    ],
+    [
+      "UIntList",
+      "index",
+      "0x006765A0"
+    ],
+    [
+      "UIntList",
+      "push_back",
+      "0x00657E50"
+    ],
+    [
+      "UIntList",
+      "back",
+      "0x006765B0"
+    ],
+    [
+      "Board",
+      "GetSimpleReachable",
+      "0x00573FD0"
+    ],
+    [
+      "Board",
+      "GetSimplePath",
+      "0x00574060"
+    ],
+    [
+      "SkillEffect",
+      "AddCharge",
+      "0x00654D10"
+    ],
+    [
+      "SkillEffect",
+      "AddBurst",
+      "0x00653CD0"
+    ],
+    [
+      "SkillEffect",
+      "AddQueuedCharge",
+      "0x006557E0"
+    ],
+    [
+      "SkillEffect",
       "AddLeap",
-      "0x00653BD0"
+      "0x00654A50"
     ],
     [
       "SkillEffect",
       "AddBurrow",
-      "0x00653E00"
+      "0x00654C80"
     ],
     [
       "SkillEffect",
       "AddGrapple",
-      "0x00652D30"
+      "0x00653BB0"
     ],
     [
       "SkillEffect",
       "AddBounce",
-      "0x00654EC0"
+      "0x00655D40"
     ],
     [
       "SkillEffect",
       "AddTeleport",
-      "0x00654760"
+      "0x006555E0"
     ],
     [
       "SkillEffect",
       "AddBoardShake",
-      "0x00654D20"
+      "0x00655BA0"
     ],
     [
       "BoardPawn",
       "IsPowered",
-      "0x00637370"
+      "0x00638210"
     ],
     [
       "BoardPawn",
       "IsInfected",
-      "0x006372F0"
+      "0x00638190"
     ],
     [
       "BoardPawn",
       "GetPathProf",
-      "0x0062F700"
+      "0x006305A0"
     ],
     [
       "BoardPawn",
       "IsGuarding",
-      "0x0063A250"
+      "0x0063B0F0"
     ],
     [
       "BoardPawn",
       "IsAcid",
-      "0x006398D0"
+      "0x0063A770"
     ],
     [
       "BoardPawn",
       "IsFire",
-      "0x006398E0"
+      "0x0063A780"
     ],
     [
       "BoardPawn",
       "IsFrozen",
-      "0x00636B70"
+      "0x00637A10"
     ],
     [
       "",
       "SoundEffect",
-      "0x00656480"
+      "0x00657300"
     ],
     [
       "Board",
       "GetReachable",
-      "0x00573280"
+      "0x005740F0"
     ],
     [
       "Board",
       "GetPath",
-      "0x005733D0"
+      "0x00574240"
     ],
     [
       "Board",
       "IsTerrain",
-      "0x0055F0D0"
+      "0x0055FF50"
     ],
     [
       "Board",
       "IsPod",
-      "0x00571680"
+      "0x005724F0"
     ],
     [
       "Board",
       "IsItem",
-      "0x005716F0"
+      "0x00572560"
     ],
     [
       "Board",
       "IsDangerous",
-      "0x005717A0"
+      "0x00572610"
     ],
     [
       "Board",
       "IsSpawning",
-      "0x0056D5B0"
+      "0x0056E420"
     ],
     [
       "Board",
       "IsCrackable",
-      "0x00568860"
+      "0x005696D0"
     ],
     [
       "BoardPawn",
       "IsGrappled",
-      "0x00631490"
+      "0x00632330"
     ],
     [
       "SkillEffect",
       "AddAirstrike",
-      "0x00653F20"
+      "0x00654DA0"
     ],
     [
       "SkillEffect",
       "AddReverseAirstrike",
-      "0x00654030"
+      "0x00654EB0"
     ],
     [
       "SkillEffect",
       "AddDropper",
-      "0x00654140"
+      "0x00654FC0"
     ],
     [
       "SkillEffect",
       "AddEmitter",
-      "0x00654500"
+      "0x00655380"
     ],
     [
       "SkillEffect",
       "AddVoice",
-      "0x00652AD0"
+      "0x00653950"
     ],
     [
       "SkillEffect",
       "AddQueuedVoice",
-      "0x00652BC0"
+      "0x00653A40"
     ],
     [
       "BoardPawn",
       "GetType",
-      "0x0063F3B0"
+      "0x00640250"
     ]
   ],
   "partial": [
     [
       "BoardPawn",
       "IsCorpse",
-      "0x00629540"
+      "0x0062A3F0"
     ],
     [
       "Board",
       "IsDeadly",
-      "0x005739E0"
+      "0x00574850"
     ],
     [
       "BoardPawn",
       "IsShield",
-      "0x00633AD0"
+      "0x00634970"
     ],
     [
       "BoardPawn",
       "IsBoosted",
-      "0x006313E0"
+      "0x00632280"
     ],
     [
       "BoardPawn",
       "IsFlying",
-      "0x0063AC00"
+      "0x0063BAA0"
     ],
     [
       "BoardPawn",
       "GetMoveSpeed",
-      "0x0063A860"
+      "0x0063B700"
     ],
     [
       "BoardPawn",
       "IsTeleporter",
-      "0x0063AF60"
+      "0x0063BE00"
     ],
     [
       "BoardPawn",
       "IsJumper",
-      "0x0063AFC0"
+      "0x0063BE60"
     ],
     [
       "BoardPawn",
       "IsBurrower",
-      "0x006365D0"
+      "0x00637470"
     ],
     [
       "",
       "IsPassiveSkill",
-      "0x0065AEB0"
+      "0x0065BD20"
     ],
     [
       "Board",
       "DamageSpace",
-      "0x0055F200"
+      "0x00560080"
     ],
     [
       "Board",
       "DamageSpace",
-      "0x0055F5B0"
+      "0x00560430"
     ],
     [
       "Board",
       "AddEffect",
-      "0x0055F7B0"
+      "0x00560630"
     ],
     [
       "Board",
       "AddEffect",
-      "0x0055F970"
+      "0x005607F0"
     ]
   ],
   "trivial_accessors": [
     "0x0046C4E0",
-    "0x004F6410",
-    "0x0055D8E0",
-    "0x0055DC10",
-    "0x00629530",
-    "0x0062F2D0",
-    "0x0062F840",
-    "0x0062F870",
-    "0x00635FA0",
-    "0x00636B70",
-    "0x006370D0",
-    "0x006372F0",
-    "0x00637370",
-    "0x00638D50",
-    "0x00639040",
-    "0x00639050",
-    "0x006398D0",
-    "0x006398E0",
-    "0x00639FC0",
-    "0x0063A250",
-    "0x006528D0",
-    "0x006528E0",
-    "0x00652900",
-    "0x00652920",
-    "0x00652A50",
-    "0x00652CB0",
-    "0x00652E30",
-    "0x00653100",
-    "0x00656520",
-    "0x00656550",
-    "0x00656FD0",
-    "0x0066E4E0",
-    "0x00675710",
-    "0x00675720",
-    "0x00675730",
-    "0x00675740",
-    "0x00675750",
-    "0x00675770",
-    "0x00675790",
-    "0x0063F3B0"
+    "0x004F7300",
+    "0x0055E760",
+    "0x0055EA90",
+    "0x0062A3E0",
+    "0x00630170",
+    "0x006306E0",
+    "0x00630710",
+    "0x00636E40",
+    "0x00637A10",
+    "0x00637F70",
+    "0x00638190",
+    "0x00638210",
+    "0x00639BF0",
+    "0x00639EE0",
+    "0x00639EF0",
+    "0x0063A770",
+    "0x0063A780",
+    "0x0063AE60",
+    "0x0063B0F0",
+    "0x00653750",
+    "0x00653760",
+    "0x00653780",
+    "0x006537A0",
+    "0x006538D0",
+    "0x00653B30",
+    "0x00653CB0",
+    "0x00653F80",
+    "0x006573A0",
+    "0x006573D0",
+    "0x00657E50",
+    "0x0066F370",
+    "0x00676590",
+    "0x006765A0",
+    "0x006765B0",
+    "0x006765C0",
+    "0x006765D0",
+    "0x006765F0",
+    "0x00676610",
+    "0x00640250"
   ]
 }

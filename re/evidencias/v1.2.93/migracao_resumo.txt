@@ -1,0 +1,10 @@
+pares brutos: 3575 | enderecos com par: 2343 | ancoras apos checar a ordem: 2332
+conflitos (mesmo antigo, dois novos): 1 | fora de ordem descartados: 6 | picos descartados: 5
+assinaturas luabind diferentes: 0
+regioes em que o deslocamento muda: 52 | bytes somados: 3669
+citados no projeto: 342 | por metodo: {'manual': 38, 'interpolado': 123, 'android': 28, 'inventario': 35, 'android+inventario': 94, 'android+bytes+inventario': 21, 'bytes': 3}
+citados por confianca: {'alta': 312, 'media': 30}
+citados em regiao alterada: 16
+sem par: 0 (0 em .text)
+rust_status sem endereco novo: []
+descartados: 0x00476000->0x005BBA00(android), 0x005355F0->0x00536870(android), 0x0056E200->0x0056F400(android), 0x005E61F0->0x005E7AD0(android), 0x005E6820->0x005E7AD0(android), 0x0065B0D0->0x0065BFE0(android), 0x00551E80->0x00552CB0(android), 0x00606B50->0x006079F0(android), 0x00663E10->0x00664CA0(android), 0x0073C210->0x0073D0A0(android), 0x00771747->0x007725A9(android)

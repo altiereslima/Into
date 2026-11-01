@@ -1,10 +1,10 @@
 # Decisão 0001 — Gráficos e som: ler da instalação e extrair localmente
 
-**Data:** 2026-10-31 (revisada no mesmo dia) · **Estado:** aceita — começa quando chegar a versão 1.2.92/93 do PC, igual à da Netflix, com `resources`
+**Data:** 2026-10-31 (revisada em 2026-11-01) · **Estado:** aceita — a versão 1.2.93 do PC, com `resources`, já está disponível; a implementação não começou
 
 ## Contexto
 O motor em Rust já executa os scripts Lua originais lendo-os da instalação do usuário. Faltam gráficos
-(`resources/resource.dat`, PNGs e fontes empacotados) e som (`data/*.bank`, FMOD Studio). O usuário quer
+(`resources/resource.dat`, PNGs e fontes empacotados) e som (`resources/*.bank`, FMOD Studio). O usuário quer
 também facilitar um port futuro para consoles.
 
 ## Decisão
@@ -30,6 +30,5 @@ também facilitar um port futuro para consoles.
   passam a ser chamadas ao renderizador e ao tocador de som.
 
 ## Pendências para começar
-Usuário: abrir a tarefa no app Claude do PC, "Link to this computer" e conectar a pasta
-`Steam/steamapps/common/Into the Breach`. Primeiro passo técnico: confirmar o formato do `resource.dat`
+Primeiro passo técnico: confirmar o formato do `resource.dat`
 (provavelmente semelhante ao do FTL) e o conteúdo dos `.bank` (FSB5/Vorbis esperado).

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Gera crates/itb-lua/src/api_manifest.rs a partir do inventario extraido do EXE.
 
-Entrada: re/evidencias/lua_api_v2_all.csv, lua_api_v2_classes.csv, lua_global_values.csv
+Entrada: re/evidencias/v1.2.93/lua_api_v2_all.csv, lua_api_v2_classes.csv, lua_global_values.csv
 Saida:   crates/itb-lua/src/api_manifest.rs (codigo Rust, versionado no repositorio)
 
 O manifesto e a ESPECIFICACAO da API que o host Rust precisa oferecer aos scripts originais.
@@ -12,8 +12,8 @@ from collections import OrderedDict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-EV = ROOT / 're' / 'evidencias'
-OUT = ROOT / 'crates' / 'itb-lua' / 'src' / 'api_manifest.rs'
+EV = ROOT / 're' / 'evidencias' / 'v1.2.93'
+OUT =ROOT / 'crates' / 'itb-lua' / 'src' / 'api_manifest.rs'
 
 # Instancias globais criadas pelo motor (nome em _G -> classe Lua). PAWN_FACTORY vem de
 # lua_global_values.csv (tipo 'object'); Board/Game sao atribuidos em tempo de missao.
@@ -69,7 +69,7 @@ def main():
         consts[n] = val
 
     L = ['// @generated por re/tools/gen_api_manifest.py — NAO EDITAR A MAO.',
-         '// Fonte: inventario do Breach.exe v1.2.88 (SHA256 4bd9e4cc...84b0).',
+         '// Fonte: inventario do Breach.exe v1.2.93 (SHA256 0f5bdc90...b910).',
          '#![allow(clippy::all)]', '',
          '/// Sobrecarga nativa: (VA do corpo resolvido, assinatura C++ simplificada).',
          'pub type Overload = (&\'static str, &\'static str);', '',
@@ -99,7 +99,7 @@ def main():
     L.append('')
     L.append('/// Instancias globais do motor: (nome em _G, classe Lua).')
     L.append('pub static INSTANCES: &[(&str, &str)] = &[' + ', '.join(f'({rs(a)}, {rs(b)})' for a, b in INSTANCES) + '];')
-    OUT.write_text('\n'.join(L) + '\n', encoding='utf-8')
+    OUT.write_text('\n'.join(L) + '\n', encoding='utf-8', newline='\n')
     nm = sum(len(v) for v in methods.values())
     print(f'{OUT.relative_to(ROOT)}: {len(classes)} classes, {nm} metodos (nomes), {sum(len(v) for v in props.values())} '
           f'propriedades, {len(globals_)} funcoes globais (nomes), {len(consts)} constantes')

@@ -1,0 +1,39 @@
+va_1288,va_1293,evidencia
+0x00400000,0x00400000,ImageBase do PE
+0x00402FB0,0x00402FB0,inicializador estático: grava a tabela de direções 0x008C7818
+0x00403030,0x00403030,inicializador estático: grava a tabela de direções 0x008D09C4
+0x00598AB0,0x00599910,SpaceDamage(int); deslocamento das vizinhas e chamada em Board::PushDamage
+0x0062CD51,0x0062DC01,mov [esi+0x968] 0x3ECCCCCD em Pawn::Push; mesmo deslocamento 0x151 dentro da rotina
+0x00675C70,0x00676AF0,slot 1 da vftable de ActiveLua: SetPawn/SetBoard/SetGame com nil
+0x00675D00,0x00676B80,slot 2 da vftable de ActiveLua: scripts/scripts.lua e GetScripts
+0x00675E10,0x00676C90,slot 3 da vftable de ActiveLua: recarga
+0x00675EE0,0x00676D60,guarda GetPawn/GetBoard/GetGame; chamada pelo slot 3
+0x00675F80,0x00676E00,devolve SetPawn/SetBoard/SetGame; chamada pelo slot 3
+0x006D6E6E,0x006D7D2E,retorno do operator new em construct<StyleInfo> sem argumentos; string classic logo depois
+0x006D78E4,0x006D87A4,retorno do operator new em construct<RegionInfo> (Point; Point; int)
+0x006D79A0,0x006D8860,retorno do operator new em construct<RegionInfo> (Point)
+0x006D8A40,0x006D9900,retorno do operator new em construct<JoyRumble> sem argumentos
+0x006D8AE6,0x006D99A6,retorno do operator new em construct<JoyRumble> (float; int)
+0x00780857,0x00781687,roundf: chamada por Point::__mul
+0x0078478E,0x007855E3,rand: imul 0x343FD e add 0x269EC3
+0x007847AF,0x00785604,srand: mesma distância de 0x21 depois de rand
+0x0081CEBC,0x0081DECC,string de Point::GetString
+0x00822170,0x00823190,string de Point::GetString
+0x00822174,0x00823194,string de Point::GetString
+0x0082A130,0x0082B28C,vftable RTTI de Board no subobjeto 16
+0x0082A140,0x0082B29C,vftable RTTI de Board no subobjeto 0
+0x0082A164,0x0082B1F8,vftable RTTI de Board no subobjeto 12
+0x0082A1F8,0x0082B2C0,vftable RTTI de Pawn no subobjeto 0
+0x00836FC8,0x00838024,vftable RTTI de ActiveLua
+0x00837E1C,0x00838E70,1.01f lido pelo A* (GridSearchable::GetAstarPath)
+0x00838028,0x00839080,255.0f lido por GL_Color::Normalize
+0x0088EB4C,0x0088FB50,global float lida por ScreenSizeX e GetDefaultScale
+0x0088F10C,0x0089010C,global int lida por ScreenSizeX/Y
+0x0088F114,0x00890114,global int lida por ScreenSizeX/Y
+0x008C6800,0x008C7818,tabela de direções de GetDirection
+0x008CF84C,0x008D0864,lista global lida por Pawn::IsCorpse
+0x008CF850,0x008D0868,fim da lista global lida por Pawn::IsCorpse
+0x008CF9AC,0x008D09C4,tabela de direções lida pelo Dijkstra e pelo A*
+0x008D0DE0,0x008D1DF8,tabela de direções lida por Pawn::Push
+0x008D0E48,0x008D1E60,lista global lida por IsPassiveSkill
+0x008D0E94,0x008D1EAC,string global lida por IsPassiveSkill

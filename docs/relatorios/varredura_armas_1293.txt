@@ -1,0 +1,11 @@
+# Varredura de armas (559 encontradas nos scripts)
+sem stubs e sem erro: 559 | rodaram tocando stubs: 0 | com erro: 0
+efeitos aplicados ao tabuleiro: 559 (mudaram unidades ou geraram eventos: 411) | pânico na aplicação: 0
+
+## Stubs que mais bloqueiam armas (nº de armas)
+
+## Erros (agrupados)
+No forced end!    
+No forced end!    
+No forced end!    
+No forced end!    

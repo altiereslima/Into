@@ -1,0 +1,2456 @@
+va_1288,va_1293,delta,secao,nome,metodo,confianca,citacoes,regiao_alterada
+0x00400000,0x00400000,0x0,dados,,manual,alta,2,0
+0x00402FB0,0x00402FB0,0x0,text,,manual,alta,1,0
+0x00403030,0x00403030,0x0,text,,manual,alta,2,0
+0x00433EB0,0x00433EB0,0x0,text,ImGui::NewFrame(),android,alta,0,0
+0x004359E0,0x004359E0,0x0,text,"ImGui::BeginChild(char const*, ImVec2, bool, int)",android,alta,0,0
+0x00435BF0,0x00435BF0,0x0,text,"ImGui::Combo(char const*, int*, bool (*)(void*, int, char const**), void*, int, int)",android,alta,0,0
+0x00437450,0x00437450,0x0,text,ImGui::End(),android,alta,0,0
+0x0043AAB0,0x0043AAB0,0x0,text,"ImGui::InputFloat(char const*, float*, float, float, int)",android,alta,0,0
+0x0043F360,0x0043F360,0x0,text,"stbi_loadf_main(stbi__context*, int*, int*, int*, int)",android,alta,0,0
+0x004493D0,0x004493D0,0x0,text,,interpolado,alta,1,0
+0x00449BB0,0x00449BB0,0x0,text,luabind::cast_failed::what() const,android,alta,0,0
+0x00449D90,0x00449D90,0x0,text,luabind::error::what() const,android,alta,0,0
+0x0044AC60,0x0044AC60,0x0,text,LuaEnv::BindUniversalDefinitions(),android,alta,1,0
+0x0044C8B0,0x0044C8B0,0x0,text,,interpolado,alta,1,0
+0x0044CAC0,0x0044CAC0,0x0,text,,interpolado,alta,1,0
+0x0044CB40,0x0044CB40,0x0,text,"LuaEnv::DirectLua(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0044D1A0,0x0044D1A0,0x0,text,LuaEnv::RefreshScripts(),android,alta,2,0
+0x0044D2E0,0x0044D2E0,0x0,text,LuaEnv::RefreshAll(),android,alta,0,0
+0x0044D7F0,0x0044D7F0,0x0,text,"LuaEnv::GetLocation(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0044DA60,0x0044DA60,0x0,text,"LuaEnv::CallListFunction(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0044E080,0x0044E080,0x0,text,"LuaString::AddPoint(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point)",android,alta,0,0
+0x0044FF40,0x0044FF40,0x0,text,,inventario,alta,0,0
+0x0044FFE0,0x0044FFE0,0x0,text,,inventario,alta,0,0
+0x00450080,0x00450080,0x0,text,,inventario,alta,0,0
+0x00450120,0x00450120,0x0,text,,inventario,alta,0,0
+0x004501C0,0x004501C0,0x0,text,,inventario,alta,0,0
+0x00450260,0x00450260,0x0,text,,inventario,alta,0,0
+0x00450300,0x00450300,0x0,text,,inventario,alta,0,0
+0x004503A0,0x004503A0,0x0,text,,inventario,alta,0,0
+0x00450440,0x00450440,0x0,text,,inventario,alta,0,0
+0x004508B0,0x004508B0,0x0,text,,interpolado,alta,1,0
+0x00450910,0x00450910,0x0,text,,interpolado,alta,1,0
+0x004509E0,0x004509E0,0x0,text,,interpolado,alta,1,0
+0x00451F60,0x00451F60,0x0,text,,inventario,alta,2,0
+0x00451FE0,0x00451FE0,0x0,text,,inventario,alta,1,0
+0x00452020,0x00452020,0x0,text,,inventario,alta,2,0
+0x004520A0,0x004520A0,0x0,text,,inventario,alta,2,0
+0x004525C0,0x004525C0,0x0,text,,inventario,alta,0,0
+0x004526A0,0x004526A0,0x0,text,,inventario,alta,0,0
+0x00452780,0x00452780,0x0,text,,inventario,alta,0,0
+0x00452860,0x00452860,0x0,text,,inventario,alta,0,0
+0x00452900,0x00452900,0x0,text,,inventario,alta,0,0
+0x004529A0,0x004529A0,0x0,text,,inventario,alta,0,0
+0x00452A80,0x00452A80,0x0,text,,inventario,alta,0,0
+0x00452B60,0x00452B60,0x0,text,,inventario,alta,0,0
+0x00452C40,0x00452C40,0x0,text,,inventario,alta,0,0
+0x00452D20,0x00452D20,0x0,text,,inventario,alta,0,0
+0x00452E00,0x00452E00,0x0,text,,inventario,alta,0,0
+0x00452EE0,0x00452EE0,0x0,text,,inventario,alta,0,0
+0x00452FD0,0x00452FD0,0x0,text,,inventario,alta,0,0
+0x004530B0,0x004530B0,0x0,text,,inventario,alta,0,0
+0x00453190,0x00453190,0x0,text,,inventario,alta,0,0
+0x00453270,0x00453270,0x0,text,,inventario,alta,0,0
+0x00453350,0x00453350,0x0,text,,inventario,alta,0,0
+0x00453430,0x00453430,0x0,text,,inventario,alta,0,0
+0x00453510,0x00453510,0x0,text,,inventario,alta,0,0
+0x004535B0,0x004535B0,0x0,text,,inventario,alta,0,0
+0x00453650,0x00453650,0x0,text,,inventario,alta,0,0
+0x00453730,0x00453730,0x0,text,,inventario,alta,0,0
+0x00453810,0x00453810,0x0,text,,inventario,alta,0,0
+0x004538F0,0x004538F0,0x0,text,,inventario,alta,0,0
+0x004539D0,0x004539D0,0x0,text,,inventario,alta,0,0
+0x00453A40,0x00453A40,0x0,text,,inventario,alta,0,0
+0x00453AB0,0x00453AB0,0x0,text,,inventario,alta,0,0
+0x00453B20,0x00453B20,0x0,text,,inventario,alta,0,0
+0x00453B90,0x00453B90,0x0,text,,inventario,alta,0,0
+0x00453C00,0x00453C00,0x0,text,,inventario,alta,0,0
+0x00453C70,0x00453C70,0x0,text,,inventario,alta,0,0
+0x00453CE0,0x00453CE0,0x0,text,,inventario,alta,0,0
+0x00453D50,0x00453D50,0x0,text,,inventario,alta,0,0
+0x00453DC0,0x00453DC0,0x0,text,,inventario,alta,0,0
+0x00453E30,0x00453E30,0x0,text,,inventario,alta,0,0
+0x00453EA0,0x00453EA0,0x0,text,,inventario,alta,0,0
+0x00453F10,0x00453F10,0x0,text,,inventario,alta,0,0
+0x00453F80,0x00453F80,0x0,text,,inventario,alta,0,0
+0x00453FF0,0x00453FF0,0x0,text,,inventario,alta,0,0
+0x00454060,0x00454060,0x0,text,,inventario,alta,0,0
+0x004540D0,0x004540D0,0x0,text,,inventario,alta,0,0
+0x00454140,0x00454140,0x0,text,,inventario,alta,0,0
+0x004541B0,0x004541B0,0x0,text,,inventario,alta,0,0
+0x004577A0,0x004577A0,0x0,text,,inventario,alta,0,0
+0x00457840,0x00457840,0x0,text,,inventario,alta,0,0
+0x00465B00,0x00465B00,0x0,text,,interpolado,alta,2,0
+0x00465D00,0x00465D00,0x0,text,,interpolado,media,2,0
+0x00465DB0,0x00465DB0,0x0,text,,interpolado,media,2,0
+0x00465E64,0x00465E64,0x0,text,,interpolado,media,2,0
+0x00466490,0x00466490,0x0,text,,interpolado,alta,2,0
+0x00466540,0x00466540,0x0,text,,interpolado,alta,1,0
+0x00466610,0x00466610,0x0,text,,interpolado,alta,2,0
+0x0046670E,0x0046670E,0x0,text,,interpolado,media,1,0
+0x00468ED0,0x00468ED0,0x0,text,,inventario,alta,0,0
+0x00468EE0,0x00468EE0,0x0,text,,interpolado,alta,2,0
+0x00468FD0,0x00468FD0,0x0,text,,interpolado,alta,2,0
+0x004690D0,0x004690D0,0x0,text,,interpolado,alta,2,0
+0x004691D0,0x004691D0,0x0,text,,interpolado,alta,2,0
+0x004692D0,0x004692D0,0x0,text,,interpolado,alta,2,0
+0x0046BC20,0x0046BC20,0x0,text,BoardManager::GetVictoryState(),android,alta,0,0
+0x0046C470,0x0046C470,0x0,text,,inventario,alta,0,0
+0x0046C4E0,0x0046C4E0,0x0,text,GL_Color::WithAlpha(float) const,android+inventario,alta,2,0
+0x0046C510,0x0046C510,0x0,text,GL_Color::Normalize() const,android+inventario,alta,2,0
+0x0046C7A0,0x0046C7A0,0x0,text,CSaveGameDir::~CSaveGameDir(),android,alta,0,0
+0x0046C9B0,0x0046C9B0,0x0,text,"CSaveGameCache::FillCache(int, CSaveGameDir*, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&, long*)",android,alta,0,0
+0x0046CEA0,0x0046CEA0,0x0,text,"CSaveGameCache::CreateDirectory(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",android,alta,0,0
+0x0046CF80,0x0046CF80,0x0,text,"CSaveGameCache::DeleteFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",android,alta,0,0
+0x0046D180,0x0046D180,0x0,text,"CSaveGameCache::RenameFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, bool)",android,alta,0,0
+0x0046D5D0,0x0046D5D0,0x0,text,"CSaveGameCache::GetFileList(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",android,alta,0,0
+0x0046E8D0,0x0046E8D0,0x0,text,CSaveGameDirEntry::~CSaveGameDirEntry(),android,alta,0,0
+0x0046E9B0,0x0046E9B0,0x0,text,,inventario,alta,0,0
+0x0046E9C0,0x0046E9C0,0x0,text,CSaveGameFile::~CSaveGameFile(),android,alta,0,0
+0x0046EC30,0x0046EC30,0x0,text,CSaveGameDir::Clone(CSaveGameDir*),android,alta,0,0
+0x0046ED70,0x0046ED70,0x0,text,CSaveGameDir::LogInfo(unsigned int),android,alta,0,0
+0x0046EDD0,0x0046EDD0,0x0,text,CSaveGameDir::ResetAction(),android,alta,0,0
+0x0046EE40,0x0046EE40,0x0,text,CSaveGameDir::HasChanges() const,android,alta,0,0
+0x0046EEA0,0x0046EEA0,0x0,text,CSaveGameDir::RestoreAction(CSaveGameDirEntry*),android,alta,0,0
+0x0046EFA0,0x0046EFA0,0x0,text,"CSaveGameDir::Flush(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&)",android,alta,0,0
+0x0046F280,0x0046F280,0x0,text,"CSaveGameDir::DoOperation(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, IDirectoryOperation*)",android,alta,0,0
+0x00472F00,0x00472F00,0x0,text,"CSaveGameDirEntry::Log(char const*, ...)",android,alta,0,1
+0x004731D0,0x00473360,0x190,text,CSaveGameFile::Clone(CSaveGameDir*),android,alta,0,0
+0x004732C0,0x00473450,0x190,text,CSaveGameFile::LogInfo(unsigned int),android,alta,0,0
+0x00473300,0x00473490,0x190,text,CSaveGameFile::ResetAction(),android,alta,0,0
+0x00473310,0x004734A0,0x190,text,CSaveGameFile::HasChanges() const,android,alta,0,0
+0x00473330,0x004734C0,0x190,text,CSaveGameFile::RestoreAction(CSaveGameDirEntry*),android,alta,0,0
+0x00473370,0x00473500,0x190,text,"CSaveGameFile::Flush(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&)",android,alta,0,0
+0x00473600,0x00473790,0x190,text,"CSaveGameFile::FillWithFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, SSaveGameCacheConfig const&, long*)",android,alta,0,1
+0x00473C50,0x00473DF0,0x1A0,text,Button::~Button(),android,alta,0,0
+0x00474580,0x00474720,0x1A0,text,"Button::OnInit(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, bool)",android,alta,0,0
+0x00474900,0x00474AA0,0x1A0,text,Button::SetGamepadSelect(bool),android,alta,0,0
+0x00474920,0x00474AC0,0x1A0,text,Button::SetFont(int),android,alta,0,0
+0x00474930,0x00474AD0,0x1A0,text,Button::SetTextShift(Point),android,alta,0,0
+0x00474950,0x00474AF0,0x1A0,text,Button::IsPotential(),android,alta,0,0
+0x00474970,0x00474B10,0x1A0,text,Button::Reset(),android,alta,0,0
+0x00474990,0x00474B30,0x1A0,text,Button::OnLoop(),android,alta,0,0
+0x004749A0,0x00474B40,0x1A0,text,Button::OnRender(),android,alta,0,0
+0x00475040,0x004751E0,0x1A0,text,Button::GetHighlightHeight(),android,alta,0,0
+0x00475100,0x004752A0,0x1A0,text,Button::GetAutoWidth(),android,alta,0,0
+0x004751D0,0x00475370,0x1A0,text,Button::GetAutoHeight(),android,alta,0,0
+0x004752A0,0x00475440,0x1A0,text,Button::IsHighlighted(),android,alta,0,0
+0x004752D0,0x00475470,0x1A0,text,Button::IsHovering(),android,alta,0,0
+0x00475320,0x004754C0,0x1A0,text,Button::SetActive(bool),android,alta,0,0
+0x004753C0,0x00475560,0x1A0,text,Button::GetLocation(),android,alta,0,0
+0x00475420,0x004755C0,0x1A0,text,"Button::MouseMove(int, int, bool)",android,alta,0,0
+0x00475530,0x004756D0,0x1A0,text,"Button::IsContained(int, int)",android,alta,0,0
+0x00475570,0x00475710,0x1A0,text,"Button::OnTouch(TouchAction, int, int, int)",android,alta,0,0
+0x00475CD0,0x00475E70,0x1A0,text,Button::LoadLua(),android,alta,0,0
+0x00475E80,0x00476020,0x1A0,text,"Button::SetName(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00475EF0,0x00476090,0x1A0,text,Button::GetHitBox(),android,alta,0,0
+0x00475F20,0x004760C0,0x1A0,text,Button::IsActive(),android,alta,0,0
+0x00475F30,0x004760D0,0x1A0,text,OptionsItem::GetHighlightHeight(),android,alta,0,0
+0x00475F40,0x004760E0,0x1A0,text,OptionsItem::GetLocation(),android,alta,0,0
+0x00475F60,0x00476100,0x1A0,text,OptionsItem::SetMaxLineSize(int),android,alta,0,0
+0x00476160,0x00476300,0x1A0,text,"ChoiceBox::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x004761B0,0x00476350,0x1A0,text,ChoiceBox::Close(),android,alta,0,0
+0x004761C0,0x00476360,0x1A0,text,ChoiceBox::SetOpen(bool),android,alta,0,0
+0x00476340,0x004764E0,0x1A0,text,ChoiceBox::~ChoiceBox(),android,alta,0,0
+0x00476470,0x00476610,0x1A0,text,ChoiceBox::OnRender(),android,alta,0,0
+0x00478160,0x00478300,0x1A0,text,"ChoiceBox::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x00478270,0x00478410,0x1A0,text,"ChoiceBox::MouseMove(int, int)",android,alta,0,0
+0x004783F0,0x00478590,0x1A0,text,"ChoiceBox::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00478550,0x004786F0,0x1A0,text,"ChoiceBox::OnTouch(TouchAction, int, int, int, int, int)",android,alta,0,0
+0x00478620,0x004787C0,0x1A0,text,"ChoiceBox::Open(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::vector<ChoiceText, std::__ndk1::allocator<ChoiceText> >)",android,alta,0,0
+0x00479EC0,0x0047A060,0x1A0,text,FocusWindow::~FocusWindow(),android,alta,0,0
+0x00479F10,0x0047A0B0,0x1A0,text,FocusWindow::Close(),android,alta,0,0
+0x00479FB0,0x0047A150,0x1A0,text,FocusWindow::UpdateJoyMouse(),android,alta,0,0
+0x0047A1D0,0x0047A370,0x1A0,text,FocusWindow::Open(),android,alta,0,0
+0x0047A280,0x0047A420,0x1A0,text,FocusWindow::SetOpen(bool),android,alta,0,0
+0x0047A990,0x0047AB30,0x1A0,text,"JoyControl::Rumble(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0047AA60,0x0047AC00,0x1A0,text,JoyControl::GetButtonImage(int),android,alta,0,0
+0x0047AEE0,0x0047B080,0x1A0,text,JoyControl::GetButtonString(int),android,alta,0,0
+0x0047DC40,0x0047DDE0,0x1A0,text,,inventario,alta,0,0
+0x0047FB00,0x0047FCA0,0x1A0,text,MouseControl::GetCurrentMouse(),android,alta,0,1
+0x00481760,0x00481890,0x130,text,ShadowBox::InitializeImages(),android,alta,0,0
+0x00482250,0x00482380,0x130,text,SlideBar::SetSliderWidth(int),android,alta,0,0
+0x00482260,0x00482390,0x130,text,SlideBar::SetSliderHeight(int),android,alta,0,0
+0x00482270,0x004823A0,0x130,text,SlideBar::SetFont(int),android,alta,0,0
+0x00482280,0x004823B0,0x130,text,SlideBar::SetLocation(Point),android,alta,0,0
+0x00482310,0x00482440,0x130,text,SlideBar::IsPotential(),android,alta,0,0
+0x00482330,0x00482460,0x130,text,SlideBar::GetLocation(),android,alta,0,0
+0x00482350,0x00482480,0x130,text,SlideBar::OnRender(),android,alta,0,0
+0x00482A30,0x00482B60,0x130,text,"SlideBar::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x00482BB0,0x00482CE0,0x130,text,"SlideBar::MouseMove(int, int, bool)",android,alta,0,0
+0x00482F60,0x00483090,0x130,text,SlideBar::IsActive(),android,alta,0,0
+0x00484E30,0x00484F60,0x130,text,ToggleBox::SetLocation(Point),android,alta,0,0
+0x00485240,0x00485370,0x130,text,ToggleBox::GetLocation(),android,alta,0,0
+0x00485290,0x004853C0,0x130,text,ToggleBox::OnRender(),android,alta,0,0
+0x00485660,0x00485790,0x130,text,ToggleBox::GetHighlightHeight(),android,alta,0,0
+0x00485760,0x00485890,0x130,text,ToggleBox::SetFont(int),android,alta,0,0
+0x00485770,0x004858A0,0x130,text,ToggleBox::SetTextShift(Point),android,alta,0,0
+0x004857A0,0x004858D0,0x130,text,ToggleBox::IsPotential(),android,alta,0,0
+0x004857C0,0x004858F0,0x130,text,"ToggleBox::MouseMove(int, int, bool)",android,alta,0,0
+0x00485870,0x004859A0,0x130,text,ToggleBox::OnConfirmAction(),android,alta,0,0
+0x00485AE0,0x00485C10,0x130,text,ToggleBox::IsActive(),android,alta,0,0
+0x004861E0,0x00486310,0x130,text,"Animation::GetAnimInfo(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool)",android,alta,0,0
+0x00487500,0x00487630,0x130,text,AnimTracker::Update(),android,alta,0,0
+0x0048ACF0,0x0048AE20,0x130,text,"freetype::tex_parse_header(void const*, int, TexFileHeader*)",android,alta,0,0
+0x0048B400,0x0048B530,0x130,text,"freetype::texture_parse(SFontTexture&, void*, int, bool)",android,alta,0,0
+0x0048B790,0x0048B8C0,0x130,text,"freetype::parse_char_info(void const*, int, int, int, std::__ndk1::map<char32_t, FontFileCharInfo2, std::__ndk1::less<char32_t>, std::__ndk1::allocator<std::__ndk1::pair<char32_t const, FontFileCharInfo2> > >&)",android,alta,0,0
+0x0048BF60,0x0048C090,0x130,text,"freetype::font_data::init_bitmap(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, void const*, int, boost::unordered::unordered_set<int, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<int> > const&, bool)",android,alta,0,0
+0x0048DD00,0x0048DE30,0x130,text,CEvent::~CEvent(),android,alta,0,0
+0x0048DD30,0x0048DE60,0x130,text,CEvent::OnEvent(SDL_Event const*),android,alta,0,0
+0x0048F5C9,0x0048F6F9,0x130,text,,interpolado,media,2,0
+0x0048FB40,0x0048FC70,0x130,text,Console::OnLoop(),android,alta,0,0
+0x00490A50,0x00490B80,0x130,text,Console::OnRender(),android,alta,0,0
+0x00491790,0x004918C0,0x130,text,Console::RenderUnitAnims(),android,alta,0,0
+0x00491D70,0x00491EA0,0x130,text,"Console::SetupUnitAnims(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00492DB0,0x00492EE0,0x130,text,,inventario,alta,0,1
+0x004956D0,0x00495810,0x140,text,CSurface::InitShaders(),android,alta,0,0
+0x00496960,0x00496AA0,0x140,text,,inventario,alta,0,0
+0x00496B50,0x00496C90,0x140,text,,inventario,alta,0,0
+0x00496CB0,0x00496DF0,0x140,text,,inventario,alta,0,1
+0x00497000,0x00497130,0x130,text,,inventario,alta,0,0
+0x004975D0,0x00497700,0x130,text,,inventario,alta,0,0
+0x00497600,0x00497730,0x130,text,,inventario,alta,0,0
+0x004978A0,0x004979D0,0x130,text,,inventario,alta,0,0
+0x00499990,0x00499AC0,0x130,text,"CSurface::GL_CreateMultiImagePrimitive(GL_Texture*, std::__ndk1::vector<GL_TexVertex, std::__ndk1::allocator<GL_TexVertex> > const&, float, float, float, float)",android,alta,0,0
+0x00499AF0,0x00499C20,0x130,text,"CSurface::GL_CreateMultiImageColorPrimitive(GL_Texture*, std::__ndk1::vector<GL_ColorTexVertex, std::__ndk1::allocator<GL_ColorTexVertex> > const&)",android,alta,0,0
+0x0049B800,0x0049B930,0x130,text,CShaderProgram::~CShaderProgram(),android,alta,0,1
+0x0049C440,0x0049C580,0x140,text,LastShot::Clear(),android,alta,0,0
+0x0049C530,0x0049C670,0x140,text,LastShot::PrepVoice(Pawn*),android,alta,0,1
+0x0049E0F0,0x0049E240,0x150,text,"FileHelper::openBinaryFileFromDisk(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",android,alta,0,0
+0x0049E5F0,0x0049E740,0x150,text,"FileHelper::removeDir(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0049E8D0,0x0049EA20,0x150,text,,inventario,alta,0,0
+0x0049EE50,0x0049EFA0,0x150,text,FileHelper::checkWritePermissions(),android,alta,0,0
+0x0049F670,0x0049F7C0,0x150,text,"FileHelper::writeFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0049FA60,0x0049FBB0,0x150,text,FileHelper::initFileHelper(),android,alta,0,1
+0x004A2920,0x004A3700,0xDE0,text,"FontControl::LoadFont(boost::unordered::unordered_map<int, freetype::font_data, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<std::__ndk1::pair<int const, freetype::font_data> > >&, FontControl::STypeIndex&, float, void const*, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x004A5740,0x004A6520,0xDE0,text,FontControl::OnLanguageChanged(),android,alta,0,0
+0x004A6420,0x004A7200,0xDE0,text,"FontControl::LoadFontFile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x004A6E90,0x004A7C70,0xDE0,text,"FontControl::GetFont(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android,alta,0,0
+0x004A7510,0x004A82F0,0xDE0,text,FontControl::LoadFontStyles(),android,alta,0,0
+0x004A77C0,0x004A85A0,0xDE0,text,"StyleInfo LuaEnv::CallFunction<StyleInfo, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, bool>(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, bool)",android,alta,0,1
+0x004A99E0,0x004AA7A0,0xDC0,text,freetype::InitCharSet(),android,alta,0,0
+0x004AA750,0x004AB510,0xDC0,text,"freetype::make_dlist(CFontAtlasGenerator&, FT_FaceRec_*, FT_StrokerRec_**, unsigned int, unsigned int, freetype::font_char*, std::__ndk1::vector<SFontTexture, std::__ndk1::allocator<SFontTexture> >&, float, boost::unordered::unordered_set<int, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<int> >*)",android,alta,0,0
+0x004AACB0,0x004ABA70,0xDC0,text,"freetype::font_data::init(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, float, void const*, int, unsigned int, int, boost::unordered::unordered_set<int, boost::hash<int>, std::__ndk1::equal_to<int>, std::__ndk1::allocator<int> > const&, bool)",android,alta,0,0
+0x004ABC50,0x004ACA10,0xDC0,text,,inventario,alta,0,0
+0x004B2310,0x004B30D0,0xDC0,text,utf8::invalid_code_point::what() const,android,alta,0,0
+0x004B2320,0x004B30E0,0xDC0,text,utf8::invalid_utf8::what() const,android,alta,0,0
+0x004B2330,0x004B30F0,0xDC0,text,utf8::not_enough_room::what() const,android,alta,0,0
+0x004B2340,0x004B3100,0xDC0,text,,inventario,alta,2,0
+0x004B2560,0x004B3320,0xDC0,text,,inventario,alta,3,0
+0x004B25F0,0x004B33B0,0xDC0,text,,inventario,alta,3,0
+0x004B2C70,0x004B3A30,0xDC0,text,,interpolado,alta,2,0
+0x004B2D60,0x004B3B20,0xDC0,text,"Globals::GetTimeString(float, bool)",android,alta,0,0
+0x004B39D0,0x004B4790,0xDC0,text,outputOpenglError(),android,alta,0,0
+0x004B4E40,0x004B5C00,0xDC0,text,"std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > LuaEnv::CallFunction<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,1
+0x004BAB30,0x004BB910,0xDE0,text,"ParticleEmitter::ParticleEmitter(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x004BC350,0x004BD130,0xDE0,text,Point::Manhattan(Point) const,android+inventario,alta,2,0
+0x004BC380,0x004BD160,0xDE0,text,Point::GetString(),android+inventario,alta,2,0
+0x004BC510,0x004BD2F0,0xDE0,text,Point::GetLuaString(),android+inventario,alta,2,0
+0x004BC5A0,0x004BD380,0xDE0,text,ResourceControl::ResourceControl(),android,alta,0,0
+0x004BDB10,0x004BE8F0,0xDE0,text,"ResourceControl::GetImage(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x004BE400,0x004BF1E0,0xDE0,text,"ResourceControl::LoadMouseImage(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, unsigned char*, int)",android,alta,0,0
+0x004BE570,0x004BF350,0xDE0,text,ResourceControl::PreparePalettes(),android,alta,0,0
+0x004C0F40,0x004C1D20,0xDE0,text,ResourceControl::PreloadResources(CApp*),android,alta,0,0
+0x004C2670,0x004C3450,0xDE0,text,ResourceControl::OnInit(),android,alta,0,0
+0x004C2A50,0x004C3830,0xDE0,text,"ResourceControl::RenderLoadingBar(float, float)",android,alta,0,0
+0x004C2D50,0x004C3B30,0xDE0,text,"ResourceControl::RenderLoadingBarFrame(float, float)",android,alta,0,0
+0x004C3610,0x004C43F0,0xDE0,text,,inventario,alta,0,0
+0x004C4130,0x004C4F10,0xDE0,text,,interpolado,alta,1,0
+0x004C41D0,0x004C4FB0,0xDE0,text,,interpolado,alta,1,0
+0x004C4DD0,0x004C5BB0,0xDE0,text,"std::__ndk1::enable_if<__is_forward_iterator<Point*>::value&&is_constructible<Point, std::__ndk1::iterator_traits<Point*>::reference>::value, void>::type std::__ndk1::vector<Point, std::__ndk1::allocator<Point> >::assign<Point*>(Point*, Point*)",android,alta,0,0
+0x004C61D0,0x004C6FB0,0xDE0,text,"TextData::LoadScript(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x004CD610,0x004CE3F0,0xDE0,text,"GridSearchable::IsWall(Point, int, int)",android,alta,0,0
+0x004CD630,0x004CE410,0xDE0,text,GridSearchable::~GridSearchable(),android,alta,0,0
+0x004CD680,0x004CE460,0xDE0,text,"GridSearchable::GetSingleCornerPath(Point, Point, int)",interpolado,alta,3,0
+0x004CDA00,0x004CE7E0,0xDE0,text,"GridSearchable::GetReachablePoints(Point, int, int)",interpolado,alta,5,0
+0x004CDCD0,0x004CEAB0,0xDE0,text,"GridSearchable::GetDistance(Point, Point, int)",android+inventario,alta,0,0
+0x004CDE60,0x004CEC40,0xDE0,text,"GridSearchable::CalculateDijkstraMap(Point, int, int, bool)",interpolado,alta,6,0
+0x004CE2B6,0x004CF096,0xDE0,text,,interpolado,media,1,0
+0x004CE630,0x004CF410,0xDE0,text,"GridSearchable::GetAstarPath(Point, Point, int)",interpolado,alta,5,0
+0x004CE771,0x004CF551,0xDE0,text,,interpolado,media,2,0
+0x004CEC60,0x004CFA40,0xDE0,text,,interpolado,alta,4,0
+0x004CF0B0,0x004CFE90,0xDE0,text,,interpolado,alta,3,0
+0x004CF5D0,0x004D03B0,0xDE0,text,,interpolado,alta,2,0
+0x004D1A30,0x004D2810,0xDE0,text,,interpolado,alta,4,0
+0x004D1AD0,0x004D28B0,0xDE0,text,,interpolado,alta,4,0
+0x004D3030,0x004D3E10,0xDE0,text,,interpolado,alta,1,0
+0x004D3450,0x004D4230,0xDE0,text,,inventario,alta,0,0
+0x004D3540,0x004D4320,0xDE0,text,,inventario,alta,0,0
+0x004D3580,0x004D4360,0xDE0,text,,inventario,alta,0,0
+0x004D35C0,0x004D43A0,0xDE0,text,,inventario,alta,0,0
+0x004D3C60,0x004D4A40,0xDE0,text,Settings::GetLanguageFolder(int),android,alta,0,1
+0x004D42D0,0x004D50A0,0xDD0,text,"Settings::GetLanguageId(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",android,alta,0,0
+0x004D4640,0x004D5410,0xDD0,text,,inventario,alta,3,0
+0x004D4690,0x004D5460,0xDD0,text,Settings::IsTextureSwap(),android,alta,0,0
+0x004D47B0,0x004D5580,0xDD0,text,,inventario,alta,0,0
+0x004D47F0,0x004D55C0,0xDD0,text,,inventario,alta,3,0
+0x004D48C0,0x004D5690,0xDD0,text,,inventario,alta,0,0
+0x004D48D0,0x004D56A0,0xDD0,text,BoardManager::IsCursor(),android+inventario,alta,0,0
+0x004D4A90,0x004D5860,0xDD0,text,"Settings::GetHotkeyName(int, int)",android,alta,0,0
+0x004D4E80,0x004D5C50,0xDD0,text,Settings::GetDefaultKey(int),android,alta,0,0
+0x004D55C0,0x004D6390,0xDD0,text,Settings::GetGamepadImage(bool),android,alta,0,0
+0x004D6370,0x004D7140,0xDD0,text,Settings::GetDpadSetting(),android,alta,0,0
+0x004D6860,0x004D7630,0xDD0,text,Settings::LoadSettings(),android,alta,0,1
+0x004D7720,0x004D8500,0xDE0,text,,inventario,alta,0,0
+0x004D78C0,0x004D86A0,0xDE0,text,Settings::GetMutationString(),android,alta,0,0
+0x004D86E0,0x004D94C0,0xDE0,text,GetShaderDefines(unsigned int),android,alta,0,0
+0x004D87D0,0x004D95B0,0xDE0,text,"CShaderProgram::Init(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",android,alta,0,0
+0x004D8CF0,0x004D9AD0,0xDE0,text,CShader::~CShader(),android,alta,0,0
+0x004D8D60,0x004D9B40,0xDE0,text,,inventario,alta,0,0
+0x004D9160,0x004D9F40,0xDE0,text,SoundControl::OnInit(),android,alta,0,1
+0x004D9AC0,0x004DA980,0xEC0,text,SoundControl::OnLoop(),android,alta,0,0
+0x004DA000,0x004DAEC0,0xEC0,text,"SoundControl::PlayEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android,alta,0,0
+0x004DA190,0x004DB050,0xEC0,text,"SoundControl::TriggerEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android,alta,0,0
+0x004DA7C0,0x004DB680,0xEC0,text,"SoundControl::StartEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x004DB110,0x004DBFD0,0xEC0,text,SoundControl::StartMenuMusic(),android,alta,0,0
+0x004DB3C0,0x004DC280,0xEC0,text,SoundControl::StartBattleMusic(),android,alta,0,0
+0x004DB4B0,0x004DC370,0xEC0,text,SoundControl::StartBattle(),android,alta,0,0
+0x004DB560,0x004DC420,0xEC0,text,SoundControl::TriggerGameover(),android,alta,0,0
+0x004DB650,0x004DC510,0xEC0,text,SoundControl::StopBattle(int),android,alta,0,0
+0x004DBD30,0x004DCBF0,0xEC0,text,SoundControl::StartNewBattleTrack(),android,alta,0,0
+0x004DEBD0,0x004DFA90,0xEC0,text,"ERRCHECK_fn(FMOD_RESULT, char const*, int)",android,alta,0,0
+0x004DFD50,0x004E0C10,0xEC0,text,,inventario,alta,3,0
+0x004DFD70,0x004E0C30,0xEC0,text,,inventario,alta,2,0
+0x004DFDE0,0x004E0CA0,0xEC0,text,,inventario,alta,2,0
+0x004DFE00,0x004E0CC0,0xEC0,text,,inventario,alta,3,0
+0x004DFE20,0x004E0CE0,0xEC0,text,,interpolado,alta,1,0
+0x004DFF60,0x004E0E20,0xEC0,text,ValueBar::Modify(int),android,alta,0,0
+0x004DFFC0,0x004E0E80,0xEC0,text,ValueBar::AnimatedModify(int),interpolado,alta,4,0
+0x004E01F0,0x004E10B0,0xEC0,text,ValueBar::GetValue() const,android+inventario,alta,0,0
+0x004E0200,0x004E10C0,0xEC0,text,ValueBar::GetMax(),android+inventario,alta,0,0
+0x004E0C00,0x004E1AC0,0xEC0,text,ValueBar::~ValueBar(),android,alta,0,0
+0x004E0CB0,0x004E1B70,0xEC0,text,"CShader::Init(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, unsigned int)",android,alta,0,0
+0x004E13F0,0x004E22B0,0xEC0,text,brk_load_default_dict(),android,alta,0,0
+0x004E27A0,0x004E3660,0xEC0,text,CApp::~CApp(),android,alta,0,0
+0x004E2800,0x004E36C0,0xEC0,text,CApp::OnInputFocus(),android,alta,0,0
+0x004E2850,0x004E3710,0xEC0,text,CApp::OnInputBlur(),android,alta,0,0
+0x004E2880,0x004E3740,0xEC0,text,CApp::OnExecute(),android,alta,0,1
+0x004E3000,0x004E3ED0,0xED0,text,CApp::ListCommands(),android,alta,0,0
+0x004E3220,0x004E40F0,0xED0,text,SDL_main,android,alta,0,1
+0x004E3710,0x004E45F0,0xEE0,text,CApp::OnLoop(),android,alta,0,0
+0x004E4740,0x004E5620,0xEE0,text,CApp::OnRender(),android,alta,0,0
+0x004E4D20,0x004E5C00,0xEE0,text,CApp::SetupWindow(),android,alta,0,0
+0x004E5030,0x004E5F10,0xEE0,text,"CApp::OnWindowResize(int, int)",android,alta,0,0
+0x004E5900,0x004E67E0,0xEE0,text,CApp::OnWindowMaximize(),android,alta,0,0
+0x004E5A40,0x004E6920,0xEE0,text,CApp::OnWindowMoved(),android,alta,0,0
+0x004E5BC0,0x004E6AA0,0xEE0,text,CApp::OnGoingToBackground(),android,alta,0,0
+0x004E5C10,0x004E6AF0,0xEE0,text,"CApp::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x004E5C70,0x004E6B50,0xEE0,text,CApp::OnInit(),android,alta,0,0
+0x004E6250,0x004E7130,0xEE0,text,CApp::OnEvent(SDL_Event const*),android,alta,0,0
+0x004E6260,0x004E7140,0xEE0,text,CApp::OnRequestExit(),android+inventario,alta,1,0
+0x004E6270,0x004E7150,0xEE0,text,CApp::OnExit(),android,alta,0,0
+0x004E62C0,0x004E71A0,0xEE0,text,"CApp::TranslateMouse(int, int)",android,alta,0,0
+0x004E6410,0x004E72F0,0xEE0,text,"CApp::OnMouseMove(int, int)",android,alta,0,0
+0x004E6460,0x004E7340,0xEE0,text,CApp::OnMouseWheel(bool),android,alta,0,0
+0x004E64A0,0x004E7380,0xEE0,text,"CApp::OnMultiGesture(int, int, int)",android,alta,0,0
+0x004E6520,0x004E7400,0xEE0,text,"CApp::OnFingerEvent(KeyAction, int, int)",android,alta,0,0
+0x004E65A0,0x004E7480,0xEE0,text,"CApp::OnFingerMove(int, int)",android,alta,0,0
+0x004E6610,0x004E74F0,0xEE0,text,CApp::OnKeyUp(int),android,alta,0,0
+0x004E6680,0x004E7560,0xEE0,text,CApp::OnKeyDown(int),android,alta,0,0
+0x004E6920,0x004E7800,0xEE0,text,"CApp::OnTouchDown(int, int, int)",android,alta,0,0
+0x004E6960,0x004E7840,0xEE0,text,"CApp::OnTouchMove(int, int, int, int, int)",android,alta,0,0
+0x004E69B0,0x004E7890,0xEE0,text,"CApp::OnTouchUp(int, int, int, int, int)",android,alta,0,0
+0x004E6A00,0x004E78E0,0xEE0,text,"CApp::OnTouchCancel(int, int, int, int, int)",android,alta,0,0
+0x004E6A50,0x004E7930,0xEE0,text,"CApp::OnJoystickMove(int, int, int)",android,alta,0,0
+0x004E6AF0,0x004E79D0,0xEE0,text,"CApp::OnGamepadButton(int, int, int)",android,alta,0,0
+0x004E6BF0,0x004E7AD0,0xEE0,text,CApp::OnGamepadEvent(int),android,alta,0,0
+0x004E6C00,0x004E7AE0,0xEE0,text,CApp::SetupController(),android,alta,0,0
+0x004E6D00,0x004E7BE0,0xEE0,text,"CApp::OnExternalProfileChange(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",android,alta,0,0
+0x004E7590,0x004E8470,0xEE0,text,"AchButton::AchButton(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x004E7970,0x004E8850,0xEE0,text,AchButton::~AchButton(),android,alta,0,0
+0x004E7A30,0x004E8910,0xEE0,text,"AchButton::OnRender(int, int)",android,alta,0,0
+0x004E7EB0,0x004E8D90,0xEE0,text,"AchButton::OnRenderTooltip(int, Point, bool)",android,alta,0,0
+0x004E8800,0x004E96E0,0xEE0,text,"AchTracker::IsUpdateable(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,1
+0x004EB570,0x004EC460,0xEF0,text,AchTracker::OnRender(),android,alta,0,0
+0x004EC740,0x004ED630,0xEF0,text,AchTracker::CheckVictoryAch(),android,alta,0,0
+0x004ECD10,0x004EDC00,0xEF0,text,"AchDisplay::OnRender(Point, int)",android,alta,0,0
+0x004ED3D0,0x004EE2C0,0xEF0,text,"AchDisplay::OnRenderTooltips(Point, bool)",android,alta,0,0
+0x004ED8D0,0x004EE7C0,0xEF0,text,"AchDisplay::OnRenderSummary(int, Point)",android,alta,0,0
+0x004EDAE0,0x004EE9D0,0xEF0,text,"AchDisplay::OnRenderIcons(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, GL_Color, int)",android,alta,0,0
+0x004EF020,0x004EFF10,0xEF0,text,AchScreen::AchScreen(),android,alta,0,0
+0x004EF3E0,0x004F02D0,0xEF0,text,AchScreen::~AchScreen(),android,alta,0,0
+0x004EFA40,0x004F0930,0xEF0,text,AchScreen::OnRender(),android,alta,0,0
+0x004F0D90,0x004F1C80,0xEF0,text,AchScreen::GetHeaderText(int),android,alta,0,0
+0x004F1950,0x004F2840,0xEF0,text,"AchScreen::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x004F19B0,0x004F28A0,0xEF0,text,"AchScreen::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x004F1C50,0x004F2B40,0xEF0,text,"AchScreen::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x004F1FE0,0x004F2ED0,0xEF0,text,"AchScreen::MouseMove(int, int)",android,alta,0,0
+0x004F2570,0x004F3460,0xEF0,text,AdvancedOptions::AdvancedOptions(),android,alta,0,0
+0x004F2A40,0x004F3930,0xEF0,text,AdvancedOptions::~AdvancedOptions(),android,alta,0,0
+0x004F2BF0,0x004F3AE0,0xEF0,text,AdvancedOptions::OnRender(),android,alta,0,0
+0x004F4940,0x004F5830,0xEF0,text,AdvancedOptions::Open(),android,alta,0,0
+0x004F4970,0x004F5860,0xEF0,text,AdvancedOptions::Close(),android,alta,0,0
+0x004F49A0,0x004F5890,0xEF0,text,"AdvancedOptions::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x004F49C0,0x004F58B0,0xEF0,text,"AdvancedOptions::MouseMove(int, int)",android,alta,0,0
+0x004F4AA0,0x004F5990,0xEF0,text,"AdvancedOptions::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x004F4BB0,0x004F5AA0,0xEF0,text,"AdvancedOptions::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x004F5380,0x004F6270,0xEF0,text,AiController::StartState(int),android,alta,0,0
+0x004F6410,0x004F7300,0xEF0,text,Pawn::GetHealth(),android+bytes+inventario,alta,3,0
+0x004F6420,0x004F7310,0xEF0,text,AiPlan::GetString(),android,alta,0,0
+0x004F7170,0x004F8060,0xEF0,text,AiPlanner::IsFast(),android,alta,0,0
+0x004F8350,0x004F9240,0xEF0,text,"AlertAnim::Start(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, bool)",android,alta,0,0
+0x004F8BA0,0x004F9A90,0xEF0,text,"AlertAnim::RenderWarning(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, GL_Color, int, int, bool, bool)",android,alta,0,0
+0x004F98A0,0x004FA790,0xEF0,text,Bank::OnRender(int),android,alta,0,0
+0x004FA2F0,0x004FB1E0,0xEF0,text,Bank::ModifyRep(int),android,alta,0,0
+0x004FA3E0,0x004FB2D0,0xEF0,text,Bank::ModifyCores(int),android,alta,0,0
+0x004FA4B0,0x004FB3A0,0xEF0,text,Bank::CheckUnusedCores(),android,alta,0,0
+0x004FA510,0x004FB400,0xEF0,text,CaveTile::CaveTile(),android,alta,0,0
+0x004FA7B0,0x004FB6A0,0xEF0,text,CaveTile::Crack(),android,alta,0,0
+0x004FA850,0x004FB740,0xEF0,text,CaveTile::Tentacle(),android,alta,0,0
+0x004FAD00,0x004FBBF0,0xEF0,text,NetworkedBox::RenderBase(),android,alta,0,0
+0x004FB730,0x004FC620,0xEF0,text,"OrderOverlay::OrderOverlay(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x004FB8D0,0x004FC7C0,0xEF0,text,OrderOverlay::~OrderOverlay(),android,alta,0,0
+0x004FB9C0,0x004FC8B0,0xEF0,text,OrderOverlay::OnRender(),android,alta,0,0
+0x004FC3F0,0x004FD2E0,0xEF0,text,OrderOverlay::RenderInfo(),android,alta,0,0
+0x004FECE0,0x004FFBD0,0xEF0,text,"OrderOverlay::Update(Board*, EnvWarning*)",android,alta,0,0
+0x004FF3E0,0x005002D0,0xEF0,text,PawnList::PawnList(),android,alta,0,0
+0x004FF700,0x005005F0,0xEF0,text,"PawnList::SetPawns(std::__ndk1::vector<Pawn*, std::__ndk1::allocator<Pawn*> >)",android,alta,0,0
+0x004FFA20,0x00500910,0xEF0,text,"PawnList::RenderPilot(Point, int)",android,alta,0,0
+0x00500270,0x00501160,0xEF0,text,"PawnList::RenderXP(Point, GL_Color, Pawn*, bool)",android,alta,0,0
+0x005006A0,0x00501590,0xEF0,text,PawnList::OnRender(),android,alta,0,0
+0x00502B80,0x00503A70,0xEF0,text,PawnList::GetRects(),android,alta,0,0
+0x00503B60,0x00504A50,0xEF0,text,Board::GetTerrain(Point),android+inventario,alta,3,0
+0x00503B80,0x00504A70,0xEF0,text,SpaceInfo::SpaceInfo(),android,alta,0,0
+0x00503D90,0x00504C80,0xEF0,text,"SpaceInfo::OnRender(Point, Board*)",android,alta,0,0
+0x00505C30,0x00506B20,0xEF0,text,"SpaceInfo::InputAction(Point, Board*)",android,alta,0,1
+0x00505EF0,0x00506DF0,0xF00,text,StatusEffects::OnRender(bool),android,alta,0,0
+0x00506DA0,0x00507CA0,0xF00,text,"StatusEffects::OnRenderTooltip(bool, int)",android,alta,0,0
+0x00509000,0x00509F00,0xF00,text,CorpReward::~CorpReward(),android,alta,0,0
+0x00509430,0x0050A330,0xF00,text,CorpReward::Open(),android,alta,0,0
+0x00509670,0x0050A570,0xF00,text,CorpReward::OpenWindow(),android,alta,0,0
+0x00509FC0,0x0050AEC0,0xF00,text,CorpReward::OnRender(),android,alta,0,0
+0x0050B7E0,0x0050C6E0,0xF00,text,CorpReward::Close(),android,alta,0,0
+0x0050B8E0,0x0050C7E0,0xF00,text,"CorpReward::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x0050BAE0,0x0050C9E0,0xF00,text,"CorpReward::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x0050BD30,0x0050CC30,0xF00,text,"CorpReward::MouseMove(int, int)",android,alta,0,0
+0x0050BE30,0x0050CD30,0xF00,text,CorpReward::GetBackFade(),android,alta,0,0
+0x0050DF20,0x0050EE20,0xF00,text,CorpStore::~CorpStore(),android,alta,0,0
+0x0050E520,0x0050F420,0xF00,text,CorpStore::GetBackFade(),android,alta,0,0
+0x0050F180,0x00510080,0xF00,text,CorpStore::OnLoop(),android,alta,0,0
+0x0050F5F0,0x005104F0,0xF00,text,CorpStore::Open(),android,alta,0,0
+0x0050F720,0x00510620,0xF00,text,CorpStore::Close(),android,alta,0,0
+0x0050FAD0,0x005109D0,0xF00,text,CorpStore::OnRender(),android,alta,0,0
+0x00511960,0x00512860,0xF00,text,CorpStore::RenderTooltips(),android,alta,0,0
+0x00512910,0x00513810,0xF00,text,"CorpStore::MouseMove(int, int)",android,alta,0,0
+0x00512B60,0x00513A60,0xF00,text,"CorpStore::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00512F90,0x00513E90,0xF00,text,CorpStore::PotentialAction(),android,alta,0,0
+0x00513250,0x00514150,0xF00,text,"CorpStore::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x00513C60,0x00514B60,0xF00,text,"StoreBox::OnRender(bool, bool)",android,alta,0,0
+0x00514960,0x00515860,0xF00,text,StoreBox::RenderTooltip(Point),android,alta,0,0
+0x005162D0,0x005171D0,0xF00,text,"PawnHolder::GetPortraitLoc(int, int)",android,alta,0,0
+0x00516310,0x00517210,0xF00,text,PawnHolder::GetPortraitWidth(int),android,alta,0,0
+0x00516690,0x00517590,0xF00,text,CorpWindow::Open(Point),android,alta,0,0
+0x005175D0,0x005184D0,0xF00,text,"FinalAnim::Start(std::__ndk1::vector<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::allocator<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > > >, int)",android,alta,0,1
+0x005177B0,0x005186D0,0xF20,text,FinalAnim::OnRender(),android,alta,0,0
+0x0051B660,0x0051C580,0xF20,text,FinalAnim::RenderBackground(int),android,alta,0,0
+0x0051B9E0,0x0051C900,0xF20,text,GameMenu::GameMenu(),android,alta,0,0
+0x0051BE70,0x0051CD90,0xF20,text,GameMenu::~GameMenu(),android,alta,0,0
+0x0051C5A0,0x0051D4C0,0xF20,text,GameMenu::Close(),android,alta,0,0
+0x0051CAC0,0x0051D9E0,0xF20,text,GameMenu::OnRender(),android,alta,0,0
+0x0051EB80,0x0051FAA0,0xF20,text,"GameMenu::MouseMove(int, int)",android,alta,0,0
+0x0051ED20,0x0051FC40,0xF20,text,"GameMenu::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x0051EE60,0x0051FD80,0xF20,text,GameMenu::ConfirmCommand(),android,alta,0,0
+0x0051EF50,0x0051FE70,0xF20,text,"GameMenu::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x0051F1D0,0x005200F0,0xF20,text,"GameMenu::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x0051F3C0,0x005202E0,0xF20,text,HangarScreen::HangarScreen(),android,alta,0,0
+0x00520AF0,0x00521A10,0xF20,text,HangarScreen::Open(),android,alta,0,0
+0x005218A0,0x005227C0,0xF20,text,HangarScreen::RenderStartButton(),android,alta,0,0
+0x00522BC0,0x00523AE0,0xF20,text,HangarScreen::OnRender(),android,alta,0,0
+0x00524E80,0x00525DA0,0xF20,text,HangarScreen::OnRenderSquad(),android,alta,0,1
+0x00529000,0x00529F30,0xF30,text,HangarScreen::OnRenderCustomization(),android,alta,0,0
+0x0052B7A0,0x0052C6D0,0xF30,text,HangarScreen::RenderHangar(),android,alta,0,0
+0x0052CF00,0x0052DE30,0xF30,text,HangarScreen::StartDeploy(),android,alta,0,0
+0x0052D130,0x0052E060,0xF30,text,HangarScreen::ResetDeploy(),android,alta,0,0
+0x0052D590,0x0052E4C0,0xF30,text,HangarScreen::GetRandomSquad(int),android,alta,0,1
+0x0052E450,0x0052F390,0xF40,text,HangarScreen::GenerateMechList(),android,alta,0,0
+0x0052F260,0x005301A0,0xF40,text,"HangarScreen::RenderSummary(Point, Pawn*, GL_Color)",android,alta,0,1
+0x00532BB0,0x005339E0,0xE30,text,HDRSettings::HDRSettings(),android,alta,0,0
+0x00532D90,0x00533BC0,0xE30,text,HDRSettings::~HDRSettings(),android,alta,0,0
+0x00532ED0,0x00533D00,0xE30,text,HDRSettings::OnRender(),android,alta,0,0
+0x00533CA0,0x00534AD0,0xE30,text,"HDRSettings::MouseMove(int, int)",android,alta,0,0
+0x00533D00,0x00534B30,0xE30,text,"HDRSettings::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00533DB0,0x00534BE0,0xE30,text,"HDRSettings::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x00533EB0,0x00534CE0,0xE30,text,"HDRSettings::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x00533EE0,0x00534D10,0xE30,text,HDRSettings::Open(),android,alta,0,0
+0x00533FA0,0x00534DD0,0xE30,text,HDRSettings::Close(),android,alta,0,0
+0x005340D0,0x00534F00,0xE30,text,QuestManager::GetState(bool),android,alta,0,0
+0x005355C0,0x005363F0,0xE30,text,LanguageMenu::~LanguageMenu(),android,alta,0,0
+0x00535A40,0x00536870,0xE30,text,LanguageMenu::OnRender(),android,alta,0,0
+0x00536B40,0x00537970,0xE30,text,"LanguageMenu::MouseMove(int, int)",android,alta,0,0
+0x00536BA0,0x005379D0,0xE30,text,"LanguageMenu::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00536C40,0x00537A70,0xE30,text,"LanguageMenu::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x00536E80,0x00537CB0,0xE30,text,"LanguageMenu::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x00536EB0,0x00537CE0,0xE30,text,LanguageMenu::Open(),android,alta,0,0
+0x00536FD0,0x00537E00,0xE30,text,LanguageMenu::Close(),android,alta,0,0
+0x005371D0,0x00538000,0xE30,text,"aria::csv::CsvParser::CsvParser(std::__ndk1::basic_istream<char, std::__ndk1::char_traits<char> >&)",android,alta,0,0
+0x00537320,0x00538150,0xE30,text,aria::csv::CsvParser::next_field(),android,alta,0,0
+0x00537840,0x00538670,0xE30,text,Library::InitTexts(),android,alta,0,0
+0x00538150,0x00538F80,0xE30,text,"Library::InitTexts(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&, boost::unordered::unordered_set<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, boost::hash<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >, std::__ndk1::equal_to<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >, std::__ndk1::allocator<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > > > const&)",android,alta,0,0
+0x00538DA0,0x00539BD0,0xE30,text,,inventario,alta,0,0
+0x00538DC0,0x00539BF0,0xE30,text,,inventario,alta,0,0
+0x00538E60,0x00539C90,0xE30,text,,inventario,alta,0,0
+0x00538E80,0x00539CB0,0xE30,text,,inventario,alta,0,0
+0x00538FE0,0x00539E10,0xE30,text,,inventario,alta,0,0
+0x005392A0,0x0053A0D0,0xE30,text,"Library::GetDialogText(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > const&)",android,alta,0,1
+0x0053CAF0,0x0053D930,0xE40,text,OnScreenRename::~OnScreenRename(),android,alta,0,0
+0x0053CB60,0x0053D9A0,0xE40,text,OnScreenRename::Close(),android,alta,0,0
+0x0053CB70,0x0053D9B0,0xE40,text,OnScreenRename::OnRender(),android,alta,0,0
+0x0053F250,0x00540090,0xE40,text,"OnScreenRename::OnGamepadButton(KeyAction, int)",android,alta,0,1
+0x00541DE0,0x00542C30,0xE50,text,OptionsMenu::~OptionsMenu(),android,alta,0,0
+0x005421D0,0x00543020,0xE50,text,OptionsMenu::OnRender(),android,alta,0,0
+0x00544A30,0x00545880,0xE50,text,"OptionsMenu::MouseMove(int, int)",android,alta,0,0
+0x00544BA0,0x005459F0,0xE50,text,"OptionsMenu::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00545050,0x00545EA0,0xE50,text,"OptionsMenu::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x00545250,0x005460A0,0xE50,text,"OptionsMenu::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x005453D0,0x00546220,0xE50,text,"OptionsMenu::OnFingerEvent(KeyAction, int, int)",android,alta,0,0
+0x005454D0,0x00546320,0xE50,text,"OptionsMenu::OnFingerMove(int, int)",android,alta,0,0
+0x00545570,0x005463C0,0xE50,text,OptionsMenu::Open(),android,alta,0,0
+0x005457B0,0x00546600,0xE50,text,OptionsMenu::Close(),android,alta,0,0
+0x00545C90,0x00546AE0,0xE50,text,OptionsMenu::RenderHotkeys(),android,alta,0,0
+0x00547250,0x005480A0,0xE50,text,"Reactor::Render(Point, bool)",android,alta,0,0
+0x005479E0,0x00548830,0xE50,text,PhoneRename::~PhoneRename(),android,alta,0,0
+0x00547A10,0x00548860,0xE50,text,PhoneRename::Close(),android,alta,0,1
+0x00547A40,0x00548880,0xE40,text,PhoneRename::OnRender(),android,alta,0,0
+0x00548A50,0x00549890,0xE40,text,"PhoneRename::MouseMove(int, int)",android,alta,0,0
+0x00548B10,0x00549950,0xE40,text,"PhoneRename::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00548CC0,0x00549B00,0xE40,text,PilotNews::PilotNews(),android,alta,0,0
+0x00548F10,0x00549D50,0xE40,text,PilotNews::~PilotNews(),android,alta,0,0
+0x005490D0,0x00549F10,0xE40,text,PilotNews::OnRender(),android,alta,0,0
+0x0054A730,0x0054B570,0xE40,text,"PilotNews::MouseMove(int, int)",android,alta,0,0
+0x0054A770,0x0054B5B0,0xE40,text,"PilotNews::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x0054A7A0,0x0054B5E0,0xE40,text,PilotNews::SetPilot(std::__ndk1::shared_ptr<Pilot>),android,alta,0,0
+0x0054A8E0,0x0054B720,0xE40,text,PilotNews::OnLoop(),android,alta,0,0
+0x0054AB90,0x0054B9D0,0xE40,text,PilotScreen::PilotScreen(),android,alta,0,0
+0x0054AD30,0x0054BB70,0xE40,text,PilotScreen::~PilotScreen(),android,alta,0,0
+0x0054ADA0,0x0054BBE0,0xE40,text,PilotScreen::Initialize(),android,alta,0,0
+0x0054B4E0,0x0054C320,0xE40,text,PilotScreen::OnRender(),android,alta,0,0
+0x0054C9E0,0x0054D820,0xE40,text,"PilotScreen::RenderPilot(int, Point const&)",android,alta,0,0
+0x0054CF00,0x0054DD40,0xE40,text,"PilotScreen::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x0054CF30,0x0054DD70,0xE40,text,"PilotScreen::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x0054D080,0x0054DEC0,0xE40,text,"PilotScreen::MouseMove(int, int)",android,alta,0,0
+0x0054D220,0x0054E060,0xE40,text,"PilotScreen::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x0054D6A0,0x0054E4E0,0xE40,text,"PowerState::RenderState(Point, GL_Color, bool)",android,alta,0,0
+0x0054DC70,0x0054EAB0,0xE40,text,"PowerState::RenderStateOutline(Point, GL_Color)",android,alta,0,0
+0x0054E750,0x0054F590,0xE40,text,GameProfile::IsProfileSelected(),android,alta,0,0
+0x0054E8D0,0x0054F710,0xE40,text,"GameProfile::DeleteProfile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0054F560,0x005503A0,0xE40,text,GameProfile::LoadProfiles(),android,alta,0,0
+0x005506E0,0x00551520,0xE40,text,GameProfile::GetFtlPilot(),android,alta,0,0
+0x005509B0,0x005517F0,0xE40,text,GameProfile::PollWarning(),android,alta,0,0
+0x00550A30,0x00551870,0xE40,text,GameProfile::GetCurrentSquadName(),android,alta,0,0
+0x00550C80,0x00551AC0,0xE40,text,GameProfile::UnlockSquad(int),android,alta,0,0
+0x00553080,0x00553EC0,0xE40,text,GameProfile::GetSquadId(int),android,alta,0,1
+0x005556A0,0x00556510,0xE70,text,ProfileManager::ProfileManager(),android,alta,0,0
+0x00555970,0x005567E0,0xE70,text,ProfileManager::~ProfileManager(),android,alta,0,0
+0x00555C80,0x00556AF0,0xE70,text,ProfileManager::OnRender(),android,alta,0,0
+0x00556B40,0x005579B0,0xE70,text,"ProfileManager::MouseMove(int, int)",android,alta,0,0
+0x00556C00,0x00557A70,0xE70,text,"ProfileManager::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00556D00,0x00557B70,0xE70,text,"ProfileManager::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x00556F80,0x00557DF0,0xE70,text,"ProfileManager::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x00556FE0,0x00557E50,0xE70,text,ProfileManager::Open(),android,alta,0,0
+0x00557090,0x00557F00,0xE70,text,ProfileSelector::ProfileSelector(),android,alta,0,0
+0x00557480,0x005582F0,0xE70,text,ProfileSelector::~ProfileSelector(),android,alta,0,0
+0x00557600,0x00558470,0xE70,text,ProfileSelector::OnRender(),android,alta,0,0
+0x005592E0,0x0055A150,0xE70,text,"ProfileSelector::MouseMove(int, int)",android,alta,0,0
+0x005593B0,0x0055A220,0xE70,text,"ProfileSelector::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x005595E0,0x0055A450,0xE70,text,"ProfileSelector::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x005598D0,0x0055A740,0xE70,text,ProfileSelector::OnConfirmCreation(),android,alta,0,0
+0x00559B50,0x0055A9C0,0xE70,text,ProfileSelector::DeleteProfile(int),android,alta,0,0
+0x00559C30,0x0055AAA0,0xE70,text,"ProfileSelector::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x00559D10,0x0055AB80,0xE70,text,ProfileSelector::Open(),android,alta,0,0
+0x0055A170,0x0055AFE0,0xE70,text,,interpolado,alta,1,0
+0x0055A420,0x0055B290,0xE70,text,WeaponAnimation::IsBusy(),android,alta,0,0
+0x0055A430,0x0055B2A0,0xE70,text,WeaponAnimation::SetImpactSound(SoundEvent),android,alta,0,0
+0x0055A500,0x0055B370,0xE70,text,ProjectileAnimation::~ProjectileAnimation(),android,alta,0,0
+0x0055ADB0,0x0055BC20,0xE70,text,"ProjectileAnimation::StartProjectile(WeaponTarget*, Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,1
+0x0055B100,0x0055BF80,0xE80,text,"ProjectileAnimation::StartArc(WeaponTarget*, Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0055B540,0x0055C3C0,0xE80,text,ProjectileAnimation::SetImpactSound(SoundEvent),android,alta,0,0
+0x0055B5C0,0x0055C440,0xE80,text,ProjectileAnimation::IsActive(),android,alta,0,0
+0x0055B600,0x0055C480,0xE80,text,ProjectileAnimation::IsBusy(),android,alta,0,0
+0x0055B610,0x0055C490,0xE80,text,ProjectileAnimation::RenderProjectile(),android,alta,0,0
+0x0055B9A0,0x0055C820,0xE80,text,ProjectileAnimation::OnLoop(),android,alta,0,0
+0x0055BC90,0x0055CB10,0xE80,text,"LaserAnimation::StartLaser(WeaponTarget*, Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0055BFF0,0x0055CE70,0xE80,text,LaserAnimation::IsActive(),android,alta,0,0
+0x0055C010,0x0055CE90,0xE80,text,LaserAnimation::RenderProjectile(),android,alta,0,0
+0x0055C290,0x0055D110,0xE80,text,LaserAnimation::OnLoop(),android,alta,0,0
+0x0055C2A0,0x0055D120,0xE80,text,PodAnimation::IsBusy(),android,alta,0,0
+0x0055C2E0,0x0055D160,0xE80,text,"PodAnimation::PodAnimation(Point, WeaponTarget*, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0055C710,0x0055D590,0xE80,text,PodAnimation::~PodAnimation(),android,alta,0,0
+0x0055C7B0,0x0055D630,0xE80,text,PodAnimation::IsActive(),android,alta,0,0
+0x0055C810,0x0055D690,0xE80,text,PodAnimation::RenderProjectile(),android,alta,0,0
+0x0055CAF0,0x0055D970,0xE80,text,PodAnimation::RenderObject(Point),android,alta,0,0
+0x0055CC30,0x0055DAB0,0xE80,text,PodAnimation::Finalize(),android,alta,0,0
+0x0055CCF0,0x0055DB70,0xE80,text,PodAnimation::LoadImages(),android,alta,0,0
+0x0055CD90,0x0055DC10,0xE80,text,PodAnimation::GetImpactSound(),android,alta,0,0
+0x0055CDD0,0x0055DC50,0xE80,text,PodAnimation::OnLoop(),android,alta,0,0
+0x0055CFA0,0x0055DE20,0xE80,text,,interpolado,alta,2,0
+0x0055D0A0,0x0055DF20,0xE80,text,,interpolado,alta,2,0
+0x0055D1C0,0x0055E040,0xE80,text,AirAnimation::RenderProjectile(),android,alta,0,0
+0x0055D260,0x0055E0E0,0xE80,text,"PylonAnimation::PylonAnimation(SpaceDamage, WeaponTarget*, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,2,0
+0x0055D4C0,0x0055E340,0xE80,text,PylonAnimation::~PylonAnimation(),android,alta,0,0
+0x0055D500,0x0055E380,0xE80,text,PylonAnimation::Finalize(),android,alta,0,0
+0x0055D550,0x0055E3D0,0xE80,text,PylonAnimation::RenderObject(Point),android,alta,0,0
+0x0055D5F0,0x0055E470,0xE80,text,PylonAnimation::GetImpactSound(),android,alta,0,0
+0x0055D710,0x0055E590,0xE80,text,WeaponSmoke::Burst(),android,alta,0,0
+0x0055D8E0,0x0055E760,0xE80,text,,inventario,alta,0,0
+0x0055D8F0,0x0055E770,0xE80,text,,interpolado,alta,3,0
+0x0055DA20,0x0055E8A0,0xE80,text,"WeaponTarget::ApplyEffect(SkillEffect, int)",android,alta,0,0
+0x0055DA70,0x0055E8F0,0xE80,text,"WeaponTarget::MarkMovement(Point, Point)",android,alta,0,0
+0x0055DAA0,0x0055E920,0xE80,text,WeaponTarget::GetPawnType(Point),android,alta,0,0
+0x0055DAE0,0x0055E960,0xE80,text,"WeaponTarget::MarkArtillery(Point, Point, GL_Color, int)",android,alta,0,0
+0x0055DB00,0x0055E980,0xE80,text,"WeaponTarget::GetSimplePath(Point, Point)",android,alta,0,0
+0x0055DB20,0x0055E9A0,0xE80,text,WeaponTarget::IsPawnBoosted(int),android,alta,0,0
+0x0055DB30,0x0055E9B0,0xE80,text,"SkillManager::IsAbility(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0055DB50,0x0055E9D0,0xE80,text,"GameMap::AddEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x0055DB70,0x0055E9F0,0xE80,text,SkillManager::IsSelected(),android+inventario,alta,0,0
+0x0055DBC0,0x0055EA40,0xE80,text,SkillManager::GetSpace(),android,alta,0,0
+0x0055DC10,0x0055EA90,0xE80,text,GridSearchable::GetSize() const,android+inventario,alta,3,0
+0x0055DC30,0x0055EAB0,0xE80,text,,interpolado,alta,5,0
+0x0055E1B0,0x0055F030,0xE80,text,Pawn::~Pawn(),android,alta,0,0
+0x0055F030,0x0055FEB0,0xE80,text,"Board::IsBlocked(Point, int)",android+bytes+inventario,alta,3,0
+0x0055F0D0,0x0055FF50,0xE80,text,"Board::IsTerrain(Point, int)",android+inventario,alta,3,0
+0x0055F130,0x0055FFB0,0xE80,text,Board::GetHealth(Point),android+inventario,alta,0,0
+0x0055F190,0x00560010,0xE80,text,"Board::SetHealth(Point, int, int)",android+inventario,alta,0,0
+0x0055F200,0x00560080,0xE80,text,Board::DamageSpace(SpaceDamage),android+inventario,alta,4,0
+0x0055F5B0,0x00560430,0xE80,text,"Board::DamageSpace(Point, int)",android+inventario,alta,2,0
+0x0055F680,0x00560500,0xE80,text,"Board::PushDamage(Point, int)",interpolado,alta,3,0
+0x0055F7B0,0x00560630,0xE80,text,Board::AddEffect(SkillEffect),android+inventario,alta,5,0
+0x0055F970,0x005607F0,0xE80,text,Board::AddEffect(SpaceDamage),android+inventario,alta,2,0
+0x0055FC10,0x00560A90,0xE80,text,Board::GetDropZone(bool),android,alta,0,0
+0x005601C0,0x00561040,0xE80,text,"Board::ApplyEffect(SkillEffect, int)",android,alta,5,0
+0x00560E60,0x00561CE0,0xE80,text,,interpolado,alta,2,0
+0x00560EA0,0x00561D20,0xE80,text,Board::RemovePawn(Pawn*),android+inventario,alta,0,0
+0x00561080,0x00561F00,0xE80,text,Board::RemovePawn(Point),android+inventario,alta,0,0
+0x00561280,0x00562100,0xE80,text,"Board::GetLeaveCost(int, int, int)",interpolado,alta,2,0
+0x005612A0,0x00562120,0xE80,text,"Board::GetEnterCost(int, int, int)",interpolado,alta,2,0
+0x00561300,0x00562180,0xE80,text,"Board::IsEnterable(int, int, int)",interpolado,alta,4,0
+0x00561370,0x005621F0,0xE80,text,Board::IsValid(Point),android+inventario,alta,5,0
+0x005613A0,0x00562220,0xE80,text,Board::LoadScript(LuaTable&),android,alta,0,0
+0x00562E70,0x00563CF0,0xE80,text,"Board::SaveScript(LuaString&, bool)",android,alta,0,0
+0x00564680,0x00565500,0xE80,text,"Board::Save(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x005649E0,0x00565860,0xE80,text,"Board::Load(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00564D20,0x00565BA0,0xE80,text,"Board::MarkFlashing(Point, bool)",android+inventario,alta,0,0
+0x00564D40,0x00565BC0,0xE80,text,,inventario,alta,0,0
+0x00564E10,0x00565C90,0xE80,text,,inventario,alta,0,0
+0x00564EC0,0x00565D40,0xE80,text,Board::ClearSpace(Point),android+inventario,alta,0,0
+0x00565060,0x00565EE0,0xE80,text,"Board::SetTerrain(Point, int)",android+inventario,alta,0,0
+0x00565080,0x00565F00,0xE80,text,"Board::SetCustomTile(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x00565140,0x00565FC0,0xE80,text,Board::GetCustomTile(Point),android+inventario,alta,0,0
+0x005651E0,0x00566060,0xE80,text,"Board::SetSmoke(Point, bool, bool)",android+inventario,alta,0,0
+0x00565240,0x005660C0,0xE80,text,"Board::AddAlert(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x005652D0,0x00566150,0xE80,text,"Board::SetAcid(Point, bool)",android+inventario,alta,0,0
+0x005653C0,0x00566240,0xE80,text,Board::IsVines(Point),android+inventario,alta,3,0
+0x005653E0,0x00566260,0xE80,text,Board::IsSmoke(Point),android+inventario,alta,3,0
+0x00565490,0x00566310,0xE80,text,Board::GetPawns(int),android+inventario,alta,0,0
+0x00565570,0x005663F0,0xE80,text,Board::GetBuildingsLua(),android+inventario,alta,0,0
+0x005655F0,0x00566470,0xE80,text,"Board::UpdateSpawning(bool, bool)",android,alta,0,0
+0x00565AE0,0x00566960,0xE80,text,Board::CheckConsole(),android,alta,0,0
+0x00566170,0x00566FF0,0xE80,text,Board::GetEnemyCount(),android+inventario,alta,0,0
+0x00566180,0x00567000,0xE80,text,,inventario,alta,1,1
+0x00566900,0x00567770,0xE70,text,Board::OnRender(int),android,alta,0,0
+0x00567170,0x00567FE0,0xE70,text,Board::OnRenderSpaces(int),android,alta,0,0
+0x00567700,0x00568570,0xE70,text,Board::GetPawn(int),android+bytes+inventario,alta,3,0
+0x00567750,0x005685C0,0xE70,text,"Board::GetPawn(Point, bool)",android+bytes+inventario,alta,4,0
+0x00567840,0x005686B0,0xE70,text,Board::IsPawnAlive(int),android+bytes+inventario,alta,2,0
+0x00567970,0x005687E0,0xE70,text,Board::GetPawnSpace(int),android+bytes+inventario,alta,2,0
+0x00567993,0x00568803,0xE70,text,,interpolado,media,1,0
+0x00567A10,0x00568880,0xE70,text,"Board::SetTerrainIcon(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x00567AD0,0x00568940,0xE70,text,"Board::RandomizeTerrain(int, int)",android+inventario,alta,0,0
+0x00567C50,0x00568AC0,0xE70,text,Board::IsFire(Point),android+inventario,alta,3,0
+0x00567CB0,0x00568B20,0xE70,text,Board::IsAcid(Point),android+inventario,alta,3,0
+0x00567D00,0x00568B70,0xE70,text,Board::IsBuilding(Point),android+inventario,alta,4,0
+0x00567E30,0x00568CA0,0xE70,text,"Board::SpawnPawn(Pawn*, Point)",android+inventario,alta,0,0
+0x005680C0,0x00568F30,0xE70,text,,inventario,alta,0,0
+0x005681C0,0x00569030,0xE70,text,,inventario,alta,0,0
+0x00568250,0x005690C0,0xE70,text,Board::SpawnPawn(Pawn*),android+inventario,alta,0,0
+0x00568270,0x005690E0,0xE70,text,,inventario,alta,0,0
+0x005683E0,0x00569250,0xE70,text,,inventario,alta,0,0
+0x005686D0,0x00569540,0xE70,text,Board::SpawnQueued(),android+inventario,alta,0,0
+0x00568860,0x005696D0,0xE70,text,Board::IsCrackable(Point),android+inventario,alta,2,0
+0x005688B0,0x00569720,0xE70,text,,inventario,alta,0,0
+0x00568900,0x00569770,0xE70,text,,inventario,alta,0,0
+0x00568950,0x005697C0,0xE70,text,Board::GetPawnTeam(Point),android+bytes+inventario,alta,4,0
+0x005689A5,0x00569815,0xE70,text,,interpolado,media,1,0
+0x005689C0,0x00569830,0xE70,text,"Board::GetPawnTeam(int, int)",android+inventario,alta,0,0
+0x005689E0,0x00569850,0xE70,text,Board::IsBusy(),android+inventario,alta,0,0
+0x005689F0,0x00569860,0xE70,text,Board::GetBusyState(),android+inventario,alta,2,0
+0x00568CF0,0x00569B60,0xE70,text,Board::UpdateStackedEffects(),android,alta,4,0
+0x005695E0,0x0056A450,0xE70,text,Board::KillTempUnits(),android,alta,0,0
+0x00569920,0x0056A790,0xE70,text,Board::IsCracked(Point),android+inventario,alta,3,0
+0x00569970,0x0056A7E0,0xE70,text,"Board::SetCracked(Point, bool)",android+inventario,alta,0,0
+0x005699D0,0x0056A840,0xE70,text,Board::OnLoop(),android,alta,0,0
+0x0056B070,0x0056BEE0,0xE70,text,Board::UpdateLeaders(),android,alta,0,0
+0x0056B240,0x0056C0B0,0xE70,text,"Board::SetBlockSpawn(Point, int)",android+inventario,alta,0,0
+0x0056B270,0x0056C0E0,0xE70,text,Board::ClearBlockSpawns(),android+inventario,alta,0,0
+0x0056B520,0x0056C390,0xE70,text,"Board::AddTeleport(Point, Point)",android+inventario,alta,0,0
+0x0056B6A0,0x0056C510,0xE70,text,Board::Teleport(int),android,alta,0,0
+0x0056BE90,0x0056CD00,0xE70,text,"Board::SetLava(Point, bool)",android+inventario,alta,0,0
+0x0056BED0,0x0056CD40,0xE70,text,Board::GetDeployLocScore(Point),android+inventario,alta,0,0
+0x0056BFC0,0x0056CE30,0xE70,text,Board::GetTurn(),android+inventario,alta,0,0
+0x0056BFD0,0x0056CE40,0xE70,text,Board::IsSafe(Point),android+inventario,alta,0,0
+0x0056C0F0,0x0056CF60,0xE70,text,Board::LoadMapData(),android,alta,0,0
+0x0056C710,0x0056D580,0xE70,text,"Board::SetWeather(int, int, Point, Point, float)",android+inventario,alta,0,0
+0x0056C750,0x0056D5C0,0xE70,text,Board::StopWeather(),android+inventario,alta,0,0
+0x0056C780,0x0056D5F0,0xE70,text,"Board::SetFrozen(Point, bool)",android+inventario,alta,0,0
+0x0056C7E0,0x0056D650,0xE70,text,Board::IsFrozen(Point),android+inventario,alta,0,0
+0x0056C900,0x0056D770,0xE70,text,,inventario,alta,0,0
+0x0056CAF0,0x0056D960,0xE70,text,"Board::GetZone(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x0056D540,0x0056E3B0,0xE70,text,"Board::Bounce(Point, int)",android+inventario,alta,0,0
+0x0056D5B0,0x0056E420,0xE70,text,Board::IsSpawning(Point),android+inventario,alta,2,0
+0x0056D860,0x0056E6D0,0xE70,text,Board::IsTargeted(Point),android+inventario,alta,0,0
+0x0056D930,0x0056E7A0,0xE70,text,"Board::Ping(Point, GL_Color)",android+inventario,alta,0,0
+0x0056D9C0,0x0056E830,0xE70,text,"Board::AddPawn(Pawn*, Point)",android+inventario,alta,0,0
+0x0056DD90,0x0056EC00,0xE70,text,,inventario,alta,0,0
+0x0056DE50,0x0056ECC0,0xE70,text,Board::AddPawn(Pawn*),android+inventario,alta,0,0
+0x0056DE70,0x0056ECE0,0xE70,text,,inventario,alta,0,0
+0x0056DFD0,0x0056EE40,0xE70,text,"Board::AddPawn(Pawn*, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x0056E170,0x0056EFE0,0xE70,text,,inventario,alta,0,0
+0x0056E590,0x0056F400,0xE70,text,Board::Fade(int),android+inventario,alta,0,0
+0x0056EA40,0x0056F8B0,0xE70,text,Board::Slide(int),android+inventario,alta,0,0
+0x0056ED50,0x0056FBC0,0xE70,text,"Board::IsPawnTeam(Point, int)",android+inventario,alta,2,0
+0x0056EDA0,0x0056FC10,0xE70,text,"Board::IsPawnTeam(int, int, int)",android+inventario,alta,2,0
+0x0056EE50,0x0056FCC0,0xE70,text,Board::IsPawnSpace(Point),android+bytes+inventario,alta,4,0
+0x0056EE70,0x0056FCE0,0xE70,text,"Board::IsPawnSpace(Point, bool)",android+bytes+inventario,alta,3,0
+0x0056F170,0x0056FFE0,0xE70,text,"Board::SetPopulated(bool, Point)",android+inventario,alta,0,0
+0x0056F230,0x005700A0,0xE70,text,,inventario,alta,0,0
+0x0056F940,0x005707B0,0xE70,text,Board::GetBuildingCount(int),android+inventario,alta,0,0
+0x0056FB20,0x00570990,0xE70,text,Board::IsEdge(Point),android+inventario,alta,3,0
+0x0056FB50,0x005709C0,0xE70,text,Board::SetQueuedOverlay(int),android,alta,0,0
+0x00570160,0x00570FD0,0xE70,text,Board::RenderExplosion(),android,alta,0,0
+0x00570430,0x005712A0,0xE70,text,Board::LockBomb(),android+inventario,alta,0,0
+0x00570660,0x005714D0,0xE70,text,"Board::MarkSpaceColor(Point, GL_Color)",android+inventario,alta,0,0
+0x005706C0,0x00571530,0xE70,text,"Board::MarkSpaceSimpleColor(Point, GL_Color)",android+inventario,alta,0,0
+0x005706E0,0x00571550,0xE70,text,Board::MarkSpaceDamage(SpaceDamage),android+inventario,alta,0,0
+0x005707C0,0x00571630,0xE70,text,Board::GetPawnCount(int),android+inventario,alta,0,0
+0x00570990,0x00571800,0xE70,text,"Board::MarkSpaceImage(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, GL_Color)",android+inventario,alta,0,0
+0x00570E00,0x00571C70,0xE70,text,Board::GetPawn(Point),android+bytes+inventario,alta,3,0
+0x00570F40,0x00571DB0,0xE70,text,Board::AddPod(),android,alta,0,0
+0x00571180,0x00571FF0,0xE70,text,Board::AddPod(Point),android,alta,0,0
+0x00571680,0x005724F0,0xE70,text,Board::IsPod(Point),android+inventario,alta,2,0
+0x005716F0,0x00572560,0xE70,text,Board::IsItem(Point),android+inventario,alta,2,0
+0x00571750,0x005725C0,0xE70,text,Board::IsDangerousItem(Point),android+inventario,alta,0,0
+0x005717A0,0x00572610,0xE70,text,Board::IsDangerous(Point),android+inventario,alta,2,0
+0x00571870,0x005726E0,0xE70,text,Board::GetItem(Point),android+inventario,alta,0,0
+0x00571930,0x005727A0,0xE70,text,Board::SetDangerous(Point),android+inventario,alta,0,0
+0x00571950,0x005727C0,0xE70,text,"Board::SetItem(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x00571B20,0x00572990,0xE70,text,"Board::IsPushBlocked(Point, int)",interpolado,alta,2,0
+0x00571B90,0x00572A00,0xE70,text,Board::GetAvailableSpace(Pawn*),android,alta,0,0
+0x005723D0,0x00573240,0xE70,text,Board::IsEnvironmentDanger(Point),android+inventario,alta,0,0
+0x005723F0,0x00573260,0xE70,text,,interpolado,alta,1,0
+0x00572680,0x005734F0,0xE70,text,Board::GetRandomBuilding(bool),android+inventario,alta,0,0
+0x005728D0,0x00573740,0xE70,text,Board::GetInfectedCount(),android+inventario,alta,0,0
+0x00572A50,0x005738C0,0xE70,text,"Board::GetAnotherPlayerPawn(int, int)",android+inventario,alta,0,0
+0x00572B50,0x005739C0,0xE70,text,Board::GetMechDamage(),android+inventario,alta,0,0
+0x00572D90,0x00573C00,0xE70,text,"Board::GetDistanceToPawn(Point, int)",android+inventario,alta,0,0
+0x00573030,0x00573EA0,0xE70,text,Board::GetDistanceToBuilding(Point),android+inventario,alta,0,0
+0x005730B0,0x00573F20,0xE70,text,"Board::AddAnimation(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android+inventario,alta,0,0
+0x00573160,0x00573FD0,0xE70,text,"Board::GetSimpleReachable(Point, int, bool)",android+inventario,alta,3,0
+0x005731F0,0x00574060,0xE70,text,"Board::GetSimplePath(Point, Point)",android+inventario,alta,3,0
+0x00573280,0x005740F0,0xE70,text,"Board::GetReachablePointList(Point, int, int)",android+inventario,alta,5,0
+0x005733D0,0x00574240,0xE70,text,"Board::GetPath(Point, Point, int)",android+inventario,alta,3,0
+0x00573490,0x00574300,0xE70,text,"Board::AddBurst(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android+inventario,alta,0,0
+0x00573540,0x005743B0,0xE70,text,"Board::IsWall(Point, int, int)",android+inventario,alta,3,0
+0x005735E0,0x00574450,0xE70,text,"Board::SetWall(bool, Point, int)",android+inventario,alta,0,0
+0x00573680,0x005744F0,0xE70,text,"Board::AddUniqueBuilding(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x00573820,0x00574690,0xE70,text,Board::IsUniqueBuilding(Point),android+inventario,alta,0,0
+0x00573950,0x005747C0,0xE70,text,Board::IsDamaged(Point),android+inventario,alta,0,0
+0x005739E0,0x00574850,0xE70,text,"Board::IsSkillDeadly(SpaceDamage, Pawn*)",inventario,alta,3,0
+0x00573A26,0x00574896,0xE70,text,,interpolado,media,1,0
+0x00573B80,0x005749F0,0xE70,text,Board::StartMechTravel(),android+inventario,alta,0,0
+0x00573EB0,0x00574D20,0xE70,text,"Board::StartPopEvent(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x005741F0,0x00575060,0xE70,text,"Board::AutoDeploy(std::__ndk1::vector<Point, std::__ndk1::allocator<Point> >)",android,alta,0,0
+0x005774F0,0x00578360,0xE70,text,,interpolado,alta,1,0
+0x00578CF0,0x00579B60,0xE70,text,BoardSpace::~BoardSpace(),android,alta,0,0
+0x00579240,0x0057A0B0,0xE70,text,SkillManager::~SkillManager(),android,alta,0,0
+0x00579D70,0x0057ABE0,0xE70,text,,interpolado,alta,1,0
+0x0057A010,0x0057AE80,0xE70,text,BoardEditor::IsSwapReady(),android,alta,0,0
+0x0057A1D0,0x0057B040,0xE70,text,BoardEditor::~BoardEditor(),android,alta,0,0
+0x0057A390,0x0057B200,0xE70,text,BoardEditor::OnLoop(),android,alta,0,0
+0x0057CD00,0x0057DB70,0xE70,text,BoardEditor::Start(),android,alta,0,0
+0x0057CE00,0x0057DC70,0xE70,text,"BoardEditor::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x0057D420,0x0057E290,0xE70,text,BoardManager::~BoardManager(),android,alta,0,0
+0x0057D570,0x0057E3E0,0xE70,text,BoardManager::MouseMove(bool),android,alta,0,0
+0x0057DB70,0x0057E9E0,0xE70,text,"BoardManager::OnFingerMove(bool, int, int)",android,alta,0,0
+0x0057DB90,0x0057EA00,0xE70,text,"BoardManager::OnFingerEvent(bool, KeyAction, int, int)",android,alta,0,0
+0x0057DBF0,0x0057EA60,0xE70,text,BoardManager::CheckCool(),android,alta,0,0
+0x0057DC40,0x0057EAB0,0xE70,text,BoardManager::GetBoardPosition(),android,alta,0,0
+0x0057DC60,0x0057EAD0,0xE70,text,BoardManager::GetBoardScale(),android,alta,0,0
+0x0057E260,0x0057F0D0,0xE70,text,BoardManager::OnRender(),android,alta,0,0
+0x0057E820,0x0057F690,0xE70,text,,interpolado,alta,1,0
+0x0057EAC0,0x0057F930,0xE70,text,SkillManager::GetArmedWeaponId(),android+inventario,alta,0,0
+0x0057EAD0,0x0057F940,0xE70,text,SkillManager::IsWeaponArmed(),android+inventario,alta,0,0
+0x0057EAF0,0x0057F960,0xE70,text,Pilot::PrepareEffect(Effect*),android,alta,0,0
+0x0057EB00,0x0057F970,0xE70,text,EffectApplier::GetPower(),android,alta,0,0
+0x0057EB20,0x0057F990,0xE70,text,"EffectApplier::GetSkillLevel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0057EB50,0x0057F9C0,0xE70,text,EffectApplier::GetRewardLoc(int),android,alta,0,0
+0x0057EB80,0x0057F9F0,0xE70,text,BoardPlayer::BoardPlayer(),android,alta,0,0
+0x0057FEE0,0x00580D50,0xE70,text,"BoardPlayer::LoadMission(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00580070,0x00580EE0,0xE70,text,BoardPlayer::OnRenderTopPad(),android,alta,0,0
+0x00581BF0,0x00582A60,0xE70,text,"BoardPlayer::SelectMap(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00582030,0x00582EA0,0xE70,text,BoardPlayer::IsNextPhase(),android,alta,0,0
+0x005822C0,0x00583130,0xE70,text,BoardPlayer::InitializeMission(),android,alta,0,0
+0x00582450,0x005832C0,0xE70,text,Skill::IsZoneTargeting(),android,alta,0,0
+0x00582610,0x00583480,0xE70,text,BoardPlayer::Start(),android,alta,0,0
+0x00582B20,0x00583990,0xE70,text,BoardPlayer::SetupButtons(),android,alta,0,0
+0x00582C00,0x00583A70,0xE70,text,BoardPlayer::SetTestMode(bool),android,alta,0,0
+0x005836F0,0x00584560,0xE70,text,BoardPlayer::MouseMove(bool),android,alta,0,0
+0x00583B70,0x005849E0,0xE70,text,BoardPlayer::UpdateObjectives(bool),android,alta,0,0
+0x00583DD0,0x00584C40,0xE70,text,BoardPlayer::CheckConsole(),android,alta,0,0
+0x00584840,0x005856B0,0xE70,text,BoardPlayer::StateLabelDone(),android,alta,0,0
+0x00584CC0,0x00585B30,0xE70,text,BoardPlayer::IsMissionEnd(),android,alta,0,0
+0x00584F40,0x00585DB0,0xE70,text,BoardPlayer::TriggerGameover(),android,alta,0,0
+0x00585570,0x005863E0,0xE70,text,BoardPlayer::RenderActiveUnits(),android,alta,0,0
+0x00585C40,0x00586AB0,0xE70,text,BoardPlayer::EndTurn(),android,alta,0,0
+0x00585D20,0x00586B90,0xE70,text,BoardPlayer::AttemptAction(),android,alta,0,0
+0x00586140,0x00586FB0,0xE70,text,BoardPlayer::DeployAction(),android,alta,0,0
+0x00586430,0x005872A0,0xE70,text,BoardPlayer::RenderEndTurn(),android,alta,0,0
+0x00587740,0x005885B0,0xE70,text,BoardPlayer::RenderGamepadContext(),android,alta,0,0
+0x00587EA0,0x00588D10,0xE70,text,"BoardPlayer::RenderGamepadContext(Point, std::__ndk1::vector<JoyTip, std::__ndk1::allocator<JoyTip> >)",android,alta,0,0
+0x005882D0,0x00589140,0xE70,text,BoardPlayer::StartNextPhase(),android,alta,0,0
+0x00588910,0x00589780,0xE70,text,BoardPlayer::UpdateQueued(),android,alta,0,0
+0x00588C20,0x00589A90,0xE70,text,BoardPlayer::UpdateState(),android,alta,0,0
+0x005893C0,0x0058A230,0xE70,text,BoardPlayer::StartState(int),android,alta,0,0
+0x00589A70,0x0058A8E0,0xE70,text,BoardPlayer::FinalizeDeployment(),android,alta,0,0
+0x00589B20,0x0058A990,0xE70,text,BoardPlayer::EndState(int),android,alta,0,0
+0x00589F90,0x0058AE00,0xE70,text,BoardPlayer::OnLoop(),android,alta,0,0
+0x0058A510,0x0058B380,0xE70,text,BoardPlayer::RandomizeEnvironment(),android,alta,0,0
+0x0058A880,0x0058B6F0,0xE70,text,BoardPlayer::CheckVictory(bool),android,alta,0,0
+0x0058ACF0,0x0058BB60,0xE70,text,BoardPlayer::SetupVictoryScreen(),android,alta,0,0
+0x0058B2A0,0x0058C110,0xE70,text,BoardPlayer::UpdateTips(),android,alta,0,0
+0x0058B3A0,0x0058C210,0xE70,text,BoardPlayer::UpdateConfirm(),android,alta,0,0
+0x0058B740,0x0058C5B0,0xE70,text,BoardPlayer::UpdateAmbience(),android,alta,0,0
+0x0058BA00,0x0058C870,0xE70,text,BoardPlayer::UpdateOrderOverlay(),android,alta,0,0
+0x0058BA80,0x0058C8F0,0xE70,text,"BoardPlayer::UpdateTestMode(std::__ndk1::vector<Pawn*, std::__ndk1::allocator<Pawn*> >&)",android,alta,0,0
+0x0058BD10,0x0058CB80,0xE70,text,"BoardPlayer::UpdateEndTurn(std::__ndk1::vector<Pawn*, std::__ndk1::allocator<Pawn*> >&)",android,alta,0,0
+0x0058BF50,0x0058CDC0,0xE70,text,BoardPlayer::GetDiffMod(),android,alta,0,0
+0x0058C000,0x0058CE70,0xE70,text,BoardPlayer::GetPodObjective(bool),android,alta,0,0
+0x0058C2E0,0x0058D150,0xE70,text,BoardPlayer::GetCompletedObjectives(),android,alta,0,0
+0x0058E6D0,0x0058F540,0xE70,text,BoardPlayer::OnRenderUI(),android,alta,0,0
+0x00590090,0x00590F00,0xE70,text,BoardPlayer::UndoMovement(),android,alta,0,0
+0x00590200,0x00591070,0xE70,text,BoardPlayer::UndoTurn(),android,alta,0,0
+0x005906D0,0x00591540,0xE70,text,BoardPlayer::SetupBuildingHealth(int),android,alta,0,0
+0x00590E40,0x00591CB0,0xE70,text,BoardPlayer::IsSecretPossible(),android,alta,0,0
+0x00591400,0x00592270,0xE70,text,"BoardPlayer::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00591760,0x005925D0,0xE70,text,"BoardPlayer::OnFingerEvent(KeyAction, int, int)",android,alta,0,0
+0x00591B10,0x00592980,0xE70,text,BoardPlayer::RenderTouchArming(),android,alta,0,0
+0x00591FA0,0x00592E10,0xE70,text,"BoardPlayer::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x00592550,0x005933C0,0xE70,text,BoardPlayer::GetBriefingMessage(),android,alta,0,0
+0x00592E30,0x00593CA0,0xE70,text,BoardPlayer::SaveGameData(LuaString&),android,alta,0,0
+0x00594400,0x00595270,0xE70,text,"BoardPlayer::AddInterfaceTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, int, bool)",android,alta,0,0
+0x005947C0,0x00595630,0xE70,text,"EnvWarning::Start(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00594D80,0x00595BF0,0xE70,text,EnvWarning::OnRender(),android,alta,0,1
+0x00598AB0,0x00599910,0xE60,text,,manual,alta,1,0
+0x00598F10,0x00599D70,0xE60,text,BoardSpace::BoardSpace(),android,alta,0,0
+0x0059A550,0x0059B3B0,0xE60,text,BoardSpace::UpdateBuildingImage(),android,alta,0,0
+0x0059ABB0,0x0059BA10,0xE60,text,BoardSpace::RenderPopulation(),android,alta,0,0
+0x0059AEB0,0x0059BD10,0xE60,text,BoardSpace::StartSavePeopleAnim(),android,alta,0,0
+0x0059B8C0,0x0059C720,0xE60,text,"BoardSpace::AddAlert(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0059C5C0,0x0059D420,0xE60,text,BoardSpace::CheckTerrainDangers(),android,alta,3,0
+0x0059CB70,0x0059D9D0,0xE60,text,BoardSpace::CheckAcidFire(Pawn*),android,alta,0,0
+0x0059D5A0,0x0059E400,0xE60,text,BoardSpace::OnLoop(),android,alta,0,0
+0x0059E8A0,0x0059F700,0xE60,text,BoardSpace::SetFrozen(bool),android,alta,4,0
+0x0059EBE0,0x0059FA40,0xE60,text,BoardSpace::SetForceField(),android,alta,2,0
+0x0059EE20,0x0059FC80,0xE60,text,BoardSpace::RemoveForceField(),interpolado,alta,3,0
+0x0059F020,0x0059FE80,0xE60,text,,interpolado,alta,2,0
+0x0059F050,0x0059FEB0,0xE60,text,BoardSpace::IsPawnSpace(bool),bytes,alta,7,0
+0x0059F260,0x005A00C0,0xE60,text,BoardSpace::IsWalkable(int),interpolado,alta,4,0
+0x0059F3A0,0x005A0200,0xE60,text,BoardSpace::GetEnterPenalty(int),interpolado,alta,2,0
+0x0059F7C0,0x005A0620,0xE60,text,BoardSpace::IsWall(int),interpolado,alta,2,0
+0x0059FC20,0x005A0A80,0xE60,text,"BoardSpace::SetPod(int, int)",android,alta,0,0
+0x0059FDF0,0x005A0C50,0xE60,text,,interpolado,alta,1,0
+0x005A03E0,0x005A1240,0xE60,text,BoardSpace::ClearItem(),android,alta,1,0
+0x005A06C0,0x005A1520,0xE60,text,BoardSpace::GetTerrainIcon(int),android,alta,0,0
+0x005A0B30,0x005A1990,0xE60,text,"BoardSpace::SetUniqueBuilding(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x005A0CB0,0x005A1B10,0xE60,text,BoardSpace::SetTerrain(int),android,alta,3,0
+0x005A10B0,0x005A1F10,0xE60,text,BoardSpace::AddBuilding(),interpolado,alta,3,0
+0x005A11B0,0x005A2010,0xE60,text,BoardSpace::TriggerSplash(int),android,alta,0,0
+0x005A1370,0x005A21D0,0xE60,text,"BoardSpace::RenderArrow(int, float)",android,alta,0,0
+0x005A16E0,0x005A2540,0xE60,text,BoardSpace::RenderFloorOverlay(bool),android,alta,0,0
+0x005A1C30,0x005A2A90,0xE60,text,"BoardSpace::RenderLayer(int, bool)",android,alta,0,0
+0x005A2060,0x005A2EC0,0xE60,text,BoardSpace::RenderPawnLayer(bool),android,alta,0,0
+0x005A4830,0x005A5690,0xE60,text,BoardSpace::RenderFloorLayer(bool),android,alta,0,0
+0x005A65B0,0x005A7410,0xE60,text,BoardSpace::RenderPawnOverlay(bool),android,alta,0,0
+0x005A6F90,0x005A7DF0,0xE60,text,BoardSpace::RenderDamageInfo(),android,alta,0,0
+0x005A7A20,0x005A8880,0xE60,text,BoardSpace::RenderPawnHealth(),android,alta,0,0
+0x005A87F0,0x005A9650,0xE60,text,BoardSpace::OnRenderProjectiles(),android,alta,0,0
+0x005A8E30,0x005A9C90,0xE60,text,"BoardSpace::RenderCloseRange(int, GL_Color)",android,alta,0,0
+0x005A9040,0x005A9EA0,0xE60,text,"BoardSpace::OnRenderVector(MoveVector, float)",android,alta,0,0
+0x005A94B0,0x005AA310,0xE60,text,,interpolado,alta,3,0
+0x005A9550,0x005AA3B0,0xE60,text,"BoardSpace::SetTileset(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x005AA8C0,0x005AB720,0xE60,text,"BoardSpace::GetTile(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x005AAA10,0x005AB870,0xE60,text,BoardSpace::IsPushBlocked(int),interpolado,alta,3,0
+0x005AAAE0,0x005AB940,0xE60,text,"BoardSpace::SetSpawning(bool, bool)",android,alta,0,0
+0x005AABD0,0x005ABA30,0xE60,text,BoardSpace::SetAcid(bool),interpolado,alta,2,0
+0x005AAC30,0x005ABA90,0xE60,text,BoardSpace::IsSelected(),android,alta,0,0
+0x005AAC40,0x005ABAA0,0xE60,text,BoardSpace::SetCracked(bool),android,alta,3,0
+0x005AAE10,0x005ABC70,0xE60,text,BoardSpace::DamageTerrain(int),android,alta,3,0
+0x005AB080,0x005ABEE0,0xE60,text,BoardSpace::SetSelected(bool),android,alta,0,0
+0x005AB090,0x005ABEF0,0xE60,text,BoardSpace::OnRenderPawn(),android,alta,0,0
+0x005AB580,0x005AC3E0,0xE60,text,BoardSpace::SetFire(bool),android,alta,2,0
+0x005AB740,0x005AC5A0,0xE60,text,"BoardSpace::SetSmoke(bool, bool)",android,alta,3,0
+0x005AB860,0x005AC6C0,0xE60,text,BoardSpace::GetSmoke(int),android,alta,0,0
+0x005ABA90,0x005AC8F0,0xE60,text,"BoardSpace::DamageSpace(SpaceDamage, int)",android,alta,5,0
+0x005AC523,0x005AD383,0xE60,text,,interpolado,media,1,0
+0x005AD2A0,0x005AE100,0xE60,text,"BoardSpace::SetGrappled(int, bool)",android,alta,0,0
+0x005AD640,0x005AE4A0,0xE60,text,BoardSpace::Threaten(),android,alta,0,0
+0x005AD740,0x005AE5A0,0xE60,text,"BoardSpace::DustBurst(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android,alta,0,0
+0x005ADA60,0x005AE8C0,0xE60,text,,interpolado,alta,1,0
+0x005ADBB0,0x005AEA10,0xE60,text,BoardSpace::PushSpace(int),interpolado,alta,4,0
+0x005ADD60,0x005AEBC0,0xE60,text,BoardSpace::MarkDamage(SpaceDamage),android,alta,0,0
+0x005AE280,0x005AF0E0,0xE60,text,BoardSpace::GetSpace(),android,alta,0,0
+0x005AE490,0x005AF2F0,0xE60,text,BoardSpace::GetPawn(bool),bytes,alta,2,0
+0x005AE510,0x005AF370,0xE60,text,BoardSpace::IsTerrainBlocking(int),bytes,alta,4,0
+0x005AE5AC,0x005AF40C,0xE60,text,,interpolado,media,1,0
+0x005AE5D0,0x005AF430,0xE60,text,BoardSpace::IsTerrain(int),interpolado,alta,4,0
+0x005AE6B0,0x005AF510,0xE60,text,BoardSpace::IsCrackable(),interpolado,alta,2,0
+0x005AE880,0x005AF6E0,0xE60,text,BoardSpace::GetDescription(),android,alta,0,0
+0x005AF170,0x005AFFD0,0xE60,text,"BoardSpace::AddAnimation(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android,alta,0,0
+0x005B1450,0x005B22B0,0xE60,text,"std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > LuaEnv::GetValue<std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> > >(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x005B29B0,0x005B3810,0xE60,text,ConfirmBox::ConfirmBox(),android,alta,0,0
+0x005B2D10,0x005B3B70,0xE60,text,ConfirmBox::~ConfirmBox(),android,alta,0,0
+0x005B2F30,0x005B3D90,0xE60,text,"ConfirmBox::Open(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool, bool)",android,alta,0,0
+0x005B31E0,0x005B4040,0xE60,text,ConfirmBox::OnRender(),android,alta,0,0
+0x005B4CC0,0x005B5B20,0xE60,text,"ConfirmBox::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x005B4D20,0x005B5B80,0xE60,text,"ConfirmBox::MouseMove(int, int)",android,alta,0,0
+0x005B4D80,0x005B5BE0,0xE60,text,"ConfirmBox::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x005B4F10,0x005B5D70,0xE60,text,"ConfirmBox::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x005B4F80,0x005B5DE0,0xE60,text,ObjectiveList::ObjectiveList(BoardPlayer*),android,alta,0,0
+0x005B58F0,0x005B6750,0xE60,text,ObjectiveList::GetRects(),android,alta,0,0
+0x005B5DE0,0x005B6C40,0xE60,text,ObjectiveList::RenderTurnText(Point),android,alta,0,0
+0x005B6670,0x005B74D0,0xE60,text,ObjectiveList::OnRender(),android,alta,0,0
+0x005B7EA0,0x005B8D00,0xE60,text,ObjectiveList::RenderTooltips(),android,alta,0,0
+0x005B83A0,0x005B9200,0xE60,text,,interpolado,alta,1,0
+0x005B84F0,0x005B9350,0xE60,text,,interpolado,alta,1,0
+0x005B86C0,0x005B9520,0xE60,text,,interpolado,alta,1,0
+0x005B8810,0x005B9670,0xE60,text,,interpolado,alta,1,0
+0x005B89E0,0x005B9840,0xE60,text,,interpolado,alta,1,0
+0x005B8B60,0x005B99C0,0xE60,text,,interpolado,alta,1,0
+0x005B8D60,0x005B9BC0,0xE60,text,RepObj::GetText(),android,alta,0,0
+0x005B9330,0x005BA190,0xE60,text,"RepObj::GetImage(int, bool, bool)",android,alta,0,0
+0x005B99F0,0x005BA850,0xE60,text,RepObj::Failed(),android+inventario,alta,0,0
+0x005B9B20,0x005BA980,0xE60,text,RepObj::GetLuaString(),android+inventario,alta,0,0
+0x005B9D90,0x005BABF0,0xE60,text,RepObj::RenderTooltip(),android,alta,0,0
+0x005BA010,0x005BAE70,0xE60,text,RepAnim::OnRender(Point),android,alta,0,0
+0x005BABA0,0x005BBA00,0xE60,text,AnimTracker::~AnimTracker(),android,alta,0,0
+0x005BBB40,0x005BC9A0,0xE60,text,PawnBox::PawnBox(),android,alta,0,0
+0x005BBEE0,0x005BCD40,0xE60,text,PawnBox::~PawnBox(),android,alta,0,0
+0x005BC6A0,0x005BD500,0xE60,text,"PawnBox::RenderPortrait(Rect2D, int, bool)",android,alta,0,0
+0x005BCE20,0x005BDC80,0xE60,text,PawnBox::OnRender(),android,alta,0,0
+0x005C0F80,0x005C1DE0,0xE60,text,PawnBox::GetBlockedImage(int),android,alta,0,0
+0x005C13C0,0x005C2220,0xE60,text,PawnBox::RenderLabel(Point),android,alta,0,0
+0x005C1F00,0x005C2D60,0xE60,text,PowerBar::RenderTooltips(int),android,alta,0,0
+0x005C2AE0,0x005C3940,0xE60,text,PowerBar::OnRender(int),android,alta,0,0
+0x005C45A0,0x005C5400,0xE60,text,"PowerBar::Modify(int, bool)",android,alta,0,0
+0x005C4B90,0x005C59F0,0xE60,text,PowerBar::Damage(int),android,alta,3,0
+0x005C53B0,0x005C6210,0xE60,text,InventoryItem::InventoryItem(),android,alta,0,0
+0x005C55F0,0x005C6450,0xE60,text,InventoryItem::~InventoryItem(),android,alta,0,0
+0x005C57F0,0x005C6650,0xE60,text,"InventoryItem::OnRender(int, int)",android,alta,0,0
+0x005C6EC0,0x005C7D20,0xE60,text,InventoryItem::RenderOutline(bool),android,alta,0,0
+0x005C8140,0x005C8FA0,0xE60,text,SkillToggle::~SkillToggle(),android,alta,0,0
+0x005C8270,0x005C90D0,0xE60,text,SkillToggle::OnRender(),android,alta,0,0
+0x005C8800,0x005C9660,0xE60,text,"SkillToggle::SetName(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x005C9090,0x005C9EF0,0xE60,text,VictoryScreen::VictoryScreen(),android,alta,0,0
+0x005C99B0,0x005CA810,0xE60,text,VictoryScreen::OnRender(),android,alta,0,0
+0x005CB2C0,0x005CC120,0xE60,text,VictoryScreen::RenderPod(),android,alta,0,0
+0x005CBC80,0x005CCAE0,0xE60,text,VictoryScreen::RenderStats(),android,alta,0,0
+0x005CD250,0x005CE0B0,0xE60,text,VictoryScreen::RenderBoard(),android,alta,0,0
+0x005CD9F0,0x005CE850,0xE60,text,VictoryScreen::OpenPod(),android,alta,0,0
+0x005CE420,0x005CF280,0xE60,text,ChoiceEvent::~ChoiceEvent(),android,alta,0,0
+0x005CEA20,0x005CF880,0xE60,text,ChoiceEvent::SetEffect(Effect),android+inventario,alta,0,0
+0x005CEA80,0x005CF8E0,0xE60,text,"ChoiceEvent::SetStartText(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x005CF670,0x005D04D0,0xE60,text,ChoiceEvent::OnLoop(),android,alta,0,0
+0x005CF6A0,0x005D0500,0xE60,text,ChoiceEvent::MakeChoice(int),android,alta,0,0
+0x005CFB30,0x005D0990,0xE60,text,ChoiceEvent::AddChoice(Choice),android+inventario,alta,0,0
+0x005CFCA0,0x005D0B00,0xE60,text,ChoiceEvent::GetText(),android+inventario,alta,0,0
+0x005CFCC0,0x005D0B20,0xE60,text,ChoiceEvent::SetHiddenEffects(bool),android+inventario,alta,0,0
+0x005CFCD0,0x005D0B30,0xE60,text,ChoiceEvent::SetUniqueMech(bool),android+inventario,alta,0,0
+0x005CFCE0,0x005D0B40,0xE60,text,ChoiceEvent::OnRender(),android,alta,0,0
+0x005CFCF0,0x005D0B50,0xE60,text,"ChoiceEvent::MouseMove(int, int)",android,alta,0,0
+0x005CFD00,0x005D0B60,0xE60,text,"ChoiceEvent::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x005D1340,0x005D21A0,0xE60,text,"SlidingWindow::RenderTabIcon(int, Point, GL_Color)",android,alta,0,0
+0x005D1350,0x005D21B0,0xE60,text,SlidingWindow::GetTabAlert(int),android,alta,0,0
+0x005D1390,0x005D21F0,0xE60,text,"SlidingWindow::SlidingWindow(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x005D17E0,0x005D2640,0xE60,text,SlidingWindow::~SlidingWindow(),android,alta,0,0
+0x005D2370,0x005D31D0,0xE60,text,"SlidingWindow::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x005D2420,0x005D3280,0xE60,text,SlidingWindow::GetBackFade(),android,alta,0,0
+0x005D2490,0x005D32F0,0xE60,text,"SlidingWindow::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x005D24B0,0x005D3310,0xE60,text,SlidingWindow::Open(int),android,alta,0,0
+0x005D2700,0x005D3560,0xE60,text,SlidingWindow::Close(),android,alta,0,0
+0x005D28B0,0x005D3710,0xE60,text,"SlidingWindow::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x005D2AE0,0x005D3940,0xE60,text,SquadList::SquadList(),android,alta,0,0
+0x005D2F50,0x005D3DB0,0xE60,text,SquadList::~SquadList(),android,alta,0,0
+0x005D2F80,0x005D3DE0,0xE60,text,SquadList::Open(),android,alta,0,1
+0x005D3100,0x005D3F70,0xE70,text,SquadList::OnRender(),android,alta,0,0
+0x005D7560,0x005D83D0,0xE70,text,"SquadList::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x005D7640,0x005D84B0,0xE70,text,"SquadList::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x005D7B00,0x005D8970,0xE70,text,"SquadList::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x005D7D10,0x005D8B80,0xE70,text,"SquadList::MouseMove(int, int)",android,alta,0,0
+0x005D7EE0,0x005D8D50,0xE70,text,StatScreen::StatScreen(),android,alta,0,0
+0x005D83E0,0x005D9250,0xE70,text,StatScreen::~StatScreen(),android,alta,0,0
+0x005D8410,0x005D9280,0xE70,text,StatScreen::Open(),android,alta,0,0
+0x005D85A0,0x005D9410,0xE70,text,StatScreen::OnRender(),android,alta,0,0
+0x005D92E0,0x005DA150,0xE70,text,"StatScreen::MouseMove(int, int)",android,alta,0,1
+0x005D9420,0x005DA2A0,0xE80,text,"StatScreen::RenderTopScores(Rect2D, bool)",android,alta,0,0
+0x005DA6B0,0x005DB530,0xE80,text,"StatScreen::RenderScore(Rect2D, bool)",android,alta,0,0
+0x005DC170,0x005DCFF0,0xE80,text,"StatScreen::RenderSquadInfo(Rect2D, bool)",android,alta,0,0
+0x005DD000,0x005DDE80,0xE80,text,"StatScreen::RenderPilotInfo(Rect2D, bool)",android,alta,0,0
+0x005DE090,0x005DEF10,0xE80,text,"StatScreen::RenderVictories(Point, std::__ndk1::vector<int, std::__ndk1::allocator<int> >, bool)",android,alta,0,0
+0x005DE830,0x005DF6B0,0xE80,text,"StatScreen::RenderRight(Rect2D, bool)",android,alta,0,0
+0x005E0880,0x005E1700,0xE80,text,"StatScreen::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x005E0DB0,0x005E1C30,0xE80,text,"StatScreen::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x005E0E20,0x005E1CA0,0xE80,text,"StatScreen::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x005E5EF0,0x005E6D70,0xE80,text,,interpolado,alta,1,0
+0x005E6350,0x005E71D0,0xE80,text,TipAnimation::OnRender(Point),android,alta,0,0
+0x005E6580,0x005E7400,0xE80,text,"Point::Point(int, int)",android,alta,0,0
+0x005E65E0,0x005E7460,0xE80,text,TipAnimation::OnLoop(),android,alta,0,0
+0x005E6850,0x005E76D0,0xE80,text,PushAnim::TriggerStep(int),android,alta,0,0
+0x005E6B10,0x005E7990,0xE80,text,PushAnim::UpdateStep(int),android,alta,0,0
+0x005E6C50,0x005E7AD0,0xE80,text,TipAnimation::~TipAnimation(),android,alta,0,0
+0x005E6C80,0x005E7B00,0xE80,text,DamageAnim::TriggerStep(int),android,alta,0,0
+0x005E6CF0,0x005E7B70,0xE80,text,DamageAnim::UpdateStep(int),android,alta,0,0
+0x005E6FA0,0x005E7E20,0xE80,text,"TipBox::TipBox(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool, Point)",android,alta,0,0
+0x005E74F0,0x005E8370,0xE80,text,TipBox::OnRender(),android,alta,0,0
+0x005E81E0,0x005E9060,0xE80,text,TipBox::UpdateText(),android,alta,0,0
+0x005E8A20,0x005E98A0,0xE80,text,TipBox::UpdateLoc(),android,alta,0,0
+0x005E8DB0,0x005E9C30,0xE80,text,TutorialAnim::~TutorialAnim(),android,alta,0,1
+0x005E8F30,0x005E9DC0,0xE90,text,TutorialAnim::OnRender(),android,alta,0,0
+0x005EB360,0x005EC1F0,0xE90,text,"TutorialAnim::MouseMove(int, int)",android,alta,0,0
+0x005EB380,0x005EC210,0xE90,text,"TutorialAnim::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x005EB470,0x005EC300,0xE90,text,UnlockWindow::~UnlockWindow(),android,alta,0,0
+0x005EB4C0,0x005EC350,0xE90,text,UnlockWindow::OnRender(),android,alta,0,0
+0x005EC5A0,0x005ED430,0xE90,text,"UnlockWindow::MouseMove(int, int)",android,alta,0,0
+0x005EC5D0,0x005ED460,0xE90,text,"UnlockWindow::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x005ECA10,0x005ED8A0,0xE90,text,VoiceBox::OnRender(),android,alta,0,0
+0x005EDBF0,0x005EEA80,0xE90,text,VoiceBox::Update(),android,alta,0,0
+0x005EFFC0,0x005F0E50,0xE90,text,Effect::GetText(),android,alta,0,0
+0x005F04B0,0x005F1340,0xE90,text,"Effect::AddReward(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android+inventario,alta,0,0
+0x005F0570,0x005F1400,0xE90,text,"Effect::RenderIcon(Point, int)",android,alta,0,0
+0x005F21B0,0x005F3040,0xE90,text,Effect::GetTooltip(),android,alta,0,0
+0x005F2480,0x005F3310,0xE90,text,Effect::Save(),android,alta,0,0
+0x005F3930,0x005F47C0,0xE90,text,IncidentManager::IncidentManager(),android,alta,0,0
+0x005F42A0,0x005F5130,0xE90,text,IncidentManager::Start(),android,alta,0,0
+0x005F4B70,0x005F5A00,0xE90,text,IncidentManager::RenderGamepadUI(),android,alta,0,0
+0x005F5620,0x005F64B0,0xE90,text,IncidentManager::CreateMap(),android,alta,0,0
+0x005F5C20,0x005F6AB0,0xE90,text,IncidentManager::RefreshRegionNames(),android,alta,0,0
+0x005F6410,0x005F72A0,0xE90,text,IncidentManager::SetupFinalMusic(),android,alta,0,0
+0x005F6500,0x005F7390,0xE90,text,IncidentManager::InitializeIncidents(int),android,alta,0,0
+0x005F6A70,0x005F7900,0xE90,text,IncidentManager::RenderExploration(),android,alta,0,0
+0x005F7520,0x005F83B0,0xE90,text,IncidentManager::ProcessConsoleCommands(),android,alta,0,0
+0x005F7D20,0x005F8BB0,0xE90,text,IncidentManager::SetupIsland(int),android,alta,0,0
+0x005F7DF0,0x005F8C80,0xE90,text,IncidentManager::BurnRegion(),android,alta,0,0
+0x005F7F90,0x005F8E20,0xE90,text,IncidentManager::LeaveIsland(),android,alta,0,0
+0x005F8470,0x005F9300,0xE90,text,IncidentManager::CreateFinalMission(),android,alta,0,0
+0x005F88C0,0x005F9750,0xE90,text,IncidentManager::UpdateIncidentLocations(),android,alta,0,0
+0x005F8BD0,0x005F9A60,0xE90,text,IncidentManager::GetMagicBullshit(int),android,alta,0,0
+0x005F8CF0,0x005F9B80,0xE90,text,"IncidentManager::OnRenderMap(bool, int, bool)",android,alta,0,0
+0x005FA860,0x005FB6F0,0xE90,text,IncidentManager::OnRenderWindows(),android,alta,0,0
+0x005FAF40,0x005FBDD0,0xE90,text,IncidentManager::RenderSeismicWarning(),android,alta,0,0
+0x005FB6C0,0x005FC550,0xE90,text,IncidentManager::RenderIslandInfo(int),android,alta,0,0
+0x005FE040,0x005FEED0,0xE90,text,IncidentManager::OnLoop(),android,alta,0,0
+0x005FE810,0x005FF6A0,0xE90,text,"IncidentManager::MouseMove(int, int)",android,alta,0,0
+0x005FEF30,0x005FFDC0,0xE90,text,IncidentManager::SelectIsland(),android,alta,0,1
+0x005FFBD0,0x00600A50,0xE80,text,IncidentManager::LoadGameData(),android,alta,0,0
+0x00600760,0x006015E0,0xE80,text,"Island::SetCorporation(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x006042F0,0x00605170,0xE80,text,Game::Game(),android,alta,0,0
+0x00604420,0x006052A0,0xE80,text,Game::~Game(),android,alta,0,0
+0x00605030,0x00605EB0,0xE80,text,MainMenu::FileWriteIssue(),android,alta,0,0
+0x006050D0,0x00605F50,0xE80,text,Game::OnRender(),android,alta,0,0
+0x006053B0,0x00606230,0xE80,text,Game::OnLoop(),android,alta,0,1
+0x00605890,0x00606720,0xE90,text,"Game::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00605990,0x00606820,0xE90,text,"Game::OnKeyAction(KeyAction, int)",android,alta,0,0
+0x00605CE0,0x00606B70,0xE90,text,"Game::MouseMove(int, int)",android,alta,0,0
+0x00605DD0,0x00606C60,0xE90,text,Game::OnCleanup(),android,alta,0,0
+0x00606060,0x00606EF0,0xE90,text,"Game::LoadGame(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,1
+0x00606DB0,0x00607C60,0xEB0,text,Game::UpdateMenus(),android,alta,0,0
+0x00607240,0x006080F0,0xEB0,text,GameMap::GameMap(),android,alta,0,0
+0x00607720,0x006085D0,0xEB0,text,GameMap::~GameMap(),android,alta,0,1
+0x006088E0,0x00609770,0xE90,text,"GameMap::AddWeapon(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x006089B0,0x00609840,0xE90,text,"GameMap::RemoveItem(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x00608A80,0x00609910,0xE90,text,"GameMap::AddPilot(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x00608B50,0x006099E0,0xE90,text,SquadControl::ModifyRepairs(int),android,alta,0,0
+0x00608EA0,0x00609D30,0xE90,text,GameMap::ApplyEffect(Effect),android,alta,0,0
+0x006091D0,0x0060A060,0xE90,text,GameMap::PrepareEffect(Effect*),android,alta,0,0
+0x00609280,0x0060A110,0xE90,text,GameMap::IsIslandUnlocked(int),android+inventario,alta,0,0
+0x006092C0,0x0060A150,0xE90,text,GameMap::CheckSingleReq(Choice&),android,alta,0,0
+0x00609560,0x0060A3F0,0xE90,text,"GameMap::GetSkillLevel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x006095D0,0x0060A460,0xE90,text,GameMap::OnRender(),android,alta,0,0
+0x0060A0E0,0x0060AF70,0xE90,text,GameMap::GetMoney(),android,alta,0,0
+0x0060A0F0,0x0060AF80,0xE90,text,GameMap::RenderFakeHangar(),android,alta,0,0
+0x0060AB70,0x0060BA00,0xE90,text,GameMap::GetItems(),android+inventario,alta,0,0
+0x0060AD00,0x0060BB90,0xE90,text,GameMap::GetNextDefense(int),android,alta,0,0
+0x0060AD10,0x0060BBA0,0xE90,text,GameMap::GetRandomVoice(),android+inventario,alta,0,0
+0x0060AD70,0x0060BC00,0xE90,text,GameMap::GetPawn(int),android+inventario,alta,0,0
+0x0060ADA0,0x0060BC30,0xE90,text,"GameMap::GetAnotherVoice(int, int)",android+inventario,alta,0,0
+0x0060ADD0,0x0060BC60,0xE90,text,GameMap::IsEvent(int),android+inventario,alta,0,0
+0x0060AE10,0x0060BCA0,0xE90,text,"GameMap::TriggerSound(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x0060AEE0,0x0060BD70,0xE90,text,GameMap::GetEventCount(int),android+inventario,alta,0,1
+0x0060AF40,0x0060BDC0,0xE80,text,GameMap::UpdateConsole(),android,alta,0,0
+0x0060B5D0,0x0060C450,0xE80,text,GameMap::OnLoop(),android,alta,0,0
+0x0060C200,0x0060D080,0xE80,text,GameMap::TestLanguageLengths(),android,alta,0,0
+0x0060C420,0x0060D2A0,0xE80,text,GameMap::CheckBattle(),android,alta,0,0
+0x0060CA40,0x0060D8C0,0xE80,text,GameMap::GetPower(),android+inventario,alta,0,0
+0x0060CAE0,0x0060D960,0xE80,text,GameMap::GetTeamTurn(),android+inventario,alta,0,0
+0x0060CB00,0x0060D980,0xE80,text,,inventario,alta,0,0
+0x0060CB20,0x0060D9A0,0xE80,text,GameMap::GetSector(),android+inventario,alta,0,0
+0x0060CB60,0x0060D9E0,0xE80,text,GameMap::ModifyPowerGrid(int),android+inventario,alta,0,0
+0x0060CBB0,0x0060DA30,0xE80,text,,inventario,alta,0,0
+0x0060CC40,0x0060DAC0,0xE80,text,,inventario,alta,0,0
+0x0060CDA0,0x0060DC20,0xE80,text,,inventario,alta,0,0
+0x0060CE30,0x0060DCB0,0xE80,text,,inventario,alta,0,0
+0x0060CF90,0x0060DE10,0xE80,text,,inventario,alta,0,0
+0x0060D030,0x0060DEB0,0xE80,text,,inventario,alta,0,0
+0x0060D1A0,0x0060E020,0xE80,text,,inventario,alta,0,0
+0x0060D240,0x0060E0C0,0xE80,text,,inventario,alta,0,0
+0x0060D3B0,0x0060E230,0xE80,text,"GameMap::AddPermaTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point)",android+inventario,alta,0,0
+0x0060D450,0x0060E2D0,0xE80,text,GameMap::ClearTips(),android+inventario,alta,0,0
+0x0060D500,0x0060E380,0xE80,text,GameMap::IsTip(),android+inventario,alta,0,0
+0x0060D540,0x0060E3C0,0xE80,text,"GameMap::AddInterfaceTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, bool)",android+inventario,alta,0,0
+0x0060D650,0x0060E4D0,0xE80,text,"GameMap::AddVerticalInterfaceTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point, bool)",android+inventario,alta,0,0
+0x0060D770,0x0060E5F0,0xE80,text,"GameMap::AddTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point)",android+inventario,alta,0,0
+0x0060D910,0x0060E790,0xE80,text,"GameMap::AddTutorial(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Point)",android+inventario,alta,0,0
+0x0060D9A0,0x0060E820,0xE80,text,GameMap::AddVoicePopup(VoicePopup),android+inventario,alta,0,0
+0x0060DA20,0x0060E8A0,0xE80,text,GameMap::IsVoicePopup(),android+inventario,alta,0,0
+0x0060DA80,0x0060E900,0xE80,text,GameMap::BlockNextTurn(),android+inventario,alta,0,0
+0x0060DAA0,0x0060E920,0xE80,text,"GameMap::AddNote(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x0060DB90,0x0060EA10,0xE80,text,GameMap::SetupBackground(),android,alta,0,0
+0x0060E7F0,0x0060F670,0xE80,text,GameMap::GetRewardLoc(int),android,alta,0,0
+0x0060E8B0,0x0060F730,0xE80,text,"GameMap::IsMechClass(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x0060E930,0x0060F7B0,0xE80,text,GameMap::GetCorp(),android+inventario,alta,0,0
+0x0060E950,0x0060F7D0,0xE80,text,GameMap::GetSavedCorp(),android+inventario,alta,0,0
+0x0060E970,0x0060F7F0,0xE80,text,GameMap::GetSquad(),android+inventario,alta,0,0
+0x0060EA00,0x0060F880,0xE80,text,GameMap::RenderTopBar(),android,alta,0,1
+0x00613CA0,0x00614B30,0xE90,text,MainMenu::~MainMenu(),android,alta,0,0
+0x00613CD0,0x00614B60,0xE90,text,MainMenu::Open(bool),android,alta,0,0
+0x00614180,0x00615010,0xE90,text,"MainMenu::OpenEndState(int, int, std::__ndk1::vector<std::__ndk1::shared_ptr<Pilot>, std::__ndk1::allocator<std::__ndk1::shared_ptr<Pilot> > >)",android,alta,0,0
+0x00614500,0x00615390,0xE90,text,MainMenu::OnLoop(),android,alta,0,0
+0x00614960,0x006157F0,0xE90,text,MainMenu::OnRender(),android,alta,0,1
+0x00615EA0,0x00616D50,0xEB0,text,MainMenu::RenderBar(),android,alta,0,0
+0x00617DD0,0x00618C80,0xEB0,text,MainMenu::RenderBackground(),android,alta,0,0
+0x00618580,0x00619430,0xEB0,text,"MainMenu::MouseMove(int, int)",android,alta,0,0
+0x00618860,0x00619710,0xEB0,text,"MainMenu::OnMouseAction(KeyAction, int)",android,alta,0,0
+0x00618970,0x00619820,0xEB0,text,MainMenu::OnConfirmAction(),android,alta,0,0
+0x00618DB0,0x00619C60,0xEB0,text,"MainMenu::OnGamepadButton(KeyAction, int)",android,alta,0,0
+0x006194E0,0x0061A390,0xEB0,text,MenuButton::~MenuButton(),android,alta,0,0
+0x00619B20,0x0061A9D0,0xEB0,text,MenuButton::Reset(),android,alta,0,0
+0x00619C10,0x0061AAC0,0xEB0,text,MenuButton::IsHovering(),android,alta,0,0
+0x00619C90,0x0061AB40,0xEB0,text,"MenuButton::MouseMove(int, int, bool)",android,alta,0,0
+0x00619D30,0x0061ABE0,0xEB0,text,,interpolado,alta,1,0
+0x0061A0E0,0x0061AF90,0xEB0,text,Pilot::~Pilot(),android,alta,0,0
+0x0061A5A0,0x0061B450,0xEB0,text,"GetRandomName(int, int)",android,alta,0,0
+0x0061A9C0,0x0061B870,0xEB0,text,"Pilot::Pilot(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0061AE40,0x0061BCF0,0xEB0,text,Pilot::GetAllPilotSkills(),android,alta,0,0
+0x0061B4D0,0x0061C380,0xEB0,text,"Pilot::GetPossibleSkills(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0061B7F0,0x0061C6A0,0xEB0,text,Pilot::OnInit(),android,alta,0,0
+0x0061C3E0,0x0061D290,0xEB0,text,"Pilot::SetPortrait(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool)",android,alta,0,0
+0x0061D010,0x0061DEC0,0xEB0,text,Pilot::GetPersonality(),android,alta,0,0
+0x0061D180,0x0061E030,0xEB0,text,,interpolado,alta,2,0
+0x0061D7D0,0x0061E680,0xEB0,text,Pilot::GetAbilityInfo(),android,alta,0,0
+0x0061D960,0x0061E810,0xEB0,text,Pilot::IncreaseXP(int),android,alta,0,0
+0x0061DA40,0x0061E8F0,0xEB0,text,"Pilot::ForceSkillAndLevel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0061DDF0,0x0061ECA0,0xEB0,text,Pilot::GetRankString(),android,alta,0,0
+0x0061ED80,0x0061FC30,0xEB0,text,Pilot::GetMaxXP(),android,alta,0,0
+0x0061EEB0,0x0061FD60,0xEB0,text,Pilot::RenderRankTip(Point),android,alta,0,0
+0x0061EFA0,0x0061FE50,0xEB0,text,"Pilot::MeasureSkills(bool, bool)",android,alta,0,0
+0x0061F820,0x006206D0,0xEB0,text,"Pilot::RenderSkills(Point, bool, bool)",android,alta,0,1
+0x00622020,0x00622EE0,0xEC0,text,Pilot::UpdateAnimations(),android,alta,0,0
+0x00622510,0x006233D0,0xEC0,text,Pilot::ApplyEffect(Effect),android,alta,0,0
+0x006237E0,0x006246A0,0xEC0,text,,inventario,alta,0,0
+0x00623F30,0x00624DF0,0xEC0,text,SkillManager::StartBattle(),android,alta,0,0
+0x00623FB0,0x00624E70,0xEC0,text,SkillManager::LoopWeapons(),android,alta,0,0
+0x006241E0,0x006250A0,0xEC0,text,SkillManager::SetSelected(bool),android,alta,0,0
+0x00624340,0x00625200,0xEC0,text,"SkillManager::FireWeapon(Point, int)",android,alta,0,0
+0x00624F50,0x00625E10,0xEC0,text,SkillManager::ArmWeapon(int),android,alta,0,0
+0x00625130,0x00625FF0,0xEC0,text,SkillManager::SetPriorityTarget(Point),android+inventario,alta,0,0
+0x00625150,0x00626010,0xEC0,text,SkillManager::GetShotsRemaining(),android+inventario,alta,0,0
+0x00625320,0x006261E0,0xEC0,text,,interpolado,alta,3,0
+0x006255B0,0x00626470,0xEC0,text,SkillManager::ClearQueuedShot(),android+inventario,alta,0,0
+0x00625710,0x006265D0,0xEC0,text,,interpolado,alta,1,0
+0x00625A60,0x00626920,0xEC0,text,Skill::GetTargetScore(Point),android,alta,0,0
+0x00625D30,0x00626BF0,0xEC0,text,SkillManager::GetTarget(),android+inventario,alta,0,0
+0x00625EB0,0x00626D70,0xEC0,text,SkillManager::ResetUses(),android+inventario,alta,0,0
+0x00626480,0x00627340,0xEC0,text,SkillManager::GetFirstClick(),android+inventario,alta,0,1
+0x00626F50,0x00627E00,0xEB0,text,"Pawn::TimeTravel(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00627080,0x00627F30,0xEB0,text,"Pawn::Pawn(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android,alta,0,0
+0x006275A3,0x00628453,0xEB0,text,,interpolado,media,1,0
+0x00628230,0x006290E0,0xEB0,text,"Pawn::SetCustomAnim(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,0,0
+0x00628850,0x00629700,0xEB0,text,"Pawn::OnInit(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00629320,0x0062A1D0,0xEB0,text,Pawn::UndoTurnUsed(),android,alta,0,0
+0x00629440,0x0062A2F0,0xEB0,text,Pawn::IsBusy(),android+inventario,alta,0,0
+0x00629530,0x0062A3E0,0xEB0,text,Pawn::IsDead(),android+bytes+inventario,alta,3,0
+0x00629540,0x0062A3F0,0xEB0,text,Pawn::IsCorpse(),android+bytes+inventario,alta,4,0
+0x006295B0,0x0062A460,0xEB0,text,"Pawn::Damage(SpaceDamage, int)",android,alta,4,0
+0x00629D50,0x0062AC00,0xEB0,text,Pawn::ProcessDeath(),android,alta,0,0
+0x0062AA90,0x0062B940,0xEB0,text,Pawn::DetonateCorpse(),android,alta,0,0
+0x0062B210,0x0062C0C0,0xEB0,text,Pawn::TriggerDeathEffect(),android,alta,0,0
+0x0062B5B0,0x0062C460,0xEB0,text,"Pawn::MutateAnim(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, bool, GL_Color)",android,alta,0,0
+0x0062BD50,0x0062CC00,0xEB0,text,Pawn::GetPrimaryStatus(),android,alta,0,0
+0x0062BF90,0x0062CE40,0xEB0,text,"Pawn::ModifyHealth(int, bool, int)",android+inventario,alta,3,0
+0x0062C5F0,0x0062D4A0,0xEB0,text,Pawn::IsTurnShield(),interpolado,alta,3,0
+0x0062C650,0x0062D500,0xEB0,text,Pawn::SetHealth(int),android+inventario,alta,0,0
+0x0062C910,0x0062D7C0,0xEB0,text,"Pawn::SetSpace(Point, bool)",interpolado,alta,1,0
+0x0062CA80,0x0062D930,0xEB0,text,Pawn::SetSpace(Point),android+inventario,alta,0,0
+0x0062CAA0,0x0062D950,0xEB0,text,Pawn::IsPushBlocked(int),interpolado,alta,2,0
+0x0062CB10,0x0062D9C0,0xEB0,text,Pawn::IsPushBlocked(),interpolado,alta,4,0
+0x0062CC00,0x0062DAB0,0xEB0,text,Pawn::Push(int),android,alta,5,0
+0x0062CD51,0x0062DC01,0xEB0,text,,manual,alta,2,1
+0x0062CDD0,0x0062DC70,0xEA0,text,Pawn::FinishPush(),android,alta,5,0
+0x0062F2D0,0x00630170,0xEA0,text,Pawn::SetTeam(int),android+bytes+inventario,alta,3,0
+0x0062F2E0,0x00630180,0xEA0,text,Pawn::SetInvisible(bool),android+inventario,alta,0,0
+0x0062F2F0,0x00630190,0xEA0,text,Pawn::IsForceField(),interpolado,alta,5,0
+0x0062F380,0x00630220,0xEA0,text,Pawn::GetTurnCount(),android+inventario,alta,0,0
+0x0062F4E0,0x00630380,0xEA0,text,,inventario,alta,0,0
+0x0062F600,0x006304A0,0xEA0,text,,interpolado,alta,2,0
+0x0062F700,0x006305A0,0xEA0,text,Pawn::GetPathingProfile(),android+inventario,alta,3,0
+0x0062F840,0x006306E0,0xEA0,text,Pawn::IsPlayer(),android+bytes+inventario,alta,2,0
+0x0062F870,0x00630710,0xEA0,text,Pawn::IsEnemy(),android+bytes+inventario,alta,2,0
+0x0062FA40,0x006308E0,0xEA0,text,Pawn::UpdateEffectAnim(),android,alta,0,0
+0x00630650,0x006314F0,0xEA0,text,Pawn::OnLoop(),android,alta,0,0
+0x006308A1,0x00631741,0xEA0,text,,interpolado,media,2,0
+0x006313E0,0x00632280,0xEA0,text,Pawn::IsBoosted(),android+inventario,alta,3,0
+0x00631490,0x00632330,0xEA0,text,Pawn::IsGrappled(),android+inventario,alta,2,0
+0x006314B0,0x00632350,0xEA0,text,Pawn::SetGrappled(bool),android,alta,0,0
+0x00631630,0x006324D0,0xEA0,text,,inventario,alta,0,0
+0x00631700,0x006325A0,0xEA0,text,Pawn::IncreasePilotXp(int),android,alta,0,0
+0x00631B20,0x006329C0,0xEA0,text,Pawn::GetPilotName(int),android+inventario,alta,0,0
+0x00631E20,0x00632CC0,0xEA0,text,Pawn::GetPilotLanguage(),android+inventario,alta,0,0
+0x00632270,0x00633110,0xEA0,text,Pawn::Move(Point),inventario,alta,0,0
+0x00632460,0x00633300,0xEA0,text,Pawn::Move(Point),android,alta,0,0
+0x00632670,0x00633510,0xEA0,text,"Pawn::SetManualPath(std::__ndk1::vector<Point, std::__ndk1::allocator<Point> >, bool)",android,alta,3,0
+0x00632750,0x006335F0,0xEA0,text,"Pawn::Leap(std::__ndk1::vector<Point, std::__ndk1::allocator<Point> >, bool, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,3,0
+0x006329F0,0x00633890,0xEA0,text,"Pawn::Charge(vector<Point>, bool, string)",interpolado,alta,3,0
+0x00632B40,0x006339E0,0xEA0,text,Pawn::Melee(SpaceDamage),interpolado,alta,3,0
+0x00632C10,0x00633AB0,0xEA0,text,Pawn::StartTurn(int),android,alta,0,0
+0x00632EE0,0x00633D80,0xEA0,text,Pawn::UpdateDot(int),android,alta,0,0
+0x006335F0,0x00634490,0xEA0,text,Pawn::SetForceField(bool),android+inventario,alta,2,0
+0x00633AD0,0x00634970,0xEA0,text,,inventario,alta,2,0
+0x00633AF0,0x00634990,0xEA0,text,Pawn::IsLargeShield(),android,alta,0,0
+0x00633D60,0x00634C00,0xEA0,text,Pawn::SetActive(bool),android+inventario,alta,0,0
+0x00633EA0,0x00634D40,0xEA0,text,"Pawn::FireWeapon(Point, int)",android+inventario,alta,0,0
+0x006340B0,0x00634F50,0xEA0,text,Pawn::SetSelected(bool),android,alta,0,0
+0x00634270,0x00635110,0xEA0,text,Pawn::SetPilot(std::__ndk1::shared_ptr<Pilot>),android,alta,0,0
+0x00634C90,0x00635B30,0xEA0,text,Pawn::GetHealthString(),android,alta,0,0
+0x006358F0,0x00636790,0xEA0,text,Pawn::GetMoveString(),android,alta,0,0
+0x00635F60,0x00636E00,0xEA0,text,Pawn::GetDangerScore(),android+inventario,alta,0,0
+0x00635FA0,0x00636E40,0xEA0,text,Pawn::GetSpace(),android+bytes+inventario,alta,4,0
+0x00636050,0x00636EF0,0xEA0,text,,inventario,alta,0,0
+0x006361D0,0x00637070,0xEA0,text,Pawn::SpawnAnimation(),android+inventario,alta,0,0
+0x006362A0,0x00637140,0xEA0,text,Pawn::IsDeadly(std::vector<SpaceDamage>),interpolado,alta,3,0
+0x00636550,0x006373F0,0xEA0,text,Pawn::IsDeadly(SpaceDamage),android+inventario,alta,0,0
+0x006365D0,0x00637470,0xEA0,text,Pawn::IsBurrower(),android+inventario,alta,2,0
+0x00636610,0x006374B0,0xEA0,text,"Pawn::Burrow(Point, bool)",interpolado,alta,4,0
+0x006366E0,0x00637580,0xEA0,text,Pawn::SetPowered(bool),android+inventario,alta,0,0
+0x00636970,0x00637810,0xEA0,text,Pawn::SetFrozen(bool),android+inventario,alta,2,0
+0x00636B70,0x00637A10,0xEA0,text,Pawn::IsFrozen(),android+inventario,alta,1,0
+0x00636E10,0x00637CB0,0xEA0,text,Pawn::SetMissionCritical(bool),android+inventario,alta,0,0
+0x00636E20,0x00637CC0,0xEA0,text,Pawn::Retreat(),android+inventario,alta,0,0
+0x006370D0,0x00637F70,0xEA0,text,Pawn::GetId(),android+bytes+inventario,alta,3,0
+0x006370E0,0x00637F80,0xEA0,text,Pawn::IsVoidShockImmune(),android,alta,0,0
+0x00637210,0x006380B0,0xEA0,text,Pawn::SetInfected(bool),android+inventario,alta,2,0
+0x006372F0,0x00638190,0xEA0,text,Pawn::IsInfected(),android+inventario,alta,1,0
+0x00637370,0x00638210,0xEA0,text,Pawn::IsPowered(),android+inventario,alta,1,0
+0x006373D0,0x00638270,0xEA0,text,Pawn::SetMutation(int),android+inventario,alta,0,0
+0x00637610,0x006384B0,0xEA0,text,Pawn::IsAvoidingMines(),android+inventario,alta,0,0
+0x00637650,0x006384F0,0xEA0,text,"Pawn::IsAbility(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,1,0
+0x006378A0,0x00638740,0xEA0,text,Pawn::AddMoveBonus(int),android+inventario,alta,0,0
+0x006378F0,0x00638790,0xEA0,text,Pawn::GetStatusEffects(),android,alta,0,0
+0x00638BD0,0x00639A70,0xEA0,text,Pawn::IsFireImmune(),android,alta,3,0
+0x00638C70,0x00639B10,0xEA0,text,,interpolado,alta,2,0
+0x00638D50,0x00639BF0,0xEA0,text,Pawn::IsDamaged(),android+bytes+inventario,alta,4,0
+0x00638D60,0x00639C00,0xEA0,text,,inventario,alta,0,0
+0x00638E00,0x00639CA0,0xEA0,text,Pawn::GetExtraSpaces(),android,alta,0,0
+0x00638FC0,0x00639E60,0xEA0,text,Pawn::GetClass(),android,alta,0,0
+0x00639000,0x00639EA0,0xEA0,text,Pawn::GetSounds(),android,alta,0,0
+0x00639040,0x00639EE0,0xEA0,text,Pawn::IsMech(),android+bytes+inventario,alta,3,0
+0x00639050,0x00639EF0,0xEA0,text,Pawn::SetMech(),android+bytes+inventario,alta,3,0
+0x00639060,0x00639F00,0xEA0,text,Pawn::SetOnFire(bool),android,alta,2,0
+0x00639300,0x0063A1A0,0xEA0,text,Pawn::UpdateKills(),android,alta,0,0
+0x006397C0,0x0063A660,0xEA0,text,Pawn::SetAcid(bool),android+inventario,alta,2,0
+0x006398D0,0x0063A770,0xEA0,text,Pawn::IsAcid(),android+inventario,alta,1,0
+0x006398E0,0x0063A780,0xEA0,text,,inventario,alta,1,0
+0x00639A50,0x0063A8F0,0xEA0,text,Pawn::Kill(bool),android+inventario,alta,2,0
+0x00639AC0,0x0063A960,0xEA0,text,Pawn::IsTempUnit(),android+inventario,alta,0,0
+0x00639BF0,0x0063AA90,0xEA0,text,Pawn::Fall(int),android+inventario,alta,0,0
+0x00639DA0,0x0063AC40,0xEA0,text,Pawn::FlyAway(),android+inventario,alta,0,0
+0x00639E10,0x0063ACB0,0xEA0,text,Pawn::IsPsionAffected(int),android,alta,6,0
+0x00639FC0,0x0063AE60,0xEA0,text,Pawn::GetTeam(),android+bytes+inventario,alta,3,0
+0x00639FD0,0x0063AE70,0xEA0,text,,interpolado,alta,2,0
+0x0063A250,0x0063B0F0,0xEA0,text,Pawn::IsGuarding(),android+inventario,alta,1,0
+0x0063A260,0x0063B100,0xEA0,text,Pawn::SetBoosted(bool),android+inventario,alta,0,0
+0x0063A410,0x0063B2B0,0xEA0,text,,interpolado,alta,2,0
+0x0063A450,0x0063B2F0,0xEA0,text,Pawn::IsUndoPossible(),android+inventario,alta,0,0
+0x0063A590,0x0063B430,0xEA0,text,Pawn::Undo(),android,alta,0,0
+0x0063A860,0x0063B700,0xEA0,text,Pawn::GetMoveSpeed(),android+inventario,alta,2,0
+0x0063A8B0,0x0063B750,0xEA0,text,Pawn::IsNonGridStructure(),android+inventario,alta,1,0
+0x0063A8F0,0x0063B790,0xEA0,text,Pawn::GetBaseMove(),android+inventario,alta,3,0
+0x0063AB10,0x0063B9B0,0xEA0,text,Pawn::SetMoveSpeed(int),android+inventario,alta,0,0
+0x0063AB20,0x0063B9C0,0xEA0,text,,interpolado,alta,2,0
+0x0063AB50,0x0063B9F0,0xEA0,text,Pawn::GetPersonality(),android+inventario,alta,0,0
+0x0063ABF0,0x0063BA90,0xEA0,text,Pawn::SetNeutral(bool),android+inventario,alta,1,0
+0x0063AC00,0x0063BAA0,0xEA0,text,Pawn::IsFlying(),android+inventario,alta,2,0
+0x0063ACF0,0x0063BB90,0xEA0,text,"Pawn::RenderStat(Point, int, bool)",android,alta,0,0
+0x0063AF60,0x0063BE00,0xEA0,text,Pawn::IsTeleporter(),android+inventario,alta,2,0
+0x0063AFC0,0x0063BE60,0xEA0,text,Pawn::IsJumper(),android+inventario,alta,3,0
+0x0063B020,0x0063BEC0,0xEA0,text,Pawn::IsActive(),android+inventario,alta,0,0
+0x0063B0B0,0x0063BF50,0xEA0,text,"Pawn::RenderOverlay(bool, Point)",android,alta,0,0
+0x0063BCC0,0x0063CB60,0xEA0,text,"Pawn::AddAlert(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0063BD50,0x0063CBF0,0xEA0,text,Pawn::StartBattle(),android,alta,0,0
+0x0063C0B0,0x0063CF50,0xEA0,text,Pawn::IsRanged(),android+inventario,alta,0,0
+0x0063C100,0x0063CFA0,0xEA0,text,Pawn::IsArmor(),interpolado,alta,4,0
+0x0063C210,0x0063D0B0,0xEA0,text,Pawn::PlayMoveSound(),android,alta,0,0
+0x0063C2B0,0x0063D150,0xEA0,text,Pawn::SaveGameData(LuaString&),android,alta,0,0
+0x0063D240,0x0063E0E0,0xEA0,text,Pawn::LoadGameData(LuaTable&),android,alta,0,0
+0x0063F3B0,0x00640250,0xEA0,text,Pawn::GetType(),android+inventario,alta,1,1
+0x00641560,0x006423F0,0xE90,text,"PawnFactory::CreatePawn(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android+inventario,alta,1,0
+0x00641750,0x006425E0,0xE90,text,,inventario,alta,0,0
+0x006417E0,0x00642670,0xE90,text,"PawnFactory::CreateEmptyPawn(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android,alta,0,0
+0x00641C10,0x00642AA0,0xE90,text,ResearchControl::ResearchControl(),android,alta,0,0
+0x006434E0,0x00644370,0xE90,text,ResearchControl::RenderReactor(),android,alta,0,0
+0x006448C0,0x00645750,0xE90,text,ResearchControl::RenderTooltips(),android,alta,0,0
+0x00645220,0x006460B0,0xE90,text,ResearchControl::RenderPilotInfo(),android,alta,0,0
+0x006465E0,0x00647470,0xE90,text,ResearchControl::SetupPilotBoxes(),android,alta,0,0
+0x00646EA0,0x00647D30,0xE90,text,ResearchControl::RenderUpgrades(),android,alta,0,0
+0x00647690,0x00648520,0xE90,text,ResearchControl::RenderMain(),android,alta,0,1
+0x00647FC0,0x00648E40,0xE80,text,ResearchControl::RenderTouchConfirm(),android,alta,0,0
+0x00649310,0x0064A190,0xE80,text,ResearchControl::RenderSecondary(),android,alta,0,0
+0x006497A0,0x0064A620,0xE80,text,ResearchControl::RenderStorage(),android,alta,0,0
+0x0064A320,0x0064B1A0,0xE80,text,ResearchControl::RenderTesting(),android,alta,0,0
+0x0064A7D0,0x0064B650,0xE80,text,"ResearchControl::RenderSkill(InventoryItem*, int)",android,alta,0,0
+0x0064B500,0x0064C380,0xE80,text,"ResearchControl::RenderTabIcon(int, Point, GL_Color)",android,alta,0,0
+0x0064B6A0,0x0064C520,0xE80,text,"ResearchControl::RenderWarning(Pawn*, Point, bool)",android,alta,0,0
+0x0064B830,0x0064C6B0,0xE80,text,ResearchControl::RenderUnopenedGamepad(),android,alta,0,0
+0x0064BBB0,0x0064CA30,0xE80,text,ResearchControl::OnLoop(),android,alta,0,0
+0x0064C8C0,0x0064D740,0xE80,text,ResearchControl::UpgradeReactor(),android,alta,0,0
+0x0064CAE0,0x0064D960,0xE80,text,"ResearchControl::SwapSlots(int, int)",android,alta,0,0
+0x0064D700,0x0064E580,0xE80,text,ResearchControl::AttemptPower(),android,alta,0,0
+0x0064ECA0,0x0064FB20,0xE80,text,ResearchControl::RenderGamepadSelection(),android,alta,0,0
+0x00652350,0x006531D0,0xE80,text,ResearchControl::Undo(),android,alta,0,0
+0x00652610,0x00653490,0xE80,text,,interpolado,alta,2,0
+0x006528D0,0x00653750,0xE80,text,,inventario,alta,0,0
+0x006528E0,0x00653760,0xE80,text,SkillEffect::GetDamageCount(),android+inventario,alta,2,0
+0x00652900,0x00653780,0xE80,text,SkillEffect::GetDamage(int),android+inventario,alta,2,0
+0x00652920,0x006537A0,0xE80,text,Squad::IsEmpty(),android+inventario,alta,1,0
+0x006529C0,0x00653840,0xE80,text,LaserAnimation::~LaserAnimation(),android,alta,0,0
+0x00652A50,0x006538D0,0xE80,text,SkillEffect::AddDamage(SpaceDamage),android+inventario,alta,2,0
+0x00652AD0,0x00653950,0xE80,text,"SkillEffect::AddVoice(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android+inventario,alta,2,0
+0x00652BC0,0x00653A40,0xE80,text,"SkillEffect::AddQueuedVoice(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android+inventario,alta,2,0
+0x00652CB0,0x00653B30,0xE80,text,SkillEffect::AddQueuedDamage(SpaceDamage),android+inventario,alta,2,0
+0x00652D30,0x00653BB0,0xE80,text,"SkillEffect::AddGrapple(Point, Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,2,0
+0x00652E30,0x00653CB0,0xE80,text,SkillEffect::GetQueuedCount(),android+inventario,alta,1,0
+0x00652E50,0x00653CD0,0xE80,text,"SkillEffect::AddBurst(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android+inventario,alta,2,0
+0x00653100,0x00653F80,0xE80,text,SkillEffect::GetQueuedDamage(int),android+inventario,alta,1,0
+0x00653120,0x00653FA0,0xE80,text,SkillEffect::AddDelay(float),android+inventario,alta,2,0
+0x006531D0,0x00654050,0xE80,text,,inventario,alta,1,0
+0x006532A0,0x00654120,0xE80,text,,inventario,alta,1,0
+0x00653370,0x006541F0,0xE80,text,,inventario,alta,2,0
+0x006534A0,0x00654320,0xE80,text,,inventario,alta,1,0
+0x00653570,0x006543F0,0xE80,text,,inventario,alta,1,0
+0x00653640,0x006544C0,0xE80,text,,inventario,alta,2,0
+0x00653740,0x006545C0,0xE80,text,,inventario,alta,2,0
+0x00653850,0x006546D0,0xE80,text,,inventario,alta,1,0
+0x00653920,0x006547A0,0xE80,text,,inventario,alta,2,0
+0x00653A10,0x00654890,0xE80,text,,inventario,alta,1,0
+0x00653AE0,0x00654960,0xE80,text,"SkillEffect::AddMove(PointList, float)",android+inventario,alta,2,0
+0x00653BD0,0x00654A50,0xE80,text,"SkillEffect::AddLeap(PointList, float)",android+inventario,alta,2,0
+0x00653E00,0x00654C80,0xE80,text,"SkillEffect::AddBurrow(PointList, float)",android+inventario,alta,2,0
+0x00653E90,0x00654D10,0xE80,text,"SkillEffect::AddCharge(PointList, float)",android+inventario,alta,2,0
+0x00653F20,0x00654DA0,0xE80,text,"SkillEffect::AddAirstrike(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,2,0
+0x00654030,0x00654EB0,0xE80,text,"SkillEffect::AddReverseAirstrike(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,2,0
+0x00654140,0x00654FC0,0xE80,text,"SkillEffect::AddDropper(SpaceDamage, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,2,0
+0x00654220,0x006550A0,0xE80,text,"SkillEffect::AddScript(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,2,0
+0x00654310,0x00655190,0xE80,text,,inventario,alta,2,0
+0x00654400,0x00655280,0xE80,text,,inventario,alta,2,0
+0x00654500,0x00655380,0xE80,text,"SkillEffect::AddEmitter(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,2,0
+0x00654580,0x00655400,0xE80,text,"SkillEffect::AddQueuedScript(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,2,0
+0x00654670,0x006554F0,0xE80,text,"SkillEffect::AddSound(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android+inventario,alta,2,0
+0x00654760,0x006555E0,0xE80,text,"SkillEffect::AddTeleport(Point, Point, float)",android+inventario,alta,2,0
+0x00654960,0x006557E0,0xE80,text,"SkillEffect::AddQueuedCharge(PointList, float)",android+inventario,alta,2,0
+0x006549F0,0x00655870,0xE80,text,"SkillEffect::AddQueuedMove(PointList, float)",android+inventario,alta,2,0
+0x00654AE0,0x00655960,0xE80,text,"SkillEffect::AddMelee(Point, SpaceDamage)",android+inventario,alta,1,0
+0x00654B50,0x006559D0,0xE80,text,"SkillEffect::AddMelee(Point, SpaceDamage, float)",android+inventario,alta,2,0
+0x00654C00,0x00655A80,0xE80,text,"SkillEffect::AddQueuedMelee(Point, SpaceDamage)",android+inventario,alta,1,0
+0x00654C70,0x00655AF0,0xE80,text,"SkillEffect::AddQueuedMelee(Point, SpaceDamage, float)",android+inventario,alta,2,0
+0x00654D20,0x00655BA0,0xE80,text,SkillEffect::AddBoardShake(float),android+inventario,alta,2,0
+0x00654EC0,0x00655D40,0xE80,text,"SkillEffect::AddBounce(Point, int)",android+inventario,alta,2,0
+0x006552E0,0x00656160,0xE80,text,"SkillEffect::MarkAffectedArea(WeaponTarget*, bool, bool)",android,alta,0,0
+0x00655F10,0x00656D90,0xE80,text,SpaceDamage::IsMovement(),android+inventario,alta,3,0
+0x00655F40,0x00656DC0,0xE80,text,SpaceDamage::MoveStart(),android+inventario,alta,2,0
+0x00655F64,0x00656DE4,0xE80,text,,interpolado,media,1,0
+0x00655F80,0x00656E00,0xE80,text,SpaceDamage::MoveEnd(),android+inventario,alta,2,0
+0x00655FA0,0x00656E20,0xE80,text,"SpaceDamage::AddVoice(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int)",android,alta,2,0
+0x00656140,0x00656FC0,0xE80,text,SpaceDamage::GetProjectileArc(WeaponTarget*),android,alta,2,0
+0x00656480,0x00657300,0xE80,text,,inventario,alta,2,0
+0x00656520,0x006573A0,0xE80,text,,inventario,alta,0,0
+0x00656550,0x006573D0,0xE80,text,,inventario,alta,0,0
+0x00656FD0,0x00657E50,0xE80,text,Squad::AddPawn(Pawn*),android+inventario,alta,0,0
+0x00656FE0,0x00657E60,0xE80,text,,inventario,alta,0,0
+0x00657550,0x006583D0,0xE80,text,SquadControl::SquadControl(),android,alta,0,1
+0x00658510,0x00659380,0xE70,text,SquadControl::StartGame(Squad),android,alta,0,0
+0x006596D0,0x0065A540,0xE70,text,SquadControl::RenderStoreUI(bool),android,alta,0,0
+0x0065AEB0,0x0065BD20,0xE70,text,,inventario,alta,3,0
+0x0065B120,0x0065BF90,0xE70,text,SquadControl::GetPawn(int),android,alta,0,1
+0x0065B160,0x0065BFE0,0xE80,text,"SquadControl::GetPortraitLoc(int, int)",android,alta,0,0
+0x0065B2C0,0x0065C140,0xE80,text,SquadControl::GetPortraitWidth(int),android,alta,0,0
+0x0065B320,0x0065C1A0,0xE80,text,SquadControl::OnLoop(),android,alta,0,0
+0x0065BE50,0x0065CCD0,0xE80,text,SquadControl::AddPilot(std::__ndk1::shared_ptr<Pilot>),android,alta,0,0
+0x0065D380,0x0065E200,0xE80,text,IncidentRegion::GetBaseText(),android,alta,0,0
+0x0065D9A0,0x0065E820,0xE80,text,IncidentRegion::RenderSummary(),android,alta,0,0
+0x0065EC60,0x0065FAE0,0xE80,text,IncidentRegion::UpdateBoxSize(),android,alta,0,0
+0x0065F1D0,0x00660050,0xE80,text,IncidentRegion::RenderMission(),android,alta,0,0
+0x0065F480,0x00660300,0xE80,text,"IncidentRegion::GetPortraitLoc(int, int)",android,alta,0,0
+0x0065F640,0x006604C0,0xE80,text,"IncidentRegion::RenderRegion(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x0065FD20,0x00660BA0,0xE80,text,IncidentRegion::FlashNew(),android,alta,0,0
+0x0065FDF0,0x00660C70,0xE80,text,IncidentRegion::RenderMouseover(Rect2D),android,alta,0,0
+0x00660310,0x00661190,0xE80,text,IncidentRegion::RenderMap(),android,alta,0,0
+0x00661490,0x00662310,0xE80,text,IncidentRegion::CreateFinalIsland(Point),android,alta,0,0
+0x00661C20,0x00662AA0,0xE80,text,"IncidentRegion::SetRegionInfo(RegionInfo, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00662310,0x00663190,0xE80,text,IncidentRegion::Success(),android,alta,0,0
+0x00662400,0x00663280,0xE80,text,IncidentRegion::Burn(),android,alta,0,0
+0x006629F0,0x00663870,0xE80,text,IncidentRegion::LoadRegionData(LuaTable&),android,alta,0,1
+0x00664800,0x006656A0,0xEA0,text,Skill::ComputeAffectedPoints(),android,alta,0,0
+0x00664AF0,0x00665990,0xEA0,text,Skill::CheckAlterations(DamageList&),android,alta,0,0
+0x00664DB0,0x00665C50,0xEA0,text,Skill::GetSecondTargetZone(Point),android,alta,0,0
+0x00664F60,0x00665E00,0xEA0,text,Skill::GetTargetZone(Point),android,alta,0,0
+0x006651A0,0x00666040,0xEA0,text,Skill::DoDamage(),android,alta,0,0
+0x00666470,0x00667310,0xEA0,text,Skill::GetTargetArea(Point),android,alta,0,0
+0x006667C0,0x00667660,0xEA0,text,Skill::SetFirstClick(),android,alta,0,0
+0x006674A0,0x00668340,0xEA0,text,Skill::GetUpgradeCost(int),android,alta,0,0
+0x00667950,0x006687F0,0xEA0,text,"Skill::GetUpgrades(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x006682E0,0x00669180,0xEA0,text,"Skill::RenderModInfo(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, bool)",android,alta,0,0
+0x006695B0,0x0066A450,0xEA0,text,"Skill::RenderInfoSimple(Point, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Animation*, Point, std::__ndk1::vector<PowerState, std::__ndk1::allocator<PowerState> >)",android,alta,0,1
+0x0066CDC0,0x0066DC50,0xE90,text,"Skill::MeasureInfoSimple(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, int, std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >, Animation*, std::__ndk1::vector<PowerState, std::__ndk1::allocator<PowerState> >)",android,alta,0,0
+0x0066E4E0,0x0066F370,0xE90,text,,inventario,alta,1,0
+0x0066F490,0x00670320,0xE90,text,"std::__ndk1::vector<int, std::__ndk1::allocator<int> > LuaData::GetList<int>(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00670E70,0x00671D00,0xE90,text,"Tutorial::GetTutorial(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00671320,0x006721B0,0xE90,text,"WeaponTip::WeaponTip(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,1
+0x00673110,0x00673F90,0xE80,text,WeaponTip::TriggerStep(int),android,alta,0,0
+0x00673ED0,0x00674D50,0xE80,text,"WeaponTip::GetMech(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char> >)",android,alta,0,0
+0x00675710,0x00676590,0xE80,text,,inventario,alta,0,0
+0x00675720,0x006765A0,0xE80,text,,inventario,alta,0,0
+0x00675730,0x006765B0,0xE80,text,,inventario,alta,0,0
+0x00675740,0x006765C0,0xE80,text,,inventario,alta,0,0
+0x00675750,0x006765D0,0xE80,text,,inventario,alta,0,0
+0x00675770,0x006765F0,0xE80,text,,inventario,alta,0,0
+0x00675790,0x00676610,0xE80,text,,inventario,alta,1,0
+0x006757A0,0x00676620,0xE80,text,,interpolado,alta,1,0
+0x00675840,0x006766C0,0xE80,text,,interpolado,alta,1,0
+0x00675930,0x006767B0,0xE80,text,TipData::IsValid(),android+inventario,alta,0,0
+0x00675A00,0x00676880,0xE80,text,,interpolado,alta,1,0
+0x00675C70,0x00676AF0,0xE80,text,ActiveLua (slot 1: SetPawn/SetBoard/SetGame com nil),manual,alta,3,0
+0x00675D00,0x00676B80,0xE80,text,ActiveLua::GetScripts(),manual,alta,2,0
+0x00675E10,0x00676C90,0xE80,text,,manual,alta,1,0
+0x00675EE0,0x00676D60,0xE80,text,,manual,alta,1,0
+0x00675F80,0x00676E00,0xE80,text,,manual,alta,2,1
+0x00676020,0x00676EE0,0xEC0,text,ActiveLua::BindDefinitions(),android,alta,1,0
+0x00676261,0x00677121,0xEC0,text,,interpolado,media,1,0
+0x006762F1,0x006771B1,0xEC0,text,,interpolado,media,1,0
+0x00676411,0x006772D1,0xEC0,text,,interpolado,media,1,0
+0x00676436,0x006772F6,0xEC0,text,,interpolado,media,1,0
+0x00676741,0x00677601,0xEC0,text,,interpolado,media,1,0
+0x00676766,0x00677626,0xEC0,text,,interpolado,media,1,0
+0x006767B0,0x00677670,0xEC0,text,,interpolado,media,1,0
+0x006767D5,0x00677695,0xEC0,text,,interpolado,media,1,0
+0x006767F7,0x006776B7,0xEC0,text,,interpolado,media,1,0
+0x00676BE7,0x00677AA7,0xEC0,text,,interpolado,media,1,0
+0x00677000,0x00677EC0,0xEC0,text,,interpolado,media,1,0
+0x00677025,0x00677EE5,0xEC0,text,,interpolado,media,1,0
+0x0067704A,0x00677F0A,0xEC0,text,,interpolado,media,1,0
+0x00677286,0x00678146,0xEC0,text,,interpolado,media,1,0
+0x006772AB,0x0067816B,0xEC0,text,,interpolado,media,1,0
+0x0067F210,0x006800D0,0xEC0,text,,inventario,alta,0,0
+0x0067F2B0,0x00680170,0xEC0,text,,inventario,alta,0,0
+0x0067F350,0x00680210,0xEC0,text,,inventario,alta,0,0
+0x0067F3F0,0x006802B0,0xEC0,text,,inventario,alta,0,0
+0x0067F490,0x00680350,0xEC0,text,,inventario,alta,0,0
+0x0067F530,0x006803F0,0xEC0,text,,inventario,alta,0,0
+0x0067F5D0,0x00680490,0xEC0,text,,inventario,alta,0,0
+0x0067F670,0x00680530,0xEC0,text,,inventario,alta,0,0
+0x0067F710,0x006805D0,0xEC0,text,,inventario,alta,0,0
+0x0067F7B0,0x00680670,0xEC0,text,,inventario,alta,0,0
+0x0067F850,0x00680710,0xEC0,text,,inventario,alta,0,0
+0x0067F8F0,0x006807B0,0xEC0,text,,inventario,alta,0,0
+0x0067F990,0x00680850,0xEC0,text,,inventario,alta,0,0
+0x0067FA30,0x006808F0,0xEC0,text,,inventario,alta,0,0
+0x0067FAD0,0x00680990,0xEC0,text,,inventario,alta,0,0
+0x0067FB70,0x00680A30,0xEC0,text,,inventario,alta,0,0
+0x0067FC10,0x00680AD0,0xEC0,text,,inventario,alta,0,0
+0x0067FCB0,0x00680B70,0xEC0,text,,inventario,alta,0,0
+0x0067FD50,0x00680C10,0xEC0,text,,inventario,alta,0,0
+0x0067FDF0,0x00680CB0,0xEC0,text,,inventario,alta,0,0
+0x0067FE90,0x00680D50,0xEC0,text,,inventario,alta,0,0
+0x0067FF30,0x00680DF0,0xEC0,text,,inventario,alta,0,0
+0x0067FFD0,0x00680E90,0xEC0,text,,inventario,alta,0,0
+0x00680070,0x00680F30,0xEC0,text,,inventario,alta,0,0
+0x00680110,0x00680FD0,0xEC0,text,,inventario,alta,0,0
+0x006801B0,0x00681070,0xEC0,text,,inventario,alta,0,0
+0x00680250,0x00681110,0xEC0,text,,inventario,alta,0,0
+0x006802F0,0x006811B0,0xEC0,text,,interpolado,alta,1,0
+0x00680350,0x00681210,0xEC0,text,,inventario,alta,0,0
+0x006803F0,0x006812B0,0xEC0,text,,inventario,alta,0,0
+0x00680490,0x00681350,0xEC0,text,,inventario,alta,0,0
+0x00680530,0x006813F0,0xEC0,text,,inventario,alta,0,0
+0x006805D0,0x00681490,0xEC0,text,,inventario,alta,0,0
+0x00680670,0x00681530,0xEC0,text,,inventario,alta,0,0
+0x00680710,0x006815D0,0xEC0,text,,inventario,alta,0,0
+0x006807B0,0x00681670,0xEC0,text,,inventario,alta,0,0
+0x00680850,0x00681710,0xEC0,text,,inventario,alta,0,0
+0x006808F0,0x006817B0,0xEC0,text,,inventario,alta,0,0
+0x00680AE0,0x006819A0,0xEC0,text,,interpolado,alta,1,0
+0x00680B90,0x00681A50,0xEC0,text,,interpolado,alta,1,0
+0x00680D00,0x00681BC0,0xEC0,text,,interpolado,alta,1,0
+0x00682ED0,0x00683D90,0xEC0,text,,inventario,alta,0,0
+0x00682FB0,0x00683E70,0xEC0,text,,inventario,alta,0,0
+0x00683050,0x00683F10,0xEC0,text,,inventario,alta,0,0
+0x006830F0,0x00683FB0,0xEC0,text,,inventario,alta,0,0
+0x00683190,0x00684050,0xEC0,text,,inventario,alta,0,0
+0x00683230,0x006840F0,0xEC0,text,,inventario,alta,0,0
+0x006832D0,0x00684190,0xEC0,text,,inventario,alta,0,0
+0x00683370,0x00684230,0xEC0,text,,inventario,alta,0,0
+0x00683450,0x00684310,0xEC0,text,,inventario,alta,0,0
+0x006834F0,0x006843B0,0xEC0,text,,inventario,alta,0,0
+0x00683590,0x00684450,0xEC0,text,,inventario,alta,0,0
+0x00683630,0x006844F0,0xEC0,text,,inventario,alta,0,0
+0x006836D0,0x00684590,0xEC0,text,,inventario,alta,0,0
+0x00683780,0x00684640,0xEC0,text,,inventario,alta,0,0
+0x00683830,0x006846F0,0xEC0,text,,inventario,alta,0,0
+0x006838E0,0x006847A0,0xEC0,text,,inventario,alta,0,0
+0x00683980,0x00684840,0xEC0,text,,inventario,alta,0,0
+0x00683A30,0x006848F0,0xEC0,text,,inventario,alta,0,0
+0x00683AE0,0x006849A0,0xEC0,text,,inventario,alta,0,0
+0x00683B90,0x00684A50,0xEC0,text,,inventario,alta,0,0
+0x00683C30,0x00684AF0,0xEC0,text,,inventario,alta,0,0
+0x00683CD0,0x00684B90,0xEC0,text,,inventario,alta,0,0
+0x00683D80,0x00684C40,0xEC0,text,,inventario,alta,0,0
+0x00683E20,0x00684CE0,0xEC0,text,,inventario,alta,0,0
+0x00683ED0,0x00684D90,0xEC0,text,,inventario,alta,0,0
+0x00683F80,0x00684E40,0xEC0,text,,inventario,alta,0,0
+0x00684020,0x00684EE0,0xEC0,text,,inventario,alta,0,0
+0x006840C0,0x00684F80,0xEC0,text,,inventario,alta,0,0
+0x00684160,0x00685020,0xEC0,text,,inventario,alta,0,0
+0x00684200,0x006850C0,0xEC0,text,,inventario,alta,0,0
+0x006842B0,0x00685170,0xEC0,text,,inventario,alta,0,0
+0x00684350,0x00685210,0xEC0,text,,inventario,alta,0,0
+0x00684400,0x006852C0,0xEC0,text,,inventario,alta,0,0
+0x006844A0,0x00685360,0xEC0,text,,inventario,alta,0,0
+0x00684550,0x00685410,0xEC0,text,,inventario,alta,0,0
+0x00684600,0x006854C0,0xEC0,text,,inventario,alta,0,0
+0x006846B0,0x00685570,0xEC0,text,,inventario,alta,0,0
+0x00684750,0x00685610,0xEC0,text,,inventario,alta,0,0
+0x006847F0,0x006856B0,0xEC0,text,,inventario,alta,0,0
+0x00684890,0x00685750,0xEC0,text,,inventario,alta,0,0
+0x00684930,0x006857F0,0xEC0,text,,inventario,alta,0,0
+0x006849D0,0x00685890,0xEC0,text,,inventario,alta,0,0
+0x00684A70,0x00685930,0xEC0,text,,inventario,alta,0,0
+0x00684B10,0x006859D0,0xEC0,text,,inventario,alta,0,0
+0x00684BC0,0x00685A80,0xEC0,text,,inventario,alta,0,0
+0x00684C60,0x00685B20,0xEC0,text,,inventario,alta,0,0
+0x00684D00,0x00685BC0,0xEC0,text,,inventario,alta,0,0
+0x00684DA0,0x00685C60,0xEC0,text,,inventario,alta,0,0
+0x00684E40,0x00685D00,0xEC0,text,,inventario,alta,0,0
+0x00684EF0,0x00685DB0,0xEC0,text,,inventario,alta,0,0
+0x00684F90,0x00685E50,0xEC0,text,,inventario,alta,0,0
+0x00685030,0x00685EF0,0xEC0,text,,inventario,alta,0,0
+0x006850E0,0x00685FA0,0xEC0,text,,inventario,alta,0,0
+0x00685180,0x00686040,0xEC0,text,,inventario,alta,0,0
+0x00685220,0x006860E0,0xEC0,text,,inventario,alta,0,0
+0x006852D0,0x00686190,0xEC0,text,,inventario,alta,0,0
+0x00685370,0x00686230,0xEC0,text,,inventario,alta,0,0
+0x00685410,0x006862D0,0xEC0,text,,inventario,alta,0,0
+0x006854C0,0x00686380,0xEC0,text,,inventario,alta,0,0
+0x00685560,0x00686420,0xEC0,text,,inventario,alta,0,0
+0x00685600,0x006864C0,0xEC0,text,,inventario,alta,0,0
+0x006856A0,0x00686560,0xEC0,text,,inventario,alta,0,0
+0x00685740,0x00686600,0xEC0,text,,inventario,alta,0,0
+0x006857E0,0x006866A0,0xEC0,text,,inventario,alta,0,0
+0x00685880,0x00686740,0xEC0,text,,inventario,alta,0,0
+0x00685920,0x006867E0,0xEC0,text,,inventario,alta,0,0
+0x006859C0,0x00686880,0xEC0,text,,inventario,alta,0,0
+0x00685A60,0x00686920,0xEC0,text,,inventario,alta,0,0
+0x00685B00,0x006869C0,0xEC0,text,,inventario,alta,0,0
+0x00685BA0,0x00686A60,0xEC0,text,,inventario,alta,0,0
+0x00685C40,0x00686B00,0xEC0,text,,inventario,alta,0,0
+0x00685CE0,0x00686BA0,0xEC0,text,,inventario,alta,0,0
+0x00685D80,0x00686C40,0xEC0,text,,inventario,alta,0,0
+0x00685E30,0x00686CF0,0xEC0,text,,inventario,alta,0,0
+0x00685ED0,0x00686D90,0xEC0,text,,inventario,alta,0,0
+0x00685FB0,0x00686E70,0xEC0,text,,inventario,alta,0,0
+0x00686090,0x00686F50,0xEC0,text,,inventario,alta,0,0
+0x00686170,0x00687030,0xEC0,text,,inventario,alta,0,0
+0x00686250,0x00687110,0xEC0,text,,inventario,alta,0,0
+0x00686330,0x006871F0,0xEC0,text,,inventario,alta,0,0
+0x006863D0,0x00687290,0xEC0,text,,inventario,alta,0,0
+0x00686470,0x00687330,0xEC0,text,,inventario,alta,0,0
+0x00686550,0x00687410,0xEC0,text,,inventario,alta,0,0
+0x00686630,0x006874F0,0xEC0,text,,inventario,alta,0,0
+0x00686710,0x006875D0,0xEC0,text,,inventario,alta,0,0
+0x006867B0,0x00687670,0xEC0,text,,inventario,alta,0,0
+0x00686890,0x00687750,0xEC0,text,,inventario,alta,0,0
+0x00686970,0x00687830,0xEC0,text,,inventario,alta,0,0
+0x00686A50,0x00687910,0xEC0,text,,inventario,alta,0,0
+0x00686B30,0x006879F0,0xEC0,text,,inventario,alta,0,0
+0x00686C10,0x00687AD0,0xEC0,text,,inventario,alta,0,0
+0x00686CF0,0x00687BB0,0xEC0,text,,inventario,alta,0,0
+0x00686DD0,0x00687C90,0xEC0,text,,inventario,alta,0,0
+0x00686E70,0x00687D30,0xEC0,text,,inventario,alta,0,0
+0x00686F10,0x00687DD0,0xEC0,text,,inventario,alta,0,0
+0x00686FB0,0x00687E70,0xEC0,text,,inventario,alta,0,0
+0x00687050,0x00687F10,0xEC0,text,,inventario,alta,0,0
+0x006870F0,0x00687FB0,0xEC0,text,,inventario,alta,0,0
+0x006871D0,0x00688090,0xEC0,text,,inventario,alta,0,0
+0x006872B0,0x00688170,0xEC0,text,,inventario,alta,0,0
+0x00687390,0x00688250,0xEC0,text,,inventario,alta,0,0
+0x00687470,0x00688330,0xEC0,text,,inventario,alta,0,0
+0x00687550,0x00688410,0xEC0,text,,inventario,alta,0,0
+0x00687630,0x006884F0,0xEC0,text,,inventario,alta,0,0
+0x00687710,0x006885D0,0xEC0,text,,inventario,alta,0,0
+0x006877B0,0x00688670,0xEC0,text,,inventario,alta,0,0
+0x00687890,0x00688750,0xEC0,text,,inventario,alta,0,0
+0x00687930,0x006887F0,0xEC0,text,,inventario,alta,0,0
+0x006879D0,0x00688890,0xEC0,text,,inventario,alta,0,0
+0x00687A70,0x00688930,0xEC0,text,,inventario,alta,0,0
+0x00687B10,0x006889D0,0xEC0,text,,inventario,alta,0,0
+0x00687BB0,0x00688A70,0xEC0,text,,inventario,alta,0,0
+0x00687C90,0x00688B50,0xEC0,text,,inventario,alta,0,0
+0x00687D30,0x00688BF0,0xEC0,text,,inventario,alta,0,0
+0x00687DD0,0x00688C90,0xEC0,text,,inventario,alta,0,0
+0x00687E70,0x00688D30,0xEC0,text,,inventario,alta,0,0
+0x00687F10,0x00688DD0,0xEC0,text,,inventario,alta,0,0
+0x00687FB0,0x00688E70,0xEC0,text,,inventario,alta,0,0
+0x00688050,0x00688F10,0xEC0,text,,inventario,alta,0,0
+0x006880F0,0x00688FB0,0xEC0,text,,inventario,alta,0,0
+0x00688190,0x00689050,0xEC0,text,,inventario,alta,0,0
+0x00688230,0x006890F0,0xEC0,text,,inventario,alta,0,0
+0x006882D0,0x00689190,0xEC0,text,,inventario,alta,0,0
+0x00688370,0x00689230,0xEC0,text,,inventario,alta,0,0
+0x00688410,0x006892D0,0xEC0,text,,inventario,alta,0,0
+0x006884B0,0x00689370,0xEC0,text,,inventario,alta,0,0
+0x00688550,0x00689410,0xEC0,text,,inventario,alta,0,0
+0x006885F0,0x006894B0,0xEC0,text,,inventario,alta,0,0
+0x00688690,0x00689550,0xEC0,text,,inventario,alta,0,0
+0x00688730,0x006895F0,0xEC0,text,,inventario,alta,0,0
+0x006887D0,0x00689690,0xEC0,text,,inventario,alta,0,0
+0x006888B0,0x00689770,0xEC0,text,,inventario,alta,0,0
+0x00688950,0x00689810,0xEC0,text,,inventario,alta,0,0
+0x006889F0,0x006898B0,0xEC0,text,,inventario,alta,0,0
+0x00688A90,0x00689950,0xEC0,text,,inventario,alta,0,0
+0x00688B30,0x006899F0,0xEC0,text,,inventario,alta,0,0
+0x00688BE0,0x00689AA0,0xEC0,text,,inventario,alta,0,0
+0x00688C90,0x00689B50,0xEC0,text,,inventario,alta,0,0
+0x00688D40,0x00689C00,0xEC0,text,,inventario,alta,0,0
+0x00688DE0,0x00689CA0,0xEC0,text,,inventario,alta,0,0
+0x00688E80,0x00689D40,0xEC0,text,,inventario,alta,0,0
+0x00688F20,0x00689DE0,0xEC0,text,,inventario,alta,0,0
+0x00688FD0,0x00689E90,0xEC0,text,,inventario,alta,0,0
+0x00689070,0x00689F30,0xEC0,text,,inventario,alta,0,0
+0x00689120,0x00689FE0,0xEC0,text,,inventario,alta,0,0
+0x006891C0,0x0068A080,0xEC0,text,,inventario,alta,0,0
+0x00689270,0x0068A130,0xEC0,text,,inventario,alta,0,0
+0x00689310,0x0068A1D0,0xEC0,text,,inventario,alta,0,0
+0x006893B0,0x0068A270,0xEC0,text,,inventario,alta,0,0
+0x00689460,0x0068A320,0xEC0,text,,inventario,alta,0,0
+0x00689500,0x0068A3C0,0xEC0,text,,inventario,alta,0,0
+0x006895A0,0x0068A460,0xEC0,text,,inventario,alta,0,0
+0x00689640,0x0068A500,0xEC0,text,,inventario,alta,0,0
+0x006896E0,0x0068A5A0,0xEC0,text,,inventario,alta,0,0
+0x00689780,0x0068A640,0xEC0,text,,inventario,alta,0,0
+0x00689820,0x0068A6E0,0xEC0,text,,inventario,alta,0,0
+0x006898C0,0x0068A780,0xEC0,text,,inventario,alta,0,0
+0x00689960,0x0068A820,0xEC0,text,,inventario,alta,0,0
+0x00689A00,0x0068A8C0,0xEC0,text,,inventario,alta,0,0
+0x00689AA0,0x0068A960,0xEC0,text,,inventario,alta,0,0
+0x00689B80,0x0068AA40,0xEC0,text,,inventario,alta,0,0
+0x00689C60,0x0068AB20,0xEC0,text,,inventario,alta,0,0
+0x00689D40,0x0068AC00,0xEC0,text,,inventario,alta,0,0
+0x00689E20,0x0068ACE0,0xEC0,text,,inventario,alta,0,0
+0x00689F00,0x0068ADC0,0xEC0,text,,inventario,alta,0,0
+0x00689FE0,0x0068AEA0,0xEC0,text,,inventario,alta,0,0
+0x0068A080,0x0068AF40,0xEC0,text,,inventario,alta,0,0
+0x0068A120,0x0068AFE0,0xEC0,text,,inventario,alta,0,0
+0x0068A1C0,0x0068B080,0xEC0,text,,inventario,alta,0,0
+0x0068A260,0x0068B120,0xEC0,text,,inventario,alta,0,0
+0x0068A300,0x0068B1C0,0xEC0,text,,inventario,alta,0,0
+0x0068A3A0,0x0068B260,0xEC0,text,,inventario,alta,0,0
+0x0068A440,0x0068B300,0xEC0,text,,inventario,alta,0,0
+0x0068A4E0,0x0068B3A0,0xEC0,text,,inventario,alta,0,0
+0x0068A580,0x0068B440,0xEC0,text,,inventario,alta,0,0
+0x0068A620,0x0068B4E0,0xEC0,text,,inventario,alta,0,0
+0x0068A6C0,0x0068B580,0xEC0,text,,inventario,alta,0,0
+0x0068A760,0x0068B620,0xEC0,text,,inventario,alta,0,0
+0x0068A800,0x0068B6C0,0xEC0,text,,inventario,alta,0,0
+0x0068A8A0,0x0068B760,0xEC0,text,,inventario,alta,0,0
+0x0068A940,0x0068B800,0xEC0,text,,inventario,alta,0,0
+0x0068A9E0,0x0068B8A0,0xEC0,text,,inventario,alta,0,0
+0x0068AA80,0x0068B940,0xEC0,text,,inventario,alta,0,0
+0x0068AB20,0x0068B9E0,0xEC0,text,,inventario,alta,0,0
+0x0068ABC0,0x0068BA80,0xEC0,text,,inventario,alta,0,0
+0x0068AC60,0x0068BB20,0xEC0,text,,inventario,alta,0,0
+0x0068AD00,0x0068BBC0,0xEC0,text,,inventario,alta,0,0
+0x0068ADA0,0x0068BC60,0xEC0,text,,inventario,alta,0,0
+0x0068AE40,0x0068BD00,0xEC0,text,,inventario,alta,0,0
+0x0068AEE0,0x0068BDA0,0xEC0,text,,inventario,alta,0,0
+0x0068AF80,0x0068BE40,0xEC0,text,,inventario,alta,0,0
+0x0068B020,0x0068BEE0,0xEC0,text,,inventario,alta,0,0
+0x0068B0C0,0x0068BF80,0xEC0,text,,inventario,alta,0,0
+0x0068B160,0x0068C020,0xEC0,text,,inventario,alta,0,0
+0x0068B200,0x0068C0C0,0xEC0,text,,inventario,alta,0,0
+0x0068B2E0,0x0068C1A0,0xEC0,text,,inventario,alta,0,0
+0x0068B380,0x0068C240,0xEC0,text,,inventario,alta,0,0
+0x0068B420,0x0068C2E0,0xEC0,text,,inventario,alta,0,0
+0x0068B4C0,0x0068C380,0xEC0,text,,inventario,alta,0,0
+0x0068B5A0,0x0068C460,0xEC0,text,,inventario,alta,0,0
+0x0068B680,0x0068C540,0xEC0,text,,inventario,alta,0,0
+0x0068B760,0x0068C620,0xEC0,text,,inventario,alta,0,0
+0x0068B840,0x0068C700,0xEC0,text,,inventario,alta,0,0
+0x0068B8B0,0x0068C770,0xEC0,text,,inventario,alta,0,0
+0x0068B920,0x0068C7E0,0xEC0,text,,inventario,alta,0,0
+0x0068B990,0x0068C850,0xEC0,text,,inventario,alta,0,0
+0x0068BA00,0x0068C8C0,0xEC0,text,,inventario,alta,0,0
+0x0068BA70,0x0068C930,0xEC0,text,,inventario,alta,0,0
+0x0068BAE0,0x0068C9A0,0xEC0,text,,inventario,alta,0,0
+0x006D6E6E,0x006D7D2E,0xEC0,text,,manual,alta,1,0
+0x006D78E4,0x006D87A4,0xEC0,text,,manual,alta,1,0
+0x006D79A0,0x006D8860,0xEC0,text,,manual,alta,1,0
+0x006D8A40,0x006D9900,0xEC0,text,,manual,alta,1,0
+0x006D8AE6,0x006D99A6,0xEC0,text,,manual,alta,1,1
+0x006E0114,0x006E0FB4,0xEA0,text,,inventario,alta,0,0
+0x006E0119,0x006E0FB9,0xEA0,text,,inventario,alta,0,0
+0x006E011D,0x006E0FBD,0xEA0,text,,inventario,alta,0,0
+0x006E0122,0x006E0FC2,0xEA0,text,,inventario,alta,0,0
+0x006E0127,0x006E0FC7,0xEA0,text,,inventario,alta,0,0
+0x006E012C,0x006E0FCC,0xEA0,text,,inventario,alta,0,0
+0x006E0134,0x006E0FD4,0xEA0,text,,inventario,alta,0,0
+0x006E0139,0x006E0FD9,0xEA0,text,,inventario,alta,0,0
+0x006E013E,0x006E0FDE,0xEA0,text,,inventario,alta,0,0
+0x006E0143,0x006E0FE3,0xEA0,text,,inventario,alta,0,0
+0x006E0148,0x006E0FE8,0xEA0,text,,inventario,alta,0,0
+0x006E014D,0x006E0FED,0xEA0,text,,inventario,alta,0,0
+0x006E0152,0x006E0FF2,0xEA0,text,,inventario,alta,0,0
+0x006E0157,0x006E0FF7,0xEA0,text,,inventario,alta,0,0
+0x006E015F,0x006E0FFF,0xEA0,text,,inventario,alta,1,0
+0x006E3080,0x006E3F20,0xEA0,text,luabind::open(lua_State*),android,alta,1,0
+0x006E6A50,0x006E78F0,0xEA0,text,luabind::detail::push_instance_metatable(lua_State*),android,alta,0,0
+0x006E6C60,0x006E7B00,0xEA0,text,"luabind::detail::make_function_aux(lua_State*, luabind::detail::function_object*)",android,alta,0,0
+0x006E7020,0x006E7EC0,0xEA0,text,"luabind::detail::invoke_context::format_error(lua_State*, luabind::detail::function_object const*) const",android,alta,0,0
+0x006E71D0,0x006E8070,0xEA0,text,luabind::detail::property_tag(lua_State*),android,alta,0,0
+0x006E7B50,0x006E89F0,0xEA0,text,luabind::detail::class_rep::static_class_gettable(lua_State*),android,alta,0,0
+0x006E7EB0,0x006E8D50,0xEA0,text,luabind::detail::handle_exception_aux(lua_State*),android,alta,0,0
+0x006E8890,0x006E9730,0xEA0,text,luabind::detail::create_class::stage2(lua_State*),android,alta,0,0
+0x006E89A0,0x006E9840,0xEA0,text,luabind::detail::create_class::stage1(lua_State*),android,alta,0,1
+0x00780857,0x00781687,0xE30,text,,manual,alta,1,1
+0x0078478E,0x007855E3,0xE55,text,,manual,alta,3,0
+0x007847AF,0x00785604,0xE55,text,,manual,alta,3,1
+0x0080A43C,0x0080B44C,0x1010,dados,,inventario,alta,0,0
+0x0081C1B8,0x0081D1C8,0x1010,dados,,inventario,alta,0,0
+0x0081C1C4,0x0081D1D4,0x1010,dados,,inventario,alta,0,0
+0x0081C520,0x0081D530,0x1010,dados,,inventario,alta,0,0
+0x0081C52C,0x0081D53C,0x1010,dados,,inventario,alta,0,0
+0x0081C538,0x0081D548,0x1010,dados,,inventario,alta,0,0
+0x0081C544,0x0081D554,0x1010,dados,,inventario,alta,0,0
+0x0081C550,0x0081D560,0x1010,dados,,inventario,alta,0,0
+0x0081C55C,0x0081D56C,0x1010,dados,,inventario,alta,0,0
+0x0081C568,0x0081D578,0x1010,dados,,inventario,alta,0,0
+0x0081C574,0x0081D584,0x1010,dados,,inventario,alta,0,0
+0x0081C580,0x0081D590,0x1010,dados,,inventario,alta,0,0
+0x0081C58C,0x0081D59C,0x1010,dados,,inventario,alta,0,0
+0x0081C598,0x0081D5A8,0x1010,dados,,inventario,alta,0,0
+0x0081C5A4,0x0081D5B4,0x1010,dados,,inventario,alta,0,0
+0x0081C5B0,0x0081D5C0,0x1010,dados,,inventario,alta,0,0
+0x0081C5BC,0x0081D5CC,0x1010,dados,,inventario,alta,0,0
+0x0081C5C8,0x0081D5D8,0x1010,dados,,inventario,alta,0,0
+0x0081C5D4,0x0081D5E4,0x1010,dados,,inventario,alta,0,0
+0x0081C5E0,0x0081D5F0,0x1010,dados,,inventario,alta,0,0
+0x0081C5EC,0x0081D5FC,0x1010,dados,,inventario,alta,0,0
+0x0081C5F8,0x0081D608,0x1010,dados,,inventario,alta,0,0
+0x0081C604,0x0081D614,0x1010,dados,,inventario,alta,0,0
+0x0081C610,0x0081D620,0x1010,dados,,inventario,alta,0,0
+0x0081C61C,0x0081D62C,0x1010,dados,,inventario,alta,0,0
+0x0081C628,0x0081D638,0x1010,dados,,inventario,alta,0,0
+0x0081C634,0x0081D644,0x1010,dados,,inventario,alta,0,0
+0x0081C640,0x0081D650,0x1010,dados,,inventario,alta,0,0
+0x0081C64C,0x0081D65C,0x1010,dados,,inventario,alta,0,0
+0x0081C658,0x0081D668,0x1010,dados,,inventario,alta,0,0
+0x0081C664,0x0081D674,0x1010,dados,,inventario,alta,0,0
+0x0081C670,0x0081D680,0x1010,dados,,inventario,alta,0,0
+0x0081C67C,0x0081D68C,0x1010,dados,,inventario,alta,0,0
+0x0081C688,0x0081D698,0x1010,dados,,inventario,alta,0,0
+0x0081C694,0x0081D6A4,0x1010,dados,,inventario,alta,0,0
+0x0081C6A0,0x0081D6B0,0x1010,dados,,inventario,alta,0,0
+0x0081C6AC,0x0081D6BC,0x1010,dados,,inventario,alta,0,0
+0x0081C6B8,0x0081D6C8,0x1010,dados,,inventario,alta,0,0
+0x0081C6C4,0x0081D6D4,0x1010,dados,,inventario,alta,0,0
+0x0081C6D0,0x0081D6E0,0x1010,dados,,inventario,alta,0,0
+0x0081C6DC,0x0081D6EC,0x1010,dados,,inventario,alta,0,0
+0x0081C6E8,0x0081D6F8,0x1010,dados,,inventario,alta,0,0
+0x0081C6F4,0x0081D704,0x1010,dados,,inventario,alta,0,0
+0x0081C700,0x0081D710,0x1010,dados,,inventario,alta,0,0
+0x0081C70C,0x0081D71C,0x1010,dados,,inventario,alta,0,0
+0x0081C718,0x0081D728,0x1010,dados,,inventario,alta,0,0
+0x0081C720,0x0081D730,0x1010,dados,,inventario,alta,0,0
+0x0081C728,0x0081D738,0x1010,dados,,inventario,alta,0,0
+0x0081C730,0x0081D740,0x1010,dados,,inventario,alta,0,0
+0x0081C738,0x0081D748,0x1010,dados,,inventario,alta,0,0
+0x0081C744,0x0081D754,0x1010,dados,,inventario,alta,0,0
+0x0081C750,0x0081D760,0x1010,dados,,inventario,alta,0,0
+0x0081C75C,0x0081D76C,0x1010,dados,,inventario,alta,0,0
+0x0081C768,0x0081D778,0x1010,dados,,inventario,alta,0,0
+0x0081C774,0x0081D784,0x1010,dados,,inventario,alta,0,0
+0x0081C780,0x0081D790,0x1010,dados,,inventario,alta,0,0
+0x0081C78C,0x0081D79C,0x1010,dados,,inventario,alta,0,0
+0x0081C798,0x0081D7A8,0x1010,dados,,inventario,alta,0,0
+0x0081C7A4,0x0081D7B4,0x1010,dados,,inventario,alta,0,0
+0x0081C968,0x0081D978,0x1010,dados,,inventario,alta,0,0
+0x0081C974,0x0081D984,0x1010,dados,,inventario,alta,0,0
+0x0081C978,0x0081D988,0x1010,dados,,inventario,alta,0,0
+0x0081C97C,0x0081D98C,0x1010,dados,,inventario,alta,0,0
+0x0081C98C,0x0081D99C,0x1010,dados,,inventario,alta,0,0
+0x0081C9A0,0x0081D9B0,0x1010,dados,,inventario,alta,0,0
+0x0081C9A4,0x0081D9B4,0x1010,dados,,inventario,alta,0,0
+0x0081C9A8,0x0081D9B8,0x1010,dados,,inventario,alta,0,0
+0x0081C9B0,0x0081D9C0,0x1010,dados,,inventario,alta,0,0
+0x0081C9B4,0x0081D9C4,0x1010,dados,,inventario,alta,0,0
+0x0081C9C0,0x0081D9D0,0x1010,dados,,inventario,alta,0,0
+0x0081C9D4,0x0081D9E4,0x1010,dados,,inventario,alta,0,0
+0x0081C9E0,0x0081D9F0,0x1010,dados,,inventario,alta,0,0
+0x0081C9EC,0x0081D9FC,0x1010,dados,,inventario,alta,0,0
+0x0081C9F0,0x0081DA00,0x1010,dados,,inventario,alta,0,0
+0x0081C9F4,0x0081DA04,0x1010,dados,,inventario,alta,0,0
+0x0081C9F8,0x0081DA08,0x1010,dados,,inventario,alta,0,0
+0x0081C9FC,0x0081DA0C,0x1010,dados,,inventario,alta,0,0
+0x0081CA04,0x0081DA14,0x1010,dados,,inventario,alta,0,0
+0x0081CA0C,0x0081DA1C,0x1010,dados,,inventario,alta,0,0
+0x0081CA14,0x0081DA24,0x1010,dados,,inventario,alta,0,0
+0x0081CA1C,0x0081DA2C,0x1010,dados,,inventario,alta,0,0
+0x0081CA2C,0x0081DA3C,0x1010,dados,,inventario,alta,0,0
+0x0081CA38,0x0081DA48,0x1010,dados,,inventario,alta,0,0
+0x0081CA48,0x0081DA58,0x1010,dados,,inventario,alta,0,0
+0x0081CA58,0x0081DA68,0x1010,dados,,inventario,alta,0,0
+0x0081CA64,0x0081DA74,0x1010,dados,,inventario,alta,0,0
+0x0081CA70,0x0081DA80,0x1010,dados,,inventario,alta,0,0
+0x0081CA7C,0x0081DA8C,0x1010,dados,,inventario,alta,0,0
+0x0081CA88,0x0081DA98,0x1010,dados,,inventario,alta,0,0
+0x0081CA94,0x0081DAA4,0x1010,dados,,inventario,alta,0,0
+0x0081CAA4,0x0081DAB4,0x1010,dados,,inventario,alta,0,0
+0x0081CAB8,0x0081DAC8,0x1010,dados,,inventario,alta,0,0
+0x0081CAC8,0x0081DAD8,0x1010,dados,,inventario,alta,0,0
+0x0081CAD4,0x0081DAE4,0x1010,dados,,inventario,alta,0,0
+0x0081CAE0,0x0081DAF0,0x1010,dados,,inventario,alta,0,0
+0x0081CAEC,0x0081DAFC,0x1010,dados,,inventario,alta,0,0
+0x0081CAF8,0x0081DB08,0x1010,dados,,inventario,alta,0,0
+0x0081CE24,0x0081DE34,0x1010,dados,,inventario,alta,0,0
+0x0081CEBC,0x0081DECC,0x1010,dados,,manual,alta,1,1
+0x00822170,0x00823190,0x1020,dados,,manual,alta,1,0
+0x00822174,0x00823194,0x1020,dados,,manual,alta,1,1
+0x008266E0,0x00827788,0x10A8,dados,,inventario,alta,0,1
+0x00826BD0,0x00827C08,0x1038,dados,,inventario,alta,0,1
+0x00826C80,0x00827CD4,0x1054,dados,,inventario,alta,0,1
+0x00827AD0,0x00828B40,0x1070,dados,,inventario,alta,0,1
+0x00828AE0,0x00829B40,0x1060,dados,,inventario,alta,0,0
+0x00829160,0x0082A1C0,0x1060,dados,,inventario,alta,0,0
+0x00829840,0x0082A8A0,0x1060,dados,,inventario,alta,0,1
+0x00829A3C,0x0082AAAC,0x1070,dados,,inventario,alta,0,1
+0x0082A130,0x0082B28C,0x115C,dados,,manual,alta,1,0
+0x0082A140,0x0082B29C,0x115C,dados,,manual,alta,2,1
+0x0082A164,0x0082B1F8,0x1094,dados,,manual,alta,2,1
+0x0082A1F8,0x0082B2C0,0x10C8,dados,,manual,alta,1,0
+0x0082A35C,0x0082B424,0x10C8,dados,,inventario,alta,0,0
+0x0082A36C,0x0082B434,0x10C8,dados,,inventario,alta,0,0
+0x0082A450,0x0082B518,0x10C8,dados,,inventario,alta,0,1
+0x0082B9FC,0x0082CA54,0x1058,dados,,inventario,alta,0,1
+0x0082E2C4,0x0082F330,0x106C,dados,,inventario,alta,0,1
+0x008304FC,0x00831598,0x109C,dados,,inventario,alta,0,1
+0x00830D80,0x00831DDC,0x105C,dados,,inventario,alta,0,0
+0x00830EE4,0x00831F40,0x105C,dados,,inventario,alta,0,0
+0x00830EF8,0x00831F54,0x105C,dados,,inventario,alta,0,0
+0x00830F08,0x00831F64,0x105C,dados,,inventario,alta,0,0
+0x0083111C,0x00832178,0x105C,dados,,inventario,alta,0,0
+0x00831138,0x00832194,0x105C,dados,,inventario,alta,0,1
+0x00832C88,0x00833CFC,0x1074,dados,,inventario,alta,0,1
+0x00832DD0,0x00833E04,0x1034,dados,,inventario,alta,0,1
+0x00832E44,0x00833EB8,0x1074,dados,,inventario,alta,0,1
+0x00832E4C,0x00833E90,0x1044,dados,,inventario,alta,0,1
+0x00832EB4,0x00833EEC,0x1038,dados,,inventario,alta,0,1
+0x008330D0,0x0083413C,0x106C,dados,,inventario,alta,0,1
+0x008330D8,0x00834120,0x1048,dados,,inventario,alta,0,1
+0x008330E0,0x00834150,0x1070,dados,,inventario,alta,0,1
+0x008330EC,0x00834134,0x1048,dados,,inventario,alta,0,1
+0x00833104,0x00834144,0x1040,dados,,inventario,alta,0,1
+0x00833774,0x008347E8,0x1074,dados,,inventario,alta,1,0
+0x0083379C,0x00834810,0x1074,dados,,inventario,alta,0,1
+0x008337B0,0x00834820,0x1070,dados,,inventario,alta,0,1
+0x008337B8,0x00834804,0x104C,dados,,inventario,alta,0,1
+0x008337C4,0x00834830,0x106C,dados,,inventario,alta,0,1
+0x008337CC,0x00834818,0x104C,dados,,inventario,alta,0,1
+0x008337E4,0x00834860,0x107C,dados,,inventario,alta,0,1
+0x008337F8,0x00834838,0x1040,dados,,inventario,alta,0,1
+0x00833804,0x00834880,0x107C,dados,,inventario,alta,0,1
+0x0083380C,0x0083484C,0x1040,dados,,inventario,alta,0,1
+0x00833820,0x00834894,0x1074,dados,,inventario,alta,0,1
+0x0083382C,0x00834874,0x1048,dados,,inventario,alta,0,1
+0x00833838,0x008348AC,0x1074,dados,,inventario,alta,0,1
+0x00833840,0x00834888,0x1048,dados,,inventario,alta,0,1
+0x0083384C,0x008348BC,0x1070,dados,,inventario,alta,0,1
+0x0083385C,0x008348A0,0x1044,dados,,inventario,alta,0,1
+0x00833868,0x008348D8,0x1070,dados,,inventario,alta,0,1
+0x00833870,0x008348B4,0x1044,dados,,inventario,alta,0,1
+0x00833878,0x008348E8,0x1070,dados,,inventario,alta,0,1
+0x00833880,0x008348CC,0x104C,dados,,inventario,alta,0,1
+0x0083388C,0x00834900,0x1074,dados,,inventario,alta,0,1
+0x008338A0,0x008348E0,0x1040,dados,,inventario,alta,0,1
+0x008338A8,0x00834924,0x107C,dados,,inventario,alta,0,1
+0x008338B4,0x008348F0,0x103C,dados,,inventario,alta,0,1
+0x008338C4,0x00834944,0x1080,dados,,inventario,alta,0,1
+0x008338CC,0x00834914,0x1048,dados,,inventario,alta,0,1
+0x008338DC,0x0083495C,0x1080,dados,,inventario,alta,0,1
+0x008338EC,0x00834930,0x1044,dados,,inventario,alta,0,1
+0x00833900,0x00834974,0x1074,dados,,inventario,alta,0,1
+0x0083390C,0x0083494C,0x1040,dados,,inventario,alta,0,1
+0x0083391C,0x00834988,0x106C,dados,,inventario,alta,0,1
+0x0083392C,0x0083496C,0x1040,dados,,inventario,alta,0,1
+0x00833934,0x008349A4,0x1070,dados,,inventario,alta,0,1
+0x00833944,0x00834980,0x103C,dados,,inventario,alta,0,1
+0x0083394C,0x008349BC,0x1070,dados,,inventario,alta,0,1
+0x00833958,0x00834998,0x1040,dados,,inventario,alta,0,1
+0x00833964,0x008349D4,0x1070,dados,,inventario,alta,0,1
+0x00833970,0x008349B4,0x1044,dados,,inventario,alta,0,1
+0x00833978,0x008349EC,0x1074,dados,,inventario,alta,0,1
+0x00833984,0x008349C8,0x1044,dados,,inventario,alta,0,1
+0x00833990,0x00834A04,0x1074,dados,,inventario,alta,0,1
+0x0083399C,0x008349E0,0x1044,dados,,inventario,alta,0,1
+0x008339A8,0x00834A1C,0x1074,dados,,inventario,alta,0,1
+0x008339B0,0x008349F8,0x1048,dados,,inventario,alta,0,1
+0x008339BC,0x00834A30,0x1074,dados,,inventario,alta,0,1
+0x008339C8,0x00834A10,0x1048,dados,,inventario,alta,0,1
+0x008339D4,0x00834A4C,0x1078,dados,,inventario,alta,0,1
+0x008339E4,0x00834A24,0x1040,dados,,inventario,alta,0,1
+0x008339F0,0x00834A6C,0x107C,dados,,inventario,alta,0,1
+0x00833A00,0x00834A3C,0x103C,dados,,inventario,alta,0,1
+0x00833A10,0x00834A94,0x1084,dados,,inventario,alta,0,1
+0x00833A20,0x00834A5C,0x103C,dados,,inventario,alta,0,1
+0x00833A30,0x00834AB4,0x1084,dados,,inventario,alta,0,1
+0x00833A40,0x00834A7C,0x103C,dados,,inventario,alta,0,1
+0x00833A58,0x00834AD8,0x1080,dados,,inventario,alta,0,1
+0x00833A68,0x00834AA4,0x103C,dados,,inventario,alta,0,1
+0x00833A78,0x00834AF4,0x107C,dados,,inventario,alta,0,1
+0x00833A8C,0x00834AC4,0x1038,dados,,inventario,alta,0,1
+0x00833AA0,0x00834B10,0x1070,dados,,inventario,alta,0,1
+0x00833AAC,0x00834AE8,0x103C,dados,,inventario,alta,0,1
+0x00833AB8,0x00834B24,0x106C,dados,,inventario,alta,0,1
+0x00833AC4,0x00834B08,0x1044,dados,,inventario,alta,0,1
+0x00833ACC,0x00834B44,0x1078,dados,,inventario,alta,0,1
+0x00833ADC,0x00834B1C,0x1040,dados,,inventario,alta,0,1
+0x00833AE4,0x00834B60,0x107C,dados,,inventario,alta,0,1
+0x00833AF8,0x00834B30,0x1038,dados,,inventario,alta,0,1
+0x00833B0C,0x00834B88,0x107C,dados,,inventario,alta,0,1
+0x00833B18,0x00834B54,0x103C,dados,,inventario,alta,0,1
+0x00833B24,0x00834BAC,0x1088,dados,,inventario,alta,0,1
+0x00833B30,0x00834B74,0x1044,dados,,inventario,alta,0,1
+0x00833B44,0x00834BC4,0x1080,dados,,inventario,alta,0,1
+0x00833B54,0x00834B94,0x1040,dados,,inventario,alta,0,1
+0x00833B6C,0x00834BE4,0x1078,dados,,inventario,alta,0,1
+0x00833B78,0x00834BB8,0x1040,dados,,inventario,alta,0,1
+0x00833B84,0x00834C00,0x107C,dados,,inventario,alta,0,1
+0x00833B94,0x00834BD4,0x1040,dados,,inventario,alta,0,1
+0x00833BA4,0x00834C18,0x1074,dados,,inventario,alta,0,1
+0x00833BB0,0x00834BF0,0x1040,dados,,inventario,alta,0,1
+0x00833BC0,0x00834C2C,0x106C,dados,,inventario,alta,0,1
+0x00833BC8,0x00834C10,0x1048,dados,,inventario,alta,0,1
+0x00833BD0,0x00834C40,0x1070,dados,,inventario,alta,0,1
+0x00833BD8,0x00834C24,0x104C,dados,,inventario,alta,0,1
+0x00833BE0,0x00834C5C,0x107C,dados,,inventario,alta,0,1
+0x00833BF0,0x00834C34,0x1044,dados,,inventario,alta,0,1
+0x00833BFC,0x00834C78,0x107C,dados,,inventario,alta,0,1
+0x00833C14,0x00834C48,0x1034,dados,,inventario,alta,0,1
+0x00833C28,0x00834C9C,0x1074,dados,,inventario,alta,0,1
+0x00833C3C,0x00834C6C,0x1030,dados,,inventario,alta,0,1
+0x00833C48,0x00834CBC,0x1074,dados,,inventario,alta,0,1
+0x00833C54,0x00834C90,0x103C,dados,,inventario,alta,0,1
+0x00833C60,0x00834CD0,0x1070,dados,,inventario,alta,0,1
+0x00833C6C,0x00834CB0,0x1044,dados,,inventario,alta,0,1
+0x00833C78,0x00834CEC,0x1074,dados,,inventario,alta,0,1
+0x00833C84,0x00834CC8,0x1044,dados,,inventario,alta,0,1
+0x00833C8C,0x00834D00,0x1074,dados,,inventario,alta,0,1
+0x00833C98,0x00834CDC,0x1044,dados,,inventario,alta,0,1
+0x00833CA8,0x00834D14,0x106C,dados,,inventario,alta,0,1
+0x00833CB0,0x00834CF8,0x1048,dados,,inventario,alta,0,1
+0x00833CB8,0x00834D28,0x1070,dados,,inventario,alta,0,1
+0x00833CC0,0x00834D0C,0x104C,dados,,inventario,alta,0,1
+0x00833CC8,0x00834D38,0x1070,dados,,inventario,alta,0,1
+0x00833CD4,0x00834D1C,0x1048,dados,,inventario,alta,0,1
+0x00833CE0,0x00834D4C,0x106C,dados,,inventario,alta,0,1
+0x00833CE8,0x00834D30,0x1048,dados,,inventario,alta,0,1
+0x00833CF0,0x00834D60,0x1070,dados,,inventario,alta,0,1
+0x00833CFC,0x00834D44,0x1048,dados,,inventario,alta,0,1
+0x00833D10,0x00834D54,0x1044,dados,,inventario,alta,0,1
+0x00833D1C,0x00834D8C,0x1070,dados,,inventario,alta,0,1
+0x00833D28,0x00834D6C,0x1044,dados,,inventario,alta,0,1
+0x00833D34,0x00834DA0,0x106C,dados,,inventario,alta,0,1
+0x00833D3C,0x00834D84,0x1048,dados,,inventario,alta,0,1
+0x00833D44,0x00834DB0,0x106C,dados,,inventario,alta,0,1
+0x00833D4C,0x00834D98,0x104C,dados,,inventario,alta,0,1
+0x00833D54,0x00834DC0,0x106C,dados,,inventario,alta,0,1
+0x00833D5C,0x00834DA8,0x104C,dados,,inventario,alta,0,1
+0x00833D64,0x00834DD0,0x106C,dados,,inventario,alta,0,1
+0x00833D70,0x00834DB8,0x1048,dados,,inventario,alta,0,1
+0x00833D78,0x00834DE8,0x1070,dados,,inventario,alta,0,1
+0x00833D80,0x00834DC8,0x1048,dados,,inventario,alta,0,1
+0x00833D88,0x00834DF8,0x1070,dados,,inventario,alta,0,1
+0x00833D90,0x00834DDC,0x104C,dados,,inventario,alta,0,1
+0x00833D9C,0x00834E08,0x106C,dados,,inventario,alta,0,1
+0x00833DA8,0x00834DF0,0x1048,dados,,inventario,alta,0,1
+0x00833DB0,0x00834E20,0x1070,dados,,inventario,alta,0,1
+0x00833DBC,0x00834E00,0x1044,dados,,inventario,alta,0,1
+0x00833DC4,0x00834E34,0x1070,dados,,inventario,alta,0,1
+0x00833DCC,0x00834E14,0x1048,dados,,inventario,alta,0,1
+0x00833DD8,0x00834E48,0x1070,dados,,inventario,alta,0,1
+0x00833DE4,0x00834E2C,0x1048,dados,,inventario,alta,0,1
+0x00833DEC,0x00834E5C,0x1070,dados,,inventario,alta,0,1
+0x00833DF8,0x00834E3C,0x1044,dados,,inventario,alta,0,1
+0x00833E04,0x00834E70,0x106C,dados,,inventario,alta,0,1
+0x00833E10,0x00834E54,0x1044,dados,,inventario,alta,0,1
+0x00833E20,0x00834E68,0x1048,dados,,inventario,alta,0,1
+0x00833E28,0x00834E9C,0x1074,dados,,inventario,alta,0,1
+0x00833E2C,0x00834E7C,0x1050,dados,,inventario,alta,0,1
+0x00833E38,0x00834EA8,0x1070,dados,,inventario,alta,0,1
+0x00833E40,0x00834E90,0x1050,dados,,inventario,alta,0,1
+0x00833E60,0x00834ED4,0x1074,dados,,inventario,alta,0,0
+0x00833E74,0x00834EE8,0x1074,dados,,inventario,alta,0,0
+0x00833E8C,0x00834F00,0x1074,dados,,inventario,alta,0,1
+0x00833EA4,0x00834F1C,0x1078,dados,,inventario,alta,0,1
+0x00833EB8,0x00834EF4,0x103C,dados,,inventario,alta,0,1
+0x00833EC4,0x00834F38,0x1074,dados,,inventario,alta,0,1
+0x00833ED4,0x00834F0C,0x1038,dados,,inventario,alta,0,1
+0x00833EF0,0x00834F30,0x1040,dados,,inventario,alta,0,1
+0x00833EF8,0x00834F68,0x1070,dados,,inventario,alta,0,1
+0x00833F08,0x00834F74,0x106C,dados,,inventario,alta,0,1
+0x00833F14,0x00834F60,0x104C,dados,,inventario,alta,0,1
+0x00833F1C,0x00834F94,0x1078,dados,,inventario,alta,0,1
+0x00833F28,0x00834F6C,0x1044,dados,,inventario,alta,0,1
+0x00833F30,0x00834FAC,0x107C,dados,,inventario,alta,0,1
+0x00833F38,0x00834F80,0x1048,dados,,inventario,alta,0,1
+0x00833F4C,0x00834FC0,0x1074,dados,,inventario,alta,0,1
+0x00833F58,0x00834FA0,0x1048,dados,,inventario,alta,0,1
+0x00833F7C,0x00834FF0,0x1074,dados,,inventario,alta,0,1
+0x00833F88,0x00834FCC,0x1044,dados,,inventario,alta,0,1
+0x00833F94,0x0083500C,0x1078,dados,,inventario,alta,0,1
+0x00833FA4,0x00834FE4,0x1040,dados,,inventario,alta,0,1
+0x00833FB0,0x00835028,0x1078,dados,,inventario,alta,0,1
+0x00833FB8,0x00834FFC,0x1044,dados,,inventario,alta,0,1
+0x00833FC8,0x00835044,0x107C,dados,,inventario,alta,0,1
+0x00833FD8,0x0083501C,0x1044,dados,,inventario,alta,0,1
+0x00833FE4,0x00835064,0x1080,dados,,inventario,alta,0,1
+0x00833FF0,0x00835030,0x1040,dados,,inventario,alta,0,1
+0x00834004,0x0083507C,0x1078,dados,,inventario,alta,0,1
+0x00834010,0x00835054,0x1044,dados,,inventario,alta,0,1
+0x00834020,0x00835090,0x1070,dados,,inventario,alta,0,1
+0x00834030,0x00835070,0x1040,dados,,inventario,alta,0,1
+0x0083403C,0x008350AC,0x1070,dados,,inventario,alta,0,1
+0x00834048,0x00835088,0x1040,dados,,inventario,alta,0,1
+0x00834050,0x008350C8,0x1078,dados,,inventario,alta,0,1
+0x00834060,0x008350A0,0x1040,dados,,inventario,alta,0,1
+0x0083406C,0x008350E4,0x1078,dados,,inventario,alta,0,1
+0x0083407C,0x008350B8,0x103C,dados,,inventario,alta,0,1
+0x0083408C,0x00835104,0x1078,dados,,inventario,alta,0,1
+0x00834098,0x008350D8,0x1040,dados,,inventario,alta,0,1
+0x008340A4,0x00835124,0x1080,dados,,inventario,alta,0,1
+0x008340B4,0x008350F4,0x1040,dados,,inventario,alta,0,1
+0x008340C4,0x00835144,0x1080,dados,,inventario,alta,0,1
+0x008340D8,0x00835110,0x1038,dados,,inventario,alta,0,1
+0x008340EC,0x00835168,0x107C,dados,,inventario,alta,0,1
+0x008340F8,0x00835134,0x103C,dados,,inventario,alta,0,1
+0x00834108,0x00835184,0x107C,dados,,inventario,alta,0,1
+0x00834114,0x00835158,0x1044,dados,,inventario,alta,0,1
+0x00834124,0x0083519C,0x1078,dados,,inventario,alta,0,1
+0x0083412C,0x00835174,0x1048,dados,,inventario,alta,0,1
+0x0083413C,0x008351B0,0x1074,dados,,inventario,alta,0,1
+0x0083414C,0x00835190,0x1044,dados,,inventario,alta,0,1
+0x00834170,0x008351E4,0x1074,dados,,inventario,alta,0,1
+0x0083417C,0x008351C0,0x1044,dados,,inventario,alta,0,1
+0x00834188,0x008351FC,0x1074,dados,,inventario,alta,0,1
+0x0083419C,0x008351D8,0x103C,dados,,inventario,alta,0,1
+0x008341A8,0x00835224,0x107C,dados,,inventario,alta,0,1
+0x008341B4,0x008351F0,0x103C,dados,,inventario,alta,0,1
+0x008341C0,0x0083523C,0x107C,dados,,inventario,alta,0,1
+0x008341CC,0x00835210,0x1044,dados,,inventario,alta,0,1
+0x008341E0,0x00835258,0x1078,dados,,inventario,alta,0,1
+0x008341EC,0x00835230,0x1044,dados,,inventario,alta,0,1
+0x008341F8,0x00835270,0x1078,dados,,inventario,alta,0,1
+0x00834200,0x00835248,0x1048,dados,,inventario,alta,0,1
+0x00834210,0x00835288,0x1078,dados,,inventario,alta,0,1
+0x00834218,0x00835264,0x104C,dados,,inventario,alta,0,1
+0x00834224,0x0083529C,0x1078,dados,,inventario,alta,0,1
+0x00834230,0x00835278,0x1048,dados,,inventario,alta,0,1
+0x00834240,0x008352B4,0x1074,dados,,inventario,alta,0,1
+0x00834254,0x00835290,0x103C,dados,,inventario,alta,0,1
+0x00834260,0x008352D4,0x1074,dados,,inventario,alta,0,1
+0x0083426C,0x008352A8,0x103C,dados,,inventario,alta,0,1
+0x00834278,0x008352F4,0x107C,dados,,inventario,alta,0,1
+0x00834288,0x008352C8,0x1040,dados,,inventario,alta,0,1
+0x00834294,0x0083530C,0x1078,dados,,inventario,alta,0,1
+0x008342A4,0x008352E0,0x103C,dados,,inventario,alta,0,1
+0x008342B8,0x00835324,0x106C,dados,,inventario,alta,0,1
+0x008342C8,0x00835304,0x103C,dados,,inventario,alta,0,1
+0x008342D0,0x00835340,0x1070,dados,,inventario,alta,0,1
+0x008342E0,0x0083531C,0x103C,dados,,inventario,alta,0,1
+0x008342E8,0x00835364,0x107C,dados,,inventario,alta,0,1
+0x008342F4,0x00835334,0x1040,dados,,inventario,alta,0,1
+0x00834300,0x0083537C,0x107C,dados,,inventario,alta,0,1
+0x00834308,0x00835350,0x1048,dados,,inventario,alta,0,1
+0x0083431C,0x00835394,0x1078,dados,,inventario,alta,0,1
+0x00834328,0x00835370,0x1048,dados,,inventario,alta,0,1
+0x00834334,0x008353A8,0x1074,dados,,inventario,alta,0,1
+0x00834340,0x00835384,0x1044,dados,,inventario,alta,0,1
+0x00834350,0x008353BC,0x106C,dados,,inventario,alta,0,1
+0x0083435C,0x008353A0,0x1044,dados,,inventario,alta,0,1
+0x00834364,0x008353D4,0x1070,dados,,inventario,alta,0,1
+0x00834370,0x008353B4,0x1044,dados,,inventario,alta,0,1
+0x00834378,0x008353F0,0x1078,dados,,inventario,alta,0,1
+0x00834384,0x008353C8,0x1044,dados,,inventario,alta,0,1
+0x00834390,0x0083540C,0x107C,dados,,inventario,alta,0,1
+0x0083439C,0x008353E0,0x1044,dados,,inventario,alta,0,1
+0x008343AC,0x00835424,0x1078,dados,,inventario,alta,0,1
+0x008343B4,0x008353FC,0x1048,dados,,inventario,alta,0,1
+0x008343C4,0x00835438,0x1074,dados,,inventario,alta,0,1
+0x008343D0,0x00835418,0x1048,dados,,inventario,alta,0,1
+0x008343DC,0x00835458,0x107C,dados,,inventario,alta,0,1
+0x008343EC,0x0083542C,0x1040,dados,,inventario,alta,0,1
+0x008343F8,0x00835470,0x1078,dados,,inventario,alta,0,1
+0x00834400,0x00835444,0x1044,dados,,inventario,alta,0,1
+0x00834414,0x00835488,0x1074,dados,,inventario,alta,0,1
+0x0083441C,0x00835468,0x104C,dados,,inventario,alta,0,1
+0x00834424,0x008354A0,0x107C,dados,,inventario,alta,0,1
+0x0083442C,0x00835478,0x104C,dados,,inventario,alta,0,1
+0x0083443C,0x008354B4,0x1078,dados,,inventario,alta,0,1
+0x00834448,0x00835490,0x1048,dados,,inventario,alta,0,1
+0x00834458,0x008354CC,0x1074,dados,,inventario,alta,0,1
+0x00834468,0x008354A8,0x1040,dados,,inventario,alta,0,1
+0x00834474,0x008354E8,0x1074,dados,,inventario,alta,0,1
+0x0083448C,0x008354C0,0x1034,dados,,inventario,alta,0,1
+0x00834498,0x0083550C,0x1074,dados,,inventario,alta,0,1
+0x008344A4,0x008354DC,0x1038,dados,,inventario,alta,0,1
+0x008344B0,0x0083552C,0x107C,dados,,inventario,alta,0,1
+0x008344C0,0x00835500,0x1040,dados,,inventario,alta,0,1
+0x008344CC,0x00835548,0x107C,dados,,inventario,alta,0,1
+0x008344DC,0x00835518,0x103C,dados,,inventario,alta,0,1
+0x008344F0,0x00835564,0x1074,dados,,inventario,alta,0,1
+0x00834510,0x00835558,0x1048,dados,,inventario,alta,0,1
+0x0083451C,0x00835590,0x1074,dados,,inventario,alta,0,1
+0x00834520,0x0083556C,0x104C,dados,,inventario,alta,0,1
+0x008345AC,0x00835628,0x107C,dados,,inventario,alta,0,1
+0x008345B8,0x00835600,0x1048,dados,,inventario,alta,0,1
+0x008345C4,0x00835644,0x1080,dados,,inventario,alta,0,1
+0x008345D0,0x00835614,0x1044,dados,,inventario,alta,0,1
+0x008345E4,0x00835660,0x107C,dados,,inventario,alta,0,1
+0x008345EC,0x00835634,0x1048,dados,,inventario,alta,0,1
+0x008345FC,0x00835670,0x1074,dados,,inventario,alta,0,1
+0x0083460C,0x00835650,0x1044,dados,,inventario,alta,0,1
+0x0083461C,0x0083568C,0x1070,dados,,inventario,alta,0,1
+0x00834628,0x00835668,0x1040,dados,,inventario,alta,0,1
+0x00834630,0x008356A4,0x1074,dados,,inventario,alta,0,1
+0x00834640,0x00835680,0x1040,dados,,inventario,alta,0,1
+0x0083464C,0x008356C4,0x1078,dados,,inventario,alta,0,1
+0x00834664,0x00835698,0x1034,dados,,inventario,alta,0,1
+0x00834670,0x008356E8,0x1078,dados,,inventario,alta,0,1
+0x00834678,0x008356B4,0x103C,dados,,inventario,alta,0,1
+0x00834688,0x00835700,0x1078,dados,,inventario,alta,0,1
+0x00834698,0x008356DC,0x1044,dados,,inventario,alta,0,1
+0x008346A4,0x00835720,0x107C,dados,,inventario,alta,0,1
+0x008346B4,0x008356F0,0x103C,dados,,inventario,alta,0,1
+0x008346C4,0x00835740,0x107C,dados,,inventario,alta,0,1
+0x008346CC,0x00835710,0x1044,dados,,inventario,alta,0,1
+0x008346DC,0x00835750,0x1074,dados,,inventario,alta,0,1
+0x008346E8,0x00835730,0x1048,dados,,inventario,alta,0,1
+0x008346F8,0x00835768,0x1070,dados,,inventario,alta,0,1
+0x00834708,0x00835748,0x1040,dados,,inventario,alta,0,1
+0x00834710,0x00835784,0x1074,dados,,inventario,alta,0,1
+0x0083471C,0x0083575C,0x1040,dados,,inventario,alta,0,1
+0x00834734,0x00835778,0x1044,dados,,inventario,alta,0,1
+0x00834748,0x00835790,0x1048,dados,,inventario,alta,0,1
+0x00834754,0x008357C4,0x1070,dados,,inventario,alta,0,1
+0x0083475C,0x008357A8,0x104C,dados,,inventario,alta,0,1
+0x00834764,0x008357D8,0x1074,dados,,inventario,alta,0,0
+0x00834780,0x008357F4,0x1074,dados,,inventario,alta,0,1
+0x0083478C,0x008357CC,0x1040,dados,,inventario,alta,0,1
+0x00834798,0x00835808,0x1070,dados,,inventario,alta,0,1
+0x008347B8,0x00835800,0x1048,dados,,inventario,alta,0,1
+0x008347C0,0x00835834,0x1074,dados,,inventario,alta,0,1
+0x008347D0,0x00835810,0x1040,dados,,inventario,alta,0,0
+0x008347E8,0x00835828,0x1040,dados,,inventario,alta,0,1
+0x008347F4,0x00835864,0x1070,dados,,inventario,alta,0,1
+0x008347FC,0x00835844,0x1048,dados,,inventario,alta,0,1
+0x00834800,0x0083587C,0x107C,dados,,inventario,alta,0,1
+0x00834810,0x00835854,0x1044,dados,,inventario,alta,0,1
+0x00834820,0x00835898,0x1078,dados,,inventario,alta,0,1
+0x00834830,0x0083586C,0x103C,dados,,inventario,alta,0,1
+0x00834840,0x008358B8,0x1078,dados,,inventario,alta,0,1
+0x0083484C,0x0083588C,0x1040,dados,,inventario,alta,0,1
+0x00834858,0x008358D4,0x107C,dados,,inventario,alta,0,1
+0x00834868,0x008358A8,0x1040,dados,,inventario,alta,0,1
+0x00834878,0x008358F0,0x1078,dados,,inventario,alta,0,1
+0x00834884,0x008358C4,0x1040,dados,,inventario,alta,0,1
+0x00834894,0x00835908,0x1074,dados,,inventario,alta,0,1
+0x0083489C,0x008358E4,0x1048,dados,,inventario,alta,0,1
+0x008348A8,0x00835920,0x1078,dados,,inventario,alta,0,1
+0x008348BC,0x008358FC,0x1040,dados,,inventario,alta,0,1
+0x008348C8,0x00835944,0x107C,dados,,inventario,alta,0,1
+0x008348D8,0x00835910,0x1038,dados,,inventario,alta,0,1
+0x008348E8,0x0083596C,0x1084,dados,,inventario,alta,0,1
+0x008348F8,0x00835934,0x103C,dados,,inventario,alta,0,1
+0x00834914,0x00835954,0x1040,dados,,inventario,alta,0,1
+0x00836440,0x008374B4,0x1074,dados,,inventario,alta,0,1
+0x0083644C,0x0083748C,0x1040,dados,,inventario,alta,0,1
+0x00836458,0x008374CC,0x1074,dados,,inventario,alta,0,1
+0x00836464,0x008374A8,0x1044,dados,,inventario,alta,0,1
+0x00836470,0x008374E4,0x1074,dados,,inventario,alta,0,1
+0x0083647C,0x008374C0,0x1044,dados,,inventario,alta,0,1
+0x00836488,0x008374F0,0x1068,dados,,inventario,alta,0,1
+0x00836494,0x008374D8,0x1044,dados,,inventario,alta,0,1
+0x008364A0,0x008374FC,0x105C,dados,,inventario,alta,0,0
+0x008364AC,0x00837508,0x105C,dados,,inventario,alta,0,0
+0x008364B8,0x00837514,0x105C,dados,,inventario,alta,0,0
+0x008364C4,0x00837520,0x105C,dados,,inventario,alta,0,1
+0x008364D0,0x00837544,0x1074,dados,,inventario,alta,0,1
+0x008364DC,0x0083752C,0x1050,dados,,inventario,alta,0,1
+0x008364E8,0x0083755C,0x1074,dados,,inventario,alta,0,1
+0x008364F4,0x00837538,0x1044,dados,,inventario,alta,0,1
+0x00836500,0x00837574,0x1074,dados,,inventario,alta,0,1
+0x0083650C,0x00837550,0x1044,dados,,inventario,alta,0,1
+0x00836518,0x0083758C,0x1074,dados,,inventario,alta,0,1
+0x00836524,0x00837568,0x1044,dados,,inventario,alta,0,1
+0x00836530,0x008375A4,0x1074,dados,,inventario,alta,0,1
+0x0083653C,0x00837580,0x1044,dados,,inventario,alta,0,1
+0x00836548,0x008375BC,0x1074,dados,,inventario,alta,0,1
+0x00836554,0x00837598,0x1044,dados,,inventario,alta,0,1
+0x00836560,0x008375D4,0x1074,dados,,inventario,alta,0,1
+0x0083656C,0x008375B0,0x1044,dados,,inventario,alta,0,1
+0x00836578,0x008375EC,0x1074,dados,,inventario,alta,0,1
+0x00836584,0x008375C8,0x1044,dados,,inventario,alta,0,1
+0x00836590,0x008375E0,0x1050,dados,,inventario,alta,0,1
+0x0083659C,0x008375F8,0x105C,dados,,inventario,alta,0,0
+0x008365A8,0x00837604,0x105C,dados,,inventario,alta,0,0
+0x008365B4,0x00837610,0x105C,dados,,inventario,alta,0,0
+0x008365C0,0x0083761C,0x105C,dados,,inventario,alta,0,0
+0x008365CC,0x00837628,0x105C,dados,,inventario,alta,0,0
+0x008365D8,0x00837634,0x105C,dados,,inventario,alta,0,0
+0x008365E4,0x00837640,0x105C,dados,,inventario,alta,0,0
+0x008365F0,0x0083764C,0x105C,dados,,inventario,alta,0,0
+0x008365FC,0x00837658,0x105C,dados,,inventario,alta,0,0
+0x00836608,0x00837664,0x105C,dados,,inventario,alta,0,0
+0x00836614,0x00837670,0x105C,dados,,inventario,alta,0,0
+0x00836620,0x0083767C,0x105C,dados,,inventario,alta,0,0
+0x0083662C,0x00837688,0x105C,dados,,inventario,alta,0,0
+0x00836638,0x00837694,0x105C,dados,,inventario,alta,0,0
+0x00836644,0x008376A0,0x105C,dados,,inventario,alta,0,0
+0x00836650,0x008376AC,0x105C,dados,,inventario,alta,0,0
+0x0083665C,0x008376B8,0x105C,dados,,inventario,alta,0,0
+0x00836668,0x008376C4,0x105C,dados,,inventario,alta,0,0
+0x00836674,0x008376D0,0x105C,dados,,inventario,alta,0,0
+0x00836680,0x008376DC,0x105C,dados,,inventario,alta,0,0
+0x0083668C,0x008376E8,0x105C,dados,,inventario,alta,0,0
+0x00836698,0x008376F4,0x105C,dados,,inventario,alta,0,0
+0x008366A4,0x00837700,0x105C,dados,,inventario,alta,0,0
+0x008366B0,0x0083770C,0x105C,dados,,inventario,alta,0,0
+0x008366BC,0x00837718,0x105C,dados,,inventario,alta,0,0
+0x008366C8,0x00837724,0x105C,dados,,inventario,alta,0,0
+0x008366D4,0x00837730,0x105C,dados,,inventario,alta,0,0
+0x008366E0,0x0083773C,0x105C,dados,,inventario,alta,0,0
+0x008366EC,0x00837748,0x105C,dados,,inventario,alta,0,0
+0x008366F8,0x00837754,0x105C,dados,,inventario,alta,0,0
+0x00836704,0x00837760,0x105C,dados,,inventario,alta,0,0
+0x00836710,0x0083776C,0x105C,dados,,inventario,alta,0,0
+0x0083671C,0x00837778,0x105C,dados,,inventario,alta,0,0
+0x00836728,0x00837784,0x105C,dados,,inventario,alta,0,0
+0x00836734,0x00837790,0x105C,dados,,inventario,alta,0,0
+0x00836740,0x0083779C,0x105C,dados,,inventario,alta,0,0
+0x0083674C,0x008377A8,0x105C,dados,,inventario,alta,0,0
+0x00836758,0x008377B4,0x105C,dados,,inventario,alta,0,0
+0x00836764,0x008377C0,0x105C,dados,,inventario,alta,0,0
+0x00836770,0x008377CC,0x105C,dados,,inventario,alta,0,0
+0x0083677C,0x008377D8,0x105C,dados,,inventario,alta,0,0
+0x00836788,0x008377E4,0x105C,dados,,inventario,alta,0,0
+0x00836794,0x008377F0,0x105C,dados,,inventario,alta,0,0
+0x008367A0,0x008377FC,0x105C,dados,,inventario,alta,0,1
+0x008367AC,0x00837814,0x1068,dados,,inventario,alta,0,1
+0x008367B8,0x0083782C,0x1074,dados,,inventario,alta,0,1
+0x008367C4,0x00837808,0x1044,dados,,inventario,alta,0,1
+0x008367D0,0x00837844,0x1074,dados,,inventario,alta,0,1
+0x008367DC,0x00837820,0x1044,dados,,inventario,alta,0,1
+0x008367E8,0x0083785C,0x1074,dados,,inventario,alta,0,1
+0x008367F4,0x00837838,0x1044,dados,,inventario,alta,0,1
+0x00836800,0x00837868,0x1068,dados,,inventario,alta,0,1
+0x0083680C,0x00837850,0x1044,dados,,inventario,alta,0,1
+0x00836818,0x00837874,0x105C,dados,,inventario,alta,0,0
+0x00836824,0x00837880,0x105C,dados,,inventario,alta,0,0
+0x00836830,0x0083788C,0x105C,dados,,inventario,alta,0,1
+0x0083683C,0x008378A4,0x1068,dados,,inventario,alta,0,1
+0x00836848,0x008378BC,0x1074,dados,,inventario,alta,0,1
+0x00836854,0x00837898,0x1044,dados,,inventario,alta,0,1
+0x00836860,0x008378D4,0x1074,dados,,inventario,alta,0,1
+0x0083686C,0x008378B0,0x1044,dados,,inventario,alta,0,1
+0x00836878,0x008378EC,0x1074,dados,,inventario,alta,0,1
+0x00836884,0x008378C8,0x1044,dados,,inventario,alta,0,1
+0x00836890,0x00837904,0x1074,dados,,inventario,alta,0,1
+0x0083689C,0x008378E0,0x1044,dados,,inventario,alta,0,1
+0x008368A8,0x0083791C,0x1074,dados,,inventario,alta,0,1
+0x008368B4,0x008378F8,0x1044,dados,,inventario,alta,0,1
+0x008368C0,0x00837928,0x1068,dados,,inventario,alta,0,1
+0x008368CC,0x00837910,0x1044,dados,,inventario,alta,0,1
+0x008368D8,0x00837934,0x105C,dados,,inventario,alta,0,0
+0x008368E4,0x00837940,0x105C,dados,,inventario,alta,0,0
+0x008368F0,0x0083794C,0x105C,dados,,inventario,alta,0,0
+0x008368FC,0x00837958,0x105C,dados,,inventario,alta,0,0
+0x00836908,0x00837964,0x105C,dados,,inventario,alta,0,0
+0x00836914,0x00837970,0x105C,dados,,inventario,alta,0,1
+0x00836920,0x00837988,0x1068,dados,,inventario,alta,0,1
+0x0083692C,0x008379A0,0x1074,dados,,inventario,alta,0,1
+0x00836938,0x0083797C,0x1044,dados,,inventario,alta,0,1
+0x00836944,0x008379B8,0x1074,dados,,inventario,alta,0,1
+0x00836950,0x00837994,0x1044,dados,,inventario,alta,0,1
+0x0083695C,0x008379C4,0x1068,dados,,inventario,alta,0,1
+0x00836968,0x008379AC,0x1044,dados,,inventario,alta,0,1
+0x00836974,0x008379D0,0x105C,dados,,inventario,alta,0,0
+0x00836980,0x008379DC,0x105C,dados,,inventario,alta,0,0
+0x0083698C,0x008379E8,0x105C,dados,,inventario,alta,0,0
+0x00836998,0x008379F4,0x105C,dados,,inventario,alta,0,0
+0x008369A4,0x00837A00,0x105C,dados,,inventario,alta,0,0
+0x008369B0,0x00837A0C,0x105C,dados,,inventario,alta,0,0
+0x008369BC,0x00837A18,0x105C,dados,,inventario,alta,0,0
+0x008369C8,0x00837A24,0x105C,dados,,inventario,alta,0,0
+0x008369D4,0x00837A30,0x105C,dados,,inventario,alta,0,0
+0x008369E0,0x00837A3C,0x105C,dados,,inventario,alta,0,0
+0x008369EC,0x00837A48,0x105C,dados,,inventario,alta,0,0
+0x008369F8,0x00837A54,0x105C,dados,,inventario,alta,0,0
+0x00836A04,0x00837A60,0x105C,dados,,inventario,alta,0,0
+0x00836A10,0x00837A6C,0x105C,dados,,inventario,alta,0,0
+0x00836A1C,0x00837A78,0x105C,dados,,inventario,alta,0,0
+0x00836A28,0x00837A84,0x105C,dados,,inventario,alta,0,0
+0x00836A34,0x00837A90,0x105C,dados,,inventario,alta,0,0
+0x00836A40,0x00837A9C,0x105C,dados,,inventario,alta,0,1
+0x00836A4C,0x00837AB4,0x1068,dados,,inventario,alta,0,1
+0x00836A58,0x00837ACC,0x1074,dados,,inventario,alta,0,1
+0x00836A64,0x00837AA8,0x1044,dados,,inventario,alta,0,1
+0x00836A70,0x00837AE4,0x1074,dados,,inventario,alta,0,1
+0x00836A7C,0x00837AC0,0x1044,dados,,inventario,alta,0,1
+0x00836A88,0x00837AD8,0x1050,dados,,inventario,alta,0,1
+0x00836A94,0x00837AF0,0x105C,dados,,inventario,alta,0,0
+0x00836AA0,0x00837AFC,0x105C,dados,,inventario,alta,0,0
+0x00836AAC,0x00837B08,0x105C,dados,,inventario,alta,0,0
+0x00836AB8,0x00837B14,0x105C,dados,,inventario,alta,0,0
+0x00836AC4,0x00837B20,0x105C,dados,,inventario,alta,0,0
+0x00836AD0,0x00837B2C,0x105C,dados,,inventario,alta,0,0
+0x00836ADC,0x00837B38,0x105C,dados,,inventario,alta,0,0
+0x00836AE8,0x00837B44,0x105C,dados,,inventario,alta,0,0
+0x00836AF4,0x00837B50,0x105C,dados,,inventario,alta,0,0
+0x00836B00,0x00837B5C,0x105C,dados,,inventario,alta,0,0
+0x00836B0C,0x00837B68,0x105C,dados,,inventario,alta,0,0
+0x00836B18,0x00837B74,0x105C,dados,,inventario,alta,0,0
+0x00836B24,0x00837B80,0x105C,dados,,inventario,alta,0,0
+0x00836B30,0x00837B8C,0x105C,dados,,inventario,alta,0,0
+0x00836B3C,0x00837B98,0x105C,dados,,inventario,alta,0,0
+0x00836B48,0x00837BA4,0x105C,dados,,inventario,alta,0,0
+0x00836B54,0x00837BB0,0x105C,dados,,inventario,alta,0,1
+0x00836B60,0x00837BC8,0x1068,dados,,inventario,alta,0,1
+0x00836B6C,0x00837BE0,0x1074,dados,,inventario,alta,0,1
+0x00836B78,0x00837BBC,0x1044,dados,,inventario,alta,0,1
+0x00836B84,0x00837BEC,0x1068,dados,,inventario,alta,0,1
+0x00836B90,0x00837BD4,0x1044,dados,,inventario,alta,0,1
+0x00836B9C,0x00837C04,0x1068,dados,,inventario,alta,0,1
+0x00836BA8,0x00837BF8,0x1050,dados,,inventario,alta,0,1
+0x00836BB4,0x00837C10,0x105C,dados,,inventario,alta,0,0
+0x00836BC0,0x00837C1C,0x105C,dados,,inventario,alta,0,0
+0x00836BCC,0x00837C28,0x105C,dados,,inventario,alta,0,0
+0x00836BD8,0x00837C34,0x105C,dados,,inventario,alta,0,0
+0x00836BE4,0x00837C40,0x105C,dados,,inventario,alta,0,0
+0x00836BF0,0x00837C4C,0x105C,dados,,inventario,alta,0,0
+0x00836BFC,0x00837C58,0x105C,dados,,inventario,alta,0,0
+0x00836C08,0x00837C64,0x105C,dados,,inventario,alta,0,1
+0x00836C14,0x00837C7C,0x1068,dados,,inventario,alta,0,1
+0x00836C20,0x00837C94,0x1074,dados,,inventario,alta,0,1
+0x00836C2C,0x00837C70,0x1044,dados,,inventario,alta,0,1
+0x00836C38,0x00837CAC,0x1074,dados,,inventario,alta,0,1
+0x00836C44,0x00837C88,0x1044,dados,,inventario,alta,0,1
+0x00836C50,0x00837CC4,0x1074,dados,,inventario,alta,0,1
+0x00836C5C,0x00837CA0,0x1044,dados,,inventario,alta,0,1
+0x00836C68,0x00837CDC,0x1074,dados,,inventario,alta,0,1
+0x00836C74,0x00837CB8,0x1044,dados,,inventario,alta,0,1
+0x00836C80,0x00837CF4,0x1074,dados,,inventario,alta,0,1
+0x00836C8C,0x00837CD0,0x1044,dados,,inventario,alta,0,1
+0x00836C98,0x00837D0C,0x1074,dados,,inventario,alta,0,1
+0x00836CA4,0x00837CE8,0x1044,dados,,inventario,alta,0,1
+0x00836CB0,0x00837D24,0x1074,dados,,inventario,alta,0,1
+0x00836CBC,0x00837D00,0x1044,dados,,inventario,alta,0,1
+0x00836CC8,0x00837D3C,0x1074,dados,,inventario,alta,0,1
+0x00836CD4,0x00837D18,0x1044,dados,,inventario,alta,0,1
+0x00836CE0,0x00837D54,0x1074,dados,,inventario,alta,0,1
+0x00836CEC,0x00837D30,0x1044,dados,,inventario,alta,0,1
+0x00836CF8,0x00837D6C,0x1074,dados,,inventario,alta,0,1
+0x00836D04,0x00837D48,0x1044,dados,,inventario,alta,0,1
+0x00836D10,0x00837D84,0x1074,dados,,inventario,alta,0,1
+0x00836D1C,0x00837D60,0x1044,dados,,inventario,alta,0,1
+0x00836D28,0x00837D90,0x1068,dados,,inventario,alta,0,1
+0x00836D34,0x00837D78,0x1044,dados,,inventario,alta,0,1
+0x00836D40,0x00837D9C,0x105C,dados,,inventario,alta,0,0
+0x00836D4C,0x00837DA8,0x105C,dados,,inventario,alta,0,1
+0x00836D58,0x00837DCC,0x1074,dados,,inventario,alta,0,1
+0x00836D64,0x00837DB4,0x1050,dados,,inventario,alta,0,1
+0x00836D70,0x00837DD8,0x1068,dados,,inventario,alta,0,1
+0x00836D7C,0x00837DC0,0x1044,dados,,inventario,alta,0,1
+0x00836D88,0x00837DE4,0x105C,dados,,inventario,alta,0,0
+0x00836D94,0x00837DF0,0x105C,dados,,inventario,alta,0,0
+0x00836DA0,0x00837DFC,0x105C,dados,,inventario,alta,0,0
+0x00836DAC,0x00837E08,0x105C,dados,,inventario,alta,0,0
+0x00836DB8,0x00837E14,0x105C,dados,,inventario,alta,0,0
+0x00836DC4,0x00837E20,0x105C,dados,,inventario,alta,0,0
+0x00836DD0,0x00837E2C,0x105C,dados,,inventario,alta,0,0
+0x00836DDC,0x00837E38,0x105C,dados,,inventario,alta,0,0
+0x00836DE8,0x00837E44,0x105C,dados,,inventario,alta,0,0
+0x00836DF4,0x00837E50,0x105C,dados,,inventario,alta,0,0
+0x00836E00,0x00837E5C,0x105C,dados,,inventario,alta,0,0
+0x00836E0C,0x00837E68,0x105C,dados,,inventario,alta,0,0
+0x00836E18,0x00837E74,0x105C,dados,,inventario,alta,0,0
+0x00836E24,0x00837E80,0x105C,dados,,inventario,alta,0,0
+0x00836E30,0x00837E8C,0x105C,dados,,inventario,alta,0,0
+0x00836E3C,0x00837E98,0x105C,dados,,inventario,alta,0,0
+0x00836E48,0x00837EA4,0x105C,dados,,inventario,alta,0,0
+0x00836E54,0x00837EB0,0x105C,dados,,inventario,alta,0,0
+0x00836E60,0x00837EBC,0x105C,dados,,inventario,alta,0,0
+0x00836E6C,0x00837EC8,0x105C,dados,,inventario,alta,0,0
+0x00836E78,0x00837ED4,0x105C,dados,,inventario,alta,0,0
+0x00836E84,0x00837EE0,0x105C,dados,,inventario,alta,0,0
+0x00836E90,0x00837EEC,0x105C,dados,,inventario,alta,0,0
+0x00836E9C,0x00837EF8,0x105C,dados,,inventario,alta,0,0
+0x00836EA8,0x00837F04,0x105C,dados,,inventario,alta,0,0
+0x00836EB4,0x00837F10,0x105C,dados,,inventario,alta,0,0
+0x00836EC0,0x00837F1C,0x105C,dados,,inventario,alta,0,0
+0x00836ECC,0x00837F28,0x105C,dados,,inventario,alta,0,0
+0x00836ED8,0x00837F34,0x105C,dados,,inventario,alta,0,0
+0x00836EE4,0x00837F40,0x105C,dados,,inventario,alta,0,0
+0x00836EF0,0x00837F4C,0x105C,dados,,inventario,alta,0,0
+0x00836EFC,0x00837F58,0x105C,dados,,inventario,alta,0,0
+0x00836F08,0x00837F64,0x105C,dados,,inventario,alta,0,0
+0x00836F14,0x00837F70,0x105C,dados,,inventario,alta,0,0
+0x00836F20,0x00837F7C,0x105C,dados,,inventario,alta,0,0
+0x00836F2C,0x00837F88,0x105C,dados,,inventario,alta,0,0
+0x00836F38,0x00837F94,0x105C,dados,,inventario,alta,0,0
+0x00836F44,0x00837FA0,0x105C,dados,,inventario,alta,0,0
+0x00836F50,0x00837FAC,0x105C,dados,,inventario,alta,0,0
+0x00836F5C,0x00837FB8,0x105C,dados,,inventario,alta,0,0
+0x00836F68,0x00837FC4,0x105C,dados,,inventario,alta,0,0
+0x00836F74,0x00837FD0,0x105C,dados,,inventario,alta,0,0
+0x00836F80,0x00837FDC,0x105C,dados,,inventario,alta,0,0
+0x00836F8C,0x00837FE8,0x105C,dados,,inventario,alta,0,0
+0x00836F98,0x00837FF4,0x105C,dados,,inventario,alta,0,0
+0x00836FA4,0x00838000,0x105C,dados,,inventario,alta,0,0
+0x00836FB0,0x0083800C,0x105C,dados,,inventario,alta,0,0
+0x00836FBC,0x00838018,0x105C,dados,,inventario,alta,0,0
+0x00836FC8,0x00838024,0x105C,dados,,manual,alta,1,1
+0x00837E1C,0x00838E70,0x1054,dados,,manual,alta,1,1
+0x00838028,0x00839080,0x1058,dados,,manual,alta,1,1
+0x0088EB4C,0x0088FB50,0x1004,dados,,manual,alta,4,1
+0x0088F10C,0x0089010C,0x1000,dados,,manual,alta,4,0
+0x0088F114,0x00890114,0x1000,dados,,manual,alta,4,1
+0x008C6800,0x008C7818,0x1018,dados,,manual,alta,1,0
+0x008CF84C,0x008D0864,0x1018,dados,,manual,alta,3,0
+0x008CF850,0x008D0868,0x1018,dados,,manual,alta,2,0
+0x008CF9AC,0x008D09C4,0x1018,dados,,manual,alta,4,0
+0x008D0DE0,0x008D1DF8,0x1018,dados,,manual,alta,1,0
+0x008D0E48,0x008D1E60,0x1018,dados,,manual,alta,3,0
+0x008D0E94,0x008D1EAC,0x1018,dados,,manual,alta,3,0

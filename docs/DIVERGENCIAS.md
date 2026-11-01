@@ -1,6 +1,7 @@
 # Divergências e hipóteses conhecidas
 
 Tudo o que o Rust faz diferente do original, ou que depende de hipótese ainda não provada.
+Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `re/evidencias/v1.2.93/migracao_enderecos.csv`.
 
 | Área | Original | Rust hoje | Impacto | Como fechar |
 |---|---|---|---|---|
@@ -24,3 +25,6 @@ Tudo o que o Rust faz diferente do original, ou que depende de hipótese ainda n
 | Unidade morrendo | sólida durante parte da animação de morte (0x0062CB10) | não sólida | Empurrões no mesmo instante | — |
 | Instâncias `Board`/`Game` | criadas pelo motor em missão | ainda não existem | Scripts de missão | M3/M4 |
 | `user/missionData.lua` | arquivo do usuário, opcional | ausente → ignorado | Nenhum | — |
+| Regras lidas na 1.2.88 | versão atual é a 1.2.93 | código não relido rotina a rotina; 36 fatos e 24 provas com bytes conferidos, e `Pawn::Push` relida | Uma mudança do mesmo tamanho em rotina não relida passaria despercebida | Reler ao tocar em cada rotina; comparar com o EXE 1.2.88, se voltar a estar disponível |
+| `IgnoreFlip`, `Pushable` | `Pawn::OnInit` lê da definição do tipo | dados de entrada em `PawnStatusBytes` | Unidades reais ainda não vêm de `pawns.lua` | M4 |
+| `Pawn::SetGuard(false)` em `Pawn::Push` | grava +0x8D2 no caminho estável | não modelado | Nenhum conhecido: na 1.2.93 só há escritas nesse deslocamento | Reavaliar se surgir uma leitura indireta |
