@@ -3,8 +3,8 @@
 Leia antes `CLAUDE.md` e `CHECKPOINT.md`. Endereços abaixo são da 1.2.93.
 
 ## Estado
-- Branch `migracao-1.2.93`. O commit `fa48d7a` (Etapa 13 parcial) é só local; o GitHub está em `05f678a` e não tem `main`.
-  A preparação da missão (abaixo) está sem commit.
+- Branch `migracao-1.2.93`. Os commits `fa48d7a` (Etapa 13 parcial) e `feb22b7` (preparação da missão) são só locais;
+  o GitHub está em `05f678a` e não tem `main`.
 - Teste diferencial com a preparação feita pelo Rust: 0 divergências em duas partidas (`Mission_Airstrike`/`any30`,
   `Mission_Tides`/`hightide18`). Guia em `ferramentas/diferencial/LEIA-ME.md`.
 - Jogo em `C:\Projetos\Into the Breach\Jogo`, cópia de teste em `Jogo_diff`, `libmain.so` em `F:\Downloads\libmain-1.so`.
