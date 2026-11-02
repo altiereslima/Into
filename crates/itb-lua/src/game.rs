@@ -32,7 +32,7 @@ impl UserData for LGame {
             Ok(g.0.borrow().is_island_unlocked(n))
         });
         m.add_method("GetPower", |_, g, ()| {
-            let (value, max) = g.0.borrow().power;
+            let (value, max) = g.0.borrow().power();
             Ok(LValueBar { value, max })
         });
         // As 8 formas (0x60DA30..0x60E0C0) completam `(texto | texto, p1, p2, tipo, a, b, c)` com tipo 0, a 0, b 1 e

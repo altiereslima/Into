@@ -1,13 +1,14 @@
 # Teste diferencial: jogo original x motor Rust
-linhas: original 67842 | Rust 67831
-preparo pelo Rust: mapa opendam19 (jogo real: ?0), setor 0 "grass", missão Mission4 (Mission_Dam); chuva: não
+linhas: original 67734 | Rust 67722
+preparo pelo Rust: mapa trainAE3 (jogo real: ?0), setor 0 "grass", missão Mission5 (Mission_Train); chuva: tipo 3 subtipo 0
 casas com terreno diferente do jogo real depois do preparo: 0 []
 rand na preparação: 7 pontos, 1 fora de sincronia ["01"]
 
 | Seção | Iguais | Diferentes | Só no original | Só no Rust |
 |---|---|---|---|---|
 | alcance | 125 | 0 | 0 | 0 |
-| arma | 58219 | 0 | 0 | 0 |
+| aplicado | 65 | 1 | 0 | 0 |
+| arma | 58044 | 0 | 0 | 0 |
 | bloco4 | 17 | 0 | 0 | 0 |
 | bloco5 | 38 | 0 | 0 | 0 |
 | caminho | 200 | 0 | 0 | 0 |
@@ -33,6 +34,9 @@ rand na preparação: 7 pontos, 1 fora de sincronia ["01"]
 | unidade | 4061 | 0 | 0 | 0 |
 | zona | 3 | 0 | 0 | 0 |
 
-Total: 67813 iguais, 0 divergências.
-rand: os 16 valores do original saem do LCG do Rust (estado 0x01922b83).
+Total: 67703 iguais, 1 divergências.
+rand: os 16 valores do original saem do LCG do Rust (estado 0x17cac50c).
 stubs tocados no Rust: [("GetMechColorsInTexture()", 1)]
+
+## Divergências
+aplicado|chao_buraco.depois: original "0,4,false,false,false,false,false,false | -" | Rust "9,4,false,false,false,false,false,false | -"

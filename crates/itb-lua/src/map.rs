@@ -166,6 +166,8 @@ impl Host {
     pub fn load_map(&self, name: &str) -> mlua::Result<(SharedBoard, LoadedMap)> {
         let loaded = self.load_map_file(name)?;
         let mut board = OccupancyBoard::from_map(&loaded.data).map_err(|e| bad(format!("{name}: {e:?}")))?;
+        board.rng = Some(self.rng.clone());
+        board.power_grid = self.game.borrow().as_ref().map(|g| g.borrow().grid.clone());
         // 0x56EC00 → PawnFactory::CreatePawn(string) com time 2 → Board::AddPawn
         for (loc, ty) in std::mem::take(&mut board.mission.pending_pawns) {
             let pawn = crate::pawns::create_pawn(&self.lua, &ty, TEAM_NONE)?;

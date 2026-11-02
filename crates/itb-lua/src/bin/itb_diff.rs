@@ -162,6 +162,11 @@ fn main() {
                         cabecalho.push(format!("a missão {} ({}) não foi criada no Rust: {}", pr.missao, pr.missao_id, e.to_string().lines().next().unwrap_or("")));
                     }
                 }
+                // semente da defesa da rede, lida do save do jogo original
+                if let (Some(g), Some(seed)) = (host.game.borrow().as_ref(), valor(&original, "missao", "grid_seed").and_then(|v| v.parse::<i32>().ok())) {
+                    g.borrow().grid.borrow_mut().seed_0x13c = seed;
+                    cabecalho.push(format!("semente da rede (save do original): {seed}"));
+                }
                 let (board, _) = host.load_mission(&mapa, pr.setor, &pr.tipo_setor, &pr.missao).expect("missão");
                 let b = board.borrow();
                 let chuva = b.weather.as_ref().map_or("não".to_string(), |w| format!("tipo {} subtipo {}", w.kind, w.subtype));

@@ -216,9 +216,13 @@ fn game_accessors_follow_the_exe() {
     assert_eq!((g.get_team_turn(), g.get_turn_count()), (TEAM_ENEMY, 3));
     g.profile_islands_0x30 = 2;
     assert!(g.is_island_unlocked(2) && !g.is_island_unlocked(3));
-    g.power = (5, 7);
+    {
+        let mut gr = g.grid.borrow_mut();
+        gr.value = 5;
+        gr.max = 7;
+    }
     g.set_power_max(4);
-    assert_eq!(g.power, (4, 4));
+    assert_eq!(g.power(), (4, 4));
     g.set_power_max(9);
-    assert_eq!(g.power, (4, 9));
+    assert_eq!(g.power(), (4, 9));
 }

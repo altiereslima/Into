@@ -21,7 +21,7 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | Movimentos (`AddMove`, `AddLeap`, `AddCharge`, `AddTeleport`) | animados (0x00632670, 0x00632750, 0x006329F0, +0x10B4, 0x00636610) | `GetPawn(caminho[0], false)` chega na última casa na hora | Ocupação durante o trajeto | Ler as animações de movimento |
 | Efeito de chegada (0x0059C5C0) | água, buraco, lava, ácido, itens, trens, "FireBoost", casos de cadáver | água afoga quem não voa e não tem +0x99D; buraco derruba quem não voa; item vira evento | Unidades especiais | Terminar a leitura |
 | `iTerrain = 9` | animação; o buraco aparece depois | buraco imediato | Unidades na casa não caem nesta versão | Ler quem conclui a animação |
-| Prédios | rede elétrica, chance de resistir (0x005C4B90), prédios de energia, objetivos | só a vida da casa; dano à rede vira evento | Rede elétrica | Reconstruir a parte do `Game` |
+| Prédios | rede elétrica (defesa com semente própria: feita), prédios de energia, objetivos | defesa da rede e vida; prédios de energia e objetivos viram evento | Prédios de energia | Ler o ramo de prédios de energia de `BoardSpace::DamageSpace` |
 | Unidade morrendo | sólida durante parte da animação de morte (0x0062CB10) | não sólida | Empurrões no mesmo instante | — |
 | Instâncias `Board`/`Game` | criadas pelo motor em missão | ainda não existem | Scripts de missão | M3/M4 |
 | `user/missionData.lua` | arquivo do usuário, opcional | ausente → ignorado | Nenhum | — |
@@ -61,4 +61,6 @@ Os endereços desta tabela são da 1.2.88; a tradução para a 1.2.93 está em `
 | Projéteis e alertas da casa em `IsSafe` (1.2.93: vetores +0x2644 e +0x7E0) | animações pendentes contam como perigo | sempre vazios: o executor termina tudo na hora | Só durante animações | Laço de quadro (M7) |
 | Casas extras de unidades grandes (slot 0x14 de `Pawn`, `GetExtraSpaces`) | `RemovePawn` e a ocupação usam todas as casas da unidade | só a casa principal | Unidades de várias casas (trem, etc.) | Ler `GetExtraSpaces` e quem preenche |
 | Cache do Dijkstra limpo por `RemovePawn` | Board+4 | o Rust não tem cache | Nenhum (o Rust recalcula sempre) | — |
+| `srand` pelo relógio depois de `PowerBar::Damage` (1.2.93: 0x5C5C9F) e de `AiController::StartState` | `rand()` global passa a depender do relógio | `PowerGrid::clock_seed`, escolhido pelo host | Sorteios depois de golpe em prédio ou do turno inimigo | Não se reproduz; o teste diferencial evita `rand()` depois desses pontos |
+| Flag global 0x8B8460 | desliga a defesa da rede (e eventos) quando ligada | sempre desligada | Desconhecido (provável tutorial) | Achar quem grava |
 

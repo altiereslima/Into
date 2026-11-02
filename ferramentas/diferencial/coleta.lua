@@ -375,6 +375,108 @@ local function coleta_jogo()
 	end
 end
 
+-- Dano aplicado na hora por Board:DamageSpace, em casas escolhidas pelo terreno (uma por caso, sem vizinhas usadas).
+-- Audita as regras de dano, fogo, ácido, gelo, escudo, rachadura e terreno do Rust, escritas a partir da 1.2.88.
+local function estado(k, p)
+	local u = Board:GetPawn(p)
+	local unidade = "-"
+	if u then
+		unidade = u:GetType() .. "," .. u:GetHealth() .. "," .. ponto(u:GetSpace()) .. "," .. tostring(u:IsDead()) .. ","
+			.. tostring(u:IsFire()) .. "," .. tostring(u:IsAcid()) .. "," .. tostring(u:IsFrozen()) .. "," .. tostring(u:IsShield())
+	end
+	emit("aplicado", k, Board:GetTerrain(p) .. "," .. Board:GetHealth(p) .. "," .. tostring(Board:IsFire(p)) .. ","
+		.. tostring(Board:IsAcid(p)) .. "," .. tostring(Board:IsSmoke(p)) .. "," .. tostring(Board:IsFrozen(p)) .. ","
+		.. tostring(Board:IsCracked(p)) .. "," .. tostring(Board:IsBuilding(p)) .. " | " .. unidade)
+end
+
+function coleta_dano_aplicado()
+	local tam = Board:GetSize()
+	local usadas = {}
+	local function livre(p)
+		for _, q in ipairs(usadas) do
+			if math.abs(q.x - p.x) + math.abs(q.y - p.y) <= 1 then return false end
+		end
+		return true
+	end
+	-- primeira casa (em x, depois y) com o terreno pedido, longe das já usadas e sem unidade
+	local function acha(terreno)
+		for x = 0, tam.x - 1 do
+			for y = 0, tam.y - 1 do
+				local p = Point(x, y)
+				if Board:GetTerrain(p) == terreno and not Board:IsPawnSpace(p) and livre(p) then
+					usadas[#usadas + 1] = p
+					return p
+				end
+			end
+		end
+	end
+	local function com_unidade(tipo)
+		local p = acha(TERRAIN_ROAD)
+		if p then Board:AddPawn(PAWN_FACTORY:CreatePawn(tipo), p) end
+		return p
+	end
+	local function dano(k, p, montar)
+		if p == nil then emit("aplicado", k, "sem casa") return end
+		emit("aplicado", k .. ".casa", ponto(p))
+		estado(k .. ".antes", p)
+		local d = SpaceDamage(p, 0)
+		montar(d)
+		Board:DamageSpace(d)
+		estado(k .. ".depois", p)
+	end
+	dano("predio1", acha(TERRAIN_BUILDING), function(d) d.iDamage = 1 end)
+	dano("predio4", acha(TERRAIN_BUILDING), function(d) d.iDamage = 4 end)
+	local m = acha(TERRAIN_MOUNTAIN)
+	dano("montanha1", m, function(d) d.iDamage = 1 end)
+	dano("montanha2", m, function(d) d.iDamage = 1 end)
+	dano("floresta", acha(TERRAIN_FOREST), function(d) d.iDamage = 1 end)
+	dano("floresta_fogo", acha(TERRAIN_FOREST), function(d) d.iFire = 1 end)
+	dano("agua_fogo", acha(TERRAIN_WATER), function(d) d.iFire = 1 end)
+	dano("agua_gelo", acha(TERRAIN_WATER), function(d) d.iFrozen = 1 end)
+	dano("chao_fumaca", acha(TERRAIN_ROAD), function(d) d.iSmoke = 1 end)
+	dano("chao_acido", acha(TERRAIN_ROAD), function(d) d.iAcid = 1 end)
+	dano("chao_racha", acha(TERRAIN_ROAD), function(d) d.iCrack = 1 end)
+	dano("chao_buraco", acha(TERRAIN_ROAD), function(d) d.iTerrain = TERRAIN_HOLE end)
+	dano("chao_agua", acha(TERRAIN_ROAD), function(d) d.iTerrain = TERRAIN_WATER end)
+	dano("inimigo1", com_unidade("Firefly1"), function(d) d.iDamage = 1 end)
+	dano("inimigo_morre", com_unidade("Firefly1"), function(d) d.iDamage = 5 end)
+	dano("inimigo_fogo", com_unidade("Firefly1"), function(d) d.iFire = 1 end)
+	dano("inimigo_acido", com_unidade("Firefly1"), function(d) d.iAcid = 1 d.iDamage = 1 end)
+	dano("inimigo_gelo", com_unidade("Firefly1"), function(d) d.iFrozen = 1 end)
+	dano("inimigo_escudo", com_unidade("Firefly1"), function(d) d.iShield = 1 end)
+	dano("mech2", com_unidade("PunchMech"), function(d) d.iDamage = 2 end)
+	dano("mech_morto", com_unidade("PunchMech"), function(d) d.iDamage = 9 end)
+	-- todos os prédios que restam: a defesa da rede sorteia a cada golpe, com a semente avançando
+	local predios = Board:GetBuildings()
+	for i = 1, predios:size() do
+		local p = predios:index(i)
+		local d = SpaceDamage(p, 1)
+		Board:DamageSpace(d)
+		estado("rede." .. ponto(p), p)
+	end
+	emit("aplicado", "energia", Game:GetPower():GetValue() .. "/" .. Game:GetPower():GetMax())
+end
+
+-- Só no jogo original: copia o saveData.lua do perfil, se já existir, para a pasta da cópia (fora do repositório).
+-- Serve para ler as sementes da rede elétrica e da IA, que o Lua não alcança de outro jeito.
+function copia_save()
+	local base = (os.getenv("USERPROFILE") or "") .. "/Documents/My Games/Into The Breach/"
+	local f = io.open(base .. "settings.lua", "r")
+	if not f then saida:write("# save: sem settings.lua\n") return end
+	local perfil = f:read("*a"):match('%["last_profile"%]%s*=%s*"([^"]*)"')
+	f:close()
+	local g = io.open(base .. "profile_" .. tostring(perfil) .. "/saveData.lua", "r")
+	if not g then saida:write("# save: sem saveData.lua no perfil ", tostring(perfil), "\n") return end
+	local texto = g:read("*a")
+	g:close()
+	-- semente da defesa da rede (PowerBar+0x13C), a primeira chave "seed" do save: o Rust parte dela
+	emit("missao", "grid_seed", texto:match('%["seed"%]%s*=%s*(%-?%d+)') or "nil")
+	local h = io.open("save_na_missao.lua", "w")
+	h:write(texto)
+	h:close()
+	saida:write("# save: copiado, ", #texto, " bytes\n")
+end
+
 local function coleta_missao(mapa)
 	emit("missao", "mapa", mapa)
 	coleta_jogo()
@@ -498,6 +600,8 @@ local function coleta_missao(mapa)
 	Board:AddShield(Point(5, 1)) emit("bloco5", "addshield_unidade", tostring(u:IsShield()))
 	local ve = VoiceEvent("Mission_Test_Start", 3, 7)
 	emit("bloco5", "voz", ve.id .. "," .. ve.pawn1 .. "," .. ve.pawn2)
+
+	coleta_dano_aplicado()
 	emit("fim", "missao", "ok")
 end
 
@@ -632,6 +736,7 @@ else
 		-- A coleta roda quando a missão começa. O motor escolhe o mapa: o comparador o identifica pelo terreno.
 		Mission.BaseStart = function(self)
 			saida:write("# missao: BaseStart\n")
+			copia_save()
 			for k, v in pairs(_G) do
 				if type(k) == "string" and v == getmetatable(self) then saida:write("# tipo da missao: ", k, "\n") end
 			end

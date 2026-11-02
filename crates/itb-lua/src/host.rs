@@ -69,6 +69,8 @@ pub struct Host {
     pub report: Rc<RefCell<Report>>,
     pub game_dir: PathBuf,
     pub rng: Rc<RefCell<MsvcRand>>,
+    /// O `Game` criado por `new_game`; os tabuleiros de missão usam a rede elétrica dele.
+    pub game: RefCell<Option<SharedGame>>,
 }
 
 fn stub_fn(lua: &Lua, report: &Rc<RefCell<Report>>, key: String) -> mlua::Result<Function> {
@@ -86,6 +88,7 @@ impl Host {
             report: Rc::new(RefCell::new(Report::default())),
             game_dir: game_dir.as_ref().to_path_buf(),
             rng: Rc::new(RefCell::new(MsvcRand::new(cfg.rand_seed))),
+            game: RefCell::new(None),
         };
         host.lua.set_app_data(host.rng.clone());
         host.install_constants()?;
@@ -422,9 +425,10 @@ impl Host {
         if let Some(f) = globals.get::<Option<Function>>("getCityPower")? {
             let max: i32 = f.call(0)?;
             let mut g = shared.borrow_mut();
-            g.power.0 = 5;
+            g.grid.borrow_mut().value = 5;
             g.set_power_max(max);
         }
+        *self.game.borrow_mut() = Some(shared.clone());
         let set: Function = globals.get("SetGame")?;
         set.call::<()>(crate::game::LGame(shared.clone()))?;
         Ok(shared)

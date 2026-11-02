@@ -393,6 +393,10 @@ pub struct OccupancyBoard {
     pub buildings: Vec<Point>,
     /// Board+0x2DA0: clima gravado por `Board::SetWeather`.
     pub weather: Option<crate::mission_setup::Weather>,
+    /// `PowerBar` do jogo (0x8B4F50), quando há partida: o dano em prédio povoado passa por `PowerBar::Damage`.
+    pub power_grid: Option<crate::game::SharedGrid>,
+    /// `rand()` do motor, para as regras que o tabuleiro sorteia sozinho (a defesa da rede).
+    pub rng: Option<std::rc::Rc<std::cell::RefCell<crate::rng::MsvcRand>>>,
 }
 
 impl OccupancyBoard {
@@ -405,7 +409,7 @@ impl OccupancyBoard {
                   sentinel: Tile::default(), pawns: Vec::new(), pawn_list: Vec::new(), global_list_has_12: false,
                   pod_space: Point::INVALID, spawn_list: Vec::new(), spawn_queue: Vec::new(), flag_0x2ca8: false, danger_list_a: Vec::new(), teleports: Vec::new(),
                   passive_skills: Vec::new(), events: Vec::new(), pushes_started: Vec::new(), mission: Default::default(),
-                  buildings: Vec::new(), weather: None })
+                  buildings: Vec::new(), weather: None, power_grid: None, rng: None })
     }
 
     /// Board vftable slot 0x08 → 0x00561370 (`IsValid`).

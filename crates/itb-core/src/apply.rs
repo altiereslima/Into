@@ -515,14 +515,21 @@ impl OccupancyBoard {
         if !hit.item.is_empty() { self.events.push(BoardEvent::SetItem { loc: p, item: hit.item.clone() }); }
     }
 
-    /// Ramo de prédio de 0x005ABA90 (0x005AC523..): tira `min(dano, vida)` da vida da casa
-    /// (`Health::Add`) e registra o dano à rede elétrica. Dano <= 0 não mexe no prédio.
-    /// Fora desta versão: a chance de resistir da rede (0x005C4B90) e o ramo de prédios de energia.
+    /// Ramo de prédio de 0x005ABA90 (1.2.93: 0x5AD383..): tira `min(dano, vida)` da vida da casa
+    /// (`Health::Add`) e registra o dano à rede elétrica. Dano <= 0 não mexe no prédio. Em casa povoada (+0x2710), com
+    /// partida em curso, `PowerBar::Damage(dano)` vem antes (0x5AD3FE): se a rede resiste, o prédio fica intacto. A
+    /// flag global 0x8B8460, que também desliga o sorteio, não foi identificada e fica desligada.
+    /// Fora desta versão: o ramo de prédios de energia.
     fn damage_building(&mut self, p: Point, d: i32) {
         if self.tile(p).terrain != TERRAIN_BUILDING { return; }
         let cur = self.tile(p).health;
         let eff = d.min(cur);
         if eff <= 0 { return; }
+        if self.tile(p).byte_0x2710 {
+            if let (Some(grid), Some(rng)) = (&self.power_grid, &self.rng) {
+                if !grid.borrow_mut().damage(eff, &mut rng.borrow_mut()) { return; }
+            }
+        }
         let t = self.tile_mut_or_sentinel(p);
         let max = t.max_health;
         let actual = health_add(&mut t.health, max, -eff);
