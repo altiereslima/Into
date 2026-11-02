@@ -23,7 +23,10 @@ Leia antes `CLAUDE.md` e `CHECKPOINT.md`. Endereços abaixo são da 1.2.93.
 - Documentar ao fechar o bloco, não a cada rotina.
 
 ## Próximo passo
-0. A fila de uso está zerada: as 85 missões rodam no `itb-uso` sem tocar stub (blocos 1 a 5 em
+0. O dano já foi conferido na 1.2.93 pelo teste (seção `aplicado`, ver `re/evidencias/v1.2.93/rotinas_dano.md`), com a
+   defesa da rede feita. A outra IA ficou sem crédito: a leitura do `.so` e do PC volta a ser feita aqui, com
+   `re/tools/chamados_android.py` e `re/tools/asm/`, e o teste diferencial serve de auditoria sempre que der.
+   A fila de uso está zerada: as 85 missões rodam no `itb-uso` sem tocar stub (blocos 1 a 5 em
    `rotinas_fila_uso.md`). O próximo passo é o **turno**: estados do `BoardPlayer`, efeitos de início e fim de turno,
    movimento e chegada, fila de ataques e IA inimiga. Guias em `so_analise/`: `turno_pc.md`, `turno_efeitos_pc.md`,
    `movimento_pc.md`, `fila_ataque_pc.md`, `execucao_ataque_pc.md`, `ia_inimiga_pc.md`, `ia_inimiga_formulas.md`.
